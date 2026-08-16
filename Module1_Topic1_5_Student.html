@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Topic T1.5 — Physical and Chemical Properties — Student</title>
+<style id="legacy-content-support">
+
+        body {
+            font-family: system-ui, sans-serif;
+            user-select: none;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+.blank-box {
+            display: inline-block;
+            min-width: 90px;
+            padding: 2px 10px;
+            margin: 0 4px;
+            border-bottom: 2px solid #38bdf8;
+            background-color: rgba(56, 189, 248, 0.1);
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .mode-student .blank-answer {
+            display: none !important;
+        }
+
+        .mode-student .blank-placeholder {
+            display: inline !important;
+            color: #38bdf8;
+            letter-spacing: 2px;
+        }
+
+        .mode-answer .blank-placeholder {
+            display: none !important;
+        }
+
+        .mode-answer .blank-answer {
+            display: inline !important;
+            color: #10b981;
+            background-color: rgba(16, 185, 129, 0.15);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border-bottom: 2px solid #10b981;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .build-hidden {
+            opacity: 0;
+            transform: translateY(12px);
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .build-visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+    
+</style>
+<style id="static-utility-css">
+/* Self-contained subset of utility classes used by the preserved Module 1 slide content. */
+@keyframes twPulse{50%{opacity:.5}}
+.animate-pulse{animation:twPulse 2s cubic-bezier(.4,0,.6,1) infinite}
+.backdrop-blur-md{backdrop-filter:blur(12px)}
+.bg-amber-950\/20{background-color:rgb(69 26 3 / 0.2)}
+.bg-emerald-500{background-color:#10b981}
+.bg-emerald-600{background-color:#059669}
+.bg-rose-950\/10{background-color:rgb(76 5 25 / 0.1)}
+.bg-slate-800{background-color:#1e293b}
+.bg-slate-900\/90{background-color:rgb(15 23 42 / 0.9)}
+.bg-slate-950{background-color:#020617}
+.border{border-width:1px;border-style:solid}
+.border-amber-500\/40{border-color:rgb(245 158 11 / 0.4)}
+.border-b{border-bottom-width:1px;border-bottom-style:solid}
+.border-emerald-500\/30{border-color:rgb(16 185 129 / 0.3)}
+.border-emerald-500\/40{border-color:rgb(16 185 129 / 0.4)}
+.border-rose-500\/30{border-color:rgb(244 63 94 / 0.3)}
+.border-slate-700{border-color:#334155}
+.border-slate-700\/60{border-color:rgb(51 65 85 / 0.6)}
+.border-slate-700\/70{border-color:rgb(51 65 85 / 0.7)}
+.border-slate-800{border-color:#1e293b}
+.border-t{border-top-width:1px;border-top-style:solid}
+.flex{display:flex}
+.flex-1{flex:1 1 0%}
+.flex-col{flex-direction:column}
+.font-bold{font-weight:700}
+.font-extrabold{font-weight:800}
+.font-medium{font-weight:500}
+.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+.font-normal{font-weight:400}
+.font-semibold{font-weight:600}
+.gap-3{gap:.75rem}
+.gap-4{gap:1rem}
+.gap-5{gap:1.25rem}
+.gap-6{gap:1.5rem}
+.grid{display:grid}
+.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
+.h-12{height:3rem}
+.h-14{height:3.5rem}
+.h-16{height:4rem}
+.h-3{height:.75rem}
+.h-3\.5{height:.875rem}
+.h-32{height:8rem}
+.h-4{height:1rem}
+.h-40{height:10rem}
+.h-full{height:100%}
+.h-screen{height:100vh}
+.hidden{display:none!important}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.justify-center{justify-content:center}
+.leading-relaxed{line-height:1.625}
+.list-decimal{list-style-type:decimal}
+.list-inside{list-style-position:inside}
+.max-w-6xl{max-width:72rem}
+.mb-1{margin-bottom:.25rem}
+.mb-2{margin-bottom:.5rem}
+.mb-3{margin-bottom:.75rem}
+.mt-1{margin-top:.25rem}
+.mt-3{margin-top:.75rem}
+.mx-auto{margin-left:auto;margin-right:auto}
+.outline-none{outline:2px solid transparent;outline-offset:2px}
+.overflow-hidden{overflow:hidden}
+.overflow-x-auto{overflow-x:auto}
+.p-1{padding:.25rem}
+.p-2{padding:.5rem}
+.p-2\.5{padding:.625rem}
+.p-4{padding:1rem}
+.p-5{padding:1.25rem}
+.p-6{padding:1.5rem}
+.px-1\.5{padding-inline:.375rem}
+.px-2\.5{padding-inline:.625rem}
+.px-3{padding-inline:.75rem}
+.px-6{padding-inline:1.5rem}
+.py-0\.5{padding-block:.125rem}
+.py-1{padding-block:.25rem}
+.py-1\.5{padding-block:.375rem}
+.py-2{padding-block:.5rem}
+.relative{position:relative}
+.rounded{border-radius:.25rem}
+.rounded-2xl{border-radius:1rem}
+.rounded-3xl{border-radius:1.5rem}
+.rounded-full{border-radius:9999px}
+.rounded-lg{border-radius:.5rem}
+.rounded-md{border-radius:.375rem}
+.rounded-xl{border-radius:.75rem}
+.shrink-0{flex-shrink:0}
+.space-x-1>:not([hidden])~:not([hidden]){margin-left:.25rem}
+.space-x-1\.5>:not([hidden])~:not([hidden]){margin-left:.375rem}
+.space-x-2>:not([hidden])~:not([hidden]){margin-left:.5rem}
+.space-x-3>:not([hidden])~:not([hidden]){margin-left:.75rem}
+.space-x-4>:not([hidden])~:not([hidden]){margin-left:1rem}
+.space-y-1>:not([hidden])~:not([hidden]){margin-top:.25rem}
+.space-y-2>:not([hidden])~:not([hidden]){margin-top:.5rem}
+.space-y-3>:not([hidden])~:not([hidden]){margin-top:.75rem}
+.space-y-4>:not([hidden])~:not([hidden]){margin-top:1rem}
+.text-3xl{font-size:1.875rem;line-height:2.25rem}
+.text-amber-300{color:#fcd34d}
+.text-amber-400{color:#fbbf24}
+.text-base{font-size:1rem;line-height:1.5rem}
+.text-center{text-align:center}
+.text-cyan-300{color:#67e8f9}
+.text-cyan-400{color:#22d3ee}
+.text-emerald-300{color:#6ee7b7}
+.text-emerald-400{color:#34d399}
+.text-left{text-align:left}
+.text-lg{font-size:1.125rem;line-height:1.75rem}
+.text-rose-400{color:#fb7185}
+.text-slate-100{color:#f1f5f9}
+.text-slate-200{color:#e2e8f0}
+.text-slate-300{color:#cbd5e1}
+.text-slate-400{color:#94a3b8}
+.text-sm{font-size:.875rem;line-height:1.25rem}
+.text-white{color:#ffffff}
+.text-xs{font-size:.75rem;line-height:1rem}
+.tracking-wide{letter-spacing:.025em}
+.tracking-wider{letter-spacing:.05em}
+.tracking-widest{letter-spacing:.1em}
+.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-duration:.15s}
+.transition-all{transition-property:all;transition-duration:.15s}
+.uppercase{text-transform:uppercase}
+.w-3{width:.75rem}
+.w-3\.5{width:.875rem}
+.w-4{width:1rem}
+.w-56{width:14rem}
+.w-full{width:100%}
+.w-screen{width:100vw}
+.z-50{z-index:50}
+.hover\:bg-emerald-500:hover{background-color:#10b981}
+.hover\:bg-slate-700:hover{background-color:#334155}
+.hover\:text-slate-200:hover{color:#e2e8f0}
+.focus\:border-emerald-500:focus{border-color:#10b981}
+@media(min-width:768px){.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:p-8{padding:2rem}.md\:text-sm{font-size:.875rem;line-height:1.25rem}}
+@media(min-width:1024px){.lg\:col-span-5{grid-column:span 5 / span 5}.lg\:col-span-6{grid-column:span 6 / span 6}.lg\:col-span-7{grid-column:span 7 / span 7}.lg\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}}
+</style>
+<style id="module8-shell">
+/* Module 8 common presentation system. */
+
+:root{--bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;--accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;--accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;--border-color:#475569;--blank-bg:#334155}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}
+.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}
+.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.75rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}.btn:disabled{opacity:.4;cursor:not-allowed}.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}
+.slide-container{width:100%!important;max-width:none!important;height:auto!important;background:var(--bg-card)!important;border-radius:12px!important;border:1px solid var(--border-color)!important;box-shadow:0 20px 25px -5px rgba(0,0,0,.5)!important;padding:2rem!important;min-height:620px!important;display:none!important;flex-direction:column!important;justify-content:space-between!important;position:relative!important;animation:m8FadeIn .3s ease-in-out!important}
+.slide-container.active{display:flex!important}.slide-container:not(.active){display:none!important}@keyframes m8FadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide-header,.slide-container>.mb-3,.slide-container>.mb-4{margin-bottom:1.15rem!important}
+.slide-category,.slide-container>.mb-3>span:first-child,.slide-container>.mb-4>span:first-child{display:inline-block!important;font-size:.8rem!important;text-transform:uppercase!important;letter-spacing:.05em!important;font-weight:700!important;color:var(--accent-teal)!important;background:rgba(45,212,191,.1)!important;padding:.25rem .6rem!important;border-radius:4px!important;margin-bottom:.5rem!important;border:1px solid rgba(45,212,191,.2)!important}
+.slide-title,.slide-container h2{font-size:2.05rem!important;font-weight:800!important;line-height:1.25!important;color:var(--text-main)!important;margin-top:0!important}
+.slide-container [data-build]{opacity:.15!important;pointer-events:none!important;transition:opacity .4s ease,transform .4s ease,filter .4s ease!important;transform:translateY(8px)!important;filter:blur(1px)!important}
+.slide-container [data-build].m8-visible{opacity:1!important;pointer-events:auto!important;transform:none!important;filter:none!important}
+.glass-panel,.glass-card{background:#0f172a!important;border:1px solid var(--border-color)!important;border-radius:10px!important;box-shadow:none!important;backdrop-filter:none!important}
+.blank-box{display:inline-block!important;min-width:90px!important;padding:.15rem .55rem!important;background:var(--blank-bg)!important;border:0!important;border-bottom:2px solid var(--accent-amber)!important;border-radius:4px!important;text-align:center!important;font-weight:700!important;vertical-align:middle!important}
+.mode-student .blank-placeholder{display:inline!important;color:transparent!important;user-select:none!important}.mode-student .blank-answer{display:none!important}.mode-answer .blank-placeholder{display:none!important}.mode-answer .blank-answer{display:inline!important;color:var(--accent-amber)!important;background:rgba(251,191,36,.15)!important;padding:.05rem .25rem!important;border-radius:3px!important;border:0!important}
+.callout{background:rgba(56,189,248,.08)!important;border:1px solid var(--accent-blue)!important;border-radius:8px!important;padding:.7rem 1rem!important}.warn{background:rgba(244,63,94,.1)!important;border:1px solid var(--accent-rose)!important;border-radius:8px!important;padding:.7rem 1rem!important;color:#fecdd3!important}.equal-banner{background:rgba(45,212,191,.1)!important;border:1px solid var(--accent-teal)!important;border-radius:8px!important;padding:.65rem!important;text-align:center!important;color:var(--accent-teal)!important;font-weight:900!important;font-size:1.05rem!important}
+input,select,textarea{background:#0f172a!important;color:var(--text-main)!important;border:1px solid var(--border-color)!important;border-radius:6px!important}
+footer{display:none!important}
+@media(max-width:1000px){header{position:sticky;top:0}.nav-controls{flex-wrap:wrap}.slide-container{min-height:auto!important;padding:1.25rem!important}.slide-title,.slide-container h2{font-size:1.65rem!important}main{padding:1rem;justify-content:flex-start}}
+@media(max-height:780px){main{justify-content:flex-start}.slide-container{min-height:auto!important}}
+
+</style>
+</head>
+<body class="mode-student">
+<header>
+  <div class="deck-title"><span>Topic T1.5 | Physical &amp; Chemical Properties</span></div>
+  <div class="mode-selector">
+    <button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button>
+    <button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button>
+  </div>
+  <div class="nav-controls">
+    <button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+    <span class="counter-badge" id="slideCounter">Slide 1 / 1</span>
+    <span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 1</span>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+  </div>
+</header>
+<main>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-1">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 1 • Fundamental States</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">The Three States of Matter</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-5 flex-1 items-center">
+<div class="lg:col-span-7 space-y-3">
+<div class="glass-panel p-4 rounded-xl border border-slate-700/60 shadow-xl space-y-2 build-hidden" data-build="1">
+<h3 class="text-emerald-400 font-bold text-sm">Solid</h3>
+<p class="text-xs text-slate-200">
+                            Fixed <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">shape</span></span> and fixed <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">volume</span></span>. Rigid structure with tightly packed particles.
+                        </p>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-slate-700/60 shadow-xl space-y-2 build-hidden" data-build="2">
+<h3 class="text-cyan-400 font-bold text-sm">Liquid</h3>
+<p class="text-xs text-slate-200">
+                            Variable <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">shape</span></span> (conforms to container) but fixed <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">volume</span></span>. Particles touch but flow.
+                        </p>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-slate-700/60 shadow-xl space-y-2 build-hidden" data-build="3">
+<h3 class="text-amber-400 font-bold text-sm">Gas</h3>
+<p class="text-xs text-slate-200">
+                            Variable <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">shape</span></span> and variable <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">volume</span></span>. Spreads to fill any container completely.
+                        </p>
+</div>
+</div>
+<!-- Particle Diagrams SVG -->
+<div class="lg:col-span-5 flex flex-col items-center justify-center space-y-3">
+<div class="glass-panel p-4 rounded-2xl border border-slate-700 bg-slate-900/90 text-center w-full build-hidden" data-build="1">
+<div class="text-xs font-semibold text-emerald-400 mb-1">Solid</div>
+<svg class="w-full h-12 mx-auto" viewbox="0 0 200 50">
+<circle cx="30" cy="25" fill="#10b981" r="10"></circle><circle cx="55" cy="25" fill="#10b981" r="10"></circle><circle cx="80" cy="25" fill="#10b981" r="10"></circle><circle cx="105" cy="25" fill="#10b981" r="10"></circle><circle cx="130" cy="25" fill="#10b981" r="10"></circle><circle cx="155" cy="25" fill="#10b981" r="10"></circle>
+</svg>
+</div>
+<div class="glass-panel p-4 rounded-2xl border border-slate-700 bg-slate-900/90 text-center w-full build-hidden" data-build="2">
+<div class="text-xs font-semibold text-cyan-400 mb-1">Liquid</div>
+<svg class="w-full h-12 mx-auto" viewbox="0 0 200 50">
+<circle cx="35" cy="22" fill="#06b6d4" r="10"></circle><circle cx="58" cy="28" fill="#06b6d4" r="10"></circle><circle cx="82" cy="20" fill="#06b6d4" r="10"></circle><circle cx="104" cy="26" fill="#06b6d4" r="10"></circle><circle cx="128" cy="22" fill="#06b6d4" r="10"></circle><circle cx="150" cy="29" fill="#06b6d4" r="10"></circle>
+</svg>
+</div>
+<div class="glass-panel p-4 rounded-2xl border border-slate-700 bg-slate-900/90 text-center w-full build-hidden" data-build="3">
+<div class="text-xs font-semibold text-amber-400 mb-1">Gas</div>
+<svg class="w-full h-12 mx-auto" viewbox="0 0 200 50">
+<circle cx="30" cy="25" fill="#f59e0b" r="8"></circle><path d="M 40 25 L 48 25" stroke="#f59e0b" stroke-width="2"></path>
+<circle cx="85" cy="18" fill="#f59e0b" r="8"></circle><path d="M 70 18 L 77 18" stroke="#f59e0b" stroke-width="2"></path>
+<circle cx="135" cy="32" fill="#f59e0b" r="8"></circle><path d="M 120 32 L 127 32" stroke="#f59e0b" stroke-width="2"></path>
+<circle cx="175" cy="20" fill="#f59e0b" r="8"></circle>
+</svg>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-2">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 2 • Physical Behavior</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Physical Properties &amp; Changes</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-center">
+<div class="lg:col-span-7 space-y-4">
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/60 shadow-xl space-y-3 build-hidden" data-build="1">
+<p class="text-sm font-medium text-slate-200">
+<strong>Physical Property:</strong> Observed or measured without changing chemical <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">identity</span></span> (e.g., color, density, melting point).
+                        </p>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/60 shadow-xl space-y-3 build-hidden" data-build="1">
+<p class="text-sm font-medium text-slate-200">
+<strong>Physical Change:</strong> A change in state or form that retains the <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">same</span></span> chemical substance (boiling, melting, grinding).
+                        </p>
+</div>
+</div>
+<!-- Particle Transition SVG: H2O(s) -> H2O(l) with Unicode Formulas -->
+<div class="lg:col-span-5 flex flex-col items-center justify-center build-hidden" data-build="2">
+<div class="glass-panel p-5 rounded-3xl border border-emerald-500/30 bg-slate-900/90 shadow-2xl text-center w-full space-y-4">
+<div class="text-xs uppercase tracking-wider text-emerald-400 font-semibold">Composition Preservation Test</div>
+<svg class="w-full h-32 mx-auto" viewbox="0 0 280 120">
+<!-- Solid Ice Box -->
+<g transform="translate(10, 15)">
+<rect fill="#1e293b" height="75" rx="8" stroke="#06b6d4" stroke-width="2" width="80" x="0" y="0"></rect>
+<text fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle" x="40" y="24">H₂O(s)</text>
+<circle cx="30" cy="45" fill="#06b6d4" r="7"></circle><circle cx="50" cy="45" fill="#06b6d4" r="7"></circle><circle cx="40" cy="62" fill="#06b6d4" r="7"></circle>
+<text fill="#94a3b8" font-size="10" text-anchor="middle" x="40" y="100">Ordered Array (Ice)</text>
+</g>
+<!-- Arrow -->
+<g transform="translate(100, 40)">
+<line stroke="#10b981" stroke-width="3" x1="0" x2="45" y1="12" y2="12"></line>
+<polygon fill="#10b981" points="45,7 55,12 45,17"></polygon>
+<text fill="#10b981" font-size="10" text-anchor="middle" x="27" y="5">Melting</text>
+</g>
+<!-- Liquid Water Box -->
+<g transform="translate(170, 15)">
+<rect fill="#1e293b" height="75" rx="8" stroke="#10b981" stroke-width="2" width="80" x="0" y="0"></rect>
+<text fill="#10b981" font-size="13" font-weight="bold" text-anchor="middle" x="40" y="24">H₂O(l)</text>
+<circle cx="28" cy="48" fill="#10b981" r="7"></circle><circle cx="52" cy="42" fill="#10b981" r="7"></circle><circle cx="42" cy="65" fill="#10b981" r="7"></circle>
+<text fill="#94a3b8" font-size="10" text-anchor="middle" x="40" y="100">Disordered (Water)</text>
+</g>
+</svg>
+<div class="p-2.5 bg-slate-950 rounded-xl border border-slate-800 text-xs text-emerald-400 font-semibold">
+                            H₂O remains chemically unchanged throughout phase transition!
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-3">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 3 • Chemical Reactivity</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Chemical Properties &amp; Changes</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-center">
+<div class="lg:col-span-6 space-y-4">
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/60 shadow-xl space-y-3 build-hidden" data-build="1">
+<p class="text-sm font-medium text-slate-200">
+<strong>Chemical Property:</strong> Ability of a substance to form <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">new</span></span> substances (e.g., flammability, acidity, toxicity).
+                        </p>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/60 shadow-xl space-y-3 build-hidden" data-build="1">
+<p class="text-sm font-medium text-slate-200">
+<strong>Chemical Change:</strong> Produces one or more <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">new</span></span> substances with a different chemical composition (rusting, burning, digestion).
+                        </p>
+</div>
+</div>
+<!-- Visual Indicators Container with added Odor change -->
+<div class="lg:col-span-6 build-hidden" data-build="2">
+<div class="glass-panel p-6 rounded-3xl border border-emerald-500/40 bg-slate-900/90 shadow-2xl space-y-3">
+<div class="text-xs uppercase tracking-wider text-emerald-400 font-bold">Possible Indicators of Chemical Change</div>
+<ul class="text-xs md:text-sm text-slate-200 space-y-2 list-decimal list-inside bg-slate-950 p-4 rounded-xl border border-slate-800">
+<li><strong class="text-cyan-400">Gas formation</strong> (bubbles produced without boiling).</li>
+<li><strong class="text-cyan-400">Persistent color change</strong> (unexpected new color).</li>
+<li><strong class="text-cyan-400">Energy change</strong> (temperature spike or light emission).</li>
+<li><strong class="text-cyan-400">Formation of a precipitate</strong> (solid forming from solution).</li>
+<li><strong class="text-cyan-400">Odor change</strong> — an unexpected new odor may indicate that new substances formed.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-4">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 4 • Phase Transitions</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Phase Changes (All Physical Changes)</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-center">
+<div class="lg:col-span-6 space-y-3">
+<div class="glass-panel p-4 rounded-xl border border-slate-700/60 shadow-xl space-y-2 build-hidden" data-build="1">
+<div class="text-emerald-400 font-bold text-sm">Melting, Freezing &amp; Vaporization</div>
+<p class="text-xs text-slate-200">
+                            • Melting (Solid → Liquid)<br/>
+                            • Freezing (Liquid → Solid)<br/>
+                            • Vaporization/Boiling (Liquid → Gas)
+                        </p>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-slate-700/60 shadow-xl space-y-2 build-hidden" data-build="2">
+<div class="text-cyan-400 font-bold text-sm">Condensation, Sublimation &amp; Deposition</div>
+<p class="text-xs text-slate-200">
+                            • Condensation (Gas → Liquid)<br/>
+                            • Sublimation (Solid → Gas, e.g., Dry Ice)<br/>
+                            • Deposition (Gas → Solid, e.g., Frost)
+                        </p>
+</div>
+</div>
+<!-- Phase Change Diagram SVG with all 6 processes, correct arrow directions, labels, and clean viewBox -->
+<div class="lg:col-span-6 flex justify-center build-hidden" data-build="2">
+<div class="glass-panel p-5 rounded-3xl border border-slate-700 bg-slate-900/90 text-center w-full space-y-3">
+<div class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Phase Transition Map</div>
+<svg class="w-full h-40 mx-auto" viewbox="0 0 340 160">
+<!-- Solid Box -->
+<rect fill="#1e293b" height="40" rx="6" stroke="#10b981" stroke-width="2" width="75" x="15" y="60"></rect>
+<text fill="#10b981" font-size="12" font-weight="bold" text-anchor="middle" x="52" y="85">Solid</text>
+<!-- Liquid Box -->
+<rect fill="#1e293b" height="40" rx="6" stroke="#06b6d4" stroke-width="2" width="75" x="132" y="60"></rect>
+<text fill="#06b6d4" font-size="12" font-weight="bold" text-anchor="middle" x="169" y="85">Liquid</text>
+<!-- Gas Box -->
+<rect fill="#1e293b" height="40" rx="6" stroke="#f59e0b" stroke-width="2" width="75" x="250" y="60"></rect>
+<text fill="#f59e0b" font-size="12" font-weight="bold" text-anchor="middle" x="287" y="85">Gas</text>
+<!-- Solid -> Liquid: Melting -->
+<path d="M 92 68 L 128 68" fill="none" stroke="#10b981" stroke-width="2"></path>
+<polygon fill="#10b981" points="128,64 134,68 128,72"></polygon>
+<text fill="#10b981" font-size="9" text-anchor="middle" x="110" y="58">Melting</text>
+<!-- Liquid -> Solid: Freezing -->
+<path d="M 128 92 L 92 92" fill="none" stroke="#38bdf8" stroke-width="2"></path>
+<polygon fill="#38bdf8" points="92,88 86,92 92,96"></polygon>
+<text fill="#38bdf8" font-size="9" text-anchor="middle" x="110" y="107">Freezing</text>
+<!-- Liquid -> Gas: Vaporization -->
+<path d="M 209 68 L 246 68" fill="none" stroke="#06b6d4" stroke-width="2"></path>
+<polygon fill="#06b6d4" points="246,64 252,68 246,72"></polygon>
+<text fill="#06b6d4" font-size="9" text-anchor="middle" x="228" y="58">Vaporization</text>
+<!-- Gas -> Liquid: Condensation -->
+<path d="M 246 92 L 209 92" fill="none" stroke="#38bdf8" stroke-width="2"></path>
+<polygon fill="#38bdf8" points="209,88 203,92 209,96"></polygon>
+<text fill="#38bdf8" font-size="9" text-anchor="middle" x="228" y="107">Condensation</text>
+<!-- Solid -> Gas: Sublimation -->
+<path d="M 92 52 Q 169 15 246 52" fill="none" stroke="#f59e0b" stroke-width="2"></path>
+<polygon fill="#f59e0b" points="243,47 252,52 243,55"></polygon>
+<text fill="#f59e0b" font-size="9" text-anchor="middle" x="169" y="27">Sublimation (Solid → Gas)</text>
+<!-- Gas -> Solid: Deposition -->
+<path d="M 246 108 Q 169 145 92 108" fill="none" stroke="#a855f7" stroke-width="2"></path>
+<polygon fill="#a855f7" points="95,113 86,108 95,105"></polygon>
+<text fill="#a855f7" font-size="9" text-anchor="middle" x="169" y="138">Deposition (Gas → Solid)</text>
+</svg>
+<div class="text-xs text-slate-300">
+                            All phase transitions are physical changes because the chemical identity does not change!
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-5">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 5 • Property Classifications</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Intensive vs. Extensive Properties</h2>
+</div>
+<div class="space-y-4 flex-1 flex flex-col justify-center">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 build-hidden" data-build="1">
+<div class="glass-panel p-5 rounded-2xl border border-emerald-500/40 space-y-2">
+<div class="text-emerald-400 font-bold text-base"><span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Intensive</span></span> Properties</div>
+<p class="text-xs text-slate-200">
+                            Independent of the amount of substance present. Excellent for identification.
+                        </p>
+<div class="text-xs font-mono text-emerald-300 bg-slate-950 p-2 rounded border border-slate-800">
+                            Examples: Temperature, Density, Color, Boiling Point
+                        </div>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-amber-500/40 space-y-2">
+<div class="text-amber-400 font-bold text-base"><span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Extensive</span></span> Properties</div>
+<p class="text-xs text-slate-200">
+                            Depends directly on the amount of matter in the sample.
+                        </p>
+<div class="text-xs font-mono text-amber-300 bg-slate-950 p-2 rounded border border-slate-800">
+                            Examples: Mass, Volume, Total Heat Content
+                        </div>
+</div>
+</div>
+<!-- Classification Table -->
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/60 shadow-xl build-hidden" data-build="2">
+<div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Amount Independent vs Amount Dependent</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="border-b border-slate-700 text-emerald-400 font-bold">
+<th class="p-2">Amount Independent (Intensive)</th>
+<th class="p-2">Amount Dependent (Extensive)</th>
+</tr>
+</thead>
+<tbody class="text-slate-300">
+<tr class="border-b border-slate-800">
+<td class="p-2">Temperature (°C)</td>
+<td class="p-2">Mass (g)</td>
+</tr>
+<tr>
+<td class="p-2">Density (g/mL) &amp; Color</td>
+<td class="p-2">Volume (mL) &amp; Energy (J)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-6">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-amber-400">Slide 6 • Critical Warning</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Caution on Proving Chemical Reactions</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-center">
+<div class="lg:col-span-7 space-y-4">
+<div class="glass-panel p-5 rounded-2xl border border-amber-500/40 bg-amber-950/20 shadow-xl space-y-3 build-hidden" data-build="1">
+<div class="text-xs uppercase tracking-wider text-amber-400 font-bold">Caution Statement</div>
+<p class="text-sm text-slate-100 font-medium leading-relaxed">
+                            No single observation always proves that a chemical reaction occurred.
+                        </p>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/60 shadow-xl space-y-3 build-hidden" data-build="2">
+<p class="text-sm text-slate-200 leading-relaxed">
+                            Bubbles from boiling represent a phase change; the substance remains H₂O.
+                        </p>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-emerald-500/40 bg-slate-900/90 text-xs text-emerald-300 font-semibold build-hidden" data-build="3">
+                        Verification Rule: Verify whether a new substance was formed.
+                    </div>
+</div>
+<!-- Beaker Illustration SVG with Unicode Formula -->
+<div class="lg:col-span-5 flex justify-center build-hidden" data-build="2">
+<div class="glass-panel p-5 rounded-3xl border border-slate-700 bg-slate-900/90 text-center w-full">
+<div class="text-xs uppercase tracking-wider text-slate-400 mb-2 font-semibold">Boiling Water Visual</div>
+<svg class="w-full h-40 mx-auto" viewbox="0 0 200 160">
+<rect fill="#1e293b" height="110" rx="4" stroke="#64748b" stroke-width="2" width="100" x="50" y="30"></rect>
+<rect fill="#06b6d4" height="78" opacity="0.4" width="96" x="52" y="60"></rect>
+<circle cx="80" cy="95" fill="#ffffff" opacity="0.8" r="4"></circle>
+<circle cx="120" cy="75" fill="#ffffff" opacity="0.8" r="5"></circle>
+<circle cx="95" cy="50" fill="#ffffff" opacity="0.8" r="6"></circle>
+<text fill="#10b981" font-size="11" font-weight="bold" text-anchor="middle" x="100" y="20">H₂O molecules</text>
+</svg>
+<div class="text-xs text-slate-300 mt-1">
+                            Bubbles from boiling represent a phase change; the substance remains H₂O.
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-7">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 7 • Exam Shortcut</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">The "Same Stuff" Test</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-center">
+<div class="lg:col-span-6 space-y-4">
+<div class="glass-panel p-5 rounded-2xl border border-emerald-500/40 bg-slate-900/90 shadow-xl space-y-3 build-hidden" data-build="1">
+<div class="text-xs text-emerald-400 font-bold uppercase">Classification Rule</div>
+<p class="text-base text-slate-200">
+                            Ask: "Is it still the <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">same stuff</span></span> at the end?"
+                        </p>
+<div class="space-y-1 text-sm text-slate-300 font-mono">
+<div>• YES (→) <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Physical</span></span> Change</div>
+<div>• NO (→) <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Chemical</span></span> Change</div>
+</div>
+</div>
+</div>
+<!-- Decision Tree Visual with Unicode Formula and clean viewBox -->
+<div class="lg:col-span-6 flex justify-center build-hidden" data-build="2">
+<div class="glass-panel p-6 rounded-3xl border border-slate-700 bg-slate-900/90 text-center w-full space-y-4">
+<div class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Decision Flowchart</div>
+<svg class="w-full h-40 mx-auto" viewbox="0 0 320 160">
+<polygon fill="#1e293b" points="160,10 230,45 160,80 90,45" stroke="#10b981" stroke-width="2"></polygon>
+<text fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle" x="160" y="49">Identity Change?</text>
+<line stroke="#06b6d4" stroke-width="2" x1="110" x2="60" y1="58" y2="100"></line>
+<text fill="#06b6d4" font-size="10" x="75" y="73">No</text>
+<rect fill="#1e293b" height="45" rx="6" stroke="#06b6d4" stroke-width="1.5" width="110" x="10" y="100"></rect>
+<text fill="#06b6d4" font-size="10" font-weight="bold" text-anchor="middle" x="65" y="120">Physical Change</text>
+<text fill="#94a3b8" font-size="9" text-anchor="middle" x="65" y="135">Water → Steam</text>
+<line stroke="#f59e0b" stroke-width="2" x1="210" x2="260" y1="58" y2="100"></line>
+<text fill="#f59e0b" font-size="10" x="240" y="73">Yes</text>
+<rect fill="#1e293b" height="45" rx="6" stroke="#f59e0b" stroke-width="1.5" width="110" x="200" y="100"></rect>
+<text fill="#f59e0b" font-size="10" font-weight="bold" text-anchor="middle" x="255" y="120">Chemical Change</text>
+<text fill="#94a3b8" font-size="9" text-anchor="middle" x="255" y="135">Propane + O₂ → CO₂ + H₂O</text>
+</svg>
+<div class="text-xs text-slate-300">
+                            The chemical identity remains H₂O; no new substance is formed.
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-8">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-rose-400">Slide 8 • Common Traps</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Frequent Student Misconceptions — T1.5</h2>
+</div>
+<div class="space-y-4 flex-1 flex flex-col justify-center">
+<div class="glass-panel p-4 rounded-xl border border-rose-500/30 bg-rose-950/10 build-hidden space-y-1" data-build="1">
+<div class="text-rose-400 font-bold text-sm">
+                        Mistake 1: Thinking dissolving sugar is <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">chemical</span></span> because it "disappears."
+                    </div>
+<p class="text-xs text-slate-300">
+<strong class="text-emerald-400">Fact:</strong> Dissolving is physical. Sugar molecules remain intact in solution and can be recovered by evaporating the water.
+                    </p>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-rose-500/30 bg-rose-950/10 build-hidden space-y-1" data-build="2">
+<div class="text-rose-400 font-bold text-sm">
+                        Mistake 2: Thinking boiling is chemical because it makes <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">gas/bubbles</span></span>.
+                    </div>
+<p class="text-xs text-slate-300">
+<strong class="text-emerald-400">Fact:</strong> The chemical identity remains H₂O; no new substance is formed.
+                    </p>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-9">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 9 • Self-Assessment</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Independent Check — Topic T1.5</h2>
+</div>
+<div class="space-y-4 flex-1 flex flex-col justify-center">
+<div class="glass-panel p-4 rounded-xl border border-slate-700/70 space-y-2 build-hidden" data-build="1">
+<div class="text-sm font-semibold text-slate-200">
+                        1. Identify as physical or chemical change: Boiling water <span class="font-mono text-cyan-300">[_______]</span>
+</div>
+<div class="flex gap-3 items-center">
+<input class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1 text-sm text-emerald-300 w-56 outline-none focus:border-emerald-500" id="q1Input" placeholder="Type answer..." type="text"/>
+<button class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-xs font-bold text-white transition" onclick="recordAnswer(1)">Submit</button>
+<span class="text-xs font-semibold text-emerald-400 hidden" id="q1Status">Recorded</span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-slate-700/70 space-y-2 build-hidden" data-build="2">
+<div class="text-sm font-semibold text-slate-200">
+                        2. Identify as physical or chemical change: Iron rusting <span class="font-mono text-cyan-300">[_______]</span>
+</div>
+<div class="flex gap-3 items-center">
+<input class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1 text-sm text-emerald-300 w-56 outline-none focus:border-emerald-500" id="q2Input" placeholder="Type answer..." type="text"/>
+<button class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-xs font-bold text-white transition" onclick="recordAnswer(2)">Submit</button>
+<span class="text-xs font-semibold text-emerald-400 hidden" id="q2Status">Recorded</span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-slate-700/70 space-y-2 build-hidden" data-build="3">
+<div class="text-sm font-semibold text-slate-200">
+                        3. Which is an intensive property? (A) Mass (B) Temperature (C) Volume <span class="font-mono text-cyan-300">[_______]</span>
+</div>
+<div class="flex gap-3 items-center">
+<input class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1 text-sm text-emerald-300 w-56 outline-none focus:border-emerald-500" id="q3Input" placeholder="Type answer..." type="text"/>
+<button class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-xs font-bold text-white transition" onclick="recordAnswer(3)">Submit</button>
+<span class="text-xs font-semibold text-emerald-400 hidden" id="q3Status">Recorded</span>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-10">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 10 • Cumulative Review</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Module 1 Master Checklist</h2>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-emerald-500/40 bg-slate-900/90 shadow-xl flex-1 flex flex-col justify-between">
+<div class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2">Can you answer all 10 module learning outcomes?</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-xs text-slate-200">
+<div class="flex items-center space-x-2"><input class="rounded accent-emerald-500" type="checkbox"/><span>1. Classify matter using the Tree?</span></div>
+<div class="flex items-center space-x-2"><input class="rounded accent-emerald-500" type="checkbox"/><span>2. Distinguish scientific laws from theories?</span></div>
+<div class="flex items-center space-x-2"><input class="rounded accent-emerald-500" type="checkbox"/><span>3. Identify SI units and metric prefixes?</span></div>
+<div class="flex items-center space-x-2"><input class="rounded accent-emerald-500" type="checkbox"/><span>4. Distinguish accuracy from precision?</span></div>
+<div class="flex items-center space-x-2"><input class="rounded accent-emerald-500" type="checkbox"/><span>5. Distinguish random vs systematic error?</span></div>
+<div class="flex items-center space-x-2"><input class="rounded accent-emerald-500" type="checkbox"/><span>6. Perform unit conversions using Roadmap?</span></div>
+<div class="flex items-center space-x-2"><input class="rounded accent-emerald-500" type="checkbox"/><span>7. Apply sig fig rules using Math Table?</span></div>
+<div class="flex items-center space-x-2"><input class="rounded accent-emerald-500" type="checkbox"/><span>8. Solve density problems with Triangle?</span></div>
+<div class="flex items-center space-x-2"><input class="rounded accent-emerald-500" type="checkbox"/><span>9. Distinguish intensive/extensive properties?</span></div>
+<div class="flex items-center space-x-2"><input class="rounded accent-emerald-500" type="checkbox"/><span>10. Distinguish physical/chemical changes?</span></div>
+</div>
+<div class="mt-3 p-2 bg-slate-950 rounded-xl border border-slate-800 text-center text-xs text-emerald-400 font-semibold">
+                    General Chemistry I — Module 1 Complete!
+                </div>
+</div>
+</section>
+</main>
+<script>
+
+let currentSlide=1;
+let currentBuild=1;
+let currentMode='student';
+const slides=[...document.querySelectorAll('.slide-container')];
+const totalSlides=slides.length;
+const buildsPerSlide={};
+slides.forEach((slide,index)=>{const nums=[...slide.querySelectorAll('[data-build]')].map(el=>parseInt(el.dataset.build||'1',10)).filter(Number.isFinite);buildsPerSlide[index+1]=nums.length?Math.max(...nums):1;});
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+function setMode(mode,button){
+  if(mode!=='student' && mode!=='answer') return;
+  currentMode=mode;
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${mode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+function updateDisplay(){
+  slides.forEach((slide,index)=>slide.classList.toggle('active',index+1===currentSlide));
+  const active=slides[currentSlide-1];
+  if(active){active.querySelectorAll('[data-build]').forEach(el=>{const n=parseInt(el.dataset.build||'1',10);el.classList.toggle('m8-visible',n<=currentBuild);});}
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+function nextBuild(){const max=buildsPerSlide[currentSlide];if(currentBuild<max)currentBuild++;else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}updateDisplay();}
+function prevBuild(){if(currentBuild>1)currentBuild--;else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}updateDisplay();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}});
+updateDisplay();
+
+</script>
+<div style="margin-top: 40px; text-align: center; font-size: 14px; color: #666; line-height: 1.5;">© 2026 Nara Chon. All rights reserved.<br>This lecture material is the intellectual property of Nara Chon and may not be reproduced, distributed, or modified without permission.</div>
+</body>
+</html>

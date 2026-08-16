@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Topic T1.3 — Uncertainty, Significant Figures, &amp; Scientific Notation — Student</title>
+<style id="legacy-content-support">
+
+        body {
+            font-family: system-ui, sans-serif;
+            user-select: none;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+.blank-box {
+            display: inline-block;
+            min-width: 90px;
+            padding: 2px 10px;
+            margin: 0 4px;
+            border-bottom: 2px solid #38bdf8;
+            background-color: rgba(56, 189, 248, 0.1);
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .mode-student .blank-answer {
+            display: none !important;
+        }
+
+        .mode-student .blank-placeholder {
+            display: inline !important;
+            color: #38bdf8;
+            letter-spacing: 2px;
+        }
+
+        .mode-answer .blank-placeholder {
+            display: none !important;
+        }
+
+        .mode-answer .blank-answer {
+            display: inline !important;
+            color: #10b981;
+            background-color: rgba(16, 185, 129, 0.15);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border-bottom: 2px solid #10b981;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .build-hidden {
+            opacity: 0;
+            transform: translateY(12px);
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .build-visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+    
+</style>
+<style id="static-utility-css">
+/* Self-contained subset of utility classes used by the preserved Module 1 slide content. */
+@keyframes twPulse{50%{opacity:.5}}
+.animate-pulse{animation:twPulse 2s cubic-bezier(.4,0,.6,1) infinite}
+.backdrop-blur-md{backdrop-filter:blur(12px)}
+.bg-amber-950\/80{background-color:rgb(69 26 3 / 0.8)}
+.bg-emerald-500{background-color:#10b981}
+.bg-emerald-500\/10{background-color:rgb(16 185 129 / 0.1)}
+.bg-emerald-600{background-color:#059669}
+.bg-emerald-950\/40{background-color:rgb(2 44 34 / 0.4)}
+.bg-rose-950\/10{background-color:rgb(76 5 25 / 0.1)}
+.bg-slate-800{background-color:#1e293b}
+.bg-slate-900\/80{background-color:rgb(15 23 42 / 0.8)}
+.bg-slate-900\/90{background-color:rgb(15 23 42 / 0.9)}
+.bg-slate-950{background-color:#020617}
+.border{border-width:1px;border-style:solid}
+.border-amber-500\/30{border-color:rgb(245 158 11 / 0.3)}
+.border-amber-500\/50{border-color:rgb(245 158 11 / 0.5)}
+.border-b{border-bottom-width:1px;border-bottom-style:solid}
+.border-emerald-500{border-color:#10b981}
+.border-emerald-500\/20{border-color:rgb(16 185 129 / 0.2)}
+.border-emerald-500\/30{border-color:rgb(16 185 129 / 0.3)}
+.border-emerald-500\/40{border-color:rgb(16 185 129 / 0.4)}
+.border-emerald-500\/50{border-color:rgb(16 185 129 / 0.5)}
+.border-indigo-500\/30{border-color:rgb(99 102 241 / 0.3)}
+.border-l-2{border-left-width:2px;border-left-style:solid}
+.border-rose-500\/30{border-color:rgb(244 63 94 / 0.3)}
+.border-slate-600{border-color:#475569}
+.border-slate-700{border-color:#334155}
+.border-slate-700\/60{border-color:rgb(51 65 85 / 0.6)}
+.border-slate-700\/70{border-color:rgb(51 65 85 / 0.7)}
+.border-slate-700\/80{border-color:rgb(51 65 85 / 0.8)}
+.border-slate-800{border-color:#1e293b}
+.border-t{border-top-width:1px;border-top-style:solid}
+.flex{display:flex}
+.flex-1{flex:1 1 0%}
+.flex-col{flex-direction:column}
+.flex-wrap{flex-wrap:wrap}
+.font-black{font-weight:900}
+.font-bold{font-weight:700}
+.font-extrabold{font-weight:800}
+.font-medium{font-weight:500}
+.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+.font-normal{font-weight:400}
+.font-semibold{font-weight:600}
+.gap-3{gap:.75rem}
+.gap-4{gap:1rem}
+.gap-6{gap:1.5rem}
+.grid{display:grid}
+.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
+.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.h-14{height:3.5rem}
+.h-16{height:4rem}
+.h-3{height:.75rem}
+.h-3\.5{height:.875rem}
+.h-4{height:1rem}
+.h-48{height:12rem}
+.h-6{height:1.5rem}
+.h-full{height:100%}
+.h-screen{height:100vh}
+.hidden{display:none!important}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.justify-center{justify-content:center}
+.list-disc{list-style-type:disc}
+.list-inside{list-style-position:inside}
+.max-w-6xl{max-width:72rem}
+.max-w-xs{max-width:20rem}
+.mb-1{margin-bottom:.25rem}
+.mb-2{margin-bottom:.5rem}
+.mb-3{margin-bottom:.75rem}
+.mb-4{margin-bottom:1rem}
+.ml-2{margin-left:.5rem}
+.mt-1{margin-top:.25rem}
+.mt-4{margin-top:1rem}
+.mx-auto{margin-left:auto;margin-right:auto}
+.outline-none{outline:2px solid transparent;outline-offset:2px}
+.overflow-hidden{overflow:hidden}
+.overflow-x-auto{overflow-x:auto}
+.p-1{padding:.25rem}
+.p-2{padding:.5rem}
+.p-3{padding:.75rem}
+.p-4{padding:1rem}
+.p-5{padding:1.25rem}
+.p-6{padding:1.5rem}
+.p-8{padding:2rem}
+.pl-2{padding-left:.5rem}
+.pl-4{padding-left:1rem}
+.pt-1{padding-top:.25rem}
+.pt-2{padding-top:.5rem}
+.px-1\.5{padding-inline:.375rem}
+.px-2\.5{padding-inline:.625rem}
+.px-3{padding-inline:.75rem}
+.px-4{padding-inline:1rem}
+.px-6{padding-inline:1.5rem}
+.py-0\.5{padding-block:.125rem}
+.py-1{padding-block:.25rem}
+.py-1\.5{padding-block:.375rem}
+.py-2{padding-block:.5rem}
+.py-3{padding-block:.75rem}
+.py-6{padding-block:1.5rem}
+.relative{position:relative}
+.rounded{border-radius:.25rem}
+.rounded-2xl{border-radius:1rem}
+.rounded-3xl{border-radius:1.5rem}
+.rounded-full{border-radius:9999px}
+.rounded-lg{border-radius:.5rem}
+.rounded-md{border-radius:.375rem}
+.rounded-xl{border-radius:.75rem}
+.shrink-0{flex-shrink:0}
+.space-x-1>:not([hidden])~:not([hidden]){margin-left:.25rem}
+.space-x-1\.5>:not([hidden])~:not([hidden]){margin-left:.375rem}
+.space-x-2>:not([hidden])~:not([hidden]){margin-left:.5rem}
+.space-x-3>:not([hidden])~:not([hidden]){margin-left:.75rem}
+.space-x-4>:not([hidden])~:not([hidden]){margin-left:1rem}
+.space-y-2>:not([hidden])~:not([hidden]){margin-top:.5rem}
+.space-y-3>:not([hidden])~:not([hidden]){margin-top:.75rem}
+.space-y-4>:not([hidden])~:not([hidden]){margin-top:1rem}
+.space-y-6>:not([hidden])~:not([hidden]){margin-top:1.5rem}
+.text-3xl{font-size:1.875rem;line-height:2.25rem}
+.text-amber-300{color:#fcd34d}
+.text-amber-400{color:#fbbf24}
+.text-base{font-size:1rem;line-height:1.5rem}
+.text-center{text-align:center}
+.text-cyan-300{color:#67e8f9}
+.text-cyan-400{color:#22d3ee}
+.text-emerald-200{color:#a7f3d0}
+.text-emerald-300{color:#6ee7b7}
+.text-emerald-400{color:#34d399}
+.text-indigo-300{color:#a5b4fc}
+.text-indigo-400{color:#818cf8}
+.text-lg{font-size:1.125rem;line-height:1.75rem}
+.text-rose-300{color:#fda4af}
+.text-rose-400{color:#fb7185}
+.text-slate-100{color:#f1f5f9}
+.text-slate-200{color:#e2e8f0}
+.text-slate-300{color:#cbd5e1}
+.text-slate-400{color:#94a3b8}
+.text-sm{font-size:.875rem;line-height:1.25rem}
+.text-white{color:#ffffff}
+.text-xl{font-size:1.25rem;line-height:1.75rem}
+.text-xs{font-size:.75rem;line-height:1rem}
+.tracking-wide{letter-spacing:.025em}
+.tracking-wider{letter-spacing:.05em}
+.tracking-widest{letter-spacing:.1em}
+.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-duration:.15s}
+.transition-all{transition-property:all;transition-duration:.15s}
+.uppercase{text-transform:uppercase}
+.w-3{width:.75rem}
+.w-3\.5{width:.875rem}
+.w-4{width:1rem}
+.w-48{width:12rem}
+.w-6{width:1.5rem}
+.w-64{width:16rem}
+.w-full{width:100%}
+.w-screen{width:100vw}
+.z-50{z-index:50}
+.hover\:bg-emerald-500:hover{background-color:#10b981}
+.hover\:bg-slate-700:hover{background-color:#334155}
+.hover\:text-slate-200:hover{color:#e2e8f0}
+.focus\:border-emerald-500:focus{border-color:#10b981}
+@media(min-width:768px){.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.md\:p-8{padding:2rem}.md\:text-5xl{font-size:3rem;line-height:1}.md\:text-base{font-size:1rem;line-height:1.5rem}.md\:text-lg{font-size:1.125rem;line-height:1.75rem}}
+@media(min-width:1024px){.lg\:col-span-5{grid-column:span 5 / span 5}.lg\:col-span-7{grid-column:span 7 / span 7}.lg\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}}
+</style>
+<style id="module8-shell">
+/* Module 8 common presentation system. */
+
+:root{--bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;--accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;--accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;--border-color:#475569;--blank-bg:#334155}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}
+.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}
+.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.75rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}.btn:disabled{opacity:.4;cursor:not-allowed}.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}
+.slide-container{width:100%!important;max-width:none!important;height:auto!important;background:var(--bg-card)!important;border-radius:12px!important;border:1px solid var(--border-color)!important;box-shadow:0 20px 25px -5px rgba(0,0,0,.5)!important;padding:2rem!important;min-height:620px!important;display:none!important;flex-direction:column!important;justify-content:space-between!important;position:relative!important;animation:m8FadeIn .3s ease-in-out!important}
+.slide-container.active{display:flex!important}.slide-container:not(.active){display:none!important}@keyframes m8FadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide-header,.slide-container>.mb-3,.slide-container>.mb-4{margin-bottom:1.15rem!important}
+.slide-category,.slide-container>.mb-3>span:first-child,.slide-container>.mb-4>span:first-child{display:inline-block!important;font-size:.8rem!important;text-transform:uppercase!important;letter-spacing:.05em!important;font-weight:700!important;color:var(--accent-teal)!important;background:rgba(45,212,191,.1)!important;padding:.25rem .6rem!important;border-radius:4px!important;margin-bottom:.5rem!important;border:1px solid rgba(45,212,191,.2)!important}
+.slide-title,.slide-container h2{font-size:2.05rem!important;font-weight:800!important;line-height:1.25!important;color:var(--text-main)!important;margin-top:0!important}
+.slide-container [data-build]{opacity:.15!important;pointer-events:none!important;transition:opacity .4s ease,transform .4s ease,filter .4s ease!important;transform:translateY(8px)!important;filter:blur(1px)!important}
+.slide-container [data-build].m8-visible{opacity:1!important;pointer-events:auto!important;transform:none!important;filter:none!important}
+.glass-panel,.glass-card{background:#0f172a!important;border:1px solid var(--border-color)!important;border-radius:10px!important;box-shadow:none!important;backdrop-filter:none!important}
+.blank-box{display:inline-block!important;min-width:90px!important;padding:.15rem .55rem!important;background:var(--blank-bg)!important;border:0!important;border-bottom:2px solid var(--accent-amber)!important;border-radius:4px!important;text-align:center!important;font-weight:700!important;vertical-align:middle!important}
+.mode-student .blank-placeholder{display:inline!important;color:transparent!important;user-select:none!important}.mode-student .blank-answer{display:none!important}.mode-answer .blank-placeholder{display:none!important}.mode-answer .blank-answer{display:inline!important;color:var(--accent-amber)!important;background:rgba(251,191,36,.15)!important;padding:.05rem .25rem!important;border-radius:3px!important;border:0!important}
+.callout{background:rgba(56,189,248,.08)!important;border:1px solid var(--accent-blue)!important;border-radius:8px!important;padding:.7rem 1rem!important}.warn{background:rgba(244,63,94,.1)!important;border:1px solid var(--accent-rose)!important;border-radius:8px!important;padding:.7rem 1rem!important;color:#fecdd3!important}.equal-banner{background:rgba(45,212,191,.1)!important;border:1px solid var(--accent-teal)!important;border-radius:8px!important;padding:.65rem!important;text-align:center!important;color:var(--accent-teal)!important;font-weight:900!important;font-size:1.05rem!important}
+input,select,textarea{background:#0f172a!important;color:var(--text-main)!important;border:1px solid var(--border-color)!important;border-radius:6px!important}
+footer{display:none!important}
+@media(max-width:1000px){header{position:sticky;top:0}.nav-controls{flex-wrap:wrap}.slide-container{min-height:auto!important;padding:1.25rem!important}.slide-title,.slide-container h2{font-size:1.65rem!important}main{padding:1rem;justify-content:flex-start}}
+@media(max-height:780px){main{justify-content:flex-start}.slide-container{min-height:auto!important}}
+
+</style>
+</head>
+<body class="mode-student">
+<header>
+  <div class="deck-title"><span>Topic T1.3 | Uncertainty, Sig Figs, &amp; Sci Notation</span></div>
+  <div class="mode-selector">
+    <button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button>
+    <button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button>
+  </div>
+  <div class="nav-controls">
+    <button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+    <span class="counter-badge" id="slideCounter">Slide 1 / 1</span>
+    <span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 1</span>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+  </div>
+</header>
+<main>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-1">
+<div class="mb-4">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 1 • Fundamental Principles</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Uncertainty in Measurement</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-center">
+<div class="lg:col-span-7 space-y-6 build-hidden" data-build="1">
+<div class="glass-panel p-6 rounded-2xl border border-slate-700/60 shadow-xl space-y-4">
+<p class="text-lg font-medium text-slate-200">
+                            Every experimental measurement contains a degree of <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">uncertainty</span></span>.
+                        </p>
+<ul class="space-y-3 text-base text-slate-300 list-disc list-inside pl-2">
+<li>The precision of a measurement is limited by the <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">measuring device</span></span>.</li>
+<li>When reading a scale, record all <strong class="text-emerald-400">certain digits</strong> plus <strong class="text-amber-400">one estimated digit</strong>.</li>
+<li>The estimated digit represents the <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">last digit</span></span> of the recorded number.</li>
+</ul>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/60 bg-slate-900/80 flex items-center space-x-4">
+<div class="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 text-emerald-400">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<span class="font-bold text-emerald-300">Rule of Thumb:</span>
+<span class="text-slate-300 ml-2">If a scale has 1 mL markings, estimate to the nearest 0.1 mL!</span>
+</div>
+</div>
+</div>
+<!-- Meniscus SVG Visual -->
+<div class="lg:col-span-5 flex flex-col items-center justify-center build-hidden" data-build="2">
+<div class="glass-panel p-6 rounded-3xl border border-emerald-500/30 bg-slate-900/90 shadow-2xl text-center w-full">
+<div class="text-xs uppercase tracking-wider text-slate-400 mb-3 font-semibold">Graduated Cylinder Reading Visual</div>
+<svg class="w-48 h-48 mx-auto" viewbox="0 0 200 200">
+<!-- Cylinder Glass Outline -->
+<rect fill="#1e293b" height="160" rx="4" stroke="#64748b" stroke-width="3" width="80" x="60" y="20"></rect>
+<!-- Graduation Marks -->
+<line stroke="#94a3b8" stroke-width="2" x1="60" x2="80" y1="40" y2="40"></line>
+<text fill="#94a3b8" font-size="10" x="90" y="44">25 mL</text>
+<line stroke="#64748b" stroke-width="1.5" x1="60" x2="75" y1="70" y2="70"></line>
+<line stroke="#94a3b8" stroke-width="2" x1="60" x2="80" y1="100" y2="100"></line>
+<text fill="#94a3b8" font-size="10" x="90" y="104">24 mL</text>
+<line stroke="#64748b" stroke-width="1.5" x1="60" x2="75" y1="130" y2="130"></line>
+<!-- Liquid Water Curve (Meniscus) -->
+<path d="M 60 82 Q 100 92 140 82 L 140 178 L 60 178 Z" fill="rgba(6, 182, 212, 0.4)" stroke="#06b6d4" stroke-width="2"></path>
+<!-- Eye line -->
+<line stroke="#f43f5e" stroke-dasharray="3,3" stroke-width="1.5" x1="40" x2="160" y1="90" y2="90"></line>
+</svg>
+<div class="mt-4 p-3 bg-slate-950 rounded-xl border border-slate-800 text-sm">
+                            Meniscus bottom is between 24 and 25.<br/>
+                            Recorded Value: <span class="font-mono text-emerald-400 font-bold">24.3 mL</span> <span class="text-xs text-slate-400">(Certain: 24, Estimated: .3)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-2">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 2 • Counting Rules</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Rules for Significant Figures (Sig Figs)</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 items-center">
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/70 space-y-2 build-hidden" data-build="1">
+<div class="text-emerald-400 font-bold text-lg">1. Non-Zero Digits</div>
+<p class="text-slate-300 text-sm">
+                        All non-zero integers are <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">ALWAYS</span></span> significant.
+                    </p>
+<div class="p-2 bg-slate-950 rounded-lg font-mono text-xs text-emerald-300">
+                        145.8 g → 4 Sig Figs
+                    </div>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/70 space-y-2 build-hidden" data-build="2">
+<div class="text-amber-400 font-bold text-lg">2. Captive (Trapped) Zeros</div>
+<p class="text-slate-300 text-sm">
+                        Zeros between non-zero digits are <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">ALWAYS</span></span> significant.
+                    </p>
+<div class="p-2 bg-slate-950 rounded-lg font-mono text-xs text-amber-300">
+                        1.008 m → 4 Sig Figs
+                    </div>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/70 space-y-2 build-hidden" data-build="3">
+<div class="text-rose-400 font-bold text-lg">3. Leading Zeros</div>
+<p class="text-slate-300 text-sm">
+                        Zeros preceding all non-zero digits are <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">NEVER</span></span> significant (placeholders only).
+                    </p>
+<div class="p-2 bg-slate-950 rounded-lg font-mono text-xs text-rose-300">
+                        0.0025 kg → 2 Sig Figs
+                    </div>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/70 space-y-2 build-hidden" data-build="4">
+<div class="text-indigo-400 font-bold text-lg">4. Trailing Zeros</div>
+<p class="text-slate-300 text-sm">
+                        Trailing zeros in a number containing a decimal point are <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">significant</span></span>. Trailing zeros in a whole number without a displayed decimal point may be <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">ambiguous</span></span>. Use scientific notation to show the intended precision.
+                    </p>
+<div class="p-2 bg-slate-950 rounded-lg font-mono text-xs text-indigo-300">
+                        100.0 g (4 SF) vs. 100 g (Ambiguous; write 1.0 × 10² g for 2 SF)
+                    </div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-3">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 3 • Visual Breakdown</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Classifying Zero Types</h2>
+</div>
+<div class="glass-panel p-8 rounded-3xl border border-slate-700/80 shadow-2xl space-y-6 flex-1 flex flex-col justify-center">
+<div class="text-center font-mono text-3xl md:text-5xl font-black tracking-widest text-white bg-slate-950 py-6 px-4 rounded-2xl border border-slate-800 shadow-inner build-hidden" data-build="1">
+<span class="text-rose-400">0.00</span><span class="text-emerald-400">4</span><span class="text-amber-400">0</span><span class="text-emerald-400">5</span><span class="text-indigo-400">0</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="p-4 bg-slate-900/80 rounded-xl border border-rose-500/30 text-center build-hidden" data-build="2">
+<div class="text-xs text-rose-400 font-bold mb-1">0.00 (Leading Zeros)</div>
+<div class="text-sm font-semibold text-slate-200">NOT Significant</div>
+<div class="text-xs text-slate-400 mt-1">Zeros before 4 are leading zeros and are not significant</div>
+</div>
+<div class="p-4 bg-slate-900/80 rounded-xl border border-emerald-500/30 text-center build-hidden" data-build="2">
+<div class="text-xs text-emerald-400 font-bold mb-1">4 &amp; 5 (Nonzero Digits)</div>
+<div class="text-sm font-semibold text-slate-200">Significant</div>
+<div class="text-xs text-slate-400 mt-1">4 and 5 are nonzero digits and are significant</div>
+</div>
+<div class="p-4 bg-slate-900/80 rounded-xl border border-amber-500/30 text-center build-hidden" data-build="3">
+<div class="text-xs text-amber-400 font-bold mb-1">0 (Captive Zero)</div>
+<div class="text-sm font-semibold text-slate-200">Significant</div>
+<div class="text-xs text-slate-400 mt-1">The zero between 4 and 5 is a captive zero and is significant</div>
+</div>
+<div class="p-4 bg-slate-900/80 rounded-xl border border-indigo-500/30 text-center build-hidden" data-build="3">
+<div class="text-xs text-indigo-400 font-bold mb-1">0 (Trailing Zero)</div>
+<div class="text-sm font-semibold text-slate-200">Significant</div>
+<div class="text-xs text-slate-400 mt-1">The final zero is a trailing zero in a decimal number and is significant</div>
+</div>
+</div>
+<div class="p-4 bg-emerald-950/40 border border-emerald-500/40 rounded-xl text-center build-hidden" data-build="4">
+<span class="text-emerald-300 font-bold text-base">Total Significant Figures = <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">4 Sig Figs</span></span> (4, 0, 5, 0)</span>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-4">
+<div class="mb-4">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 4 • Addition &amp; Subtraction</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Sig Figs in Addition &amp; Subtraction</h2>
+</div>
+<div class="space-y-6 flex-1 flex flex-col justify-center">
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/70 build-hidden" data-build="1">
+<p class="text-lg text-slate-200">
+<strong class="text-emerald-400">The Decimal Place Rule:</strong> The result must have the same number of <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">decimal places</span></span> as the measurement with the fewest decimal places.
+                    </p>
+</div>
+<div class="glass-panel p-6 rounded-2xl border border-emerald-500/40 bg-slate-900/90 shadow-xl build-hidden" data-build="2">
+<div class="text-xs font-semibold text-emerald-400 uppercase mb-3">Example Problem</div>
+<div class="font-mono text-lg space-y-2 text-slate-200 max-w-xs mx-auto border-l-2 border-emerald-500 pl-4">
+<div>  12.11  <span class="text-xs text-slate-400">(2 decimal places)</span></div>
+<div>+ 18.0   <span class="text-xs text-amber-400 font-bold">(1 decimal place ← FEWEST)</span></div>
+<div>+ 1.013 <span class="text-xs text-slate-400">(3 decimal places)</span></div>
+<div class="border-t border-slate-600 pt-1 font-bold">= 31.123 → <span class="text-emerald-400">31.1</span></div>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-slate-700/70 text-sm text-slate-300 build-hidden" data-build="3">
+<span class="text-amber-400 font-bold">Key Distinction:</span> Do NOT count total sig figs here! Only look at <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">places past decimal</span></span>.
+                </div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-5">
+<div class="mb-4">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 5 • Multiplication &amp; Division</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Sig Figs in Multiplication &amp; Division</h2>
+</div>
+<div class="space-y-6 flex-1 flex flex-col justify-center">
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/70 build-hidden" data-build="1">
+<p class="text-lg text-slate-200">
+<strong class="text-emerald-400">The Total Sig Fig Rule:</strong> The result must contain the same number of <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">total sig figs</span></span> as the measurement with the fewest total sig figs.
+                    </p>
+</div>
+<div class="glass-panel p-6 rounded-2xl border border-emerald-500/40 bg-slate-900/90 shadow-xl build-hidden" data-build="2">
+<div class="text-xs font-semibold text-emerald-400 uppercase mb-3">Example Calculation</div>
+<div class="font-mono text-base md:text-lg flex flex-wrap items-center justify-center gap-3 py-3">
+<span class="px-3 py-1 bg-slate-800 rounded-lg border border-slate-700">4.56 <span class="text-xs text-slate-400">(3 SF)</span></span>
+<span>×</span>
+<span class="px-3 py-1 bg-amber-950/80 rounded-lg border border-amber-500/50 text-amber-300">1.4 <span class="text-xs text-amber-400 font-bold">(2 SF ← FEWEST)</span></span>
+<span>=</span>
+<span>6.384</span>
+<span>→</span>
+<span class="px-4 py-1.5 bg-emerald-600 rounded-lg font-bold text-white shadow-lg">6.4 <span class="text-xs text-emerald-200">(2 SF)</span></span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-slate-700/70 text-sm text-slate-300 build-hidden" data-build="3">
+<span class="text-emerald-400 font-bold">Exact Numbers:</span> Counted objects (e.g., 3 apples) or defined conversion factors (1 in = 2.54 cm) have <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">infinite</span></span> sig figs and never limit calculations!
+                </div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-6">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 6 • Compact Representation</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Scientific Notation (N × 10ⁿ)</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-center">
+<div class="lg:col-span-7 space-y-4">
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/70 build-hidden space-y-2" data-build="1">
+<h3 class="text-emerald-400 font-bold text-base">Standard Scientific Form</h3>
+<div class="font-mono text-xl text-center py-3 bg-slate-950 rounded-xl border border-slate-800 text-cyan-300">
+                            N × 10<sup>n</sup>
+</div>
+<p class="text-sm text-slate-300">
+                            Where <strong class="text-amber-400">1 ≤ N &lt; 10</strong> and <strong class="text-emerald-400">n</strong> is an integer exponent.
+                        </p>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/70 build-hidden space-y-2" data-build="2">
+<h3 class="text-cyan-400 font-bold text-base">Eliminating Ambiguity</h3>
+<p class="text-sm text-slate-200">
+                            How do you write 300 with 2 Sig Figs? Standard decimal form is ambiguous!
+                        </p>
+<div class="font-mono text-sm bg-slate-950 p-3 rounded-xl border border-slate-800 text-emerald-400">
+                            300 with 2 SF = <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">3.0 × 10²</span></span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 glass-panel p-6 rounded-2xl border border-slate-700/70 flex flex-col justify-center space-y-3 build-hidden" data-build="3">
+<div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Exponent Direction Quick Guide</div>
+<div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs font-mono space-y-2">
+<div class="text-emerald-400">Large Numbers (&gt;10):</div>
+<div>Move decimal left → Exponent is <span class="font-bold text-white">POSITIVE (+)</span></div>
+<div>560000 → 5.6 × 10⁵</div>
+</div>
+<div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs font-mono space-y-2">
+<div class="text-rose-400">Small Numbers (&lt;1):</div>
+<div>Move decimal right → Exponent is <span class="font-bold text-white">NEGATIVE (-)</span></div>
+<div>0.00045 → 4.5 × 10⁻⁴</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-7">
+<div class="mb-4">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 7 • Combined Operations</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Multi-Step Calculations &amp; Rounding</h2>
+</div>
+<div class="space-y-4 flex-1 flex flex-col justify-center">
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/70 build-hidden" data-build="1">
+<h3 class="text-amber-400 font-bold text-lg mb-1">Golden Rule of Rounding</h3>
+<p class="text-base text-slate-200">
+                        At each operation, apply the correct significant-figure rule to determine that step’s precision limit. Carry all extra digits through <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">intermediate steps</span></span> as guard digits, and round ONLY the final reported answer.
+                    </p>
+</div>
+<div class="glass-panel p-6 rounded-2xl border border-slate-700 build-hidden space-y-3" data-build="2">
+<div class="text-xs font-semibold text-emerald-400 uppercase">Mixed Operations Sequence: (2.54 + 0.123) × 1.2</div>
+<div class="font-mono text-sm md:text-base space-y-2 text-slate-200 bg-slate-950 p-4 rounded-xl border border-slate-800">
+<div>Step 1: 2.54 (2 dec) + 0.123 (3 dec) = <span class="text-amber-400">2.663</span> <span class="text-xs text-slate-400">(calculator value; Step 1 is limited to the hundredths place → 2.66 if reported here; carry 2.663 forward as guard digits)</span></div>
+<div>Step 2: use the unrounded 2.663 while carrying forward the Step 1 precision limit (3 SF for this value): 2.663 × 1.2 (2 SF) = <span class="text-cyan-300">3.1956</span></div>
+<div>Final Rounding (2 SF limit): <span class="text-emerald-400 font-bold text-lg">3.2</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-8">
+<div class="mb-4">
+<span class="text-xs font-semibold uppercase tracking-widest text-rose-400">Slide 8 • Common Traps</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Frequent Student Mistakes — Topic T1.3</h2>
+</div>
+<div class="space-y-4 flex-1 flex flex-col justify-center">
+<div class="glass-panel p-5 rounded-2xl border border-rose-500/30 bg-rose-950/10 build-hidden space-y-2" data-build="1">
+<div class="text-rose-400 font-bold text-base">
+                        Mistake 1: Counting leading zeros as significant.
+                    </div>
+<p class="text-sm text-slate-200">
+<strong class="text-emerald-400">Correction:</strong> Zeros before non-zero digits (e.g., 0.005) are strictly <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">placeholders</span></span>!
+                    </p>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-rose-500/30 bg-rose-950/10 build-hidden space-y-2" data-build="2">
+<div class="text-rose-400 font-bold text-base">
+                        Mistake 2: Mixing up addition and multiplication Sig Fig rules.
+                    </div>
+<p class="text-sm text-slate-200">
+<strong class="text-emerald-400">Correction:</strong> Addition/Subtraction uses <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">decimal places</span></span>; Multiplication/Division uses <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">total sig figs</span></span>.
+                    </p>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-rose-500/30 bg-rose-950/10 build-hidden space-y-2" data-build="3">
+<div class="text-rose-400 font-bold text-base">
+                        Mistake 3: Rounding too early in multi-step problems.
+                    </div>
+<p class="text-sm text-slate-200">
+<strong class="text-emerald-400">Correction:</strong> Apply the correct rule at each step to track the precision limit, but keep full calculator values as guard digits until reporting the <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">final answer</span></span>.
+                    </p>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-9">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 9 • Self-Assessment</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Independent Check — Sig Figs</h2>
+</div>
+<div class="space-y-4 flex-1 flex flex-col justify-center">
+<div class="glass-panel p-4 rounded-xl border border-slate-700/70 space-y-2 build-hidden" data-build="1">
+<div class="text-base font-semibold text-slate-200">
+                        1. How many sig figs are in <span class="font-mono text-cyan-300">0.05030 g</span>?
+                    </div>
+<div class="flex gap-3 items-center">
+<input class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-emerald-300 w-64 outline-none focus:border-emerald-500" id="q1Input" placeholder="Type your answer..." type="text"/>
+<button class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-xs font-bold text-white transition" onclick="recordAnswer(1)">Submit</button>
+<span class="text-xs font-semibold text-emerald-400 hidden" id="q1Status">Recorded</span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-slate-700/70 space-y-2 build-hidden" data-build="2">
+<div class="text-base font-semibold text-slate-200">
+                        2. Solve: <span class="font-mono text-cyan-300">12.58 g + 3.2 g</span> (reported to proper SF).
+                    </div>
+<div class="flex gap-3 items-center">
+<input class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-emerald-300 w-64 outline-none focus:border-emerald-500" id="q2Input" placeholder="Type your answer..." type="text"/>
+<button class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-xs font-bold text-white transition" onclick="recordAnswer(2)">Submit</button>
+<span class="text-xs font-semibold text-emerald-400 hidden" id="q2Status">Recorded</span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-slate-700/70 space-y-2 build-hidden" data-build="3">
+<div class="text-base font-semibold text-slate-200">
+                        3. Convert <span class="font-mono text-cyan-300">0.0000450 m</span> to scientific notation.
+                    </div>
+<div class="flex gap-3 items-center">
+<input class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-emerald-300 w-64 outline-none focus:border-emerald-500" id="q3Input" placeholder="Type your answer..." type="text"/>
+<button class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-xs font-bold text-white transition" onclick="recordAnswer(3)">Submit</button>
+<span class="text-xs font-semibold text-emerald-400 hidden" id="q3Status">Recorded</span>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-10">
+<div class="mb-3">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 10 • Comprehensive Example</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Density &amp; Uncertainty Application</h2>
+</div>
+<div class="glass-panel p-6 rounded-2xl border border-slate-700 space-y-4 flex-1 flex flex-col justify-center">
+<div class="text-base text-slate-200 build-hidden" data-build="1">
+<strong>Problem:</strong> A block has mass <span class="font-mono text-cyan-300">25.40 g</span> and volume <span class="font-mono text-cyan-300">12.2 mL</span>. Calculate its density (d = m/V) with proper Sig Figs.
+                </div>
+<div class="glass-panel p-5 rounded-xl border border-emerald-500/40 bg-slate-950 font-mono text-sm space-y-3 build-hidden" data-build="2">
+<div class="text-slate-400">Step 1: Identify Sig Figs of inputs</div>
+<div class="text-slate-200">• Mass (25.40 g) → <span class="text-emerald-400 font-bold">4 Sig Figs</span></div>
+<div class="text-slate-200">• Volume (12.2 mL) → <span class="text-amber-400 font-bold">3 Sig Figs (Limit)</span></div>
+<div class="text-slate-400 pt-2 border-t border-slate-800">Step 2: Calculate ratio</div>
+<div class="text-slate-200">25.40 / 12.2 = 2.0819672... g/mL</div>
+<div class="text-slate-400 pt-2 border-t border-slate-800">Step 3: Round to 3 Sig Figs</div>
+<div class="text-emerald-400 font-bold text-xl">Density = 2.08 g/mL</div>
+</div>
+</div>
+</section>
+<section class="slide-container w-full max-w-6xl h-full flex flex-col justify-between hidden" id="slide-11">
+<div class="mb-4">
+<span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Slide 11 • Key Takeaways</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Topic Summary — T1.3</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 items-center">
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/70 space-y-2 build-hidden" data-build="1">
+<div class="text-xs font-bold uppercase text-emerald-400">1. Measuring &amp; Uncertainty</div>
+<p class="text-sm text-slate-200">
+                        Always record all certain digits plus 1 estimated digit.
+                    </p>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/70 space-y-2 build-hidden" data-build="1">
+<div class="text-xs font-bold uppercase text-amber-400">2. Sig Fig Rules</div>
+<p class="text-sm text-slate-200">
+                        Leading zeros are not significant. Trailing zeros in decimal numbers are significant, while trailing zeros in whole numbers may be ambiguous.
+                    </p>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-slate-700/70 space-y-2 build-hidden" data-build="2">
+<div class="text-xs font-bold uppercase text-indigo-400">3. Operation Rules</div>
+<p class="text-sm text-slate-200">
+                        Add/Sub = fewest decimal places. Mult/Div = fewest total sig figs.
+                    </p>
+</div>
+<div class="glass-panel p-5 rounded-2xl border border-emerald-500/50 bg-slate-900/90 space-y-2 build-hidden" data-build="2">
+<div class="text-xs font-bold uppercase text-cyan-400">Next Up: Topic T1.4</div>
+<p class="text-sm text-slate-200">
+                        Coming next: <strong class="text-emerald-300">Density</strong>!
+                    </p>
+</div>
+</div>
+</section>
+</main>
+<script>
+
+let currentSlide=1;
+let currentBuild=1;
+let currentMode='student';
+const slides=[...document.querySelectorAll('.slide-container')];
+const totalSlides=slides.length;
+const buildsPerSlide={};
+slides.forEach((slide,index)=>{const nums=[...slide.querySelectorAll('[data-build]')].map(el=>parseInt(el.dataset.build||'1',10)).filter(Number.isFinite);buildsPerSlide[index+1]=nums.length?Math.max(...nums):1;});
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+function setMode(mode,button){
+  if(mode!=='student' && mode!=='answer') return;
+  currentMode=mode;
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${mode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+function updateDisplay(){
+  slides.forEach((slide,index)=>slide.classList.toggle('active',index+1===currentSlide));
+  const active=slides[currentSlide-1];
+  if(active){active.querySelectorAll('[data-build]').forEach(el=>{const n=parseInt(el.dataset.build||'1',10);el.classList.toggle('m8-visible',n<=currentBuild);});}
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+function nextBuild(){const max=buildsPerSlide[currentSlide];if(currentBuild<max)currentBuild++;else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}updateDisplay();}
+function prevBuild(){if(currentBuild>1)currentBuild--;else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}updateDisplay();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}});
+updateDisplay();
+
+</script>
+<div style="margin-top: 40px; text-align: center; font-size: 14px; color: #666; line-height: 1.5;">© 2026 Nara Chon. All rights reserved.<br>This lecture material is the intellectual property of Nara Chon and may not be reproduced, distributed, or modified without permission.</div>
+</body>
+</html>

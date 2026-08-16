@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Topic T1.1 — Introduction to Chemistry — Student</title>
+<style id="legacy-content-support">
+
+        /* Modern Self-Contained Reset & Theme Tokens */
+        :root {
+            --bg-dark: #070b14;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --bg-panel: rgba(30, 41, 59, 0.65);
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --border-highlight: rgba(56, 189, 248, 0.3);
+            --cyan: #38bdf8;
+            --cyan-dark: #0284c7;
+            --emerald: #10b981;
+            --amber: #f59e0b;
+            --indigo: #6366f1;
+            --rose: #f43f5e;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --font-stack: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+        }
+
+        /* Glassmorphism Styling */
+        .glass-panel {
+            background: var(--bg-panel);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 0.75rem;
+            padding: 1rem;
+        }
+
+        /* Interactive Mode Blanks */
+        .blank-box {
+            display: inline-block;
+            min-width: 90px;
+            padding: 2px 8px;
+            margin: 0 4px;
+            border-bottom: 2px solid var(--cyan);
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .mode-student .blank-answer {
+            display: none !important;
+        }
+
+        .mode-student .blank-placeholder {
+            display: inline !important;
+            color: var(--cyan);
+            letter-spacing: 2px;
+        }
+
+        .mode-answer .blank-placeholder {
+            display: none !important;
+        }
+
+        .mode-answer .blank-answer {
+            display: inline !important;
+            color: var(--emerald);
+            background-color: rgba(16, 185, 129, 0.18);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border-bottom: 2px solid var(--emerald);
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Build Steps Control */
+        .build-hidden {
+            opacity: 0;
+            transform: translateY(12px);
+            pointer-events: none;
+            transition: all 0.35s ease;
+        }
+
+        .build-visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            transition: all 0.35s ease;
+        }
+
+        /* Editable state */
+/* Top Bar Layout */
+        header {
+            height: 60px;
+            padding: 0 1.5rem;
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            z-index: 50;
+        }
+
+        .brand-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .badge-sub {
+            color: var(--cyan);
+            font-weight: 400;
+        }
+
+        .pill-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 2px 10px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 9999px;
+            color: var(--text-sub);
+        }
+
+        .controls-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-group {
+            background: #020617;
+            padding: 3px;
+            border-radius: 0.5rem;
+            border: 1px solid #1e293b;
+            display: flex;
+            gap: 4px;
+        }
+
+        .btn-mode {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-mode.active-student {
+            background: var(--cyan-dark);
+            color: #ffffff;
+        }
+
+        .btn-mode.active-answer {
+            background: #059669;
+            color: #ffffff;
+        }
+.step-counter {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 6px 12px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            color: var(--cyan);
+        }
+
+        .btn-nav {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-nav:hover {
+            background: #334155;
+        }
+
+        /* Main Content Layout */
+        main {
+            flex: 1;
+            position: relative;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            max-width: 1100px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .slide-container.hidden {
+            display: none !important;
+        }
+
+        .slide-header {
+            margin-bottom: 1rem;
+        }
+
+        .slide-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--cyan);
+        }
+
+        .slide-title {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-top: 0.25rem;
+        }
+
+        /* Utility Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.25rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .grid-12 {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            gap: 1.25rem;
+        }
+
+        .col-span-7 { grid-column: span 7 / span 7; }
+        .col-span-5 { grid-column: span 5 / span 5; }
+
+        @media (max-width: 900px) {
+            .grid-2, .grid-3, .grid-4, .grid-12 {
+                grid-template-columns: 1fr;
+            }
+            .col-span-7, .col-span-5 { grid-column: span 1 / span 1; }
+        }
+
+        /* Typography & Components */
+        .text-sm { font-size: 0.875rem; }
+        .text-base { font-size: 1rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-2xl { font-size: 1.5rem; }
+
+        .font-mono { font-family: var(--font-mono); }
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+
+        .text-cyan { color: var(--cyan); }
+        .text-emerald { color: var(--emerald); }
+        .text-amber { color: var(--amber); }
+        .text-indigo { color: var(--indigo); }
+        .text-rose { color: var(--rose); }
+
+        .space-y-3 > * + * { margin-top: 0.75rem; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .space-y-6 > * + * { margin-top: 1.5rem; }
+
+        /* Tables */
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .table-custom th {
+            background: #020617;
+            color: var(--cyan);
+            padding: 0.85rem 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .table-custom td {
+            padding: 0.85rem 1rem;
+            font-size: 0.875rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .table-custom tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Input Controls */
+        .input-text {
+            background: #020617;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.85rem;
+            color: var(--cyan);
+            font-family: var(--font-stack);
+            font-size: 0.875rem;
+            width: 100%;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .input-text:focus {
+            border-color: var(--cyan);
+        }
+
+        /* Bottom Toolbar Layout */
+        footer {
+            height: 54px;
+            padding: 0 1.5rem;
+            background: #0f172a;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            z-index: 50;
+        }
+
+        .thumb-strip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            overflow-x: auto;
+            padding: 4px 0;
+        }
+
+        .thumb-btn {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: var(--text-sub);
+            padding: 4px 10px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .thumb-btn.active {
+            background: var(--cyan-dark);
+            border-color: var(--cyan);
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        kbd {
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-main);
+        }
+    
+</style>
+<style id="static-utility-css">
+/* Self-contained subset of utility classes used by the preserved Module 1 slide content. */
+@keyframes twPulse{50%{opacity:.5}}
+.col-span-5{grid-column:span 5 / span 5}
+.col-span-7{grid-column:span 7 / span 7}
+.font-bold{font-weight:700}
+.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+.font-semibold{font-weight:600}
+.hidden{display:none!important}
+.space-y-2>:not([hidden])~:not([hidden]){margin-top:.5rem}
+.space-y-3>:not([hidden])~:not([hidden]){margin-top:.75rem}
+.space-y-4>:not([hidden])~:not([hidden]){margin-top:1rem}
+.space-y-6>:not([hidden])~:not([hidden]){margin-top:1.5rem}
+.text-2xl{font-size:1.5rem;line-height:2rem}
+.text-base{font-size:1rem;line-height:1.5rem}
+.text-center{text-align:center}
+.text-lg{font-size:1.125rem;line-height:1.75rem}
+.text-sm{font-size:.875rem;line-height:1.25rem}
+.text-xl{font-size:1.25rem;line-height:1.75rem}
+</style>
+<style id="module8-shell">
+/* Module 8 common presentation system. */
+
+:root{--bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;--accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;--accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;--border-color:#475569;--blank-bg:#334155}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}
+.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}
+.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.75rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}.btn:disabled{opacity:.4;cursor:not-allowed}.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}
+.slide-container{width:100%!important;max-width:none!important;height:auto!important;background:var(--bg-card)!important;border-radius:12px!important;border:1px solid var(--border-color)!important;box-shadow:0 20px 25px -5px rgba(0,0,0,.5)!important;padding:2rem!important;min-height:620px!important;display:none!important;flex-direction:column!important;justify-content:space-between!important;position:relative!important;animation:m8FadeIn .3s ease-in-out!important}
+.slide-container.active{display:flex!important}.slide-container:not(.active){display:none!important}@keyframes m8FadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide-header,.slide-container>.mb-3,.slide-container>.mb-4{margin-bottom:1.15rem!important}
+.slide-category,.slide-container>.mb-3>span:first-child,.slide-container>.mb-4>span:first-child{display:inline-block!important;font-size:.8rem!important;text-transform:uppercase!important;letter-spacing:.05em!important;font-weight:700!important;color:var(--accent-teal)!important;background:rgba(45,212,191,.1)!important;padding:.25rem .6rem!important;border-radius:4px!important;margin-bottom:.5rem!important;border:1px solid rgba(45,212,191,.2)!important}
+.slide-title,.slide-container h2{font-size:2.05rem!important;font-weight:800!important;line-height:1.25!important;color:var(--text-main)!important;margin-top:0!important}
+.slide-container [data-build]{opacity:.15!important;pointer-events:none!important;transition:opacity .4s ease,transform .4s ease,filter .4s ease!important;transform:translateY(8px)!important;filter:blur(1px)!important}
+.slide-container [data-build].m8-visible{opacity:1!important;pointer-events:auto!important;transform:none!important;filter:none!important}
+.glass-panel,.glass-card{background:#0f172a!important;border:1px solid var(--border-color)!important;border-radius:10px!important;box-shadow:none!important;backdrop-filter:none!important}
+.blank-box{display:inline-block!important;min-width:90px!important;padding:.15rem .55rem!important;background:var(--blank-bg)!important;border:0!important;border-bottom:2px solid var(--accent-amber)!important;border-radius:4px!important;text-align:center!important;font-weight:700!important;vertical-align:middle!important}
+.mode-student .blank-placeholder{display:inline!important;color:transparent!important;user-select:none!important}.mode-student .blank-answer{display:none!important}.mode-answer .blank-placeholder{display:none!important}.mode-answer .blank-answer{display:inline!important;color:var(--accent-amber)!important;background:rgba(251,191,36,.15)!important;padding:.05rem .25rem!important;border-radius:3px!important;border:0!important}
+.callout{background:rgba(56,189,248,.08)!important;border:1px solid var(--accent-blue)!important;border-radius:8px!important;padding:.7rem 1rem!important}.warn{background:rgba(244,63,94,.1)!important;border:1px solid var(--accent-rose)!important;border-radius:8px!important;padding:.7rem 1rem!important;color:#fecdd3!important}.equal-banner{background:rgba(45,212,191,.1)!important;border:1px solid var(--accent-teal)!important;border-radius:8px!important;padding:.65rem!important;text-align:center!important;color:var(--accent-teal)!important;font-weight:900!important;font-size:1.05rem!important}
+input,select,textarea{background:#0f172a!important;color:var(--text-main)!important;border:1px solid var(--border-color)!important;border-radius:6px!important}
+footer{display:none!important}
+@media(max-width:1000px){header{position:sticky;top:0}.nav-controls{flex-wrap:wrap}.slide-container{min-height:auto!important;padding:1.25rem!important}.slide-title,.slide-container h2{font-size:1.65rem!important}main{padding:1rem;justify-content:flex-start}}
+@media(max-height:780px){main{justify-content:flex-start}.slide-container{min-height:auto!important}}
+
+</style>
+</head>
+<body class="mode-student">
+<header>
+  <div class="deck-title"><span>Topic T1.1 | Introduction to Chemistry</span></div>
+  <div class="mode-selector">
+    <button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button>
+    <button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button>
+  </div>
+  <div class="nav-controls">
+    <button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+    <span class="counter-badge" id="slideCounter">Slide 1 / 1</span>
+    <span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 1</span>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+  </div>
+</header>
+<main>
+<section class="slide-container" id="slide-1">
+<div class="slide-header">
+<div class="slide-category">Slide 1 • Core Concepts</div>
+<h2 class="slide-title">Topic T1.1 — Introduction to Chemistry</h2>
+</div>
+<div class="grid-12" style="align-items: center; flex: 1;">
+<div class="col-span-7 space-y-6">
+<!-- Build 1: Core Definition -->
+<div class="glass-panel space-y-3 build-hidden" data-build="1">
+<div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan);">Definition</div>
+<p class="text-lg">
+<strong class="text-cyan">Chemistry:</strong> The study of <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">matter</span></span>, its properties, the changes it undergoes, and the energy associated with those changes.
+                        </p>
+</div>
+<!-- Build 3: Core Sub-definitions -->
+<div class="glass-panel space-y-3 build-hidden" data-build="3">
+<p class="text-base">
+                            • <strong>Matter:</strong> Anything that has <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">mass</span></span> and occupies space (<span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">volume</span></span>).
+                        </p>
+<p class="text-base">
+                            • <strong>Composition:</strong> The types and <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">amounts</span></span> of simpler substances that make up a sample of matter.
+                        </p>
+</div>
+</div>
+<!-- Build 2: Visual Concept SVG Diagram -->
+<div class="col-span-5 build-hidden" data-build="2" style="display: flex; justify-content: center;">
+<div class="glass-panel" style="width: 100%; text-align: center; border: 1px solid var(--border-highlight);">
+<div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-sub); margin-bottom: 1rem; font-weight: 600;">Scope of Chemistry</div>
+<svg style="width: 100%; height: 210px;" viewbox="0 0 320 200">
+<rect fill="#0284c7" height="40" rx="10" stroke="#38bdf8" stroke-width="2" width="100" x="110" y="80"></rect>
+<text fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle" x="160" y="105">Chemistry</text>
+<line stroke="#64748b" stroke-dasharray="4" stroke-width="2" x1="110" x2="50" y1="90" y2="45"></line>
+<line stroke="#64748b" stroke-width="2" x1="210" x2="270" y1="90" y2="45"></line>
+<line stroke="#64748b" stroke-width="2" x1="210" x2="270" y1="105" y2="105"></line>
+<line stroke="#64748b" stroke-width="2" x1="210" x2="270" y1="120" y2="160"></line>
+<rect fill="#0f766e" height="32" rx="6" stroke="#14b8a6" stroke-width="1.5" width="80" x="10" y="25"></rect>
+<text fill="#ccfbf1" font-size="12" font-weight="600" text-anchor="middle" x="50" y="46">Matter</text>
+<rect fill="#334155" height="28" rx="6" stroke="#64748b" stroke-width="1.5" width="80" x="230" y="28"></rect>
+<text fill="#f1f5f9" font-size="11" font-weight="500" text-anchor="middle" x="270" y="46">Properties</text>
+<rect fill="#334155" height="28" rx="6" stroke="#64748b" stroke-width="1.5" width="80" x="230" y="91"></rect>
+<text fill="#f1f5f9" font-size="11" font-weight="500" text-anchor="middle" x="270" y="109">Changes</text>
+<rect fill="#334155" height="28" rx="6" stroke="#64748b" stroke-width="1.5" width="80" x="230" y="145"></rect>
+<text fill="#f1f5f9" font-size="11" font-weight="500" text-anchor="middle" x="270" y="163">Energy</text>
+</svg>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container hidden" id="slide-2">
+<div class="slide-header">
+<div class="slide-category">Slide 2 • Triad Perspective</div>
+<h2 class="slide-title">The Three Domains of Chemistry</h2>
+</div>
+<div class="grid-3" style="flex: 1; align-items: stretch; margin: 1rem 0;">
+<!-- Domain 1: Macroscopic -->
+<div class="glass-panel build-hidden" data-build="1" style="display: flex; flex-direction: column; justify-content: space-between;">
+<div>
+<div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--cyan); margin-bottom: 0.5rem;">Domain 1</div>
+<h3 class="text-xl font-bold" style="margin-bottom: 0.5rem;">
+<span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Macroscopic</span></span>
+</h3>
+<p class="text-sm" style="color: var(--text-sub);">
+                            Things large enough to be sensed directly by human sight or touch.
+                        </p>
+</div>
+<div style="margin: 1.5rem 0; text-align: center;">
+<svg style="width: 100px; height: 100px;" viewbox="0 0 100 100">
+<polygon fill="#0ea5e9" opacity="0.8" points="50,15 85,32 50,50 15,32"></polygon>
+<polygon fill="#0284c7" opacity="0.9" points="15,32 50,50 50,85 15,67"></polygon>
+<polygon fill="#38bdf8" opacity="0.7" points="50,50 85,32 85,67 50,85"></polygon>
+</svg>
+<div class="font-mono text-sm" style="color: var(--text-sub); margin-top: 0.5rem;">Visible Ice Cube</div>
+</div>
+</div>
+<!-- Domain 2: Microscopic -->
+<div class="glass-panel build-hidden" data-build="2" style="display: flex; flex-direction: column; justify-content: space-between;">
+<div>
+<div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--emerald); margin-bottom: 0.5rem;">Domain 2</div>
+<h3 class="text-xl font-bold" style="margin-bottom: 0.5rem;">
+<span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Microscopic</span></span>
+</h3>
+<p class="text-sm" style="color: var(--text-sub);">
+                            The submicroscopic realm of individual atoms, molecules, and chemical bonds.
+                        </p>
+</div>
+<div style="margin: 1.5rem 0; text-align: center;">
+<svg style="width: 110px; height: 100px;" viewbox="0 0 120 100">
+<circle cx="60" cy="45" fill="#ef4444" r="22"></circle>
+<text fill="white" font-size="13" font-weight="bold" text-anchor="middle" x="60" y="50">O</text>
+<circle cx="30" cy="70" fill="#f8fafc" r="14" stroke="#94a3b8" stroke-width="2"></circle>
+<text fill="#0f172a" font-size="10" font-weight="bold" text-anchor="middle" x="30" y="74">H</text>
+<circle cx="90" cy="70" fill="#f8fafc" r="14" stroke="#94a3b8" stroke-width="2"></circle>
+<text fill="#0f172a" font-size="10" font-weight="bold" text-anchor="middle" x="90" y="74">H</text>
+<line stroke="#cbd5e1" stroke-width="3" x1="48" x2="38" y1="56" y2="64"></line>
+<line stroke="#cbd5e1" stroke-width="3" x1="72" x2="82" y1="56" y2="64"></line>
+</svg>
+<div class="font-mono text-sm" style="color: var(--text-sub); margin-top: 0.5rem;">Bonded H₂O Molecule</div>
+</div>
+</div>
+<!-- Domain 3: Symbolic -->
+<div class="glass-panel build-hidden" data-build="3" style="display: flex; flex-direction: column; justify-content: space-between;">
+<div>
+<div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--amber); margin-bottom: 0.5rem;">Domain 3</div>
+<h3 class="text-xl font-bold" style="margin-bottom: 0.5rem;">
+<span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Symbolic</span></span>
+</h3>
+<p class="text-sm" style="color: var(--text-sub);">
+                            Specialized language of chemical symbols, formulas, numbers, and equations.
+                        </p>
+</div>
+<div style="margin: 1.5rem 0; text-align: center;">
+<div class="glass-card" style="display: inline-block; padding: 1rem 1.5rem; border-color: var(--amber);">
+<span class="font-mono text-2xl font-bold text-amber">H₂O (s)</span>
+</div>
+<div class="font-mono text-sm" style="color: var(--text-sub); margin-top: 0.5rem;">Chemical Formula &amp; Phase</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container hidden" id="slide-3">
+<div class="slide-header">
+<div class="slide-category">Slide 3 • Scientific Process</div>
+<h2 class="slide-title">The Scientific Method</h2>
+</div>
+<div class="grid-12" style="align-items: center; flex: 1;">
+<div class="col-span-7 space-y-4">
+<div class="glass-panel build-hidden" data-build="1">
+<h3 class="text-cyan font-bold text-base" style="margin-bottom: 0.25rem;">1. Observations</h3>
+<p class="text-sm">
+                            Gathering <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Qualitative</span></span> (descriptive) or <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Quantitative</span></span> (numerical) data.
+                        </p>
+</div>
+<div class="glass-panel build-hidden" data-build="2">
+<h3 class="text-indigo font-bold text-base" style="margin-bottom: 0.25rem;">2. Hypothesis</h3>
+<p class="text-sm">
+                            A <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">tentative</span></span> testable explanation for a set of observations.
+                        </p>
+</div>
+<div class="glass-panel build-hidden" data-build="3">
+<h3 class="text-emerald font-bold text-base" style="margin-bottom: 0.25rem;">3. Experimentation</h3>
+<p class="text-sm">
+                            Controlled procedures designed to rigorously test a <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">hypothesis</span></span>.
+                        </p>
+</div>
+</div>
+<div class="col-span-5 build-hidden" data-build="3" style="display: flex; justify-content: center;">
+<div class="glass-panel" style="width: 100%; text-align: center;">
+<div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-sub); margin-bottom: 1rem; font-weight: 600;">Iterative Scientific Discovery</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
+<div class="glass-card font-bold text-cyan" style="width: 180px; border-color: var(--cyan);">Observation</div>
+<span style="color: var(--text-sub); font-size: 1.25rem;">↓</span>
+<div class="glass-card font-bold text-indigo" style="width: 180px; border-color: var(--indigo);">Hypothesis</div>
+<span style="color: var(--text-sub); font-size: 1.25rem;">↓</span>
+<div class="glass-card font-bold text-emerald" style="width: 180px; border-color: var(--emerald);">Experiment</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container hidden" id="slide-4">
+<div class="slide-header">
+<div class="slide-category">Slide 4 • Principles</div>
+<h2 class="slide-title">Scientific Law versus Theory</h2>
+</div>
+<div class="grid-2" style="flex: 1; align-items: stretch;">
+<!-- Scientific Law -->
+<div class="glass-panel build-hidden" data-build="1" style="display: flex; flex-direction: column; justify-content: space-between; border-color: var(--cyan);">
+<div>
+<div style="margin-bottom: 0.75rem;">
+<span class="pill-tag" style="background: rgba(56, 189, 248, 0.2); color: var(--cyan); font-weight: 700;">SCIENTIFIC LAW</span>
+</div>
+<p class="text-base" style="margin-bottom: 1rem;">
+                            A concise statement or mathematical equation that <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">summarizes</span></span> a vast body of experimental observations.
+                        </p>
+<div class="glass-card font-mono text-sm text-cyan">
+                            Key Function: Describes <u>WHAT</u> happens under specific natural conditions.
+                        </div>
+</div>
+<div class="text-sm" style="color: var(--text-sub); font-style: italic;">
+                        Example: Law of Conservation of Mass.
+                    </div>
+</div>
+<!-- Scientific Theory -->
+<div class="glass-panel build-hidden" data-build="2" style="display: flex; flex-direction: column; justify-content: space-between; border-color: var(--indigo);">
+<div>
+<div style="margin-bottom: 0.75rem;">
+<span class="pill-tag" style="background: rgba(99, 102, 241, 0.2); color: var(--indigo); font-weight: 700;">SCIENTIFIC THEORY</span>
+</div>
+<p class="text-base" style="margin-bottom: 1rem;">
+                            A well-substantiated, comprehensive, testable <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">explanation</span></span> of why a natural phenomenon occurs.
+                        </p>
+<div class="glass-card font-mono text-sm text-indigo">
+                            Key Function: Explains <u>WHY</u> it happens at a fundamental level.
+                        </div>
+</div>
+<div class="text-sm" style="color: var(--text-sub); font-style: italic;">
+                        Example: Dalton's Atomic Theory.
+                    </div>
+</div>
+</div>
+<div class="glass-panel build-hidden text-center text-sm" data-build="3" style="margin-top: 1rem;">
+<span class="text-amber font-bold">Key Insight:</span> Laws state <em>what happens</em>; Theories explain <em>why it happens</em>.
+            </div>
+</section>
+<section class="slide-container hidden" id="slide-5">
+<div class="slide-header">
+<div class="slide-category">Slide 5 • Exam Strategy</div>
+<h2 class="slide-title">Exam Shortcut — Law vs. Theory (What vs. Why)</h2>
+</div>
+<div class="space-y-4" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+<div class="glass-panel build-hidden" data-build="1" style="display: flex; justify-content: space-around; align-items: center; border-color: var(--cyan);">
+<div style="text-align: center; padding: 1rem; background: #020617; border-radius: 0.75rem; border: 1px solid var(--cyan);">
+<div class="text-sm" style="color: var(--text-sub); text-transform: uppercase;">Law Keyword</div>
+<div class="text-2xl font-bold text-cyan" style="margin: 0.25rem 0;"><span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">WHAT</span></span> Happens</div>
+<div class="text-sm" style="color: var(--text-sub);">(Summarizes Observations)</div>
+</div>
+<span class="text-2xl font-bold" style="color: var(--text-sub);">VS</span>
+<div style="text-align: center; padding: 1rem; background: #020617; border-radius: 0.75rem; border: 1px solid var(--indigo);">
+<div class="text-sm" style="color: var(--text-sub); text-transform: uppercase;">Theory Keyword</div>
+<div class="text-2xl font-bold text-indigo" style="margin: 0.25rem 0;"><span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">WHY</span></span> It Happens</div>
+<div class="text-sm" style="color: var(--text-sub);">(Provides Explanation)</div>
+</div>
+</div>
+<div class="glass-panel build-hidden" data-build="2" style="border-color: var(--rose); background: rgba(244, 63, 94, 0.08);">
+<div class="text-rose font-bold text-base" style="margin-bottom: 0.25rem;">CRITICAL EXAM MISCONCEPTION:</div>
+<p class="text-sm">
+                        A Scientific Theory does <strong>NOT</strong> turn into a Scientific Law when proven! They perform completely <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">different</span></span> functions.
+                    </p>
+</div>
+<div class="glass-panel build-hidden space-y-3" data-build="3">
+<div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--amber);">Quick Identify:</div>
+<div class="text-sm" style="display: flex; justify-content: space-between; align-items: center;">
+<span>• "At constant temperature, gas volume decreases as pressure increases"</span>
+<span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Law (What)</span></span>
+</div>
+<div class="text-sm" style="display: flex; justify-content: space-between; align-items: center;">
+<span>• "Gases consist of tiny particles colliding elastically"</span>
+<span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Theory (Why)</span></span>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container hidden" id="slide-6">
+<div class="slide-header">
+<div class="slide-category">Slide 6 • Matter Hierarchy</div>
+<h2 class="slide-title">Classification of Matter</h2>
+</div>
+<div class="grid-2" style="margin-bottom: 1rem;">
+<div class="glass-panel build-hidden" data-build="1">
+<p class="text-sm">
+<strong class="text-cyan">Pure Substance:</strong> Constant composition and fixed, unique <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">properties</span></span> throughout.
+                    </p>
+</div>
+<div class="glass-panel build-hidden" data-build="2">
+<p class="text-sm">
+<strong class="text-emerald">Mixture:</strong> Combination of two or more substances that can be separated by <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">physical</span></span> means.
+                    </p>
+</div>
+</div>
+<div class="glass-panel build-hidden" data-build="3" style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+<div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-sub); font-weight: 600; margin-bottom: 0.75rem;">Matter Classification Hierarchy</div>
+<svg style="width: 100%; max-width: 650px; height: 180px;" viewbox="0 0 600 180">
+<rect fill="#0284c7" height="30" rx="6" stroke="#38bdf8" stroke-width="2" width="100" x="250" y="10"></rect>
+<text fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle" x="300" y="30">MATTER</text>
+<path d="M 300 40 L 160 70" stroke="#64748b" stroke-width="2"></path>
+<path d="M 300 40 L 440 70" stroke="#64748b" stroke-width="2"></path>
+<rect fill="#0f766e" height="30" rx="6" stroke="#14b8a6" stroke-width="1.5" width="120" x="100" y="70"></rect>
+<text fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle" x="160" y="90">Pure Substance</text>
+<rect fill="#334155" height="30" rx="6" stroke="#64748b" stroke-width="1.5" width="120" x="380" y="70"></rect>
+<text fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle" x="440" y="90">Mixture</text>
+<path d="M 160 100 L 90 130" stroke="#64748b" stroke-width="1.5"></path>
+<path d="M 160 100 L 230 130" stroke="#64748b" stroke-width="1.5"></path>
+<path d="M 440 100 L 370 130" stroke="#64748b" stroke-width="1.5"></path>
+<path d="M 440 100 L 510 130" stroke="#64748b" stroke-width="1.5"></path>
+<rect fill="#1e293b" height="28" rx="5" stroke="#38bdf8" stroke-width="1" width="100" x="40" y="130"></rect>
+<text fill="#38bdf8" font-size="10" font-weight="600" text-anchor="middle" x="90" y="148">Element</text>
+<rect fill="#1e293b" height="28" rx="5" stroke="#38bdf8" stroke-width="1" width="100" x="180" y="130"></rect>
+<text fill="#38bdf8" font-size="10" font-weight="600" text-anchor="middle" x="230" y="148">Compound</text>
+<rect fill="#1e293b" height="28" rx="5" stroke="#34d399" stroke-width="1" width="100" x="320" y="130"></rect>
+<text fill="#34d399" font-size="10" font-weight="600" text-anchor="middle" x="370" y="148">Homogeneous</text>
+<rect fill="#1e293b" height="28" rx="5" stroke="#f59e0b" stroke-width="1" width="100" x="460" y="130"></rect>
+<text fill="#f59e0b" font-size="10" font-weight="600" text-anchor="middle" x="510" y="148">Heterogeneous</text>
+</svg>
+</div>
+</section>
+<section class="slide-container hidden" id="slide-7">
+<div class="slide-header">
+<div class="slide-category">Slide 7 • Types of Matter</div>
+<h2 class="slide-title">Elements, Compounds, and Mixtures</h2>
+</div>
+<div class="grid-4" style="flex: 1; align-items: stretch; margin: 0.5rem 0;">
+<div class="glass-panel build-hidden" data-build="1" style="display: flex; flex-direction: column; justify-content: space-between;">
+<div>
+<div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--cyan);">Pure Substance</div>
+<h3 class="text-lg font-bold">Element</h3>
+<p class="text-sm" style="color: var(--text-sub); margin-top: 0.5rem;">
+                            Cannot be broken down into simpler substances by <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">chemical</span></span> changes.
+                        </p>
+</div>
+<div style="text-align: center; margin-top: 1rem;">
+<svg style="width: 70px; height: 70px; background: #020617; border-radius: 8px; padding: 4px;" viewbox="0 0 60 60">
+<circle cx="15" cy="15" fill="#38bdf8" r="5"></circle>
+<circle cx="45" cy="15" fill="#38bdf8" r="5"></circle>
+<circle cx="30" cy="35" fill="#38bdf8" r="5"></circle>
+<circle cx="15" cy="50" fill="#38bdf8" r="5"></circle>
+<circle cx="45" cy="50" fill="#38bdf8" r="5"></circle>
+</svg>
+</div>
+</div>
+<div class="glass-panel build-hidden" data-build="2" style="display: flex; flex-direction: column; justify-content: space-between;">
+<div>
+<div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--cyan);">Pure Substance</div>
+<h3 class="text-lg font-bold">Compound</h3>
+<p class="text-sm" style="color: var(--text-sub); margin-top: 0.5rem;">
+                            Two or more elements chemically combined in fixed <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">proportions</span></span>.
+                        </p>
+</div>
+<div style="text-align: center; margin-top: 1rem;">
+<svg style="width: 70px; height: 70px; background: #020617; border-radius: 8px; padding: 4px;" viewbox="0 0 60 60">
+<circle cx="20" cy="20" fill="#ef4444" r="6"></circle>
+<circle cx="13" cy="24" fill="#ffffff" r="3.5"></circle>
+<circle cx="27" cy="24" fill="#ffffff" r="3.5"></circle>
+<circle cx="40" cy="42" fill="#ef4444" r="6"></circle>
+<circle cx="33" cy="46" fill="#ffffff" r="3.5"></circle>
+<circle cx="47" cy="46" fill="#ffffff" r="3.5"></circle>
+</svg>
+</div>
+</div>
+<div class="glass-panel build-hidden" data-build="3" style="display: flex; flex-direction: column; justify-content: space-between;">
+<div>
+<div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--emerald);">Mixture</div>
+<h3 class="text-lg font-bold">Homogeneous</h3>
+<p class="text-sm" style="color: var(--text-sub); margin-top: 0.5rem;">
+                            Uniform composition throughout (e.g., <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">saltwater</span></span>).
+                        </p>
+</div>
+<div style="text-align: center; margin-top: 1rem;">
+<svg style="width: 70px; height: 70px; background: #020617; border-radius: 8px; padding: 4px;" viewbox="0 0 60 60">
+<circle cx="15" cy="15" fill="#38bdf8" r="4"></circle>
+<circle cx="35" cy="15" fill="#f59e0b" r="4"></circle>
+<circle cx="25" cy="35" fill="#38bdf8" r="4"></circle>
+<circle cx="48" cy="35" fill="#f59e0b" r="4"></circle>
+<circle cx="15" cy="50" fill="#f59e0b" r="4"></circle>
+<circle cx="38" cy="50" fill="#38bdf8" r="4"></circle>
+</svg>
+</div>
+</div>
+<div class="glass-panel build-hidden" data-build="4" style="display: flex; flex-direction: column; justify-content: space-between;">
+<div>
+<div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--amber);">Mixture</div>
+<h3 class="text-lg font-bold">Heterogeneous</h3>
+<p class="text-sm" style="color: var(--text-sub); margin-top: 0.5rem;">
+                            Non-uniform composition with distinct phases (e.g., <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">oil and water</span></span>).
+                        </p>
+</div>
+<div style="text-align: center; margin-top: 1rem;">
+<svg style="width: 70px; height: 70px; background: #020617; border-radius: 8px; padding: 4px;" viewbox="0 0 60 60">
+<rect fill="#38bdf8" height="22" opacity="0.3" rx="3" width="50" x="5" y="5"></rect>
+<circle cx="15" cy="15" fill="#38bdf8" r="4"></circle>
+<circle cx="35" cy="15" fill="#38bdf8" r="4"></circle>
+<rect fill="#f59e0b" height="22" opacity="0.3" rx="3" width="50" x="5" y="32"></rect>
+<circle cx="20" cy="42" fill="#f59e0b" r="4"></circle>
+<circle cx="40" cy="42" fill="#f59e0b" r="4"></circle>
+</svg>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container hidden" id="slide-8">
+<div class="slide-header">
+<div class="slide-category">Slide 8 • Guided Practice</div>
+<h2 class="slide-title">Guided Example — Classifying Matter</h2>
+</div>
+<div class="glass-panel build-hidden text-base font-semibold" data-build="1" style="margin-bottom: 1rem; border-color: var(--cyan);">
+                Task: Classify each sample as an Element, Compound, Homogeneous Mixture, or Heterogeneous Mixture.
+            </div>
+<div class="glass-panel build-hidden" data-build="2" style="flex: 1; padding: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: center;">
+<table class="table-custom">
+<thead>
+<tr>
+<th style="padding-left: 1.5rem;">Sample Material</th>
+<th>Composition Details</th>
+<th style="text-align: center;">Correct Classification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding-left: 1.5rem; font-weight: 600;">1. White wine</td>
+<td style="color: var(--text-sub);">Uniform liquid mixture of water, ethanol, and acids</td>
+<td style="text-align: center;"><span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Homogeneous Mixture</span></span></td>
+</tr>
+<tr>
+<td style="padding-left: 1.5rem; font-weight: 600;">2. Mercury</td>
+<td style="color: var(--text-sub);">Pure metallic liquid composed strictly of Hg atoms</td>
+<td style="text-align: center;"><span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Element</span></span></td>
+</tr>
+<tr>
+<td style="padding-left: 1.5rem; font-weight: 600;">3. Ranch salad dressing</td>
+<td style="color: var(--text-sub);">Separated layers/herbs visible throughout</td>
+<td style="text-align: center;"><span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Heterogeneous Mixture</span></span></td>
+</tr>
+<tr>
+<td style="padding-left: 1.5rem; font-weight: 600;">4. Table sugar (sucrose)</td>
+<td style="color: var(--text-sub);">Pure chemical formula C₁₂H₂₂O₁₁ in fixed ratio</td>
+<td style="text-align: center;"><span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">Compound</span></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="slide-container hidden" id="slide-9">
+<div class="slide-header">
+<div class="slide-category" style="color: var(--rose);">Slide 9 • Pitfalls &amp; Corrections</div>
+<h2 class="slide-title">Common Student Mistakes — T1.1</h2>
+</div>
+<div class="space-y-4" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+<div class="glass-panel build-hidden space-y-3" data-build="1" style="border-color: var(--rose); background: rgba(244, 63, 94, 0.08);">
+<div class="text-rose font-bold text-base">
+                        Mistake 1: Believing a Theory eventually turns into a Law.
+                    </div>
+<p class="text-sm">
+<strong class="text-emerald">Correction:</strong> Laws describe <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">what</span></span> happens (observations), while Theories explain <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">why</span></span> (underlying cause). They remain distinct!
+                    </p>
+</div>
+<div class="glass-panel build-hidden space-y-3" data-build="2" style="border-color: var(--rose); background: rgba(244, 63, 94, 0.08);">
+<div class="text-rose font-bold text-base">
+                        Mistake 2: Confusing Compounds with Homogeneous Mixtures.
+                    </div>
+<p class="text-sm">
+<strong class="text-emerald">Correction:</strong> Compounds have fixed, definite chemical ratios (e.g. H₂O). Mixtures can vary in <span class="blank-box"><span class="blank-placeholder">[_______]</span><span class="blank-answer">composition</span></span> (e.g. weak vs strong saltwater).
+                    </p>
+</div>
+</div>
+</section>
+<section class="slide-container hidden" id="slide-10">
+<div class="slide-header">
+<div class="slide-category">Slide 10 • Self-Assessment</div>
+<h2 class="slide-title">Independent Check — Topic T1.1</h2>
+</div>
+<div class="space-y-4" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+<!-- Exact Question 1 -->
+<div class="glass-panel build-hidden space-y-3" data-build="1">
+<div class="text-base font-semibold">
+                        1. Classify a sample of pure copper wire (Cu).
+                    </div>
+<div style="display: flex; gap: 0.75rem; align-items: center;">
+<input class="input-text" id="q1Input" placeholder="Type your answer..." style="max-width: 320px;" type="text"/>
+<button class="btn-nav" onclick="recordAnswer(1)" style="background: var(--cyan-dark);">Submit Response</button>
+<span class="text-sm font-semibold text-cyan" id="q1Status" style="display: none;">Recorded</span>
+</div>
+</div>
+<!-- Exact Question 2 -->
+<div class="glass-panel build-hidden space-y-3" data-build="2">
+<div class="text-base font-semibold">
+                        2. Classify a sample of carbon dioxide gas (CO₂).
+                    </div>
+<div style="display: flex; gap: 0.75rem; align-items: center;">
+<input class="input-text" id="q2Input" placeholder="Type your answer..." style="max-width: 320px;" type="text"/>
+<button class="btn-nav" onclick="recordAnswer(2)" style="background: var(--cyan-dark);">Submit Response</button>
+<span class="text-sm font-semibold text-cyan" id="q2Status" style="display: none;">Recorded</span>
+</div>
+</div>
+<!-- Exact Question 3 -->
+<div class="glass-panel build-hidden space-y-3" data-build="3">
+<div class="text-base font-semibold">
+                        3. Classify a mixture of sand and iron filings.
+                    </div>
+<div style="display: flex; gap: 0.75rem; align-items: center;">
+<input class="input-text" id="q3Input" placeholder="Type your answer..." style="max-width: 320px;" type="text"/>
+<button class="btn-nav" onclick="recordAnswer(3)" style="background: var(--cyan-dark);">Submit Response</button>
+<span class="text-sm font-semibold text-cyan" id="q3Status" style="display: none;">Recorded</span>
+</div>
+</div>
+</div>
+</section>
+<section class="slide-container hidden" id="slide-11">
+<div class="slide-header">
+<div class="slide-category">Slide 11 • Key Takeaways</div>
+<h2 class="slide-title">Topic Summary — T1.1</h2>
+</div>
+<div class="grid-2" style="flex: 1; align-items: center;">
+<div class="glass-panel build-hidden space-y-2" data-build="1">
+<div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--cyan);">1. Scope &amp; Domains</div>
+<p class="text-sm">
+                        Chemistry connects the <strong class="text-cyan">Macroscopic</strong> world we see to the <strong class="text-emerald">Microscopic</strong> realm of atoms through <strong class="text-amber">Symbolic</strong> notation.
+                    </p>
+</div>
+<div class="glass-panel build-hidden space-y-2" data-build="1">
+<div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--indigo);">2. Law vs. Theory</div>
+<p class="text-sm">
+<strong class="text-cyan">Laws</strong> summarize <em>WHAT happens</em>. <strong class="text-indigo">Theories</strong> explain <em>WHY it happens</em>.
+                    </p>
+</div>
+<div class="glass-panel build-hidden space-y-2" data-build="2">
+<div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--emerald);">3. Classification of Matter</div>
+<p class="text-sm">
+                        Matter splits into <strong>Pure Substances</strong> (Elements/Compounds) and <strong>Mixtures</strong> (Homogeneous/Heterogeneous).
+                    </p>
+</div>
+<div class="glass-panel build-hidden space-y-2" data-build="2" style="border-color: var(--cyan);">
+<div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--amber);">Next Step</div>
+<p class="text-sm">
+                        Topic T1.2 covers <strong class="text-cyan">Measurements, SI Units, and Dimensional Analysis</strong>!
+                    </p>
+</div>
+</div>
+</section>
+</main>
+<script>
+
+let currentSlide=1;
+let currentBuild=1;
+let currentMode='student';
+const slides=[...document.querySelectorAll('.slide-container')];
+const totalSlides=slides.length;
+const buildsPerSlide={};
+slides.forEach((slide,index)=>{const nums=[...slide.querySelectorAll('[data-build]')].map(el=>parseInt(el.dataset.build||'1',10)).filter(Number.isFinite);buildsPerSlide[index+1]=nums.length?Math.max(...nums):1;});
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+function setMode(mode,button){
+  if(mode!=='student' && mode!=='answer') return;
+  currentMode=mode;
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${mode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+function updateDisplay(){
+  slides.forEach((slide,index)=>slide.classList.toggle('active',index+1===currentSlide));
+  const active=slides[currentSlide-1];
+  if(active){active.querySelectorAll('[data-build]').forEach(el=>{const n=parseInt(el.dataset.build||'1',10);el.classList.toggle('m8-visible',n<=currentBuild);});}
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+function nextBuild(){const max=buildsPerSlide[currentSlide];if(currentBuild<max)currentBuild++;else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}updateDisplay();}
+function prevBuild(){if(currentBuild>1)currentBuild--;else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}updateDisplay();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}});
+updateDisplay();
+
+</script>
+<div style="margin-top: 40px; text-align: center; font-size: 14px; color: #666; line-height: 1.5;">© 2026 Nara Chon. All rights reserved.<br>This lecture material is the intellectual property of Nara Chon and may not be reproduced, distributed, or modified without permission.</div>
+</body>
+</html>
