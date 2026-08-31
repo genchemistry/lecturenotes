@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Topic T2.3 — Isotopes and Average Atomic Mass — Student</title>
+<style>
+:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--accent-blue:#38bdf8;--accent-teal:#2dd4bf;
+  --accent-amber:#fbbf24;--accent-rose:#f43f5e;--accent-purple:#c084fc;
+  --text-main:#f8fafc;--text-muted:#94a3b8;--border:#475569;--blank:#334155;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border);padding:.5rem 1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;z-index:100}
+.deck-title{font-size:1.1rem;font-weight:700;color:var(--accent-blue);display:flex;gap:.5rem;align-items:center}
+.mode-selector{display:flex;background:#1e293b;border:1px solid var(--border);border-radius:8px;padding:3px}
+.mode-btn,.btn{border-radius:6px;font-weight:600;cursor:pointer;transition:.2s}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.35rem .75rem;font-size:.85rem}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.5rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border);padding:.38rem .8rem;font-size:.85rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter{font-size:.85rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border)}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:.85rem 1.25rem;max-width:1600px;width:100%;margin:0 auto}
+.slide{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:1.2rem 1.5rem;min-height:580px;max-height:calc(100vh - 100px);display:none;flex-direction:column;justify-content:space-between;overflow-y:auto}
+.slide.active{display:flex}
+.slide-header{margin-bottom:.55rem}
+.meta-pill{display:inline-block;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.15rem .45rem;border-radius:4px;border:1px solid rgba(45,212,191,.2);margin-bottom:.25rem}
+.slide-title{font-size:1.55rem;font-weight:800;line-height:1.2}
+.lo{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.45rem .8rem;border-radius:0 6px 6px 0;margin-top:.4rem;font-size:.9rem}
+.lo strong{color:var(--accent-blue)}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:.8rem;margin-top:.2rem}
+.build-step{opacity:.15;pointer-events:none;transform:translateY(6px);filter:blur(1px);transition:.35s}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.blank{display:inline-block;min-width:82px;padding:.12rem .45rem;background:var(--blank);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none}
+body.mode-student .blank{color:transparent!important}
+body.mode-reviewlegacy .blank.revealed{color:var(--accent-amber);background:rgba(251,191,36,.15)}
+body.mode-editlegacy .blank.revealed{color:var(--accent-teal);background:rgba(45,212,191,.15)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem}
+.card{background:#0f172a;border:1px solid var(--border);border-radius:8px;padding:.8rem}
+.card h4{color:var(--accent-blue);font-size:.95rem;margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em}
+.atom-table{width:100%;border-collapse:collapse;font-size:.87rem}
+.atom-table th,.atom-table td{border:1px solid var(--border);padding:.42rem .55rem;text-align:center}
+.atom-table th{background:#1e293b;color:var(--accent-blue)}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.question-card{background:#0f172a;border:1px solid var(--border);border-radius:8px;padding:.8rem;display:flex;flex-direction:column;gap:.45rem}
+.qnum{display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:var(--accent-blue);color:#0f172a;font-weight:800;font-size:.8rem;margin-right:.4rem}
+.qtext{font-size:.95rem;font-weight:600;line-height:1.3}
+.response{background:#1e293b;border:1px dashed var(--border);border-radius:6px;min-height:52px;padding:.35rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-style:italic}
+.removed-drawer{margin-top:.7rem;background:#090d16;border:1px solid #334155;border-radius:8px;padding:.7rem;display:none;font-size:.84rem;color:#cbd5e1}
+body.show-notes .removed-drawer{display:block}
+body.mode-student .removed-drawer{display:none!important}
+body.mode-student #notesBtn{display:none!important}
+.removed-drawer h5{color:var(--accent-amber);font-size:.84rem;text-transform:uppercase;margin-bottom:.3rem}
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.4rem;margin-top:.35rem}
+.meta-item{background:#1e293b;padding:.35rem .55rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.72rem;text-transform:uppercase}
+.callout{background:rgba(56,189,248,.09);border:1px solid var(--accent-blue);border-radius:8px;padding:.55rem .75rem}
+.warn{background:rgba(244,63,94,.08);border:1px solid var(--accent-rose);border-radius:8px;padding:.5rem .75rem;color:#fecdd3}
+.roadmap{display:grid;grid-template-columns:repeat(5,1fr);gap:.35rem}
+.roadmap div{background:#0f172a;border:1px solid var(--border);border-radius:7px;padding:.55rem;text-align:center;font-size:.82rem;font-weight:700}
+.isotope-nucleus{display:flex;gap:.25rem;justify-content:center;flex-wrap:wrap;margin:.35rem 0}
+.particle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800}
+.p{background:var(--accent-rose)} .n{background:#94a3b8;color:#0f172a}
+.electron-row{display:flex;justify-content:center;gap:1.5rem;color:var(--accent-blue);font-size:1.1rem;margin-top:.25rem}
+.pop-grid{display:grid;grid-template-columns:repeat(10,16px);gap:4px;justify-content:center}
+.dot{width:16px;height:16px;border-radius:50%;background:var(--accent-blue)}
+.dot.alt{background:var(--accent-teal)}
+.answer-only{display:none}
+body.mode-reviewlegacy .answer-only.revealed-answer,body.mode-editlegacy .answer-only.revealed-answer{display:block}
+[contenteditable="true"]{outline:1px dashed var(--accent-teal);padding:2px 4px;border-radius:3px}
+@media(max-width:1024px){.grid-2,.grid-3,.question-grid,.roadmap{grid-template-columns:1fr}.slide{min-height:auto;padding:1rem}.slide-title{font-size:1.35rem}}
+</style>
+<style id="module8-modernization-style">
+/* MODULE 8 MASTER SHELL MODERNIZATION OVERRIDE */
+:root { --bg-dark: #0f172a; --bg-card: #1e293b; --bg-card-hover: #334155; --accent-blue: #38bdf8; --accent-teal: #2dd4bf; --accent-amber: #fbbf24; --accent-rose: #f43f5e; --text-main: #f8fafc; --text-muted: #94a3b8; --border-color: #475569; --border: #475569; --blank-bg: #334155; --blank: #334155; --blank-revealed: #0284c7; }
+body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important; background-color: var(--bg-dark) !important; color: var(--text-main) !important; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+header { background-color: #0b1120 !important; border-bottom: 1px solid var(--border-color) !important; padding: 0.75rem 1.5rem !important; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; z-index: 100; }
+.deck-title { font-size: 1.25rem !important; font-weight: 700 !important; color: var(--accent-blue) !important; display: flex; align-items: center; gap: 0.5rem; }
+.mode-selector { display: flex !important; background: #1e293b !important; border-radius: 8px !important; padding: 3px !important; border: 1px solid var(--border-color) !important; }
+.mode-btn { background: none !important; border: none !important; color: var(--text-muted) !important; padding: 0.4rem 0.8rem !important; font-size: 0.95rem !important; font-weight: 600 !important; cursor: pointer; border-radius: 6px; transition: all 0.2s ease; }
+.mode-btn.active { background-color: var(--accent-blue) !important; color: #0f172a !important; }
+.nav, .nav-controls { display: flex !important; align-items: center !important; gap: 0.75rem !important; }
+.btn { background-color: #334155 !important; color: var(--text-main) !important; border: 1px solid var(--border-color) !important; padding: 0.45rem 0.9rem !important; border-radius: 6px !important; font-size: 0.95rem !important; font-weight: 600 !important; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+.btn:hover:not(:disabled) { background-color: #475569 !important; border-color: var(--accent-blue) !important; }
+.btn:disabled { opacity: 0.4 !important; cursor: not-allowed !important; }
+.btn-primary, .btn.primary { background-color: var(--accent-blue) !important; color: #0f172a !important; border: none !important; }
+.btn-primary:hover:not(:disabled), .btn.primary:hover:not(:disabled) { background-color: #0284c7 !important; color: #ffffff !important; }
+.counter, .counter-badge { font-size: 0.95rem !important; color: var(--text-muted) !important; font-weight: 600 !important; background: #1e293b !important; padding: 0.3rem 0.6rem !important; border-radius: 4px !important; border: 1px solid var(--border-color) !important; }
+main { flex: 1 !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; padding: 1.5rem !important; max-width: 1400px !important; width: 100% !important; margin: 0 auto !important; position: relative; }
+.slide, .slide-container { width: 100% !important; background-color: var(--bg-card) !important; border-radius: 12px !important; border: 1px solid var(--border-color) !important; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5) !important; padding: 2rem !important; min-height: 620px !important; max-height: none !important; display: none; flex-direction: column; justify-content: space-between; position: relative; animation: fadeInModule8 0.3s ease-in-out; overflow-y: auto; }
+.slide.active, .slide-container.active { display: flex !important; }
+@keyframes fadeInModule8 { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.slide-header { margin-bottom: 1.25rem !important; }
+.meta, .meta-pill { display: inline-block !important; font-size: 0.8rem !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; font-weight: 700 !important; color: var(--accent-teal) !important; background-color: rgba(45, 212, 191, 0.1) !important; padding: 0.25rem 0.6rem !important; border-radius: 4px !important; margin-bottom: 0.5rem !important; border: 1px solid rgba(45, 212, 191, 0.2) !important; }
+.slide-title, .slide-header h1, .slide > div > h1, .slide > h1, .slide-container h1 { font-size: 2.05rem !important; font-weight: 800 !important; color: var(--text-main) !important; line-height: 1.25 !important; margin: 0 !important; }
+.lo, .lo-box { background-color: rgba(56, 189, 248, 0.08) !important; border-left: 4px solid var(--accent-blue) !important; padding: 0.7rem 1.1rem !important; border-radius: 0 6px 6px 0 !important; margin-top: 0.75rem !important; font-size: 1rem !important; color: #e2e8f0 !important; }
+.lo strong, .lo-box strong { color: var(--accent-blue) !important; }
+.slide-body { flex: 1 !important; display: flex !important; flex-direction: column !important; gap: 1rem !important; margin-top: 0.35rem !important; }
+.build-step { opacity: 0.15 !important; pointer-events: none !important; transform: translateY(6px) !important; filter: blur(1px) !important; transition: 0.35s !important; }
+.build-step.visible { opacity: 1 !important; pointer-events: auto !important; transform: none !important; filter: none !important; }
+.card { background: #0f172a !important; border: 1px solid var(--border-color) !important; border-radius: 10px !important; padding: 1rem !important; }
+.card h4 { color: var(--accent-blue) !important; font-size: 1rem !important; margin-bottom: 0.5rem !important; }
+.blank { display: inline-block !important; min-width: 82px !important; padding: 0.12rem 0.45rem !important; background: var(--blank-bg) !important; border-bottom: 2px solid var(--accent-amber) !important; border-radius: 4px !important; color: transparent !important; text-align: center !important; font-weight: 700 !important; user-select: none !important; }
+body.mode-student .blank { color: transparent !important; } body.mode-reviewlegacy .blank.revealed { color: var(--accent-amber) !important; background: rgba(251,191,36,0.15) !important; } body.mode-editlegacy .blank.revealed { color: var(--accent-teal) !important; background: rgba(45,212,191,0.15) !important; }
+.removed-drawer { margin-top: 0.9rem !important; background: #090d16 !important; border: 1px solid #334155 !important; border-radius: 8px !important; padding: 0.9rem !important; display: none; font-size: 0.9rem !important; color: #cbd5e1 !important; }
+body.show-notes .removed-drawer { display: block !important; } body.mode-student .removed-drawer { display: none !important; } body.mode-student #notesBtn, body.mode-student #notesToggleBtn { display: none !important; }
+@media (max-width: 900px) { header { padding: 0.85rem 1rem !important; } main { padding: 1rem !important; } .slide, .slide-container { padding: 1.25rem !important; min-height: 560px !important; } .slide-title, .slide-header h1, .slide > div > h1, .slide > h1, .slide-container h1 { font-size: 1.7rem !important; } }
+</style><style id="student-distribution-style">
+/* STUDENT DISTRIBUTION */
+body.mode-student .blank[data-answer]{
+  color:transparent !important;
+  background:var(--blank-bg, var(--blank, #334155)) !important;
+}
+body.mode-answer .blank[data-answer]{
+  color:var(--accent-amber, var(--amber, #fbbf24)) !important;
+  background:rgba(251,191,36,.15) !important;
+  border-bottom-color:var(--accent-amber, var(--amber, #fbbf24)) !important;
+}
+body.mode-student .answer-only{display:none !important;}
+body.mode-answer .answer-only{display:block !important;}
+body.mode-answer .response[data-review-note]::after,
+body.mode-answer .response-area[data-review-note]::after{
+  content:attr(data-review-note);
+  display:block;
+  color:var(--text-muted, var(--muted, #94a3b8));
+  font-style:normal;
+  font-size:.78rem;
+  margin-top:.25rem;
+}
+</style></head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>⚛️</span><span>⚛️ Topic T2.3 | Isotopes and Average Atomic Mass</span></div>
+<div class="mode-selector"><button class="mode-btn active" data-mode="student" type="button">Student Mode</button><button class="mode-btn" data-mode="answer" type="button">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter counter-badge" id="slideCounter">Slide 1 / 7</span>
+<span class="counter counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+
+<section class="slide active slide-container" data-max-builds="3" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 13 · Local Slide 1</span>
+<h1 class="slide-title">What Is an Isotope?</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Define isotopes in terms of proton and neutron counts.</div>
+</div>
+<div class="slide-body">
+<div class="grid-3">
+<div class="card build-step visible" data-build="1">
+<h4>Hydrogen-1</h4>
+<div class="isotope-nucleus"><span class="particle p">p⁺</span></div>
+<div class="electron-row"><span>e⁻</span></div>
+<p style="text-align:center;font-size:.85rem">1 proton, 0 neutrons</p>
+</div>
+<div class="card build-step" data-build="2">
+<h4>Hydrogen-2</h4>
+<div class="isotope-nucleus"><span class="particle p">p⁺</span><span class="particle n">n⁰</span></div>
+<div class="electron-row"><span>e⁻</span></div>
+<p style="text-align:center;font-size:.85rem">1 proton, 1 neutron</p>
+</div>
+<div class="card build-step" data-build="2">
+<h4>Hydrogen-3</h4>
+<div class="isotope-nucleus"><span class="particle p">p⁺</span><span class="particle n">n⁰</span><span class="particle n">n⁰</span></div>
+<div class="electron-row"><span>e⁻</span></div>
+<p style="text-align:center;font-size:.85rem">1 proton, 2 neutrons</p>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout">
+<strong>Isotopes:</strong> Atoms of the same element with the same number of
+        <span class="blank" contenteditable="false" data-answer="protons" data-placeholder="[_______]">[_______]</span>
+        but different numbers of
+        <span class="blank" contenteditable="false" data-answer="neutrons" data-placeholder="[_______]">[_______]</span>.
+        <p style="margin-top:.4rem">Isotopes have the same atomic number but different mass numbers.</p>
+<p style="margin-top:.25rem">Their chemical behavior is generally similar because neutral isotopes have the same electron count.</p>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 14 · Local Slide 2</span>
+<h1 class="slide-title">Mass Number, Isotope Mass, and Average Atomic Mass</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Distinguish mass number, measured isotope mass, and periodic-table average atomic mass.</div>
+</div>
+<div class="slide-body">
+<table class="atom-table">
+<thead><tr><th>Quantity</th><th>Meaning</th><th>Example</th></tr></thead>
+<tbody>
+<tr class="build-step visible" data-build="1">
+<td style="font-weight:700;color:var(--accent-amber)">Mass number</td>
+<td>Whole-number count of p⁺ + n⁰ for one isotope.</td>
+<td>C-12 → 12</td>
+</tr>
+<tr class="build-step" data-build="2">
+<td style="font-weight:700;color:var(--accent-teal)">Isotope mass</td>
+<td>Experimentally measured mass of one isotope in <span class="blank" contenteditable="false" data-answer="amu" data-placeholder="[_______]">[_______]</span>.</td>
+<td>C-12 → 12.0000 amu</td>
+</tr>
+<tr class="build-step" data-build="3">
+<td style="font-weight:700;color:var(--accent-blue)">Average atomic mass</td>
+<td>Abundance-weighted average of naturally occurring isotopes.</td>
+<td>Carbon → 12.011 amu</td>
+</tr>
+</tbody></table>
+<div class="build-step" data-build="3"><div class="warn">These three numbers are related but are not interchangeable.</div></div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 15 · Local Slide 3</span>
+<h1 class="slide-title">Natural Isotopic Abundance</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Convert percent abundance to fractional abundance and check abundance totals.</div>
+</div>
+<div class="slide-body">
+<div class="grid-2">
+<div class="card build-step visible" data-build="1">
+<h4>100-Atom Sample</h4>
+<p style="font-size:.9rem;line-height:1.35;margin-bottom:.45rem">
+<strong>Natural abundance:</strong> Percentage of atoms in a natural sample that are a particular isotope.
+        </p>
+<div class="pop-grid">
+<span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span>
+</div>
+<p style="text-align:center;margin-top:.45rem;font-size:.84rem">70 atoms of isotope A; 30 atoms of isotope B</p>
+</div>
+<div class="card">
+<div class="build-step" data-build="2">
+<h4>Percent Abundance</h4>
+<p>Isotope A = 70%</p><p style="margin-top:.25rem">Isotope B = 30%</p>
+<p style="margin-top:.45rem">Percent abundances sum to <span class="blank" contenteditable="false" data-answer="100" data-placeholder="[_______]">[_______]</span>%.</p>
+</div>
+<div class="build-step" data-build="3" style="margin-top:.65rem">
+<h4 style="color:var(--accent-teal)">Fractional Abundance</h4>
+<p>70% ÷ 100 = 0.70</p><p style="margin-top:.25rem">30% ÷ 100 = 0.30</p>
+<p style="margin-top:.45rem">Fractional abundances sum to <span class="blank" contenteditable="false" data-answer="1.00" data-placeholder="[_______]">[_______]</span>.</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3"><div class="callout" style="text-align:center;font-weight:700">Convert percent to fraction: divide by 100.</div></div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 16 · Local Slide 4</span>
+<h1 class="slide-title">Weighted Average — Concept and Calculation Roadmap</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Explain average atomic mass as a weighted average and organize the calculation correctly.</div>
+</div>
+<div class="slide-body">
+<div class="grid-2">
+<div class="card build-step visible" data-build="1">
+<h4>Abundance Effect</h4>
+<div class="pop-grid">
+<span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span><span class="dot alt"></span>
+</div>
+<p style="margin-top:.45rem;text-align:center;font-size:.85rem">More abundant isotopes contribute more strongly to the average.</p>
+</div>
+<div class="card build-step" data-build="2" style="position:relative">
+<div style="position:absolute;left:-1.15rem;top:50%;transform:translateY(-50%);font-size:1.5rem;color:var(--accent-amber)">→</div>
+<h4>Weighted-Average Setup</h4>
+<p>Percent abundance must be converted to <span class="blank" contenteditable="false" data-answer="fractional" data-placeholder="[_______]">[_______]</span> abundance before multiplication.</p>
+<div style="margin-top:.55rem;padding:.5rem;background:#1e293b;border-radius:6px;text-align:center;font-weight:800;color:var(--accent-teal)">
+          Average atomic mass = Σ(isotope mass × fractional abundance)
+        </div>
+<table class="atom-table" style="margin-top:.55rem">
+<thead><tr><th>Isotope</th><th>Mass</th><th>Fraction</th><th>Contribution</th></tr></thead>
+<tbody><tr><td>1</td><td>m₁</td><td>f₁</td><td>m₁f₁</td></tr><tr><td>2</td><td>m₂</td><td>f₂</td><td>m₂f₂</td></tr></tbody>
+</table>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="roadmap">
+<div>1. Percent → decimal</div><div>2. Multiply</div><div>3. Add contributions</div><div>4. Report in amu</div><div>5. Check range</div>
+</div>
+<div class="warn" style="margin-top:.5rem">The answer must lie between the isotope masses.</div>
+</div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 17 · Local Slide 5</span>
+<h1 class="slide-title">Guided Calculation — Average Atomic Mass and Reasonableness</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Calculate average atomic mass and evaluate whether the result is physically reasonable.</div>
+</div>
+<div class="slide-body">
+<div class="card build-step visible" data-build="1">
+<h4>Given — Silver Isotopes</h4>
+<div class="grid-2">
+<div>Ag-107: 106.90509 amu, 51.84% → 0.5184</div>
+<div>Ag-109: 108.90476 amu, 48.16% → 0.4816</div>
+</div>
+</div>
+<div class="card build-step" data-build="2">
+<h4>Setup and Contributions</h4>
+<p>(106.90509 amu)(0.5184) + (108.90476 amu)(0.4816)</p>
+<table class="atom-table" style="margin-top:.5rem">
+<thead><tr><th>Isotope</th><th>Contribution</th></tr></thead>
+<tbody><tr><td>Ag-107</td><td>55.41960 amu</td></tr><tr><td>Ag-109</td><td>52.44853 amu</td></tr></tbody>
+</table>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout">
+        Final result: <span class="blank" contenteditable="false" data-answer="107.868" data-placeholder="[_______]">[_______]</span> amu
+      </div>
+<div class="answer-only" style="margin-top:.5rem">
+<svg style="width:100%;height:auto" viewbox="0 0 700 90">
+<line stroke="#475569" stroke-width="4" x1="70" x2="630" y1="45" y2="45"></line>
+<circle cx="70" cy="45" fill="#38bdf8" r="7"></circle><text fill="#38bdf8" font-size="13" text-anchor="middle" x="70" y="75">106.905</text>
+<circle cx="630" cy="45" fill="#2dd4bf" r="7"></circle><text fill="#2dd4bf" font-size="13" text-anchor="middle" x="630" y="75">108.905</text>
+<polygon fill="#fbbf24" points="340,17 330,0 350,0"></polygon><circle cx="340" cy="45" fill="#fbbf24" r="8"></circle>
+<text fill="#fbbf24" font-size="13" font-weight="700" text-anchor="middle" x="340" y="14">107.868</text>
+</svg>
+</div>
+<div class="warn" style="margin-top:.45rem">Reasonableness: the answer lies between the isotope masses and is slightly closer to the more abundant isotope.</div>
+</div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 18 · Local Slide 6</span>
+<h1 class="slide-title">Guided Calculation — Unknown Isotopic Abundance with x and 1 − x</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Solve a two-isotope abundance problem by representing the two fractional abundances as x and 1 − x.</div>
+</div>
+<div class="slide-body">
+<div class="card build-step visible" data-build="1">
+<h4>Given — Nitrogen Isotopes</h4>
+<p>Nitrogen has two naturally occurring isotopes. Its average atomic mass is <strong>14.007 amu</strong>.</p>
+<table class="atom-table" style="margin-top:.5rem">
+<thead><tr><th>Isotope</th><th>Isotope Mass</th><th>Fractional Abundance</th></tr></thead>
+<tbody>
+<tr><td>N-14</td><td>14.00374 amu</td><td><strong>x</strong></td></tr>
+<tr><td>N-15</td><td>15.000108 amu</td><td><strong>1 − x</strong></td></tr>
+</tbody>
+</table>
+<div class="callout" style="margin-top:.5rem">Why 1 − x? The two fractional abundances must add to <strong>1.000</strong>.</div>
+</div>
+<div class="card build-step" data-build="2">
+<h4>Set Up and Solve</h4>
+<p style="font-weight:800;color:var(--accent-teal)">14.007 = (14.00374)(x) + (15.000108)(1 − x)</p>
+<div style="margin-top:.5rem;line-height:1.75">
+<p>14.007 = 14.00374x + 15.000108 − 15.000108x</p>
+<p>14.007 = 15.000108 − 0.996368x</p>
+<p>0.993108 = 0.996368x</p>
+<p><strong>x = 0.996728</strong></p>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="grid-2">
+<div class="card">
+<h4>N-14 Abundance</h4>
+<p>x = 0.996728</p>
+<p style="margin-top:.35rem;font-size:1.15rem;font-weight:900;color:var(--accent-amber)">N-14 = <span class="blank" contenteditable="false" data-answer="99.67%" data-placeholder="[_______]">[_______]</span></p>
+</div>
+<div class="card">
+<h4>N-15 Abundance</h4>
+<p>1 − x = 1 − 0.996728 = 0.003272</p>
+<p style="margin-top:.35rem;font-size:1.15rem;font-weight:900;color:var(--accent-blue)">N-15 = <span class="blank" contenteditable="false" data-answer="0.33%" data-placeholder="[_______]">[_______]</span></p>
+</div>
+</div>
+<div class="callout" style="margin-top:.5rem"><strong>Check:</strong> 99.67% + 0.33% = 100.00%. The average, 14.007 amu, is much closer to 14.00374 amu, so N-14 should be much more abundant.</div>
+<div class="warn" style="margin-top:.45rem">For exactly two isotopes, using x and 1 − x automatically enforces the requirement that the two fractional abundances sum to 1.</div>
+</div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="2" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 19 · Local Slide 7</span>
+<h1 class="slide-title">Independent Check — Isotopes and Average Atomic Mass</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Assess isotope definitions, weighted-average calculations, and abundance reasoning.</div>
+</div>
+<div class="slide-body">
+<div class="question-grid">
+<div class="question-card build-step visible" data-build="1">
+<div><span class="qnum">1</span><span class="qtext">Explain why two isotopes are the same element.</span></div>
+<div class="response">Student response area</div>
+</div>
+<div class="question-card build-step visible" data-build="1">
+<div><span class="qnum">2</span><span class="qtext">Calculate an average atomic mass from the data below.</span></div>
+<table class="atom-table"><thead><tr><th>Isotope</th><th>Mass</th><th>Abundance</th></tr></thead><tbody><tr><td>X-10</td><td>10.012 amu</td><td>80.0%</td></tr><tr><td>X-11</td><td>11.009 amu</td><td>20.0%</td></tr></tbody></table>
+<div class="response">Show setup and units</div>
+</div>
+<div class="question-card build-step" data-build="2">
+<div><span class="qnum">3</span><span class="qtext">Predict which isotope is more abundant from the location of the average.</span></div>
+<div class="response">Student response area</div>
+</div>
+<div class="question-card build-step" data-build="2">
+<div><span class="qnum">4</span><span class="qtext">Identify the error in a simple-average solution.</span></div>
+<div class="response">Student response area</div>
+</div>
+<div class="question-card build-step" data-build="2" style="grid-column:1/-1">
+<div><span class="qnum">5</span><span class="qtext">Set up, but do not solve, an unknown-abundance equation.</span></div>
+<div class="response">Student equation setup area</div>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+</main>
+
+<script>
+(() => {
+  let currentSlide = 1;
+  let currentBuild = 1;
+  let currentMode = 'student';
+  const totalSlides = 7;
+
+  const slides = () => Array.from(document.querySelectorAll('.slide, .slide-container'))
+    .filter((el, i, arr) => el.id && el.id.startsWith('slide-') && arr.findIndex(x => x.id === el.id) === i);
+
+  function buildMax(slide) {
+    const values = Array.from(slide.querySelectorAll('[data-build]'))
+      .map(el => parseInt(el.dataset.build || '1', 10))
+      .filter(Number.isFinite);
+    const declared = parseInt(slide.dataset.maxBuilds || '1', 10);
+    return Math.max(declared || 1, ...(values.length ? values : [1]));
+  }
+
+  function setMode(mode) {
+    currentMode = mode === 'answer' ? 'answer' : 'student';
+    document.body.className = 'mode-' + currentMode;
+
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === currentMode);
+    });
+
+    document.querySelectorAll('.blank[data-answer]').forEach(blank => {
+      if (currentMode === 'answer') {
+        blank.textContent = blank.dataset.answer || '';
+      } else {
+        blank.textContent = blank.dataset.placeholder || '[_______]';
+      }
+    });
+  }
+
+  function updateView() {
+    const deck = slides();
+    deck.forEach((slide, idx) => {
+      slide.classList.toggle('active', idx === currentSlide - 1);
+      if (idx === currentSlide - 1) {
+        slide.querySelectorAll('[data-build]').forEach(el => {
+          const b = parseInt(el.dataset.build || '1', 10);
+          el.classList.toggle('visible', b <= currentBuild);
+        });
+      }
+    });
+
+    const active = deck[currentSlide - 1];
+    const maxBuild = active ? buildMax(active) : 1;
+    currentBuild = Math.min(currentBuild, maxBuild);
+
+    const sc = document.getElementById('slideCounter');
+    const bc = document.getElementById('buildCounter');
+    if (sc) sc.textContent = `Slide ${currentSlide} / ${totalSlides}`;
+    if (bc) bc.textContent = `Build ${currentBuild} / ${maxBuild}`;
+
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
+    if (prev) prev.disabled = currentSlide === 1 && currentBuild === 1;
+    if (next) next.disabled = currentSlide === totalSlides && currentBuild === maxBuild;
+  }
+
+  window.nextBuild = function() {
+    const deck = slides();
+    const active = deck[currentSlide - 1];
+    const maxBuild = active ? buildMax(active) : 1;
+    if (currentBuild < maxBuild) currentBuild++;
+    else if (currentSlide < totalSlides) { currentSlide++; currentBuild = 1; }
+    updateView();
+  };
+
+  window.prevBuild = function() {
+    const deck = slides();
+    if (currentBuild > 1) currentBuild--;
+    else if (currentSlide > 1) {
+      currentSlide--;
+      currentBuild = buildMax(deck[currentSlide - 1]);
+    }
+    updateView();
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(btn =>
+      btn.addEventListener('click', () => setMode(btn.dataset.mode))
+    );
+
+    document.querySelectorAll('.blank[data-answer]').forEach(blank => {
+      if (!blank.dataset.placeholder) blank.dataset.placeholder = blank.textContent || '[_______]';
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') window.nextBuild();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') window.prevBuild();
+    });
+
+    setMode('student');
+    updateView();
+  });
+})();
+</script></body>
+</html>

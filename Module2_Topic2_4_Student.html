@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Topic T2.4 — Periodic Table — Student</title>
+<style>
+:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--accent-blue:#38bdf8;--accent-teal:#2dd4bf;
+  --accent-amber:#fbbf24;--accent-rose:#f43f5e;--accent-purple:#c084fc;
+  --text-main:#f8fafc;--text-muted:#94a3b8;--border:#475569;--blank:#334155;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border);padding:.5rem 1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;z-index:100}
+.deck-title{font-size:1.1rem;font-weight:700;color:var(--accent-blue);display:flex;gap:.5rem;align-items:center}
+.mode-selector{display:flex;background:#1e293b;border:1px solid var(--border);border-radius:8px;padding:3px}
+.mode-btn,.btn{border-radius:6px;font-weight:600;cursor:pointer;transition:.2s}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.35rem .75rem;font-size:.85rem}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.5rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border);padding:.38rem .8rem;font-size:.85rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter{font-size:.85rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border)}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:.85rem 1.25rem;max-width:1600px;width:100%;margin:0 auto}
+.slide{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:1.2rem 1.5rem;min-height:580px;max-height:calc(100vh - 100px);display:none;flex-direction:column;justify-content:space-between;overflow-y:auto}
+.slide.active{display:flex}
+.slide-header{margin-bottom:.55rem}
+.meta-pill{display:inline-block;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.15rem .45rem;border-radius:4px;border:1px solid rgba(45,212,191,.2);margin-bottom:.25rem}
+.slide-title{font-size:1.55rem;font-weight:800;line-height:1.2}
+.lo{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.45rem .8rem;border-radius:0 6px 6px 0;margin-top:.4rem;font-size:.9rem}
+.lo strong{color:var(--accent-blue)}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:.8rem;margin-top:.2rem}
+.build-step{opacity:.15;pointer-events:none;transform:translateY(6px);filter:blur(1px);transition:.35s}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.blank{display:inline-block;min-width:82px;padding:.12rem .45rem;background:var(--blank);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none}
+body.mode-student .blank{color:transparent!important}
+body.mode-reviewlegacy .blank.revealed{color:var(--accent-amber);background:rgba(251,191,36,.15)}
+body.mode-editlegacy .blank.revealed{color:var(--accent-teal);background:rgba(45,212,191,.15)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem}
+.card{background:#0f172a;border:1px solid var(--border);border-radius:8px;padding:.8rem;overflow-x:auto}
+.card h4{color:var(--accent-blue);font-size:.95rem;margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em}
+.ptable{display:grid;grid-template-columns:repeat(18,minmax(38px,1fr));gap:3px;width:100%;min-width:760px}
+.tile{min-height:32px;border:1px solid var(--border);border-radius:3px;background:#172033;color:#cbd5e1;display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:700;position:relative}
+.tile.empty{visibility:hidden}
+.tile.period-highlight{background:rgba(56,189,248,.22);border-color:var(--accent-blue)}
+.tile.group-highlight{background:rgba(251,191,36,.22);border-color:var(--accent-amber)}
+.tile.sequence{background:rgba(45,212,191,.22);border-color:var(--accent-teal)}
+.tile.metal{background:repeating-linear-gradient(45deg,rgba(56,189,248,.22),rgba(56,189,248,.22) 5px,rgba(56,189,248,.08) 5px,rgba(56,189,248,.08) 10px)}
+.tile.nonmetal{background:repeating-linear-gradient(-45deg,rgba(244,63,94,.22),rgba(244,63,94,.22) 5px,rgba(244,63,94,.08) 5px,rgba(244,63,94,.08) 10px)}
+.tile.metalloid{background:repeating-linear-gradient(90deg,rgba(251,191,36,.24),rgba(251,191,36,.24) 4px,rgba(251,191,36,.08) 4px,rgba(251,191,36,.08) 8px)}
+.tile.main-group{background:rgba(45,212,191,.22);border-color:var(--accent-teal)}
+.tile.transition{background:rgba(192,132,252,.22);border-color:var(--accent-purple)}
+.tile.sample{box-shadow:0 0 0 3px var(--accent-amber) inset;color:#fff}
+.legend{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.5rem;font-size:.8rem}
+.legend span{display:inline-flex;align-items:center;gap:.3rem;background:#0f172a;border:1px solid var(--border);padding:.3rem .5rem;border-radius:5px}
+.swatch{width:14px;height:14px;border-radius:3px;border:1px solid var(--border)}
+.callout{background:rgba(56,189,248,.09);border:1px solid var(--accent-blue);border-radius:8px;padding:.55rem .75rem}
+.warn{background:rgba(244,63,94,.08);border:1px solid var(--accent-rose);border-radius:8px;padding:.5rem .75rem;color:#fecdd3}
+.memory-band{display:grid;grid-template-columns:repeat(7,1fr);gap:.4rem}
+.memory-band div{background:#0f172a;border:1px solid var(--accent-blue);border-radius:7px;padding:.55rem;text-align:center;font-weight:800;color:var(--accent-blue)}
+.particle-panel{background:#0f172a;border:1px solid var(--border);border-radius:8px;padding:.8rem;text-align:center}
+.atom-dot{width:26px;height:26px;border-radius:50%;background:var(--accent-blue);display:inline-flex;align-items:center;justify-content:center;color:#0f172a;font-size:.72rem;font-weight:800;margin:.2rem}
+.bond{display:inline-flex;align-items:center}
+.bond::after{content:"";width:16px;height:2px;background:var(--text-muted)}
+.charge-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:.4rem}
+.charge-cell{background:#0f172a;border:1px solid var(--border);border-radius:6px;padding:.55rem;text-align:center}
+.charge-cell strong{display:block;color:var(--accent-blue);font-size:.82rem;margin-bottom:.25rem}
+.response-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.response-table th,.response-table td{border:1px solid var(--border);padding:.42rem .5rem;text-align:center}
+.response-table th{background:#1e293b;color:var(--accent-blue)}
+.removed-drawer{margin-top:.7rem;background:#090d16;border:1px solid #334155;border-radius:8px;padding:.7rem;display:none;font-size:.84rem;color:#cbd5e1}
+body.show-notes .removed-drawer{display:block}
+body.mode-student .removed-drawer{display:none!important}
+body.mode-student #notesBtn{display:none!important}
+.removed-drawer h5{color:var(--accent-amber);font-size:.84rem;text-transform:uppercase;margin-bottom:.3rem}
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.4rem;margin-top:.35rem}
+.meta-item{background:#1e293b;padding:.35rem .55rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.72rem;text-transform:uppercase}
+[contenteditable="true"]{outline:1px dashed var(--accent-teal);padding:2px 4px;border-radius:3px}
+@media(max-width:1024px){.grid-2,.grid-3,.memory-band,.charge-grid{grid-template-columns:1fr}.slide{min-height:auto;padding:1rem}.slide-title{font-size:1.35rem}}
+</style>
+<style id="module8-modernization-style">
+/* MODULE 8 MASTER SHELL MODERNIZATION OVERRIDE */
+:root { --bg-dark: #0f172a; --bg-card: #1e293b; --bg-card-hover: #334155; --accent-blue: #38bdf8; --accent-teal: #2dd4bf; --accent-amber: #fbbf24; --accent-rose: #f43f5e; --text-main: #f8fafc; --text-muted: #94a3b8; --border-color: #475569; --border: #475569; --blank-bg: #334155; --blank: #334155; --blank-revealed: #0284c7; }
+body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important; background-color: var(--bg-dark) !important; color: var(--text-main) !important; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+header { background-color: #0b1120 !important; border-bottom: 1px solid var(--border-color) !important; padding: 0.75rem 1.5rem !important; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; z-index: 100; }
+.deck-title { font-size: 1.25rem !important; font-weight: 700 !important; color: var(--accent-blue) !important; display: flex; align-items: center; gap: 0.5rem; }
+.mode-selector { display: flex !important; background: #1e293b !important; border-radius: 8px !important; padding: 3px !important; border: 1px solid var(--border-color) !important; }
+.mode-btn { background: none !important; border: none !important; color: var(--text-muted) !important; padding: 0.4rem 0.8rem !important; font-size: 0.95rem !important; font-weight: 600 !important; cursor: pointer; border-radius: 6px; transition: all 0.2s ease; }
+.mode-btn.active { background-color: var(--accent-blue) !important; color: #0f172a !important; }
+.nav, .nav-controls { display: flex !important; align-items: center !important; gap: 0.75rem !important; }
+.btn { background-color: #334155 !important; color: var(--text-main) !important; border: 1px solid var(--border-color) !important; padding: 0.45rem 0.9rem !important; border-radius: 6px !important; font-size: 0.95rem !important; font-weight: 600 !important; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+.btn:hover:not(:disabled) { background-color: #475569 !important; border-color: var(--accent-blue) !important; }
+.btn:disabled { opacity: 0.4 !important; cursor: not-allowed !important; }
+.btn-primary, .btn.primary { background-color: var(--accent-blue) !important; color: #0f172a !important; border: none !important; }
+.btn-primary:hover:not(:disabled), .btn.primary:hover:not(:disabled) { background-color: #0284c7 !important; color: #ffffff !important; }
+.counter, .counter-badge { font-size: 0.95rem !important; color: var(--text-muted) !important; font-weight: 600 !important; background: #1e293b !important; padding: 0.3rem 0.6rem !important; border-radius: 4px !important; border: 1px solid var(--border-color) !important; }
+main { flex: 1 !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; padding: 1.5rem !important; max-width: 1400px !important; width: 100% !important; margin: 0 auto !important; position: relative; }
+.slide, .slide-container { width: 100% !important; background-color: var(--bg-card) !important; border-radius: 12px !important; border: 1px solid var(--border-color) !important; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5) !important; padding: 2rem !important; min-height: 620px !important; max-height: none !important; display: none; flex-direction: column; justify-content: space-between; position: relative; animation: fadeInModule8 0.3s ease-in-out; overflow-y: auto; }
+.slide.active, .slide-container.active { display: flex !important; }
+@keyframes fadeInModule8 { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.slide-header { margin-bottom: 1.25rem !important; }
+.meta, .meta-pill { display: inline-block !important; font-size: 0.8rem !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; font-weight: 700 !important; color: var(--accent-teal) !important; background-color: rgba(45, 212, 191, 0.1) !important; padding: 0.25rem 0.6rem !important; border-radius: 4px !important; margin-bottom: 0.5rem !important; border: 1px solid rgba(45, 212, 191, 0.2) !important; }
+.slide-title, .slide-header h1, .slide > div > h1, .slide > h1, .slide-container h1 { font-size: 2.05rem !important; font-weight: 800 !important; color: var(--text-main) !important; line-height: 1.25 !important; margin: 0 !important; }
+.lo, .lo-box { background-color: rgba(56, 189, 248, 0.08) !important; border-left: 4px solid var(--accent-blue) !important; padding: 0.7rem 1.1rem !important; border-radius: 0 6px 6px 0 !important; margin-top: 0.75rem !important; font-size: 1rem !important; color: #e2e8f0 !important; }
+.lo strong, .lo-box strong { color: var(--accent-blue) !important; }
+.slide-body { flex: 1 !important; display: flex !important; flex-direction: column !important; gap: 1rem !important; margin-top: 0.35rem !important; }
+.build-step { opacity: 0.15 !important; pointer-events: none !important; transform: translateY(6px) !important; filter: blur(1px) !important; transition: 0.35s !important; }
+.build-step.visible { opacity: 1 !important; pointer-events: auto !important; transform: none !important; filter: none !important; }
+.card { background: #0f172a !important; border: 1px solid var(--border-color) !important; border-radius: 10px !important; padding: 1rem !important; }
+.card h4 { color: var(--accent-blue) !important; font-size: 1rem !important; margin-bottom: 0.5rem !important; }
+.blank { display: inline-block !important; min-width: 82px !important; padding: 0.12rem 0.45rem !important; background: var(--blank-bg) !important; border-bottom: 2px solid var(--accent-amber) !important; border-radius: 4px !important; color: transparent !important; text-align: center !important; font-weight: 700 !important; user-select: none !important; }
+body.mode-student .blank { color: transparent !important; } body.mode-reviewlegacy .blank.revealed { color: var(--accent-amber) !important; background: rgba(251,191,36,0.15) !important; } body.mode-editlegacy .blank.revealed { color: var(--accent-teal) !important; background: rgba(45,212,191,0.15) !important; }
+.removed-drawer { margin-top: 0.9rem !important; background: #090d16 !important; border: 1px solid #334155 !important; border-radius: 8px !important; padding: 0.9rem !important; display: none; font-size: 0.9rem !important; color: #cbd5e1 !important; }
+body.show-notes .removed-drawer { display: block !important; } body.mode-student .removed-drawer { display: none !important; } body.mode-student #notesBtn, body.mode-student #notesToggleBtn { display: none !important; }
+@media (max-width: 900px) { header { padding: 0.85rem 1rem !important; } main { padding: 1rem !important; } .slide, .slide-container { padding: 1.25rem !important; min-height: 560px !important; } .slide-title, .slide-header h1, .slide > div > h1, .slide > h1, .slide-container h1 { font-size: 1.7rem !important; } }
+</style><style id="student-distribution-style">
+/* STUDENT DISTRIBUTION */
+body.mode-student .blank[data-answer]{
+  color:transparent !important;
+  background:var(--blank-bg, var(--blank, #334155)) !important;
+}
+body.mode-answer .blank[data-answer]{
+  color:var(--accent-amber, var(--amber, #fbbf24)) !important;
+  background:rgba(251,191,36,.15) !important;
+  border-bottom-color:var(--accent-amber, var(--amber, #fbbf24)) !important;
+}
+body.mode-student .answer-only{display:none !important;}
+body.mode-answer .answer-only{display:block !important;}
+body.mode-answer .response[data-review-note]::after,
+body.mode-answer .response-area[data-review-note]::after{
+  content:attr(data-review-note);
+  display:block;
+  color:var(--text-muted, var(--muted, #94a3b8));
+  font-style:normal;
+  font-size:.78rem;
+  margin-top:.25rem;
+}
+</style></head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧭</span><span>🧭 Topic T2.4 | Periodic Table</span></div>
+<div class="mode-selector"><button class="mode-btn active" data-mode="student" type="button">Student Mode</button><button class="mode-btn" data-mode="answer" type="button">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter counter-badge" id="slideCounter">Slide 1 / 6</span>
+<span class="counter counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+
+<section class="slide active slide-container" data-max-builds="3" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 20 · Local Slide 1</span>
+<h1 class="slide-title">The Periodic Table as a Map</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Identify the organizing principle of the periodic table.</div>
+</div>
+<div class="slide-body">
+<div class="card">
+<div class="build-step visible" data-build="1">
+<p>Elements are arranged in order of increasing <span class="blank" contenteditable="false" data-answer="atomic" data-placeholder="[_______]">[_______]</span> number.</p>
+</div>
+<div class="ptable" style="margin-top:.65rem">
+
+<div class="tile sequence build-step visible" data-build="1">1 H</div>
+<div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div>
+<div class="tile sequence build-step visible" data-build="1">2 He</div>
+
+<div class="tile period-highlight build-step" data-build="2">3 Li</div>
+<div class="tile period-highlight build-step" data-build="2">4 Be</div>
+<div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div>
+<div class="tile period-highlight build-step" data-build="2">5 B</div>
+<div class="tile period-highlight build-step" data-build="2">6 C</div>
+<div class="tile period-highlight build-step" data-build="2">7 N</div>
+<div class="tile period-highlight build-step" data-build="2">8 O</div>
+<div class="tile period-highlight build-step" data-build="2">9 F</div>
+<div class="tile period-highlight build-step" data-build="2">10 Ne</div>
+
+<div class="tile group-highlight build-step" data-build="3">11 Na</div>
+<div class="tile">12 Mg</div>
+<div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div>
+<div class="tile">13 Al</div>
+<div class="tile">14 Si</div>
+<div class="tile">15 P</div>
+<div class="tile">16 S</div>
+<div class="tile">17 Cl</div>
+<div class="tile">18 Ar</div>
+
+<div class="tile group-highlight build-step" data-build="3">19 K</div>
+<div class="tile">20 Ca</div>
+<div class="tile">21 Sc</div>
+<div class="tile">22 Ti</div>
+<div class="tile">23 V</div>
+<div class="tile">24 Cr</div>
+<div class="tile">25 Mn</div>
+<div class="tile">26 Fe</div>
+<div class="tile">27 Co</div>
+<div class="tile">28 Ni</div>
+<div class="tile">29 Cu</div>
+<div class="tile">30 Zn</div>
+<div class="tile">31 Ga</div>
+<div class="tile">32 Ge</div>
+<div class="tile">33 As</div>
+<div class="tile">34 Se</div>
+<div class="tile">35 Br</div>
+<div class="tile">36 Kr</div>
+</div>
+</div>
+<div class="grid-2">
+<div class="card build-step" data-build="2"><h4>Period</h4><p>Horizontal rows are periods.</p></div>
+<div class="card build-step" data-build="3"><h4>Group or Family</h4><p>Vertical columns are groups or families.</p><p style="margin-top:.35rem">Elements in the same group often have similar chemical behavior.</p></div>
+</div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 21 · Local Slide 2</span>
+<h1 class="slide-title">Metals, Nonmetals, and Metalloids</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Locate the three broad element categories on the periodic table.</div>
+</div>
+<div class="slide-body">
+<div class="card">
+<div class="ptable">
+<div class="tile nonmetal build-step" data-build="2">H</div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile nonmetal build-step" data-build="2">He</div>
+<div class="tile metal build-step visible" data-build="1">Li</div><div class="tile metal build-step visible" data-build="1">Be</div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile metalloid build-step" data-build="3">B</div><div class="tile nonmetal build-step" data-build="2">C</div><div class="tile nonmetal build-step" data-build="2">N</div><div class="tile nonmetal build-step" data-build="2">O</div><div class="tile nonmetal build-step" data-build="2">F</div><div class="tile nonmetal build-step" data-build="2">Ne</div>
+<div class="tile metal build-step visible" data-build="1">Na</div><div class="tile metal build-step visible" data-build="1">Mg</div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile metal build-step visible" data-build="1">Al</div><div class="tile metalloid build-step" data-build="3">Si</div><div class="tile nonmetal build-step" data-build="2">P</div><div class="tile nonmetal build-step" data-build="2">S</div><div class="tile nonmetal build-step" data-build="2">Cl</div><div class="tile nonmetal build-step" data-build="2">Ar</div>
+<div class="tile metal build-step visible" data-build="1">K</div><div class="tile metal build-step visible" data-build="1">Ca</div><div class="tile metal build-step visible" data-build="1">Sc</div><div class="tile metal build-step visible" data-build="1">Ti</div><div class="tile metal build-step visible" data-build="1">V</div><div class="tile metal build-step visible" data-build="1">Cr</div><div class="tile metal build-step visible" data-build="1">Mn</div><div class="tile metal build-step visible" data-build="1">Fe</div><div class="tile metal build-step visible" data-build="1">Co</div><div class="tile metal build-step visible" data-build="1">Ni</div><div class="tile metal build-step visible" data-build="1">Cu</div><div class="tile metal build-step visible" data-build="1">Zn</div><div class="tile metal build-step visible" data-build="1">Ga</div><div class="tile metalloid build-step" data-build="3">Ge</div><div class="tile metalloid build-step" data-build="3">As</div><div class="tile nonmetal build-step" data-build="2">Se</div><div class="tile nonmetal build-step" data-build="2">Br</div><div class="tile nonmetal build-step" data-build="2">Kr</div>
+</div>
+<div class="legend">
+<span class="build-step visible" data-build="1"><i class="swatch" style="background:rgba(56,189,248,.25)"></i>Metals: left and center</span>
+<span class="build-step" data-build="2"><i class="swatch" style="background:rgba(244,63,94,.25)"></i>Nonmetals: upper right + H</span>
+<span class="build-step" data-build="3"><i class="swatch" style="background:rgba(251,191,36,.25)"></i>Metalloids: staircase boundary</span>
+</div>
+</div>
+<div class="build-step" data-build="3"><div class="callout">Classification helps predict bonding and compound type.</div></div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 22 · Local Slide 3</span>
+<h1 class="slide-title">Main-Group and Transition Elements</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Distinguish main-group elements from transition metals for later ion and nomenclature rules.</div>
+</div>
+<div class="slide-body">
+<div class="card">
+<p style="font-size:.8rem;color:var(--text-muted);margin-bottom:.45rem"><strong>Schematic Group/Block Map:</strong> Column positions are shown; rows below are not individual periods.</p>
+<div class="ptable">
+<div class="tile main-group build-step visible" data-build="1">1</div><div class="tile main-group build-step visible" data-build="1">2</div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile main-group build-step visible" data-build="1">13</div><div class="tile main-group build-step visible" data-build="1">14</div><div class="tile main-group build-step visible" data-build="1">15</div><div class="tile main-group build-step visible" data-build="1">16</div><div class="tile main-group build-step visible" data-build="1">17</div><div class="tile main-group build-step visible" data-build="1">18</div>
+<div class="tile main-group build-step visible" data-build="1">1</div><div class="tile main-group build-step visible" data-build="1">2</div><div class="tile transition build-step" data-build="2">3</div><div class="tile transition build-step" data-build="2">4</div><div class="tile transition build-step" data-build="2">5</div><div class="tile transition build-step" data-build="2">6</div><div class="tile transition build-step" data-build="2">7</div><div class="tile transition build-step" data-build="2">8</div><div class="tile transition build-step" data-build="2">9</div><div class="tile transition build-step" data-build="2">10</div><div class="tile transition build-step" data-build="2">11</div><div class="tile transition build-step" data-build="2">12</div><div class="tile main-group build-step visible" data-build="1">13</div><div class="tile main-group build-step visible" data-build="1">14</div><div class="tile main-group build-step visible" data-build="1">15</div><div class="tile main-group build-step visible" data-build="1">16</div><div class="tile main-group build-step visible" data-build="1">17</div><div class="tile main-group build-step visible" data-build="1">18</div>
+</div>
+</div>
+<div class="grid-2">
+<div class="card build-step visible" data-build="1"><h4>Main-Group Elements</h4><p>Groups 1–2 and 13–18.</p><p style="margin-top:.35rem">Many main-group ions follow predictable charge patterns.</p></div>
+<div class="card build-step" data-build="2"><h4 style="color:var(--accent-purple)">Transition Metals</h4><p>Central d-block.</p><p style="margin-top:.35rem">Many transition metals can form more than one charge.</p></div>
+</div>
+<div class="build-step" data-build="3"><div class="warn"><strong>Future use:</strong> Roman numerals identify variable metal charge.</div></div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 23 · Local Slide 4</span>
+<h1 class="slide-title">Elemental Forms — Atomic, Molecular, and Diatomic Elements</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Distinguish atomic and molecular elemental forms and write the seven diatomic elements correctly.</div>
+</div>
+<div class="slide-body">
+<div class="grid-2 build-step visible" data-build="1">
+<div class="particle-panel"><h4>Atomic Element</h4><div><span class="atom-dot">Ne</span><span class="atom-dot">Ne</span><span class="atom-dot">Ne</span></div><p style="font-size:.83rem;margin-top:.35rem">Exists as individual atoms in its elemental form.</p></div>
+<div class="particle-panel"><h4>Molecular Element</h4><div><span class="atom-dot">O</span><span style="color:var(--text-muted)">—</span><span class="atom-dot">O</span></div><p style="font-size:.83rem;margin-top:.35rem">Exists as molecules containing only one type of atom.</p></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="memory-band">
+<div>H₂</div><div>N₂</div><div>O₂</div><div>F₂</div><div>Cl₂</div><div>Br₂</div><div>I₂</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="particle-panel" style="margin-bottom:.55rem">
+<h4>Other Common Elemental Forms</h4>
+<div style="font-size:1.4rem;font-weight:800;color:var(--accent-purple)">P₄   S₈</div>
+</div>
+<div class="grid-2">
+<div class="callout"><strong>Pure elemental form:</strong> oxygen is O₂.</div>
+<div class="warn"><strong>Inside a compound:</strong> oxygen in H₂O is not written as O₂.</div>
+</div>
+<p style="margin-top:.45rem">The diatomic rule applies to the pure elemental form, not automatically to atoms inside compounds.</p>
+</div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 24 · Local Slide 5</span>
+<h1 class="slide-title">Predicting Common Main-Group Ion Charges</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Use group position to predict common monatomic ion charges.</div>
+</div>
+<div class="slide-body">
+<div class="card">
+<h4>Main-Group Charge Pattern Overlay</h4>
+<div class="ptable">
+<div class="tile main-group build-step visible" data-build="1">+1</div>
+<div class="tile main-group build-step visible" data-build="1">+2</div>
+<div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div>
+<div class="tile main-group build-step visible" data-build="1">+3</div>
+<div class="tile" style="opacity:.25">var.</div>
+<div class="tile nonmetal build-step" data-build="2">−3</div>
+<div class="tile nonmetal build-step" data-build="2">−2</div>
+<div class="tile nonmetal build-step" data-build="2">−1</div>
+<div class="tile nonmetal build-step" data-build="2">0</div>
+</div>
+<div class="legend">
+<span class="build-step visible" data-build="1"><i class="swatch" style="background:rgba(45,212,191,.25)"></i>Typical positive charges on the left</span>
+<span class="build-step" data-build="2"><i class="swatch" style="background:rgba(244,63,94,.25)"></i>Typical negative charges on the right</span>
+</div>
+</div>
+<div class="grid-2">
+<div class="card build-step visible" data-build="1"><h4>Metals</h4><p style="text-align:center;font-size:1.05rem">tend to lose electrons → positive ions</p><p style="text-align:center;color:var(--accent-amber);font-size:1.5rem">→</p></div>
+<div class="card build-step" data-build="2"><h4>Nonmetals</h4><p style="text-align:center;font-size:1.05rem">tend to gain electrons → negative ions</p><p style="text-align:center;color:var(--accent-rose);font-size:1.5rem">←</p></div>
+</div>
+<div class="build-step" data-build="3"><div class="warn"><strong>Caution:</strong> This is an introductory pattern, not a universal rule.</div></div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 25 · Local Slide 6</span>
+<h1 class="slide-title">Guided Practice — Reading the Periodic Table</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Apply periodic-table classification and formula predictions.</div>
+</div>
+<div class="slide-body">
+<div class="grid-2">
+<div class="card">
+<h4>Selected Elements</h4>
+<div style="display:grid;grid-template-columns:repeat(18,minmax(38px,1fr));gap:3px;margin-bottom:.25rem;color:var(--text-muted);font-size:.58rem;text-align:center;min-width:760px">
+<span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+</div>
+<div class="ptable">
+
+<div class="tile">H</div>
+<div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div>
+<div class="tile">He</div>
+
+<div class="tile sample build-step visible" data-build="1">Na</div>
+<div class="tile">Mg</div>
+<div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div><div class="tile empty"></div>
+<div class="tile">Al</div>
+<div class="tile sample build-step" data-build="2">Si</div>
+<div class="tile">P</div>
+<div class="tile">S</div>
+<div class="tile sample build-step" data-build="2">Cl</div>
+<div class="tile">Ar</div>
+
+<div class="tile">K</div>
+<div class="tile">Ca</div>
+<div class="tile">Sc</div>
+<div class="tile">Ti</div>
+<div class="tile">V</div>
+<div class="tile">Cr</div>
+<div class="tile">Mn</div>
+<div class="tile sample build-step" data-build="3">Fe</div>
+<div class="tile">Co</div>
+<div class="tile">Ni</div>
+<div class="tile">Cu</div>
+<div class="tile">Zn</div>
+<div class="tile">Ga</div>
+<div class="tile">Ge</div>
+<div class="tile">As</div>
+<div class="tile">Se</div>
+<div class="tile">Br</div>
+<div class="tile">Kr</div>
+</div>
+</div>
+<div class="card">
+<h4>Five-Part Response Organizer</h4><p style="font-size:.8rem;color:var(--text-muted);margin-bottom:.4rem">Each sample is evaluated using five response fields.</p>
+<table class="response-table">
+<thead><tr><th>Sample</th><th>Period &amp; Group</th><th>Category</th><th>Main/Transition</th><th>Elemental Formula</th><th>Likely Ion</th></tr></thead>
+<tbody>
+<tr class="build-step visible" data-build="1"><td>Na</td><td><span class="blank" contenteditable="false" data-answer="Period 3, Group 1" data-placeholder="[_______]">[_______]</span></td><td><span class="blank" contenteditable="false" data-answer="metal" data-placeholder="[_______]">[_______]</span></td><td><span class="blank" contenteditable="false" data-answer="main-group" data-placeholder="[_______]">[_______]</span></td><td>Na</td><td><span class="blank" contenteditable="false" data-answer="+1" data-placeholder="[_______]">[_______]</span></td></tr>
+<tr class="build-step" data-build="2"><td>Si</td><td><span class="blank" contenteditable="false" data-answer="Period 3, Group 14" data-placeholder="[_______]">[_______]</span></td><td><span class="blank" contenteditable="false" data-answer="metalloid" data-placeholder="[_______]">[_______]</span></td><td><span class="blank" contenteditable="false" data-answer="main-group" data-placeholder="[_______]">[_______]</span></td><td>Si</td><td>not predictable here</td></tr>
+<tr class="build-step" data-build="2"><td>Cl</td><td><span class="blank" contenteditable="false" data-answer="Period 3, Group 17" data-placeholder="[_______]">[_______]</span></td><td><span class="blank" contenteditable="false" data-answer="nonmetal" data-placeholder="[_______]">[_______]</span></td><td><span class="blank" contenteditable="false" data-answer="main-group" data-placeholder="[_______]">[_______]</span></td><td><span class="blank" contenteditable="false" data-answer="Cl₂" data-placeholder="[_______]">[_______]</span></td><td><span class="blank" contenteditable="false" data-answer="−1" data-placeholder="[_______]">[_______]</span></td></tr>
+<tr class="build-step" data-build="3"><td>Fe</td><td><span class="blank" contenteditable="false" data-answer="Period 4, Group 8" data-placeholder="[_______]">[_______]</span></td><td><span class="blank" contenteditable="false" data-answer="metal" data-placeholder="[_______]">[_______]</span></td><td><span class="blank" contenteditable="false" data-answer="transition" data-placeholder="[_______]">[_______]</span></td><td>Fe</td><td><span class="blank" contenteditable="false" data-answer="variable" data-placeholder="[_______]">[_______]</span></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="build-step" data-build="3"><div class="callout">For each selected element, identify period and group, broad category, main-group or transition status, elemental formula when relevant, and likely monatomic ion charge when predictable.</div></div>
+</div>
+</div>
+
+</section>
+</main>
+
+<script>
+(() => {
+  let currentSlide = 1;
+  let currentBuild = 1;
+  let currentMode = 'student';
+  const totalSlides = 6;
+
+  const slides = () => Array.from(document.querySelectorAll('.slide, .slide-container'))
+    .filter((el, i, arr) => el.id && el.id.startsWith('slide-') && arr.findIndex(x => x.id === el.id) === i);
+
+  function buildMax(slide) {
+    const values = Array.from(slide.querySelectorAll('[data-build]'))
+      .map(el => parseInt(el.dataset.build || '1', 10))
+      .filter(Number.isFinite);
+    const declared = parseInt(slide.dataset.maxBuilds || '1', 10);
+    return Math.max(declared || 1, ...(values.length ? values : [1]));
+  }
+
+  function setMode(mode) {
+    currentMode = mode === 'answer' ? 'answer' : 'student';
+    document.body.className = 'mode-' + currentMode;
+
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === currentMode);
+    });
+
+    document.querySelectorAll('.blank[data-answer]').forEach(blank => {
+      if (currentMode === 'answer') {
+        blank.textContent = blank.dataset.answer || '';
+      } else {
+        blank.textContent = blank.dataset.placeholder || '[_______]';
+      }
+    });
+  }
+
+  function updateView() {
+    const deck = slides();
+    deck.forEach((slide, idx) => {
+      slide.classList.toggle('active', idx === currentSlide - 1);
+      if (idx === currentSlide - 1) {
+        slide.querySelectorAll('[data-build]').forEach(el => {
+          const b = parseInt(el.dataset.build || '1', 10);
+          el.classList.toggle('visible', b <= currentBuild);
+        });
+      }
+    });
+
+    const active = deck[currentSlide - 1];
+    const maxBuild = active ? buildMax(active) : 1;
+    currentBuild = Math.min(currentBuild, maxBuild);
+
+    const sc = document.getElementById('slideCounter');
+    const bc = document.getElementById('buildCounter');
+    if (sc) sc.textContent = `Slide ${currentSlide} / ${totalSlides}`;
+    if (bc) bc.textContent = `Build ${currentBuild} / ${maxBuild}`;
+
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
+    if (prev) prev.disabled = currentSlide === 1 && currentBuild === 1;
+    if (next) next.disabled = currentSlide === totalSlides && currentBuild === maxBuild;
+  }
+
+  window.nextBuild = function() {
+    const deck = slides();
+    const active = deck[currentSlide - 1];
+    const maxBuild = active ? buildMax(active) : 1;
+    if (currentBuild < maxBuild) currentBuild++;
+    else if (currentSlide < totalSlides) { currentSlide++; currentBuild = 1; }
+    updateView();
+  };
+
+  window.prevBuild = function() {
+    const deck = slides();
+    if (currentBuild > 1) currentBuild--;
+    else if (currentSlide > 1) {
+      currentSlide--;
+      currentBuild = buildMax(deck[currentSlide - 1]);
+    }
+    updateView();
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(btn =>
+      btn.addEventListener('click', () => setMode(btn.dataset.mode))
+    );
+
+    document.querySelectorAll('.blank[data-answer]').forEach(blank => {
+      if (!blank.dataset.placeholder) blank.dataset.placeholder = blank.textContent || '[_______]';
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') window.nextBuild();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') window.prevBuild();
+    });
+
+    setMode('student');
+    updateView();
+  });
+})();
+</script></body>
+</html>

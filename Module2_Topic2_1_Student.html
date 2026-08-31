@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>T2.1 — Atomic Theory Interactive Deck — Student</title>
+<style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --accent-blue: #38bdf8;
+            --accent-teal: #2dd4bf;
+            --accent-amber: #fbbf24;
+            --accent-rose: #f43f5e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #475569;
+            --blank-bg: #334155;
+            --blank-revealed: #0284c7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar & Controls */
+        header {
+            background-color: #0b1120;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .deck-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mode-selector {
+            display: flex;
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 3px;
+            border: 1px solid var(--border-color);
+        }
+
+        .mode-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .mode-btn.active {
+            background-color: var(--accent-blue);
+            color: #0f172a;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            background-color: #334155;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.45rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .btn:hover:not(:disabled) {
+            background-color: #475569;
+            border-color: var(--accent-blue);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: #0f172a;
+            border: none;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: #0284c7;
+            color: #ffffff;
+        }
+
+        .counter-badge {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            background: #1e293b;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Slide Viewport */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
+            padding: 2rem;
+            min-height: 620px;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .slide-container.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header Slide Information */
+        .slide-header {
+            margin-bottom: 1.25rem;
+        }
+
+        .meta-pill {
+            display: inline-block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            color: var(--accent-teal);
+            background-color: rgba(45, 212, 191, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+        }
+
+        .slide-title {
+            font-size: 2.05rem;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.25;
+        }
+
+        .lo-box {
+            background-color: rgba(56, 189, 248, 0.08);
+            border-left: 4px solid var(--accent-blue);
+            padding: 0.7rem 1.1rem;
+            border-radius: 0 6px 6px 0;
+            margin-top: 0.75rem;
+            font-size: 1rem;
+            color: #e2e8f0;
+        }
+
+        .lo-box strong {
+            color: var(--accent-blue);
+        }
+
+        /* Slide Content Body */
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Build Elements */
+        .build-step {
+            opacity: 0.15;
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: translateY(8px);
+            filter: blur(1px);
+        }
+
+        .build-step.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* Skeletal Notes & Interactive Blanks */
+        .blank {
+            display: inline-block;
+            min-width: 90px;
+            padding: 0.15rem 0.55rem;
+            background-color: var(--blank-bg);
+            border-bottom: 2px solid var(--accent-amber);
+            border-radius: 4px;
+            color: transparent;
+            text-align: center;
+            font-weight: 700;
+            user-select: none;
+            transition: all 0.2s ease;
+            vertical-align: middle;
+        }
+
+        body.mode-student .blank {
+            cursor: default;
+        }
+
+        body.mode-reviewlegacy .blank.revealed {
+            color: var(--accent-amber);
+            background-color: rgba(251, 191, 36, 0.15);
+            border-bottom-color: var(--accent-amber);
+        }
+
+        body.mode-editlegacy .blank.revealed {
+            color: var(--accent-teal);
+            background-color: rgba(45, 212, 191, 0.15);
+            border-bottom-color: var(--accent-teal);
+        }
+
+        /* Visual Construction Panels */
+        .visual-panel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            align-items: stretch;
+            margin-top: 0.5rem;
+        }
+
+        .panel-card {
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .panel-card h4 {
+            color: var(--accent-blue);
+            font-size: 1.08rem;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Specific Graphics & SVG Containers */
+        .svg-canvas {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+        }
+
+        .roadmap-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+
+        .roadmap-step {
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            background: #1e293b;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        .roadmap-step.active-topic {
+            background: var(--accent-blue);
+            color: #0f172a;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+
+        .roadmap-arrow {
+            color: var(--border-color);
+            font-weight: 900;
+            font-size: 1rem;
+            margin: 0 0.2rem;
+        }
+
+        /* Question Cards (Slide 2 & Slide Checks) */
+        .question-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .question-card {
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .question-num {
+            display: inline-block;
+            background: var(--accent-blue);
+            color: #0f172a;
+            font-weight: 800;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-size: 0.9rem;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .response-area {
+            background: #1e293b;
+            border: 1px dashed var(--border-color);
+            border-radius: 6px;
+            min-height: 60px;
+            padding: 0.5rem;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+        }
+
+        /* Review Notes Drawer */
+        .removed-drawer {
+            margin-top: 1.5rem;
+            background: #090d16;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1rem;
+            display: none;
+            font-size: 0.92rem;
+            color: #cbd5e1;
+        }
+
+        body.mode-reviewlegacy .removed-drawer,
+        body.show-notes .removed-drawer {
+            display: block;
+        }
+
+        .removed-drawer h5 {
+            color: var(--accent-amber);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .meta-item {
+            background: #1e293b;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+        }
+
+        .meta-item strong {
+            color: var(--accent-blue);
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* Tables & Lists */
+        .atom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .atom-table th, .atom-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.55rem 0.75rem;
+            text-align: center;
+        }
+
+        .atom-table th {
+            background-color: #1e293b;
+            color: var(--accent-blue);
+        }
+
+        .decision-strip {
+            background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid var(--accent-teal);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.75rem;
+        }
+
+        /* Editable-element legacy styling; no editing controls are distributed */
+        [contenteditable="true"] {
+            outline: 2px dashed var(--accent-teal);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 900px) {
+            .question-grid {
+                grid-template-columns: 1fr;
+            }
+            .slide-title {
+                font-size: 1.6rem;
+            }
+            .slide-container {
+                padding: 1.25rem;
+                min-height: auto;
+            }
+        }
+    </style>
+<style id="module8-modernization-style">
+/* MODULE 8 MASTER SHELL MODERNIZATION OVERRIDE */
+:root { --bg-dark: #0f172a; --bg-card: #1e293b; --bg-card-hover: #334155; --accent-blue: #38bdf8; --accent-teal: #2dd4bf; --accent-amber: #fbbf24; --accent-rose: #f43f5e; --text-main: #f8fafc; --text-muted: #94a3b8; --border-color: #475569; --border: #475569; --blank-bg: #334155; --blank: #334155; --blank-revealed: #0284c7; }
+body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important; background-color: var(--bg-dark) !important; color: var(--text-main) !important; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+header { background-color: #0b1120 !important; border-bottom: 1px solid var(--border-color) !important; padding: 0.75rem 1.5rem !important; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; z-index: 100; }
+.deck-title { font-size: 1.25rem !important; font-weight: 700 !important; color: var(--accent-blue) !important; display: flex; align-items: center; gap: 0.5rem; }
+.mode-selector { display: flex !important; background: #1e293b !important; border-radius: 8px !important; padding: 3px !important; border: 1px solid var(--border-color) !important; }
+.mode-btn { background: none !important; border: none !important; color: var(--text-muted) !important; padding: 0.4rem 0.8rem !important; font-size: 0.95rem !important; font-weight: 600 !important; cursor: pointer; border-radius: 6px; transition: all 0.2s ease; }
+.mode-btn.active { background-color: var(--accent-blue) !important; color: #0f172a !important; }
+.nav, .nav-controls { display: flex !important; align-items: center !important; gap: 0.75rem !important; }
+.btn { background-color: #334155 !important; color: var(--text-main) !important; border: 1px solid var(--border-color) !important; padding: 0.45rem 0.9rem !important; border-radius: 6px !important; font-size: 0.95rem !important; font-weight: 600 !important; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+.btn:hover:not(:disabled) { background-color: #475569 !important; border-color: var(--accent-blue) !important; }
+.btn:disabled { opacity: 0.4 !important; cursor: not-allowed !important; }
+.btn-primary, .btn.primary { background-color: var(--accent-blue) !important; color: #0f172a !important; border: none !important; }
+.btn-primary:hover:not(:disabled), .btn.primary:hover:not(:disabled) { background-color: #0284c7 !important; color: #ffffff !important; }
+.counter, .counter-badge { font-size: 0.95rem !important; color: var(--text-muted) !important; font-weight: 600 !important; background: #1e293b !important; padding: 0.3rem 0.6rem !important; border-radius: 4px !important; border: 1px solid var(--border-color) !important; }
+main { flex: 1 !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; padding: 1.5rem !important; max-width: 1400px !important; width: 100% !important; margin: 0 auto !important; position: relative; }
+.slide, .slide-container { width: 100% !important; background-color: var(--bg-card) !important; border-radius: 12px !important; border: 1px solid var(--border-color) !important; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5) !important; padding: 2rem !important; min-height: 620px !important; max-height: none !important; display: none; flex-direction: column; justify-content: space-between; position: relative; animation: fadeInModule8 0.3s ease-in-out; overflow-y: auto; }
+.slide.active, .slide-container.active { display: flex !important; }
+@keyframes fadeInModule8 { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.slide-header { margin-bottom: 1.25rem !important; }
+.meta, .meta-pill { display: inline-block !important; font-size: 0.8rem !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; font-weight: 700 !important; color: var(--accent-teal) !important; background-color: rgba(45, 212, 191, 0.1) !important; padding: 0.25rem 0.6rem !important; border-radius: 4px !important; margin-bottom: 0.5rem !important; border: 1px solid rgba(45, 212, 191, 0.2) !important; }
+.slide-title, .slide-header h1, .slide > div > h1, .slide > h1, .slide-container h1 { font-size: 2.05rem !important; font-weight: 800 !important; color: var(--text-main) !important; line-height: 1.25 !important; margin: 0 !important; }
+.lo, .lo-box { background-color: rgba(56, 189, 248, 0.08) !important; border-left: 4px solid var(--accent-blue) !important; padding: 0.7rem 1.1rem !important; border-radius: 0 6px 6px 0 !important; margin-top: 0.75rem !important; font-size: 1rem !important; color: #e2e8f0 !important; }
+.lo strong, .lo-box strong { color: var(--accent-blue) !important; }
+.slide-body { flex: 1 !important; display: flex !important; flex-direction: column !important; gap: 1rem !important; margin-top: 0.35rem !important; }
+.build-step { opacity: 0.15 !important; pointer-events: none !important; transform: translateY(6px) !important; filter: blur(1px) !important; transition: 0.35s !important; }
+.build-step.visible { opacity: 1 !important; pointer-events: auto !important; transform: none !important; filter: none !important; }
+.card { background: #0f172a !important; border: 1px solid var(--border-color) !important; border-radius: 10px !important; padding: 1rem !important; }
+.card h4 { color: var(--accent-blue) !important; font-size: 1rem !important; margin-bottom: 0.5rem !important; }
+.blank { display: inline-block !important; min-width: 82px !important; padding: 0.12rem 0.45rem !important; background: var(--blank-bg) !important; border-bottom: 2px solid var(--accent-amber) !important; border-radius: 4px !important; color: transparent !important; text-align: center !important; font-weight: 700 !important; user-select: none !important; }
+body.mode-student .blank { color: transparent !important; } body.mode-reviewlegacy .blank.revealed { color: var(--accent-amber) !important; background: rgba(251,191,36,0.15) !important; } body.mode-editlegacy .blank.revealed { color: var(--accent-teal) !important; background: rgba(45,212,191,0.15) !important; }
+.removed-drawer { margin-top: 0.9rem !important; background: #090d16 !important; border: 1px solid #334155 !important; border-radius: 8px !important; padding: 0.9rem !important; display: none; font-size: 0.9rem !important; color: #cbd5e1 !important; }
+body.show-notes .removed-drawer { display: block !important; } body.mode-student .removed-drawer { display: none !important; } body.mode-student #notesBtn, body.mode-student #notesToggleBtn { display: none !important; }
+@media (max-width: 900px) { header { padding: 0.85rem 1rem !important; } main { padding: 1rem !important; } .slide, .slide-container { padding: 1.25rem !important; min-height: 560px !important; } .slide-title, .slide-header h1, .slide > div > h1, .slide > h1, .slide-container h1 { font-size: 1.7rem !important; } }
+</style><style id="student-distribution-style">
+/* STUDENT DISTRIBUTION */
+body.mode-student .blank[data-answer]{
+  color:transparent !important;
+  background:var(--blank-bg, var(--blank, #334155)) !important;
+}
+body.mode-answer .blank[data-answer]{
+  color:var(--accent-amber, var(--amber, #fbbf24)) !important;
+  background:rgba(251,191,36,.15) !important;
+  border-bottom-color:var(--accent-amber, var(--amber, #fbbf24)) !important;
+}
+body.mode-student .answer-only{display:none !important;}
+body.mode-answer .answer-only{display:block !important;}
+body.mode-answer .response[data-review-note]::after,
+body.mode-answer .response-area[data-review-note]::after{
+  content:attr(data-review-note);
+  display:block;
+  color:var(--text-muted, var(--muted, #94a3b8));
+  font-style:normal;
+  font-size:.78rem;
+  margin-top:.25rem;
+}
+</style></head>
+<body class="mode-student">
+
+<header>
+<div class="deck-title">
+<span>🧪</span>
+<span>🧪 Topic T2.1 | Atomic Theory</span>
+</div>
+<div class="mode-selector"><button class="mode-btn active" data-mode="student" type="button">Student Mode</button><button class="mode-btn" data-mode="answer" type="button">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 5</span>
+<span class="counter-badge" id="buildCounter" style="color: var(--accent-teal);">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+
+<main>
+
+<div class="slide-container active" data-integrated-slide="1" data-local-slide="1" id="slide-1">
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 1 · Local Slide 1</span>
+<h1 class="slide-title">Module 2 — From Matter to Atoms</h1>
+<div class="lo-box">
+<strong>Learning Objective:</strong> Connect macroscopic matter from Module 1 to microscopic particles and symbolic formulas.
+                </div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<p style="font-size: 1.15rem; line-height: 1.5;">
+                        • Module 1 described matter by its observable properties and measurements.
+                    </p>
+</div>
+<div class="build-step" data-build="2">
+<p style="font-size: 1.15rem; line-height: 1.5;">
+                        • What is matter made of?<br/>
+                        • How do atoms become ions?<br/>
+                        • How do we write correct chemical formulas?
+                    </p>
+</div>
+<div class="build-step" data-build="3">
+<p style="font-size: 1.15rem; font-weight: 700; color: var(--accent-amber); margin-top: 0.5rem;">
+                        Macroscopic sample → Particle-level model → Symbolic formula
+                    </p>
+<div class="visual-panel-grid">
+
+<div class="panel-card">
+<h4>1. Macroscopic</h4>
+<svg class="svg-canvas" viewbox="0 0 160 120">
+<defs>
+<lineargradient id="cuGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#b45309"></stop>
+<stop offset="50%" stop-color="#d97706"></stop>
+<stop offset="100%" stop-color="#78350f"></stop>
+</lineargradient>
+</defs>
+<rect fill="url(#cuGrad)" height="60" rx="6" stroke="#f59e0b" stroke-width="2" width="100" x="30" y="30"></rect>
+<text fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle" x="80" y="65">Copper Sheet</text>
+<text fill="#fef3c7" font-size="10" text-anchor="middle" x="80" y="82">(Observable Sample)</text>
+</svg>
+</div>
+
+<div class="panel-card">
+<h4>2. Particle Level</h4>
+<svg class="svg-canvas" viewbox="0 0 160 120">
+<g fill="#d97706" stroke="#fbbf24" stroke-width="1.5">
+<circle cx="45" cy="35" r="14"></circle>
+<circle cx="80" cy="35" r="14"></circle>
+<circle cx="115" cy="35" r="14"></circle>
+<circle cx="45" cy="65" r="14"></circle>
+<circle cx="80" cy="65" r="14"></circle>
+<circle cx="115" cy="65" r="14"></circle>
+<circle cx="45" cy="95" r="14"></circle>
+<circle cx="80" cy="95" r="14"></circle>
+<circle cx="115" cy="95" r="14"></circle>
+</g>
+<g fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">
+<text x="45" y="38">Cu</text><text x="80" y="38">Cu</text><text x="115" y="38">Cu</text>
+<text x="45" y="68">Cu</text><text x="80" y="68">Cu</text><text x="115" y="68">Cu</text>
+<text x="45" y="98">Cu</text><text x="80" y="98">Cu</text><text x="115" y="98">Cu</text>
+</g>
+</svg>
+</div>
+
+<div class="panel-card">
+<h4>3. Symbolic</h4>
+<div style="font-size: 3.5rem; font-weight: 900; color: var(--accent-teal); margin: 10px 0;">
+                                Cu
+                            </div>
+<span style="font-size: 0.88rem; color: var(--text-muted);">Element Symbol for Copper</span>
+</div>
+</div>
+
+<div class="roadmap-container">
+<div class="roadmap-step active-topic">Atomic Theory</div>
+<span class="roadmap-arrow">→</span>
+<div class="roadmap-step">Atoms</div>
+<span class="roadmap-arrow">→</span>
+<div class="roadmap-step">Isotopes</div>
+<span class="roadmap-arrow">→</span>
+<div class="roadmap-step">Periodic Table</div>
+<span class="roadmap-arrow">→</span>
+<div class="roadmap-step">Ions</div>
+<span class="roadmap-arrow">→</span>
+<div class="roadmap-step">Formulas</div>
+<span class="roadmap-arrow">→</span>
+<div class="roadmap-step">Names</div>
+</div>
+</div>
+</div>
+
+
+</div>
+
+<div class="slide-container" data-integrated-slide="2" data-local-slide="2" id="slide-2">
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 2 · Local Slide 2</span>
+<h1 class="slide-title">Readiness Check — Matter and Symbols</h1>
+<div class="lo-box">
+<strong>Learning Objective:</strong> Diagnose prerequisite understanding of elements, compounds, and chemical symbols.
+                </div>
+</div>
+<div class="slide-body">
+<div class="question-grid">
+<div class="build-step visible" data-build="1">
+<div class="question-card">
+<div>
+<span class="question-num">1</span>
+<span class="question-text">Classify copper as an element, compound, or mixture.</span>
+</div>
+<div class="response-area">Student Response / Discussion Area</div>
+</div>
+</div>
+<div class="build-step visible" data-build="1">
+<div class="question-card">
+<div>
+<span class="question-num">2</span>
+<span class="question-text">In H<sub>2</sub>O, how many H atoms and O atoms are represented?</span>
+</div>
+<div class="response-area">Student Response / Discussion Area</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="question-card">
+<div>
+<span class="question-num">3</span>
+<span class="question-text">Which symbol represents cobalt: Co or CO?</span>
+</div>
+<div class="response-area">Student Response / Discussion Area</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="question-card">
+<div>
+<span class="question-num">4</span>
+<span class="question-text">Does a subscript change the identity of an element or the number of atoms?</span>
+</div>
+<div class="response-area">Student Response / Discussion Area</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+
+<div class="slide-container" data-integrated-slide="3" data-local-slide="3" id="slide-3">
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 3 · Local Slide 3</span>
+<h1 class="slide-title">Atomic Theory — The Atomic Idea and Dalton’s Model</h1>
+<div class="lo-box">
+<strong>Learning Objective:</strong> Explain the central claims of atomic theory and identify the Dalton statement modified by isotope evidence.
+                </div>
+</div>
+<div class="slide-body">
+
+<div class="build-step visible" data-build="1">
+<div style="background: #0f172a; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+<svg style="width: 240px; height: auto;" viewbox="0 0 280 90">
+
+<rect fill="#94a3b8" height="50" rx="4" stroke="#cbd5e1" width="60" x="10" y="20"></rect>
+<text fill="#0f172a" font-size="10" font-weight="bold" text-anchor="middle" x="40" y="50">Metal Sample</text>
+
+<polygon fill="rgba(56, 189, 248, 0.15)" points="70,25 140,5 140,85 70,65" stroke="#38bdf8" stroke-dasharray="3,3"></polygon>
+
+<circle cx="170" cy="25" fill="#38bdf8" r="10"></circle>
+<circle cx="195" cy="25" fill="#38bdf8" r="10"></circle>
+<circle cx="220" cy="25" fill="#38bdf8" r="10"></circle>
+<circle cx="170" cy="50" fill="#38bdf8" r="10"></circle>
+<circle cx="195" cy="50" fill="#38bdf8" r="10"></circle>
+<circle cx="220" cy="50" fill="#38bdf8" r="10"></circle>
+<circle cx="170" cy="75" fill="#38bdf8" r="10"></circle>
+<circle cx="195" cy="75" fill="#38bdf8" r="10"></circle>
+<circle cx="220" cy="75" fill="#38bdf8" r="10"></circle>
+</svg>
+<div style="flex: 1;">
+<p style="font-size: 1.15rem; line-height: 1.4;">
+<strong>Atom:</strong> The smallest unit of an element that retains the element’s chemical identity.
+                            </p>
+<p style="margin-top: 0.5rem; color: #cbd5e1; font-size: 1.08rem;">
+                                • Matter appears continuous macroscopically but consists of discrete 
+                                <span class="blank" contenteditable="false" data-answer="atoms" data-placeholder="[ _______ ]" onclick="toggleBlank(this)">[ _______ ]</span> 
+                                at the particle level.
+                            </p>
+</div>
+</div>
+</div>
+
+<div class="build-step" data-build="2">
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;">
+<div style="background: #0f172a; border-left: 4px solid var(--accent-teal); padding: 0.8rem; border-radius: 4px;">
+<h4 style="color: var(--accent-teal); font-size: 1.08rem;">1. Elements &amp; Atoms</h4>
+<p style="font-size: 1.05rem; margin-top: 0.3rem;">
+                                Elements consist of atoms. Compounds form when atoms combine in simple 
+                                <span class="blank" contenteditable="false" data-answer="whole" data-placeholder="[ _______ ]" onclick="toggleBlank(this)">[ _______ ]</span>-number ratios.
+                            </p>
+</div>
+<div style="background: #0f172a; border-left: 4px solid var(--accent-blue); padding: 0.8rem; border-radius: 4px;">
+<h4 style="color: var(--accent-blue); font-size: 1.08rem;">2. Chemical Reactions</h4>
+<p style="font-size: 1.05rem; margin-top: 0.3rem;">
+                                Chemical reactions 
+                                <span class="blank" contenteditable="false" data-answer="rearrange" data-placeholder="[ _______ ]" onclick="toggleBlank(this)">[ _______ ]</span> 
+                                atoms rather than creating or destroying them.
+                            </p>
+</div>
+</div>
+</div>
+
+<div class="build-step" data-build="3">
+<div style="background: rgba(244, 63, 94, 0.1); border: 1px solid var(--accent-rose); border-radius: 8px; padding: 0.8rem 1.2rem; display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem;">
+<span style="font-size: 1.5rem;">⚠️</span>
+<div>
+<strong style="color: var(--accent-rose); font-size: 0.92rem; text-transform: uppercase;">Historical Model → Modern Correction:</strong>
+<p style="font-size: 1.05rem; color: #fecdd3; margin-top: 0.1rem;">
+                                Dalton stated all atoms of a given element are identical in mass. <strong>Modern Correction:</strong> Atoms of the same element can have different masses because <em>isotopes</em> exist.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+
+<div class="slide-container" data-integrated-slide="4" data-local-slide="4" id="slide-4">
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 4 · Local Slide 4</span>
+<h1 class="slide-title">Conservation of Mass at the Particle Level</h1>
+<div class="lo-box">
+<strong>Learning Objective:</strong> Relate conservation of mass to conservation and rearrangement of atoms.
+                </div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<p style="font-size: 1.15rem; line-height: 1.4;">
+<strong>Law of Conservation of Mass:</strong> Matter is neither created nor destroyed in an ordinary chemical reaction.
+                    </p>
+</div>
+
+<div style="background: #0f172a; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem; margin-top: 0.5rem;">
+<div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 1rem;">
+
+<div class="build-step visible" data-build="1" style="text-align: center;">
+<h5 style="color: var(--accent-blue); margin-bottom: 0.5rem; font-size: 1.05rem;">Reactants</h5>
+<svg height="90" viewbox="0 0 180 90" width="180">
+
+<circle cx="35" cy="45" fill="#0284c7" r="16" stroke="#38bdf8" stroke-width="2"></circle>
+<circle cx="61" cy="45" fill="#0284c7" r="16" stroke="#38bdf8" stroke-width="2"></circle>
+<text fill="#94a3b8" font-size="12" font-weight="bold" text-anchor="middle" x="48" y="83">A₂</text>
+<text fill="#ffffff" font-size="20" font-weight="bold" text-anchor="middle" x="95" y="50">+</text>
+
+<circle cx="125" cy="45" fill="#0d9488" r="14" stroke="#2dd4bf" stroke-width="2"></circle>
+<circle cx="149" cy="45" fill="#0d9488" r="14" stroke="#2dd4bf" stroke-width="2"></circle>
+<text fill="#94a3b8" font-size="12" font-weight="bold" text-anchor="middle" x="137" y="83">B₂</text>
+</svg>
+</div>
+<div class="build-step" data-build="2" style="font-size: 2rem; color: var(--accent-amber); font-weight: bold;">
+                            ➔
+                        </div>
+
+<div class="build-step" data-build="2" style="text-align: center;">
+<h5 style="color: var(--accent-teal); margin-bottom: 0.5rem; font-size: 1.05rem;">Products</h5>
+<svg height="90" viewbox="0 0 180 90" width="180">
+
+<circle cx="30" cy="45" fill="#0284c7" r="16" stroke="#38bdf8" stroke-width="2"></circle>
+<circle cx="54" cy="45" fill="#0d9488" r="14" stroke="#2dd4bf" stroke-width="2"></circle>
+<text fill="#ffffff" font-size="20" font-weight="bold" text-anchor="middle" x="90" y="50">+</text>
+
+<circle cx="125" cy="45" fill="#0284c7" r="16" stroke="#38bdf8" stroke-width="2"></circle>
+<circle cx="149" cy="45" fill="#0d9488" r="14" stroke="#2dd4bf" stroke-width="2"></circle>
+<text fill="#94a3b8" font-size="12" font-weight="bold" text-anchor="middle" x="90" y="83">2 AB</text>
+</svg>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<p style="color: var(--text-muted); font-size: 1.05rem; margin-top: 0.75rem; text-align: center;">
+                            Atoms may change partners, but their identities remain 
+                            <span class="blank" contenteditable="false" data-answer="unchanged" data-placeholder="[ _______ ]" onclick="toggleBlank(this)">[ _______ ]</span>.
+                        </p>
+</div>
+
+<div class="build-step" data-build="3">
+<div style="margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
+<p style="font-weight: 700; color: var(--accent-teal); text-align: center; margin-bottom: 0.4rem; font-size: 1rem;">
+                                Balanced Particle Accounting: Number of each atom type before = after
+                            </p>
+<table class="atom-table">
+<thead>
+<tr>
+<th>Element Type</th>
+<th>Reactants (Before)</th>
+<th>Products (After)</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="color: var(--accent-blue); font-weight: bold;">Element A (Blue)</td>
+<td>2 atoms</td>
+<td>2 atoms</td>
+<td style="color: var(--accent-teal);">✓ Conserved</td>
+</tr>
+<tr>
+<td style="color: var(--accent-teal); font-weight: bold;">Element B (Teal)</td>
+<td>2 atoms</td>
+<td>2 atoms</td>
+<td style="color: var(--accent-teal);">✓ Conserved</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+
+<div class="slide-container" data-integrated-slide="5" data-local-slide="5" id="slide-5">
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 5 · Local Slide 5</span>
+<h1 class="slide-title">Composition Laws — Definite versus Multiple Proportions</h1>
+<div class="lo-box">
+<strong>Learning Objective:</strong> Distinguish the laws of definite and multiple proportions using particle models and mass ratios.
+                </div>
+</div>
+<div class="slide-body">
+<div class="visual-panel-grid" style="grid-template-columns: 1fr 1fr;">
+
+<div class="build-step visible" data-build="1" style="height: 100%;">
+<div class="panel-card" style="height: 100%; justify-content: flex-start; text-align: left;">
+<h4 style="color: var(--accent-teal);">Law of Definite Proportions</h4>
+<p style="font-size: 1.05rem; line-height: 1.4; margin-bottom: 0.5rem;">
+                                A given compound always contains its elements in the same fixed ratio by 
+                                <span class="blank" contenteditable="false" data-answer="mass" data-placeholder="[ _____ ]" onclick="toggleBlank(this)">[ _____ ]</span>.
+                            </p>
+
+<div style="background: #1e293b; border-radius: 6px; padding: 0.75rem; width: 100%; margin: 0.4rem 0;">
+<div style="display: flex; justify-content: space-around; align-items: center;">
+<div>
+
+<svg height="50" viewbox="0 0 70 50" width="70">
+<circle cx="35" cy="25" fill="#f43f5e" r="14"></circle>
+<circle cx="21" cy="35" fill="#ffffff" r="8"></circle>
+<circle cx="49" cy="35" fill="#ffffff" r="8"></circle>
+</svg>
+<div style="font-size: 0.82rem; text-anchor: middle; color: var(--text-muted); text-align: center;">Small Sample</div>
+</div>
+<div style="font-size: 0.9rem; color: var(--accent-teal); font-weight: bold; text-align: center; line-height: 1.2;">Same composition ratio</div>
+<div>
+
+<svg height="50" viewbox="0 0 90 50" width="90">
+<g transform="scale(0.7) translate(10,0)">
+<circle cx="35" cy="25" fill="#f43f5e" r="14"></circle>
+<circle cx="21" cy="35" fill="#ffffff" r="8"></circle>
+<circle cx="49" cy="35" fill="#ffffff" r="8"></circle>
+</g>
+<g transform="scale(0.7) translate(60,20)">
+<circle cx="35" cy="25" fill="#f43f5e" r="14"></circle>
+<circle cx="21" cy="35" fill="#ffffff" r="8"></circle>
+<circle cx="49" cy="35" fill="#ffffff" r="8"></circle>
+</g>
+</svg>
+<div style="font-size: 0.82rem; text-anchor: middle; color: var(--text-muted); text-align: center;">Large Sample</div>
+</div>
+</div>
+<div style="font-size: 0.88rem; background: #0f172a; padding: 0.45rem; border-radius: 4px; margin-top: 0.4rem;">
+<strong>H<sub>2</sub>O Ratios:</strong><br/>
+                                    • Atom Ratio (H:O) = <strong>2 : 1</strong><br/>
+                                    • Mass Ratio (H:O) = 2(1.008) : 16.00 ≈ <strong>1 : 8</strong>
+</div>
+</div>
+</div>
+</div>
+
+<div class="build-step" data-build="2" style="height: 100%;">
+<div class="panel-card" style="height: 100%; justify-content: flex-start; text-align: left;">
+<h4 style="color: var(--accent-blue);">Law of Multiple Proportions</h4>
+<p style="font-size: 1.05rem; line-height: 1.4; margin-bottom: 0.5rem;">
+                                When two elements form <em>more than one compound</em>, combining masses relate by small 
+                                <span class="blank" contenteditable="false" data-answer="whole" data-placeholder="[ _____ ]" onclick="toggleBlank(this)">[ _____ ]</span>-number ratios.
+                            </p>
+
+<div style="background: #1e293b; border-radius: 6px; padding: 0.6rem; width: 100%;">
+
+<div style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.6rem; background: #0f172a; padding: 0.5rem; border-radius: 4px; border: 1px solid var(--border-color);">
+<div style="display: flex; align-items: center; justify-content: space-between;">
+<span style="font-size: 0.9rem; font-weight: bold; color: var(--accent-blue);">CO (Carbon Monoxide):</span>
+
+<svg height="30" viewbox="0 0 70 30" width="70">
+
+<circle cx="20" cy="15" fill="#475569" r="11" stroke="#94a3b8" stroke-width="1.5"></circle>
+<text fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle" x="20" y="19">C</text>
+
+<line stroke="#cbd5e1" stroke-width="2" x1="31" x2="39" y1="15" y2="15"></line>
+
+<circle cx="50" cy="15" fill="#f43f5e" r="11" stroke="#fb7185" stroke-width="1.5"></circle>
+<text fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle" x="50" y="19">O</text>
+</svg>
+</div>
+<div style="display: flex; align-items: center; gap: 0.4rem;">
+<div style="background: #334155; height: 16px; width: 50px; border-radius: 2px; text-align: center; font-size: 0.68rem; color: #fff; line-height: 16px;">12g C</div>
+<div style="background: #f43f5e; height: 16px; width: 65px; border-radius: 2px; text-align: center; font-size: 0.68rem; color: #fff; line-height: 16px;">16g O</div>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 0.3rem; background: #0f172a; padding: 0.5rem; border-radius: 4px; border: 1px solid var(--border-color);">
+<div style="display: flex; align-items: center; justify-content: space-between;">
+<span style="font-size: 0.9rem; font-weight: bold; color: var(--accent-blue);">CO<sub>2</sub> (Carbon Dioxide):</span>
+
+<svg height="30" viewbox="0 0 95 30" width="95">
+
+<circle cx="15" cy="15" fill="#f43f5e" r="11" stroke="#fb7185" stroke-width="1.5"></circle>
+<text fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle" x="15" y="19">O</text>
+
+<line stroke="#cbd5e1" stroke-width="2" x1="26" x2="36" y1="15" y2="15"></line>
+
+<circle cx="47" cy="15" fill="#475569" r="11" stroke="#94a3b8" stroke-width="1.5"></circle>
+<text fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle" x="47" y="19">C</text>
+
+<line stroke="#cbd5e1" stroke-width="2" x1="58" x2="68" y1="15" y2="15"></line>
+
+<circle cx="79" cy="15" fill="#f43f5e" r="11" stroke="#fb7185" stroke-width="1.5"></circle>
+<text fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle" x="79" y="19">O</text>
+</svg>
+</div>
+<div style="display: flex; align-items: center; gap: 0.4rem;">
+<div style="background: #334155; height: 16px; width: 50px; border-radius: 2px; text-align: center; font-size: 0.68rem; color: #fff; line-height: 16px;">12g C</div>
+<div style="background: #f43f5e; height: 16px; width: 130px; border-radius: 2px; text-align: center; font-size: 0.68rem; color: #fff; line-height: 16px;">32g O</div>
+</div>
+</div>
+<div style="font-size: 0.88rem; background: #0f172a; padding: 0.45rem; border-radius: 4px; margin-top: 0.5rem;">
+                                    Oxygen-mass ratio for CO vs CO<sub>2</sub> (for same 12g C):<br/>
+                                    16 g : 32 g = <span class="blank" contenteditable="false" data-answer="1:2" data-placeholder="[ _____ ]" onclick="toggleBlank(this)">[ _____ ]</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="build-step" data-build="3">
+<div class="decision-strip">
+<div style="display: flex; align-items: center; gap: 0.5rem;">
+<span style="font-size: 1.2rem;">💡</span>
+<span style="font-size: 0.95rem; font-weight: bold;">Guided Decision Rule:</span>
+</div>
+<div style="font-size: 0.9rem; color: #e2e8f0;">
+                            Fixed composition of <strong>ONE compound</strong> ➔ <em>Definite Proportions</em> | Comparison of <strong>TWO compounds</strong> ➔ <em>Multiple Proportions</em>
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+</main>
+
+
+<script>
+(() => {
+  let currentSlide = 1;
+  let currentBuild = 1;
+  let currentMode = 'student';
+  const totalSlides = 5;
+
+  const slides = () => Array.from(document.querySelectorAll('.slide, .slide-container'))
+    .filter((el, i, arr) => el.id && el.id.startsWith('slide-') && arr.findIndex(x => x.id === el.id) === i);
+
+  function buildMax(slide) {
+    const values = Array.from(slide.querySelectorAll('[data-build]'))
+      .map(el => parseInt(el.dataset.build || '1', 10))
+      .filter(Number.isFinite);
+    const declared = parseInt(slide.dataset.maxBuilds || '1', 10);
+    return Math.max(declared || 1, ...(values.length ? values : [1]));
+  }
+
+  function setMode(mode) {
+    currentMode = mode === 'answer' ? 'answer' : 'student';
+    document.body.className = 'mode-' + currentMode;
+
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === currentMode);
+    });
+
+    document.querySelectorAll('.blank[data-answer]').forEach(blank => {
+      if (currentMode === 'answer') {
+        blank.textContent = blank.dataset.answer || '';
+      } else {
+        blank.textContent = blank.dataset.placeholder || '[_______]';
+      }
+    });
+  }
+
+  function updateView() {
+    const deck = slides();
+    deck.forEach((slide, idx) => {
+      slide.classList.toggle('active', idx === currentSlide - 1);
+      if (idx === currentSlide - 1) {
+        slide.querySelectorAll('[data-build]').forEach(el => {
+          const b = parseInt(el.dataset.build || '1', 10);
+          el.classList.toggle('visible', b <= currentBuild);
+        });
+      }
+    });
+
+    const active = deck[currentSlide - 1];
+    const maxBuild = active ? buildMax(active) : 1;
+    currentBuild = Math.min(currentBuild, maxBuild);
+
+    const sc = document.getElementById('slideCounter');
+    const bc = document.getElementById('buildCounter');
+    if (sc) sc.textContent = `Slide ${currentSlide} / ${totalSlides}`;
+    if (bc) bc.textContent = `Build ${currentBuild} / ${maxBuild}`;
+
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
+    if (prev) prev.disabled = currentSlide === 1 && currentBuild === 1;
+    if (next) next.disabled = currentSlide === totalSlides && currentBuild === maxBuild;
+  }
+
+  window.nextBuild = function() {
+    const deck = slides();
+    const active = deck[currentSlide - 1];
+    const maxBuild = active ? buildMax(active) : 1;
+    if (currentBuild < maxBuild) currentBuild++;
+    else if (currentSlide < totalSlides) { currentSlide++; currentBuild = 1; }
+    updateView();
+  };
+
+  window.prevBuild = function() {
+    const deck = slides();
+    if (currentBuild > 1) currentBuild--;
+    else if (currentSlide > 1) {
+      currentSlide--;
+      currentBuild = buildMax(deck[currentSlide - 1]);
+    }
+    updateView();
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(btn =>
+      btn.addEventListener('click', () => setMode(btn.dataset.mode))
+    );
+
+    document.querySelectorAll('.blank[data-answer]').forEach(blank => {
+      if (!blank.dataset.placeholder) blank.dataset.placeholder = blank.textContent || '[_______]';
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') window.nextBuild();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') window.prevBuild();
+    });
+
+    setMode('student');
+    updateView();
+  });
+})();
+</script></body>
+</html>

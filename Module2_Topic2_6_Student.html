@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Topic T2.6 — Chemical Formulas — Student</title>
+<style>
+:root{
+  --bg:#0f172a;--card:#1e293b;--panel:#0b1220;--blue:#38bdf8;--teal:#2dd4bf;
+  --amber:#fbbf24;--rose:#fb7185;--purple:#c084fc;--text:#f8fafc;--muted:#94a3b8;
+  --border:#475569;--blank:#334155;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+header{background:#0b1120;border-bottom:1px solid var(--border);padding:.55rem 1.2rem;display:flex;justify-content:space-between;align-items:center;gap:.7rem;flex-wrap:wrap}
+.deck-title{font-weight:800;color:var(--blue);display:flex;gap:.5rem;align-items:center}
+.mode-selector{display:flex;background:#1e293b;border:1px solid var(--border);border-radius:8px;padding:3px}
+.mode-btn,.btn{border-radius:6px;font-weight:700;cursor:pointer}
+.mode-btn{background:none;border:none;color:var(--muted);padding:.35rem .75rem}
+.mode-btn.active{background:var(--blue);color:#0f172a}
+.nav{display:flex;align-items:center;gap:.45rem}
+.btn{background:#334155;color:var(--text);border:1px solid var(--border);padding:.38rem .75rem}
+.btn.primary{background:var(--blue);color:#0f172a;border:none}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.counter{font-size:.82rem;color:var(--muted);background:#1e293b;border:1px solid var(--border);padding:.3rem .55rem;border-radius:5px}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:.9rem 1.2rem;max-width:1600px;width:100%;margin:auto}
+.slide{display:none;width:100%;min-height:590px;max-height:calc(100vh - 105px);overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.45rem;box-shadow:0 20px 30px rgba(0,0,0,.35);flex-direction:column;justify-content:space-between}
+.slide.active{display:flex}
+.meta{display:inline-block;font-size:.72rem;color:var(--teal);background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.25);padding:.15rem .45rem;border-radius:4px;margin-bottom:.25rem}
+h1{font-size:1.55rem;line-height:1.2}
+.lo{margin-top:.4rem;background:rgba(56,189,248,.08);border-left:4px solid var(--blue);padding:.45rem .8rem;border-radius:0 6px 6px 0;font-size:.9rem}
+.lo strong{color:var(--blue)}
+.slide-body{display:flex;flex-direction:column;gap:.75rem;margin-top:.5rem}
+.build-step{opacity:.14;pointer-events:none;filter:blur(1px);transform:translateY(6px);transition:.3s}
+.build-step.visible{opacity:1;pointer-events:auto;filter:none;transform:none}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.8rem}
+.card h4{color:var(--blue);font-size:.95rem;margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.04em}.chem-case{text-transform:none!important;letter-spacing:normal!important}
+.blank{display:inline-block;min-width:80px;padding:.1rem .45rem;background:var(--blank);border-bottom:2px solid var(--amber);border-radius:4px;color:transparent;text-align:center;font-weight:800;user-select:none}
+body.mode-student .blank{color:transparent!important}
+body.mode-reviewlegacy .blank.revealed{color:var(--amber);background:rgba(251,191,36,.12)}
+body.mode-editlegacy .blank.revealed{color:var(--teal);background:rgba(45,212,191,.12)}
+.callout{background:rgba(56,189,248,.08);border:1px solid var(--blue);border-radius:8px;padding:.55rem .75rem}
+.warn{background:rgba(251,113,133,.08);border:1px solid var(--rose);border-radius:8px;padding:.5rem .75rem;color:#fecdd3}
+.formula{font-size:1.7rem;font-weight:900;text-align:center;color:var(--teal)}
+.annotate{position:relative;min-height:150px;display:flex;align-items:center;justify-content:center}
+.label{position:absolute;font-size:.78rem;font-weight:700;padding:.25rem .4rem;border-radius:4px;background:#1e293b;border:1px solid var(--border)}
+.arrowline{position:absolute;height:2px;background:var(--amber);transform-origin:left center}
+.tree{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.7rem;align-items:start}
+.tree-node{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.65rem;text-align:center}
+.lattice{display:grid;grid-template-columns:repeat(6,36px);gap:4px;justify-content:center}
+.ion{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800}
+.pos{background:var(--amber);color:#0f172a}.neg{background:var(--blue);color:#0f172a}
+.molecules{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.molecule{display:flex;align-items:center;gap:.15rem}
+.atom{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800}
+.h{background:#e2e8f0;color:#0f172a}.o{background:var(--rose)}
+.charge-row{display:flex;gap:.4rem;align-items:center;justify-content:center;flex-wrap:wrap}
+.charge-tile{min-width:68px;padding:.5rem;border-radius:7px;text-align:center;font-weight:900;background:var(--panel);border:1px solid var(--border)}
+.flow{display:grid;grid-template-columns:1fr;gap:.42rem}
+.flow-step{background:var(--panel);border:1px solid var(--border);border-radius:7px;padding:.5rem .65rem;display:flex;gap:.55rem;align-items:center}
+.stepnum{width:26px;height:26px;border-radius:50%;background:var(--blue);color:#0f172a;display:flex;align-items:center;justify-content:center;font-weight:900}
+.unit-box{display:inline-block;border:2px solid var(--teal);padding:.25rem .45rem;border-radius:6px;margin:.15rem;font-weight:800}
+.bracket{border-top:2px solid var(--amber);border-left:2px solid var(--amber);border-right:2px solid var(--amber);padding:.3rem .5rem;margin-top:.25rem;text-align:center}
+.atom-table{width:100%;border-collapse:collapse;font-size:.86rem}
+.atom-table th,.atom-table td{border:1px solid var(--border);padding:.45rem;text-align:center}
+.atom-table th{background:#1e293b;color:var(--blue)}
+.questions{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.qcard{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.75rem}
+.qnum{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#0f172a;align-items:center;justify-content:center;font-weight:900;margin-right:.35rem}
+.response{margin-top:.45rem;min-height:50px;border:1px dashed var(--border);border-radius:6px;color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-style:italic}
+.refstrip{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.refstrip span{background:#1e293b;border:1px solid var(--border);border-radius:999px;padding:.3rem .55rem;font-size:.82rem}
+.notes{display:none;margin-top:.7rem;background:#090d16;border:1px solid #334155;border-radius:8px;padding:.7rem;font-size:.83rem;color:#cbd5e1}
+body.show-notes .notes{display:block}
+body.mode-student .notes{display:none!important}
+body.mode-student #notesBtn{display:none!important}
+.notes h5{color:var(--amber);margin-bottom:.3rem;text-transform:uppercase}
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.4rem;margin-top:.35rem}
+.meta-item{background:#1e293b;border-radius:4px;padding:.35rem .5rem}
+.meta-item strong{display:block;color:var(--blue);font-size:.72rem;text-transform:uppercase}
+[contenteditable="true"]{outline:1px dashed var(--teal);border-radius:3px}
+@media(max-width:1000px){.grid-2,.grid-3,.tree,.questions{grid-template-columns:1fr}.slide{min-height:auto;padding:1rem}}
+</style>
+<style id="module8-modernization-style">
+/* MODULE 8 MASTER SHELL MODERNIZATION OVERRIDE */
+:root { --bg-dark: #0f172a; --bg-card: #1e293b; --bg-card-hover: #334155; --accent-blue: #38bdf8; --accent-teal: #2dd4bf; --accent-amber: #fbbf24; --accent-rose: #f43f5e; --text-main: #f8fafc; --text-muted: #94a3b8; --border-color: #475569; --border: #475569; --blank-bg: #334155; --blank: #334155; --blank-revealed: #0284c7; }
+body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important; background-color: var(--bg-dark) !important; color: var(--text-main) !important; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+header { background-color: #0b1120 !important; border-bottom: 1px solid var(--border-color) !important; padding: 0.75rem 1.5rem !important; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; z-index: 100; }
+.deck-title { font-size: 1.25rem !important; font-weight: 700 !important; color: var(--accent-blue) !important; display: flex; align-items: center; gap: 0.5rem; }
+.mode-selector { display: flex !important; background: #1e293b !important; border-radius: 8px !important; padding: 3px !important; border: 1px solid var(--border-color) !important; }
+.mode-btn { background: none !important; border: none !important; color: var(--text-muted) !important; padding: 0.4rem 0.8rem !important; font-size: 0.95rem !important; font-weight: 600 !important; cursor: pointer; border-radius: 6px; transition: all 0.2s ease; }
+.mode-btn.active { background-color: var(--accent-blue) !important; color: #0f172a !important; }
+.nav, .nav-controls { display: flex !important; align-items: center !important; gap: 0.75rem !important; }
+.btn { background-color: #334155 !important; color: var(--text-main) !important; border: 1px solid var(--border-color) !important; padding: 0.45rem 0.9rem !important; border-radius: 6px !important; font-size: 0.95rem !important; font-weight: 600 !important; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+.btn:hover:not(:disabled) { background-color: #475569 !important; border-color: var(--accent-blue) !important; }
+.btn:disabled { opacity: 0.4 !important; cursor: not-allowed !important; }
+.btn-primary, .btn.primary { background-color: var(--accent-blue) !important; color: #0f172a !important; border: none !important; }
+.btn-primary:hover:not(:disabled), .btn.primary:hover:not(:disabled) { background-color: #0284c7 !important; color: #ffffff !important; }
+.counter, .counter-badge { font-size: 0.95rem !important; color: var(--text-muted) !important; font-weight: 600 !important; background: #1e293b !important; padding: 0.3rem 0.6rem !important; border-radius: 4px !important; border: 1px solid var(--border-color) !important; }
+main { flex: 1 !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; padding: 1.5rem !important; max-width: 1400px !important; width: 100% !important; margin: 0 auto !important; position: relative; }
+.slide, .slide-container { width: 100% !important; background-color: var(--bg-card) !important; border-radius: 12px !important; border: 1px solid var(--border-color) !important; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5) !important; padding: 2rem !important; min-height: 620px !important; max-height: none !important; display: none; flex-direction: column; justify-content: space-between; position: relative; animation: fadeInModule8 0.3s ease-in-out; overflow-y: auto; }
+.slide.active, .slide-container.active { display: flex !important; }
+@keyframes fadeInModule8 { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.slide-header { margin-bottom: 1.25rem !important; }
+.meta, .meta-pill { display: inline-block !important; font-size: 0.8rem !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; font-weight: 700 !important; color: var(--accent-teal) !important; background-color: rgba(45, 212, 191, 0.1) !important; padding: 0.25rem 0.6rem !important; border-radius: 4px !important; margin-bottom: 0.5rem !important; border: 1px solid rgba(45, 212, 191, 0.2) !important; }
+.slide-title, .slide-header h1, .slide > div > h1, .slide > h1, .slide-container h1 { font-size: 2.05rem !important; font-weight: 800 !important; color: var(--text-main) !important; line-height: 1.25 !important; margin: 0 !important; }
+.lo, .lo-box { background-color: rgba(56, 189, 248, 0.08) !important; border-left: 4px solid var(--accent-blue) !important; padding: 0.7rem 1.1rem !important; border-radius: 0 6px 6px 0 !important; margin-top: 0.75rem !important; font-size: 1rem !important; color: #e2e8f0 !important; }
+.lo strong, .lo-box strong { color: var(--accent-blue) !important; }
+.slide-body { flex: 1 !important; display: flex !important; flex-direction: column !important; gap: 1rem !important; margin-top: 0.35rem !important; }
+.build-step { opacity: 0.15 !important; pointer-events: none !important; transform: translateY(6px) !important; filter: blur(1px) !important; transition: 0.35s !important; }
+.build-step.visible { opacity: 1 !important; pointer-events: auto !important; transform: none !important; filter: none !important; }
+.card { background: #0f172a !important; border: 1px solid var(--border-color) !important; border-radius: 10px !important; padding: 1rem !important; }
+.card h4 { color: var(--accent-blue) !important; font-size: 1rem !important; margin-bottom: 0.5rem !important; }
+.blank { display: inline-block !important; min-width: 82px !important; padding: 0.12rem 0.45rem !important; background: var(--blank-bg) !important; border-bottom: 2px solid var(--accent-amber) !important; border-radius: 4px !important; color: transparent !important; text-align: center !important; font-weight: 700 !important; user-select: none !important; }
+body.mode-student .blank { color: transparent !important; } body.mode-reviewlegacy .blank.revealed { color: var(--accent-amber) !important; background: rgba(251,191,36,0.15) !important; } body.mode-editlegacy .blank.revealed { color: var(--accent-teal) !important; background: rgba(45,212,191,0.15) !important; }
+.removed-drawer { margin-top: 0.9rem !important; background: #090d16 !important; border: 1px solid #334155 !important; border-radius: 8px !important; padding: 0.9rem !important; display: none; font-size: 0.9rem !important; color: #cbd5e1 !important; }
+body.show-notes .removed-drawer { display: block !important; } body.mode-student .removed-drawer { display: none !important; } body.mode-student #notesBtn, body.mode-student #notesToggleBtn { display: none !important; }
+@media (max-width: 900px) { header { padding: 0.85rem 1rem !important; } main { padding: 1rem !important; } .slide, .slide-container { padding: 1.25rem !important; min-height: 560px !important; } .slide-title, .slide-header h1, .slide > div > h1, .slide > h1, .slide-container h1 { font-size: 1.7rem !important; } }
+</style>
+<style id="magic-cross-style">
+.magic-only-badge{display:inline-flex;align-items:center;gap:.35rem;background:rgba(251,191,36,.12);border:1px solid var(--amber);color:#fde68a;border-radius:999px;padding:.28rem .65rem;font-size:.78rem;font-weight:900;letter-spacing:.03em;text-transform:uppercase}
+.magic-cross-wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:.8rem;align-items:stretch}
+.magic-cross-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:.75rem;position:relative;overflow:hidden}
+.magic-cross-stage{position:relative;min-height:240px;display:flex;align-items:center;justify-content:center}
+.magic-cross-stage svg{width:100%;max-width:620px;height:230px;overflow:visible}
+.magic-cross-stage .ion-label{font-size:34px;font-weight:900;fill:#f8fafc}
+.magic-cross-stage .sub-label{font-size:30px;font-weight:900;fill:#2dd4bf}
+.magic-cross-stage .formula-label{font-size:38px;font-weight:900;fill:#f8fafc}
+.magic-cross-stage .arrow{stroke:#fbbf24;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.magic-cross-stage .guide{stroke:#475569;stroke-width:2;stroke-dasharray:5 5;fill:none}
+.magic-cross-rules{display:flex;flex-direction:column;gap:.5rem}
+.magic-rule{background:#111827;border:1px solid var(--border);border-radius:8px;padding:.55rem .65rem;font-size:.9rem}
+.magic-rule strong{color:var(--blue)}
+.magic-rule.warnline{border-color:var(--rose);background:rgba(251,113,133,.07)}
+.magic-rule.goodline{border-color:var(--teal);background:rgba(45,212,191,.07)}
+.magic-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:.55rem;align-items:center}
+.magic-compare .case{background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:.65rem;text-align:center}
+.magic-compare .case .chem{font-size:1.35rem;font-weight:900;color:var(--teal)}
+.magic-compare .arr{font-size:1.5rem;color:var(--amber);font-weight:900}
+@media(max-width:900px){.magic-cross-wrap{grid-template-columns:1fr}.magic-cross-stage{min-height:220px}.magic-cross-stage svg{height:210px}}
+</style>
+<style id="student-distribution-style">
+/* STUDENT DISTRIBUTION */
+body.mode-student .blank[data-answer]{
+  color:transparent !important;
+  background:var(--blank-bg, var(--blank, #334155)) !important;
+}
+body.mode-answer .blank[data-answer]{
+  color:var(--accent-amber, var(--amber, #fbbf24)) !important;
+  background:rgba(251,191,36,.15) !important;
+  border-bottom-color:var(--accent-amber, var(--amber, #fbbf24)) !important;
+}
+body.mode-student .answer-only{display:none !important;}
+body.mode-answer .answer-only{display:block !important;}
+body.mode-answer .response[data-review-note]::after,
+body.mode-answer .response-area[data-review-note]::after{
+  content:attr(data-review-note);
+  display:block;
+  color:var(--text-muted, var(--muted, #94a3b8));
+  font-style:normal;
+  font-size:.78rem;
+  margin-top:.25rem;
+}
+</style></head>
+<body class="mode-student">
+<header>
+<div class="deck-title">🧪 Topic T2.6 | Chemical Formulas</div>
+<div class="mode-selector"><button class="mode-btn active" data-mode="student" type="button">Student Mode</button><button class="mode-btn" data-mode="answer" type="button">Answer Mode</button></div>
+<div class="nav nav-controls">
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter counter-badge" id="slideCounter">Slide 1 / 9</span>
+<span class="counter counter-badge" id="buildCounter">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+<section class="slide active slide-container" data-max-builds="3" id="slide-1">
+<div>
+<div class="slide-header"><div class="meta meta-pill">Integrated Slide 34 · Local Slide 1</div><h1 class="slide-title">What Does a Chemical Formula Tell Us?</h1><div class="lo lo-box"><strong>Learning Objective:</strong> Interpret elements, subscripts, parentheses, and charge in chemical formulas.</div></div><div class="slide-body">
+<div class="card build-step visible" data-build="1">
+<p>A chemical formula identifies the elements present and their relative numbers.</p>
+<div class="annotate">
+<div class="formula" style="position:relative;z-index:2">H₂O</div>
+<svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" viewbox="0 0 700 150">
+<defs>
+<marker id="arrow34a" markerheight="8" markerwidth="8" orient="auto" refx="7" refy="3">
+<path d="M0,0 L0,6 L7,3 z" fill="#fbbf24"></path>
+</marker>
+</defs>
+<line marker-end="url(#arrow34a)" stroke="#fbbf24" stroke-width="2" x1="120" x2="305" y1="42" y2="72"></line>
+<line marker-end="url(#arrow34a)" stroke="#fbbf24" stroke-width="2" x1="590" x2="365" y1="112" y2="87"></line>
+</svg>
+<div class="label" style="left:7%;top:16%">element symbols</div>
+<div class="label" style="right:6%;bottom:10%">subscript 2 applies to H</div>
+</div>
+<p>A subscript applies to the symbol or grouped unit immediately before it.</p>
+</div>
+<div class="card build-step" data-build="2">
+<div class="annotate">
+<div class="formula" style="position:relative;z-index:2">Ca(NO₃)₂</div>
+<svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" viewbox="0 0 700 150">
+<defs>
+<marker id="arrow34b" markerheight="8" markerwidth="8" orient="auto" refx="7" refy="3">
+<path d="M0,0 L0,6 L7,3 z" fill="#fbbf24"></path>
+</marker>
+</defs>
+<line marker-end="url(#arrow34b)" stroke="#fbbf24" stroke-width="2" x1="105" x2="292" y1="38" y2="72"></line>
+<line marker-end="url(#arrow34b)" stroke="#fbbf24" stroke-width="2" x1="582" x2="395" y1="34" y2="70"></line>
+<line marker-end="url(#arrow34b)" stroke="#fbbf24" stroke-width="2" x1="580" x2="437" y1="115" y2="91"></line>
+</svg>
+<div class="label" style="left:5%;top:10%">Ca is one element symbol</div>
+<div class="label" style="right:4%;top:9%">parentheses keep NO₃ together</div>
+<div class="label" style="right:4%;bottom:8%">outside 2 applies to the whole NO₃ unit</div>
+</div>
+<p>Parentheses preserve a polyatomic ion as a unit.</p>
+</div>
+<div class="card build-step" data-build="3">
+<div class="annotate">
+<div class="formula" style="position:relative;z-index:2">SO₄²⁻</div>
+<svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" viewbox="0 0 700 150">
+<defs>
+<marker id="arrow34c" markerheight="8" markerwidth="8" orient="auto" refx="7" refy="3">
+<path d="M0,0 L0,6 L7,3 z" fill="#fbbf24"></path>
+</marker>
+</defs>
+<line marker-end="url(#arrow34c)" stroke="#fbbf24" stroke-width="2" x1="575" x2="402" y1="38" y2="66"></line>
+</svg>
+<div class="label" style="right:5%;top:10%">superscript charge applies to the ion</div>
+</div>
+<p>A superscript charge applies to an ion, not to a neutral compound.</p>
+</div>
+</div>
+</div>
+
+</section>
+<section class="slide slide-container" data-max-builds="3" id="slide-2">
+<div>
+<div class="slide-header"><div class="meta meta-pill">Integrated Slide 35 · Local Slide 2</div><h1 class="slide-title">Ionic or Molecular?</h1><div class="lo lo-box"><strong>Learning Objective:</strong> Classify compounds using element types and the presence of ions.</div></div><div class="slide-body">
+<div class="tree">
+<div class="tree-node build-step visible" data-build="1"><strong>Identify the first component</strong></div>
+<div class="tree-node build-step visible" data-build="1"><strong>Metal</strong><br/>+ nonmetal → usually <span class="blank" contenteditable="false" data-answer="ionic" data-placeholder="[_______]">[_______]</span><br/>+ polyatomic ion → ionic</div>
+<div class="tree-node build-step visible" data-build="1"><strong>NH₄⁺</strong><br/>+ anion → ionic</div>
+<div class="tree-node build-step" data-build="2" style="grid-column:1/-1"><strong>Nonmetal + nonmetal</strong> → usually <span class="blank" contenteditable="false" data-answer="molecular" data-placeholder="[_______]">[_______]</span></div>
+</div>
+<div class="build-step" data-build="3">
+<div class="grid-3">
+<div class="card"><h4 class="chem-case">NaCl</h4><p>metal + nonmetal → ionic</p></div>
+<div class="card"><h4>NH₄NO₃</h4><p>ammonium + anion → ionic</p></div>
+<div class="card"><h4>CO₂</h4><p>nonmetal + nonmetal → molecular</p></div>
+</div>
+<div class="callout" style="margin-top:.5rem">Compound type determines the formula and naming rules.</div>
+</div>
+</div>
+</div>
+
+</section>
+<section class="slide slide-container" data-max-builds="3" id="slide-3">
+<div>
+<div class="slide-header"><div class="meta meta-pill">Integrated Slide 36 · Local Slide 3</div><h1 class="slide-title">Formula Unit versus Molecule</h1><div class="lo lo-box"><strong>Learning Objective:</strong> Distinguish an ionic formula unit from a molecular particle.</div></div><div class="slide-body">
+<div class="grid-2">
+<div class="card build-step visible" data-build="1">
+<h4 class="chem-case">NaCl Lattice</h4>
+<div class="lattice">
+<span class="ion pos">Na⁺</span><span class="ion neg">Cl⁻</span><span class="ion pos">Na⁺</span><span class="ion neg">Cl⁻</span><span class="ion pos">Na⁺</span><span class="ion neg">Cl⁻</span>
+<span class="ion neg">Cl⁻</span><span class="ion pos">Na⁺</span><span class="ion neg">Cl⁻</span><span class="ion pos">Na⁺</span><span class="ion neg">Cl⁻</span><span class="ion pos">Na⁺</span>
+<span class="ion pos">Na⁺</span><span class="ion neg">Cl⁻</span><span class="ion pos">Na⁺</span><span class="ion neg">Cl⁻</span><span class="ion pos">Na⁺</span><span class="ion neg">Cl⁻</span>
+</div>
+<div style="display:flex;justify-content:center;align-items:center;gap:.55rem;margin-top:.65rem;flex-wrap:wrap">
+<span style="display:inline-flex;align-items:center;gap:4px;border:2px solid var(--teal);border-radius:7px;padding:4px 7px;background:rgba(45,212,191,.06)">
+<span class="ion pos">Na⁺</span><span class="ion neg">Cl⁻</span>
+</span>
+<span style="color:var(--teal);font-size:.78rem;font-weight:800">Highlighted 1:1 ratio = one formula unit</span>
+</div>
+<p style="margin-top:.55rem"><span style="text-transform:none">NaCl</span> represents a formula-unit ratio in a lattice.</p>
+</div>
+<div class="card build-step" data-build="2">
+<h4>Separated H₂O Molecules</h4>
+<div class="molecules">
+<div style="border:2px solid var(--teal);border-radius:8px;padding:.35rem;position:relative">
+<div class="molecule"><span class="atom h">H</span><span class="atom o">O</span><span class="atom h">H</span></div>
+<span style="position:absolute;left:50%;transform:translateX(-50%);bottom:-23px;white-space:nowrap;color:var(--teal);font-size:.72rem;font-weight:800">1 molecule</span>
+</div>
+<div class="molecule"><span class="atom h">H</span><span class="atom o">O</span><span class="atom h">H</span></div>
+<div class="molecule"><span class="atom h">H</span><span class="atom o">O</span><span class="atom h">H</span></div>
+</div>
+<p style="margin-top:1.7rem">H₂O represents one discrete molecule.</p>
+</div>
+</div>
+<div class="grid-2 build-step" data-build="3">
+<div class="callout"><strong>Formula unit:</strong> Lowest whole-number ratio of ions in an ionic compound.</div>
+<div class="callout"><strong>Molecule:</strong> Discrete group of covalently bonded atoms.</div>
+</div>
+</div>
+</div>
+
+</section>
+<section class="slide slide-container" data-max-builds="3" id="slide-4">
+<div>
+<div class="slide-header"><div class="meta meta-pill">Integrated Slide 37 · Local Slide 4</div><h1 class="slide-title">Electrical Neutrality</h1><div class="lo lo-box"><strong>Learning Objective:</strong> Explain ionic formula ratios through total charge balance.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout">A neutral ionic compound has total positive charge = total negative charge.</div>
+<div class="charge-row" style="margin-top:.6rem"><div class="charge-tile">Mg²⁺</div></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="charge-row">
+<div class="charge-tile">Mg²⁺</div><span class="rule-arrow">+</span><div class="charge-tile">Cl⁻</div><div class="charge-tile">Cl⁻</div>
+</div>
+<p style="text-align:center;margin-top:.45rem">One Mg²⁺ requires <span class="blank" contenteditable="false" data-answer="2" data-placeholder="[_______]">[_______]</span> Cl⁻ ions.</p>
+<p style="text-align:center">Total charge: +2 + 2(−1) = 0</p>
+</div>
+<div class="build-step" data-build="3">
+<div class="charge-row">
+<div class="charge-tile">Al³⁺</div><div class="charge-tile">Al³⁺</div><span class="rule-arrow">↔</span>
+<div class="charge-tile">O²⁻</div><div class="charge-tile">O²⁻</div><div class="charge-tile">O²⁻</div>
+</div>
+<p style="text-align:center;margin-top:.45rem">Two Al³⁺ ions provide +6; three O²⁻ ions provide <span class="blank" contenteditable="false" data-answer="−6" data-placeholder="[_______]">[_______]</span>.</p>
+<div class="warn" style="margin-top:.45rem">Charge balance determines subscripts.</div>
+</div>
+</div>
+</div>
+
+</section>
+<section class="slide slide-container" data-max-builds="3" id="slide-5">
+<div>
+<div class="slide-header"><div class="meta meta-pill">Integrated Slide 38 · Local Slide 5</div><h1 class="slide-title">Ionic Formula Roadmap — Principle First</h1><div class="lo lo-box"><strong>Learning Objective:</strong> Use charge neutrality as the principle behind ionic formulas and prepare to use the Magic Cross shortcut correctly.</div></div>
+<div class="slide-body">
+<div class="flow">
+<div class="flow-step build-step visible" data-build="1"><span class="stepnum">1</span>Confirm that the compound is <strong>ionic</strong>.</div>
+<div class="flow-step build-step visible" data-build="1"><span class="stepnum">2</span>Write the cation and anion symbols with their charges.</div>
+<div class="flow-step build-step" data-build="2"><span class="stepnum">3</span>Choose the smallest ion ratio that makes total charge <span class="blank" contenteditable="false" data-answer="zero" data-placeholder="[_______]">[_______]</span>.</div>
+<div class="flow-step build-step" data-build="2"><span class="stepnum">4</span>Write that ratio as subscripts and reduce if needed.</div>
+<div class="flow-step build-step" data-build="3"><span class="stepnum">5</span>Use parentheses when more than one polyatomic ion is needed.</div>
+<div class="flow-step build-step" data-build="3"><span class="stepnum">6</span>Remove ion charges from the final neutral formula and check.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><span class="magic-only-badge">Ionic compounds only</span> <strong style="margin-left:.35rem">Magic Cross</strong> is a shortcut for Steps 2–4. It does not replace the idea that the final compound must be electrically neutral.</div>
+</div>
+</div>
+</div>
+
+</section>
+<section class="slide slide-container" data-max-builds="4" id="slide-6">
+<div>
+<div class="slide-header"><div class="meta meta-pill">Integrated Slide 39 · Local Slide 6</div><h1 class="slide-title">Magic Cross Shortcut — Ionic Compounds Only</h1><div class="lo lo-box"><strong>Learning Objective:</strong> Use the Magic Cross shortcut to write a neutral binary ionic formula, then verify the result by charge balance.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="magic-only-badge">Use only after you know it is ionic</span>
+<div class="callout" style="margin-top:.5rem"><strong>Example:</strong> aluminum oxide → Al<sup>3+</sup> and O<sup>2−</sup>. Cross only the <strong>charge magnitudes</strong>. Do not carry the + or − signs into the subscripts.</div>
+</div>
+<div class="magic-cross-wrap build-step" data-build="2">
+<div class="magic-cross-card">
+<div aria-label="Magic Cross diagram for aluminum oxide" class="magic-cross-stage">
+<svg role="img" viewbox="0 0 620 230">
+<defs><marker id="arrowhead26" markerheight="10" markerunits="strokeWidth" markerwidth="10" orient="auto" refx="8" refy="4"><path d="M0,0 L0,8 L9,4 z" fill="#fbbf24"></path></marker></defs>
+<text class="ion-label" x="135" y="55">Al³⁺</text>
+<text class="ion-label" x="405" y="55">O²⁻</text>
+<path class="arrow" d="M192 48 C232 86, 278 126, 323 186" marker-end="url(#arrowhead26)"></path>
+<path class="arrow" d="M438 48 C392 86, 316 126, 222 186" marker-end="url(#arrowhead26)"></path>
+<text class="formula-label" x="165" y="186">Al</text>
+<text class="sub-label" x="218" y="197">2</text>
+<text class="formula-label" x="285" y="186">O</text>
+<text class="sub-label" x="327" y="197">3</text>
+<text class="formula-label" x="383" y="188">→ Al₂O₃</text>
+</svg>
+</div>
+</div>
+<div class="magic-cross-rules">
+<div class="magic-rule"><strong>1.</strong> Al has charge magnitude 3; O has charge magnitude 2.</div>
+<div class="magic-rule"><strong>2.</strong> Cross 3 to oxygen and 2 to aluminum.</div>
+<div class="magic-rule"><strong>3.</strong> Write <strong>Al₂O₃</strong>.</div>
+<div class="magic-rule goodline"><strong>4. Check:</strong> 2(+3) + 3(−2) = 0.</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Do not cross the signs.</strong> The signs tell you cation versus anion; the <strong>numbers</strong> become subscripts.</div>
+</div>
+<div class="build-step" data-build="4">
+<div class="magic-compare"><div class="case"><div class="chem">Ca²⁺ + O²⁻</div><p style="margin-top:.3rem">Magic Cross first gives Ca₂O₂</p></div><div class="arr">→</div><div class="case"><div class="chem">CaO</div><p style="margin-top:.3rem">Reduce 2:2 to the lowest whole-number ratio, 1:1.</p></div></div>
+</div>
+</div>
+</div>
+
+</section>
+<section class="slide slide-container" data-max-builds="4" id="slide-7">
+<div>
+<div class="slide-header"><div class="meta meta-pill">Integrated Slide 40 · Local Slide 7</div><h1 class="slide-title">Magic Cross with a Polyatomic Ion</h1><div class="lo lo-box"><strong>Learning Objective:</strong> Apply Magic Cross to an ionic formula containing a polyatomic ion and use parentheses correctly.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1"><div class="callout"><span class="magic-only-badge">Still ionic only</span> Treat a polyatomic ion as <strong>one intact charged unit</strong>. Example: calcium nitrate → Ca<sup>2+</sup> and NO<sub>3</sub><sup>−</sup>.</div></div>
+<div class="magic-cross-wrap build-step" data-build="2">
+<div class="magic-cross-card">
+<div aria-label="Magic Cross diagram for calcium nitrate" class="magic-cross-stage">
+<svg role="img" viewbox="0 0 620 230">
+<defs><marker id="arrowhead27" markerheight="10" markerunits="strokeWidth" markerwidth="10" orient="auto" refx="8" refy="4"><path d="M0,0 L0,8 L9,4 z" fill="#fbbf24"></path></marker></defs>
+<text class="ion-label" x="120" y="55">Ca²⁺</text>
+<text class="ion-label" x="390" y="55">NO₃⁻</text>
+<path class="arrow" d="M200 65 C250 96, 335 125, 416 156" marker-end="url(#arrowhead27)"></path>
+<path class="arrow" d="M442 66 C395 96, 306 126, 220 156" marker-end="url(#arrowhead27)"></path>
+<text class="formula-label" x="130" y="187">Ca</text>
+<text class="sub-label" x="205" y="197">1</text>
+<text class="formula-label" x="270" y="187">(NO₃)</text>
+<text class="sub-label" x="382" y="197">2</text>
+<text class="formula-label" x="430" y="188">→ Ca(NO₃)₂</text>
+</svg>
+</div>
+</div>
+<div class="magic-cross-rules">
+<div class="magic-rule"><strong>Cross the 2</strong> from Ca²⁺ to nitrate.</div>
+<div class="magic-rule"><strong>Cross the 1</strong> from NO₃⁻ to calcium; subscript 1 is not written.</div>
+<div class="magic-rule"><strong>Parentheses:</strong> two nitrate ions means <strong>(NO₃)₂</strong>.</div>
+<div class="magic-rule goodline"><strong>Check:</strong> +2 + 2(−1) = 0.</div>
+</div>
+</div>
+<div class="build-step" data-build="3"><div class="grid-2"><div class="callout"><strong>Correct:</strong> Ca(NO₃)₂</div><div class="warn"><strong>Incorrect:</strong> CaNO₃₂ — this does not show two intact nitrate ions.</div></div></div>
+<div class="build-step" data-build="4"><div class="callout"><strong>Shortcut boundary:</strong> Magic Cross helps set ionic subscripts. It does <strong>not</strong> apply to molecular compounds, where prefixes such as di-, tri-, and tetra- tell you the subscripts directly.</div></div>
+</div>
+</div>
+
+</section>
+<section class="slide slide-container" data-max-builds="3" id="slide-8">
+<div>
+<div class="slide-header"><div class="meta meta-pill">Integrated Slide 41 · Local Slide 8</div><h1 class="slide-title">Guided Practice — Counting Atoms in Formulas</h1><div class="lo lo-box"><strong>Learning Objective:</strong> Count atoms in formulas containing subscripts, parentheses, and hydrate dots.</div></div><div class="slide-body">
+<div class="card build-step visible" data-build="1">
+<h4>Ca(NO₃)₂</h4>
+<div class="bracket">(NO₃) × 2</div>
+<div class="grid-3" style="margin-top:.5rem">
+<div class="callout"><strong>Ca:</strong> 1</div>
+<div class="callout"><strong>N:</strong> 1 × 2 = <span class="blank" contenteditable="false" data-answer="2" data-placeholder="[_______]">[_______]</span></div>
+<div class="callout"><strong>O:</strong> 3 × 2 = <span class="blank" contenteditable="false" data-answer="6" data-placeholder="[_______]">[_______]</span></div>
+</div>
+<p style="margin-top:.45rem">The outside 2 multiplies every atom inside the parentheses.</p>
+</div>
+<div class="card build-step" data-build="2">
+<h4>Al₂(SO₄)₃</h4>
+<div class="bracket">(SO₄) × 3</div>
+<div class="grid-3" style="margin-top:.5rem">
+<div class="callout"><strong>Al:</strong> <span class="blank" contenteditable="false" data-answer="2" data-placeholder="[_______]">[_______]</span></div>
+<div class="callout"><strong>S:</strong> 1 × 3 = <span class="blank" contenteditable="false" data-answer="3" data-placeholder="[_______]">[_______]</span></div>
+<div class="callout"><strong>O:</strong> 4 × 3 = <span class="blank" contenteditable="false" data-answer="12" data-placeholder="[_______]">[_______]</span></div>
+</div>
+<p style="margin-top:.45rem">Track the direct subscript on Al separately from the parenthetical multiplier.</p>
+</div>
+<div class="card build-step" data-build="3">
+<h4>CuSO₄·5H₂O</h4>
+<div class="grid-2">
+<div class="callout">
+<strong>Ionic compound portion: CuSO₄</strong>
+<p style="margin-top:.3rem">Cu = 1, S = 1, O = 4</p>
+</div>
+<div class="callout">
+<strong>Water portion: 5 × H₂O</strong>
+<p style="margin-top:.3rem">H = 5 × 2 = 10, O = 5 × 1 = 5</p>
+</div>
+</div>
+<div class="grid-3" style="margin-top:.5rem">
+<div class="callout"><strong>Cu:</strong> <span class="blank" contenteditable="false" data-answer="1" data-placeholder="[_______]">[_______]</span></div>
+<div class="callout"><strong>S:</strong> <span class="blank" contenteditable="false" data-answer="1" data-placeholder="[_______]">[_______]</span></div>
+<div class="callout"><strong>H:</strong> <span class="blank" contenteditable="false" data-answer="10" data-placeholder="[_______]">[_______]</span></div>
+</div>
+<div class="callout" style="margin-top:.5rem"><strong>Total oxygen:</strong> 4 from CuSO₄ + 5 from 5H₂O = <span class="blank" contenteditable="false" data-answer="9" data-placeholder="[_______]">[_______]</span>.</div>
+<p style="margin-top:.4rem">Count the ionic compound and waters separately, then combine totals for the same element.</p>
+</div>
+</div>
+</div>
+
+</section>
+<section class="slide slide-container" data-max-builds="2" id="slide-9">
+<div>
+<div class="slide-header"><div class="meta meta-pill">Integrated Slide 42 · Local Slide 9</div><h1 class="slide-title">Independent Check — Chemical Formulas</h1><div class="lo lo-box"><strong>Learning Objective:</strong> Assess compound classification, charge balance, parentheses, and atom counting.</div></div><div class="slide-body">
+<div class="refstrip"><span>NO₃⁻ nitrate</span><span>SO₄²⁻ sulfate</span><span>PO₄³⁻ phosphate</span></div>
+<div class="questions">
+<div class="qcard build-step visible" data-build="1"><div><span class="qnum">1</span>Write the formula for sodium oxide.</div><div class="response">Student work space</div></div>
+<div class="qcard build-step visible" data-build="1"><div><span class="qnum">2</span>Write the formula for calcium phosphate.</div><div class="response">Student work space</div></div>
+<div class="qcard build-step" data-build="2"><div><span class="qnum">3</span>Classify CO₂ and MgCl₂ as molecular or ionic.</div><div class="response">Student work space</div></div>
+<div class="qcard build-step" data-build="2"><div><span class="qnum">4</span>Count each type of atom in Fe₂(SO₄)₃.</div><div class="response">Student work space</div></div>
+<div class="qcard build-step" data-build="2" style="grid-column:1/-1"><div><span class="qnum">5</span>Correct the formula CaNO₃₂ and explain the error.</div><div class="response">Student work space</div></div>
+</div>
+</div>
+</div>
+
+</section>
+</main>
+
+<script>
+(() => {
+  let currentSlide = 1;
+  let currentBuild = 1;
+  let currentMode = 'student';
+  const totalSlides = 9;
+
+  const slides = () => Array.from(document.querySelectorAll('.slide, .slide-container'))
+    .filter((el, i, arr) => el.id && el.id.startsWith('slide-') && arr.findIndex(x => x.id === el.id) === i);
+
+  function buildMax(slide) {
+    const values = Array.from(slide.querySelectorAll('[data-build]'))
+      .map(el => parseInt(el.dataset.build || '1', 10))
+      .filter(Number.isFinite);
+    const declared = parseInt(slide.dataset.maxBuilds || '1', 10);
+    return Math.max(declared || 1, ...(values.length ? values : [1]));
+  }
+
+  function setMode(mode) {
+    currentMode = mode === 'answer' ? 'answer' : 'student';
+    document.body.className = 'mode-' + currentMode;
+
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === currentMode);
+    });
+
+    document.querySelectorAll('.blank[data-answer]').forEach(blank => {
+      if (currentMode === 'answer') {
+        blank.textContent = blank.dataset.answer || '';
+      } else {
+        blank.textContent = blank.dataset.placeholder || '[_______]';
+      }
+    });
+  }
+
+  function updateView() {
+    const deck = slides();
+    deck.forEach((slide, idx) => {
+      slide.classList.toggle('active', idx === currentSlide - 1);
+      if (idx === currentSlide - 1) {
+        slide.querySelectorAll('[data-build]').forEach(el => {
+          const b = parseInt(el.dataset.build || '1', 10);
+          el.classList.toggle('visible', b <= currentBuild);
+        });
+      }
+    });
+
+    const active = deck[currentSlide - 1];
+    const maxBuild = active ? buildMax(active) : 1;
+    currentBuild = Math.min(currentBuild, maxBuild);
+
+    const sc = document.getElementById('slideCounter');
+    const bc = document.getElementById('buildCounter');
+    if (sc) sc.textContent = `Slide ${currentSlide} / ${totalSlides}`;
+    if (bc) bc.textContent = `Build ${currentBuild} / ${maxBuild}`;
+
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
+    if (prev) prev.disabled = currentSlide === 1 && currentBuild === 1;
+    if (next) next.disabled = currentSlide === totalSlides && currentBuild === maxBuild;
+  }
+
+  window.nextBuild = function() {
+    const deck = slides();
+    const active = deck[currentSlide - 1];
+    const maxBuild = active ? buildMax(active) : 1;
+    if (currentBuild < maxBuild) currentBuild++;
+    else if (currentSlide < totalSlides) { currentSlide++; currentBuild = 1; }
+    updateView();
+  };
+
+  window.prevBuild = function() {
+    const deck = slides();
+    if (currentBuild > 1) currentBuild--;
+    else if (currentSlide > 1) {
+      currentSlide--;
+      currentBuild = buildMax(deck[currentSlide - 1]);
+    }
+    updateView();
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(btn =>
+      btn.addEventListener('click', () => setMode(btn.dataset.mode))
+    );
+
+    document.querySelectorAll('.blank[data-answer]').forEach(blank => {
+      if (!blank.dataset.placeholder) blank.dataset.placeholder = blank.textContent || '[_______]';
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') window.nextBuild();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') window.prevBuild();
+    });
+
+    setMode('student');
+    updateView();
+  });
+})();
+</script></body>
+</html>

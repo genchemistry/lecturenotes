@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Topic T2.2 — Subatomic Particles and Atomic Accounting — Student</title>
+<style>
+:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--accent-blue:#38bdf8;--accent-teal:#2dd4bf;
+  --accent-amber:#fbbf24;--accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border:#475569;--blank:#334155;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border);padding:.5rem 1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;z-index:100}
+.deck-title{font-size:1.1rem;font-weight:700;color:var(--accent-blue);display:flex;gap:.5rem;align-items:center}
+.mode-selector{display:flex;background:#1e293b;border:1px solid var(--border);border-radius:8px;padding:3px}
+.mode-btn,.btn{border-radius:6px;font-weight:600;cursor:pointer;transition:.2s}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.35rem .75rem;font-size:.85rem}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.5rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border);padding:.38rem .8rem;font-size:.85rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter{font-size:.85rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border)}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:.85rem 1.25rem;max-width:1600px;width:100%;margin:0 auto}
+.slide{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:1.2rem 1.5rem;min-height:580px;max-height:calc(100vh - 100px);display:none;flex-direction:column;justify-content:space-between;overflow-y:auto}
+.slide.active{display:flex}
+.slide-header{margin-bottom:.55rem}
+.meta-pill{display:inline-block;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.15rem .45rem;border-radius:4px;border:1px solid rgba(45,212,191,.2);margin-bottom:.25rem}
+.slide-title{font-size:1.55rem;font-weight:800;line-height:1.2}
+.lo{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.45rem .8rem;border-radius:0 6px 6px 0;margin-top:.4rem;font-size:.9rem}
+.lo strong{color:var(--accent-blue)}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:.8rem;margin-top:.2rem}
+.build-step{opacity:.15;pointer-events:none;transform:translateY(6px);filter:blur(1px);transition:.35s}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.blank{display:inline-block;min-width:82px;padding:.12rem .45rem;background:var(--blank);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none}
+body.mode-student .blank{color:transparent!important}
+body.mode-reviewlegacy .blank.revealed{color:var(--accent-amber);background:rgba(251,191,36,.15)}
+body.mode-editlegacy .blank.revealed{color:var(--accent-teal);background:rgba(45,212,191,.15)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem}
+.card{background:#0f172a;border:1px solid var(--border);border-radius:8px;padding:.8rem}
+.card h4{color:var(--accent-blue);font-size:.95rem;margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em}
+.atom-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.atom-table th,.atom-table td{border:1px solid var(--border);padding:.45rem .6rem;text-align:center}
+.atom-table th{background:#1e293b;color:var(--accent-blue)}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.question-card{background:#0f172a;border:1px solid var(--border);border-radius:8px;padding:.85rem;display:flex;flex-direction:column;gap:.5rem}
+.qnum{display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:var(--accent-blue);color:#0f172a;font-weight:800;font-size:.8rem;margin-right:.4rem}
+.qtext{font-size:.98rem;font-weight:600;line-height:1.35}
+.response{background:#1e293b;border:1px dashed var(--border);border-radius:6px;min-height:58px;padding:.4rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-style:italic}
+.removed-drawer{margin-top:.7rem;background:#090d16;border:1px solid #334155;border-radius:8px;padding:.7rem;display:none;font-size:.84rem;color:#cbd5e1}
+body.show-notes .removed-drawer{display:block}
+body.mode-student .removed-drawer{display:none!important}
+body.mode-student #notesBtn{display:none!important}
+.removed-drawer h5{color:var(--accent-amber);font-size:.84rem;text-transform:uppercase;margin-bottom:.3rem}
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.4rem;margin-top:.35rem}
+.meta-item{background:#1e293b;padding:.35rem .55rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.72rem;text-transform:uppercase}
+.symbol-box{display:inline-flex;align-items:center;background:#0f172a;border:1px solid var(--border);border-radius:8px;padding:.55rem .9rem;font-family:monospace;font-weight:800}
+.left-stack{display:inline-flex;flex-direction:column;line-height:1;text-align:right;margin-right:.15rem;font-size:1.05rem}
+.center-symbol{font-size:2.8rem;color:var(--accent-teal)}
+.charge{font-size:1.05rem;color:var(--accent-amber);align-self:flex-start;margin-top:.1rem}
+.callout{background:rgba(56,189,248,.09);border:1px solid var(--accent-blue);border-radius:8px;padding:.55rem .75rem}
+.warn{background:rgba(244,63,94,.08);border:1px solid var(--accent-rose);border-radius:8px;padding:.5rem .75rem;color:#fecdd3}
+
+.answer-only{display:none}
+body.mode-reviewlegacy .answer-only.revealed-answer,
+body.mode-editlegacy .answer-only.revealed-answer{display:block}
+
+[contenteditable="true"]{outline:1px dashed var(--accent-teal);padding:2px 4px;border-radius:3px}
+@media(max-width:1024px){.grid-2,.grid-3,.question-grid{grid-template-columns:1fr}.slide{min-height:auto;padding:1rem}.slide-title{font-size:1.35rem}}
+
+.nuclear-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.simple-illustration{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:1rem}
+.atom-shell{width:120px;height:120px;border:2px solid #64748b;border-radius:50%;margin:.6rem auto;position:relative}
+.atom-shell .nucleus{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#1e293b;display:flex;align-items:center;justify-content:center;color:#f8fafc;font-weight:800;font-size:.8rem}
+.atom-shell .electron{position:absolute;width:16px;height:16px;border-radius:50%;background:#60a5fa;color:#0f172a;font-size:.65rem;display:flex;align-items:center;justify-content:center;font-weight:800}
+.atom-shell .e1{left:50%;top:-8px;transform:translateX(-50%)}
+.atom-shell .e2{right:-8px;top:50%;transform:translateY(-50%)}
+.atom-shell .e3{left:50%;bottom:-8px;transform:translateX(-50%)}
+.atom-shell .e4{left:-8px;top:50%;transform:translateY(-50%)}
+.nucleus-box{width:140px;height:110px;border:2px dashed #94a3b8;border-radius:14px;margin:.6rem auto;display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;padding:.55rem;align-items:center;justify-items:center}
+.pdot,.ndot{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800}
+.pdot{background:#fda4af;color:#4c0519}
+.ndot{background:#cbd5e1;color:#0f172a}
+.rad-type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.rad-type-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem}
+.rad-visual{min-height:86px;border:1px dashed #64748b;border-radius:10px;padding:.55rem;margin:.45rem 0;display:flex;align-items:center;justify-content:center;gap:.35rem;flex-wrap:wrap}
+.arrow-big{font-size:1.2rem;font-weight:900;color:var(--accent-blue)}
+.alpha-pack{display:flex;gap:.25rem;align-items:center;justify-content:center;background:#111827;border-radius:10px;padding:.3rem .5rem;border:1px solid #475569}
+.beta-flow{display:flex;align-items:center;justify-content:center;gap:.35rem;flex-wrap:wrap}
+.gamma-waves{font-size:1.4rem;letter-spacing:.15rem;color:#fbbf24;font-weight:900}
+.quick-table{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:.5rem}
+.quick-table th,.quick-table td{border:1px solid var(--border-color);padding:.55rem;vertical-align:top}
+.quick-table th{background:#1e293b;color:var(--accent-blue)}
+.worked-grid{display:grid;grid-template-columns:1fr;gap:.8rem}
+.worked-box{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.85rem}
+.worked-box h4{color:var(--accent-blue);margin-bottom:.35rem}
+.answer-line{margin-top:.45rem;padding:.45rem .6rem;border-radius:8px;background:#111827;border-left:4px solid var(--accent-teal)}
+@media(max-width:900px){.nuclear-compare,.rad-type-grid{grid-template-columns:1fr}}
+
+</style>
+<style id="module8-modernization-style">
+/* MODULE 8 MASTER SHELL MODERNIZATION OVERRIDE */
+:root { --bg-dark: #0f172a; --bg-card: #1e293b; --bg-card-hover: #334155; --accent-blue: #38bdf8; --accent-teal: #2dd4bf; --accent-amber: #fbbf24; --accent-rose: #f43f5e; --text-main: #f8fafc; --text-muted: #94a3b8; --border-color: #475569; --border: #475569; --blank-bg: #334155; --blank: #334155; --blank-revealed: #0284c7; }
+body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important; background-color: var(--bg-dark) !important; color: var(--text-main) !important; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+header { background-color: #0b1120 !important; border-bottom: 1px solid var(--border-color) !important; padding: 0.75rem 1.5rem !important; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; z-index: 100; }
+.deck-title { font-size: 1.25rem !important; font-weight: 700 !important; color: var(--accent-blue) !important; display: flex; align-items: center; gap: 0.5rem; }
+.mode-selector { display: flex !important; background: #1e293b !important; border-radius: 8px !important; padding: 3px !important; border: 1px solid var(--border-color) !important; }
+.mode-btn { background: none !important; border: none !important; color: var(--text-muted) !important; padding: 0.4rem 0.8rem !important; font-size: 0.95rem !important; font-weight: 600 !important; cursor: pointer; border-radius: 6px; transition: all 0.2s ease; }
+.mode-btn.active { background-color: var(--accent-blue) !important; color: #0f172a !important; }
+.nav, .nav-controls { display: flex !important; align-items: center !important; gap: 0.75rem !important; }
+.btn { background-color: #334155 !important; color: var(--text-main) !important; border: 1px solid var(--border-color) !important; padding: 0.45rem 0.9rem !important; border-radius: 6px !important; font-size: 0.95rem !important; font-weight: 600 !important; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.3rem; }
+.btn:hover:not(:disabled) { background-color: #475569 !important; border-color: var(--accent-blue) !important; }
+.btn:disabled { opacity: 0.4 !important; cursor: not-allowed !important; }
+.btn-primary, .btn.primary { background-color: var(--accent-blue) !important; color: #0f172a !important; border: none !important; }
+.btn-primary:hover:not(:disabled), .btn.primary:hover:not(:disabled) { background-color: #0284c7 !important; color: #ffffff !important; }
+.counter, .counter-badge { font-size: 0.95rem !important; color: var(--text-muted) !important; font-weight: 600 !important; background: #1e293b !important; padding: 0.3rem 0.6rem !important; border-radius: 4px !important; border: 1px solid var(--border-color) !important; }
+main { flex: 1 !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; padding: 1.5rem !important; max-width: 1400px !important; width: 100% !important; margin: 0 auto !important; position: relative; }
+.slide, .slide-container { width: 100% !important; background-color: var(--bg-card) !important; border-radius: 12px !important; border: 1px solid var(--border-color) !important; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5) !important; padding: 2rem !important; min-height: 620px !important; max-height: none !important; display: none; flex-direction: column; justify-content: space-between; position: relative; animation: fadeInModule8 0.3s ease-in-out; overflow-y: auto; }
+.slide.active, .slide-container.active { display: flex !important; }
+@keyframes fadeInModule8 { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.slide-header { margin-bottom: 1.25rem !important; }
+.meta, .meta-pill { display: inline-block !important; font-size: 0.8rem !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; font-weight: 700 !important; color: var(--accent-teal) !important; background-color: rgba(45, 212, 191, 0.1) !important; padding: 0.25rem 0.6rem !important; border-radius: 4px !important; margin-bottom: 0.5rem !important; border: 1px solid rgba(45, 212, 191, 0.2) !important; }
+.slide-title, .slide-header h1, .slide > div > h1, .slide > h1, .slide-container h1 { font-size: 2.05rem !important; font-weight: 800 !important; color: var(--text-main) !important; line-height: 1.25 !important; margin: 0 !important; }
+.lo, .lo-box { background-color: rgba(56, 189, 248, 0.08) !important; border-left: 4px solid var(--accent-blue) !important; padding: 0.7rem 1.1rem !important; border-radius: 0 6px 6px 0 !important; margin-top: 0.75rem !important; font-size: 1rem !important; color: #e2e8f0 !important; }
+.lo strong, .lo-box strong { color: var(--accent-blue) !important; }
+.slide-body { flex: 1 !important; display: flex !important; flex-direction: column !important; gap: 1rem !important; margin-top: 0.35rem !important; }
+.build-step { opacity: 0.15 !important; pointer-events: none !important; transform: translateY(6px) !important; filter: blur(1px) !important; transition: 0.35s !important; }
+.build-step.visible { opacity: 1 !important; pointer-events: auto !important; transform: none !important; filter: none !important; }
+.card { background: #0f172a !important; border: 1px solid var(--border-color) !important; border-radius: 10px !important; padding: 1rem !important; }
+.card h4 { color: var(--accent-blue) !important; font-size: 1rem !important; margin-bottom: 0.5rem !important; }
+.blank { display: inline-block !important; min-width: 82px !important; padding: 0.12rem 0.45rem !important; background: var(--blank-bg) !important; border-bottom: 2px solid var(--accent-amber) !important; border-radius: 4px !important; color: transparent !important; text-align: center !important; font-weight: 700 !important; user-select: none !important; }
+body.mode-student .blank { color: transparent !important; } body.mode-reviewlegacy .blank.revealed { color: var(--accent-amber) !important; background: rgba(251,191,36,0.15) !important; } body.mode-editlegacy .blank.revealed { color: var(--accent-teal) !important; background: rgba(45,212,191,0.15) !important; }
+.removed-drawer { margin-top: 0.9rem !important; background: #090d16 !important; border: 1px solid #334155 !important; border-radius: 8px !important; padding: 0.9rem !important; display: none; font-size: 0.9rem !important; color: #cbd5e1 !important; }
+body.show-notes .removed-drawer { display: block !important; } body.mode-student .removed-drawer { display: none !important; } body.mode-student #notesBtn, body.mode-student #notesToggleBtn { display: none !important; }
+@media (max-width: 900px) { header { padding: 0.85rem 1rem !important; } main { padding: 1rem !important; } .slide, .slide-container { padding: 1.25rem !important; min-height: 560px !important; } .slide-title, .slide-header h1, .slide > div > h1, .slide > h1, .slide-container h1 { font-size: 1.7rem !important; } }
+</style><style id="student-distribution-style">
+/* STUDENT DISTRIBUTION */
+body.mode-student .blank[data-answer]{
+  color:transparent !important;
+  background:var(--blank-bg, var(--blank, #334155)) !important;
+}
+body.mode-answer .blank[data-answer]{
+  color:var(--accent-amber, var(--amber, #fbbf24)) !important;
+  background:rgba(251,191,36,.15) !important;
+  border-bottom-color:var(--accent-amber, var(--amber, #fbbf24)) !important;
+}
+body.mode-student .answer-only{display:none !important;}
+body.mode-answer .answer-only{display:block !important;}
+body.mode-answer .response[data-review-note]::after,
+body.mode-answer .response-area[data-review-note]::after{
+  content:attr(data-review-note);
+  display:block;
+  color:var(--text-muted, var(--muted, #94a3b8));
+  font-style:normal;
+  font-size:.78rem;
+  margin-top:.25rem;
+}
+</style></head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>⚛️</span><span>⚛️ Topic T2.2 | Subatomic Particles and Atomic Accounting</span></div>
+<div class="mode-selector"><button class="mode-btn active" data-mode="student" type="button">Student Mode</button><button class="mode-btn" data-mode="answer" type="button">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter counter-badge" id="slideCounter">Slide 1 / 9</span>
+<span class="counter counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+
+<section class="slide active slide-container" data-max-builds="3" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 6 · Local Slide 1</span>
+<h1 class="slide-title">The Modern Atomic Picture</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Identify the nucleus and electron region in a modern introductory atomic model.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="card" style="display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap">
+<svg style="width:330px;max-width:100%;height:auto" viewbox="0 0 340 190">
+<ellipse cx="170" cy="95" fill="rgba(56,189,248,.08)" rx="145" ry="76" stroke="#38bdf8" stroke-dasharray="5 5" stroke-width="2"></ellipse>
+<circle cx="170" cy="95" fill="#1e293b" r="21" stroke="#fbbf24" stroke-width="2"></circle>
+<circle cx="170" cy="95" fill="#fbbf24" opacity=".35" r="8"></circle>
+<circle cx="60" cy="80" fill="#38bdf8" r="4"></circle><circle cx="278" cy="115" fill="#38bdf8" r="4"></circle><circle cx="115" cy="150" fill="#38bdf8" r="4"></circle>
+<line stroke="#38bdf8" x1="230" x2="205" y1="52" y2="70"></line><text fill="#38bdf8" font-size="11" x="236" y="47">electron region</text>
+<line stroke="#fbbf24" x1="122" x2="151" y1="137" y2="111"></line><text fill="#fbbf24" font-size="11" x="65" y="151">tiny nucleus</text>
+</svg>
+<div style="flex:1;min-width:250px;font-size:.98rem;line-height:1.45">
+<p>Electrons occupy the space surrounding the nucleus.</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="card" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+<svg style="width:150px;height:90px;flex-shrink:0" viewbox="0 0 150 90">
+<circle cx="75" cy="45" fill="#1e293b" r="31" stroke="#fbbf24" stroke-width="2"></circle>
+<circle cx="66" cy="37" fill="#f43f5e" r="10"></circle><text fill="white" font-size="10" text-anchor="middle" x="66" y="41">+</text>
+<circle cx="84" cy="37" fill="#94a3b8" r="10"></circle><text fill="#0f172a" font-size="10" text-anchor="middle" x="84" y="41">n</text>
+<circle cx="66" cy="55" fill="#94a3b8" r="10"></circle><text fill="#0f172a" font-size="10" text-anchor="middle" x="66" y="59">n</text>
+<circle cx="84" cy="55" fill="#f43f5e" r="10"></circle><text fill="white" font-size="10" text-anchor="middle" x="84" y="59">+</text>
+</svg>
+<div>
+            The nucleus contains <span class="blank" contenteditable="false" data-answer="protons" data-placeholder="[_______]">[_______]</span>
+            and <span class="blank" contenteditable="false" data-answer="neutrons" data-placeholder="[_______]">[_______]</span>.
+          </div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="grid-2">
+<div class="card"><h4>Atomic Volume</h4><p>Most atomic volume is associated with the electron region.</p></div>
+<div class="card"><h4 style="color:var(--accent-amber)">Atomic Mass</h4><p>Most atomic mass is concentrated in the nucleus.</p></div>
+</div>
+<div class="warn" style="margin-top:.55rem">
+<strong>Scale Caution:</strong> Atomic diagrams are not drawn to scale.
+        </div>
+</div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 7 · Local Slide 2</span>
+<h1 class="slide-title">Protons, Neutrons, and Electrons</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Compare the location, charge, and approximate relative mass of subatomic particles.</div>
+</div>
+<div class="slide-body">
+<table class="atom-table">
+<thead><tr><th>Particle</th><th>Location</th><th>Charge</th><th>Relative Mass</th></tr></thead>
+<tbody>
+<tr class="build-step visible" data-build="1"><td style="color:var(--accent-rose);font-weight:700">Proton</td><td>Nucleus</td><td><span class="blank" contenteditable="false" data-answer="+1" data-placeholder="[_______]">[_______]</span></td><td>≈ 1</td></tr>
+<tr class="build-step" data-build="2"><td style="font-weight:700">Neutron</td><td>Nucleus</td><td><span class="blank" contenteditable="false" data-answer="0" data-placeholder="[_______]">[_______]</span></td><td>≈ 1</td></tr>
+<tr class="build-step" data-build="3"><td style="color:var(--accent-blue);font-weight:700">Electron</td><td>Outside nucleus</td><td><span class="blank" contenteditable="false" data-answer="−1" data-placeholder="[_______]">[_______]</span></td><td>≈ 1/1836</td></tr>
+</tbody></table>
+<div class="build-step" data-build="3"><div class="callout">The electron mass is very small, but not zero.</div></div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 8 · Local Slide 3</span>
+<h1 class="slide-title">Atomic Number, Mass Number, and Neutrons</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Use atomic number and mass number to identify an element and calculate its neutron count.</div>
+</div>
+<div class="slide-body">
+<div class="grid-2">
+<div class="card build-step visible" data-build="1">
+<h4>Atomic Number, Z</h4>
+<p>Number of <span class="blank" contenteditable="false" data-answer="protons" data-placeholder="[_______]">[_______]</span> in the nucleus; Z determines element identity.</p>
+<div style="margin-top:.55rem;background:#1e293b;border-radius:6px;padding:.55rem;text-align:center">
+<div style="font-size:.72rem;color:var(--text-muted)">15</div>
+<div style="font-size:2rem;font-weight:800;color:var(--accent-teal)">P</div>
+<div style="font-size:.8rem">Phosphorus</div>
+</div>
+</div>
+<div class="card build-step" data-build="2">
+<h4>Mass Number, A</h4>
+<p>Number of protons + number of <span class="blank" contenteditable="false" data-answer="neutrons" data-placeholder="[_______]">[_______]</span>.</p>
+<div style="margin-top:.55rem;text-align:center;font-weight:800;color:var(--accent-amber)">A = Z + N    |    N = A − Z</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="card">
+<strong>Guided example:</strong> A = 31 and Z = 15 → N = 31 − 15 = <span class="blank" contenteditable="false" data-answer="16" data-placeholder="[_______]">[_______]</span>.
+          <div class="warn" style="margin-top:.55rem">Mass number is a whole-number count for one isotope, not the decimal atomic mass on the periodic table.</div>
+</div>
+</div>
+</div>
+</div>
+
+</section><section class="slide slide-container" data-max-builds="3" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Curriculum Insert 8A · Local Slide 4</span>
+<h1 class="slide-title">Radioactivity — A Change in the Nucleus</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Explain radioactivity in simple terms and recognize alpha, beta, and gamma emissions.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="nuclear-compare">
+<div class="simple-illustration">
+<h4>Chemical change</h4>
+<div class="atom-shell">
+<div class="nucleus">nucleus</div>
+<div class="electron e1">e⁻</div>
+<div class="electron e2">e⁻</div>
+<div class="electron e3">e⁻</div>
+<div class="electron e4">e⁻</div>
+</div>
+<p><strong>What changes?</strong> The <strong>electrons</strong> move around to make or break bonds.</p>
+<p style="margin-top:.3rem;color:var(--text-muted)">The nucleus stays the same.</p>
+</div>
+<div class="simple-illustration">
+<h4>Radioactive change</h4>
+<div class="nucleus-box">
+<div class="pdot">p⁺</div><div class="ndot">n⁰</div><div class="pdot">p⁺</div>
+<div class="ndot">n⁰</div><div class="pdot">p⁺</div><div class="ndot">n⁰</div>
+</div>
+<p><strong>What changes?</strong> The <strong>nucleus itself</strong> changes because it is unstable.</p>
+<p style="margin-top:.3rem;color:var(--text-muted)">Something may leave the nucleus: a particle or energy.</p>
+</div>
+</div>
+<div class="callout" style="margin-top:.6rem"><strong>Easy idea:</strong> chemistry changes the outside of the atom; radioactivity changes the center of the atom.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="rad-type-grid">
+<div class="rad-type-card">
+<h4>α alpha</h4>
+<div class="rad-visual">
+<div class="alpha-pack"><span class="pdot">p⁺</span><span class="pdot">p⁺</span><span class="ndot">n⁰</span><span class="ndot">n⁰</span></div>
+<span class="arrow-big">leaves</span>
+</div>
+<p><strong>Meaning:</strong> 2 protons and 2 neutrons leave together.</p>
+<p><strong>Remember:</strong> A − 4, Z − 2.</p>
+</div>
+<div class="rad-type-card">
+<h4>β beta (β⁻)</h4>
+<div class="rad-visual beta-flow">
+<span class="ndot">n⁰</span><span class="arrow-big">→</span><span class="pdot">p⁺</span><span>+ e⁻ out</span>
+</div>
+<p><strong>Meaning:</strong> a neutron turns into a proton, and an electron is emitted.</p>
+<p><strong>Remember:</strong> A stays the same, Z + 1.</p>
+</div>
+<div class="rad-type-card">
+<h4>γ gamma</h4>
+<div class="rad-visual">
+<div class="nucleus-box" style="width:96px;height:72px;margin:0">
+<div class="pdot">p⁺</div><div class="ndot">n⁰</div><div class="pdot">p⁺</div>
+<div class="ndot">n⁰</div><div class="pdot">p⁺</div><div class="ndot">n⁰</div>
+</div>
+<span class="gamma-waves">~~~</span>
+</div>
+<p><strong>Meaning:</strong> the nucleus releases energy only.</p>
+<p><strong>Remember:</strong> A and Z do not change.</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<table class="quick-table">
+<tr><th>If this happens...</th><th>Then it is...</th></tr>
+<tr><td>Mass number goes down by 4, atomic number goes down by 2</td><td><strong>α emission</strong></td></tr>
+<tr><td>Mass number stays the same, atomic number goes up by 1</td><td><strong>β⁻ emission</strong></td></tr>
+<tr><td>Mass number and atomic number both stay the same</td><td><strong>γ emission</strong></td></tr>
+</table>
+<div class="warn" style="margin-top:.55rem"><strong>Fast exam strategy:</strong> do not panic. Just compare how <strong>A</strong> and <strong>Z</strong> change.</div>
+<p style="margin-top:.45rem">Radioactivity changes the <span class="blank" contenteditable="false" data-answer="nucleus" data-placeholder="[ _______ ]">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+
+</section><section class="slide slide-container" data-max-builds="3" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Curriculum Insert 8B · Local Slide 5</span>
+<h1 class="slide-title">Worked Problems — Radioactivity (Easy → Medium → Hard)</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Solve introductory ACS-style radioactivity problems by tracking mass number A and atomic number Z.</div>
+</div>
+<div class="slide-body">
+<div class="worked-grid">
+<div class="build-step visible" data-build="1">
+<div class="worked-box">
+<h4>Easy</h4>
+<p><strong>Question:</strong> A nucleus emits an α particle. How do the mass number A and atomic number Z change?</p>
+<p><strong>Step 1:</strong> An α particle is 2 protons + 2 neutrons.</p>
+<p><strong>Step 2:</strong> Losing 2 protons and 2 neutrons means losing 4 total mass units and 2 positive charges.</p>
+<div class="answer-line"><strong>Answer:</strong> <strong>A decreases by 4</strong> and <strong>Z decreases by 2</strong>.</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked-box">
+<h4>Medium</h4>
+<p><strong>Question:</strong> Carbon-14 undergoes β⁻ decay. What are the mass number and atomic number of the daughter nucleus?</p>
+<p><strong>Step 1:</strong> Carbon-14 has <strong>A = 14</strong> and carbon has <strong>Z = 6</strong>.</p>
+<p><strong>Step 2:</strong> In β⁻ decay, a neutron becomes a proton and an electron is emitted.</p>
+<p><strong>Step 3:</strong> So <strong>A stays the same</strong>, but <strong>Z increases by 1</strong>.</p>
+<div class="answer-line"><strong>Answer:</strong> Daughter nucleus = <strong>A = 14</strong>, <strong>Z = 7</strong> (nitrogen-14).</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="worked-box">
+<h4>Hard</h4>
+<p><strong>Question:</strong> A parent nucleus forms a daughter nucleus whose mass number is 4 lower and atomic number is 2 lower. What was emitted?</p>
+<p><strong>Step 1:</strong> Compare the changes: <strong>ΔA = −4</strong> and <strong>ΔZ = −2</strong>.</p>
+<p><strong>Step 2:</strong> Match that pattern with the three emissions:</p>
+<ul style="margin:.35rem 0 0 1.2rem">
+<li>α: A − 4, Z − 2</li>
+<li>β⁻: A no change, Z + 1</li>
+<li>γ: A no change, Z no change</li>
+</ul>
+<div class="answer-line"><strong>Answer:</strong> The nucleus emitted an <strong>α particle</strong>.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 9 · Local Slide 6</span>
+<h1 class="slide-title">Isotope Symbol Anatomy</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Interpret every position in a complete isotope symbol.</div>
+</div>
+<div class="slide-body" style="align-items:center;justify-content:center">
+<div class="build-step visible" data-build="1" style="position:relative;min-width:420px;min-height:190px;display:flex;align-items:center;justify-content:center">
+<div class="symbol-box" style="position:relative;z-index:2">
+<span class="left-stack"><span>23</span><span>11</span></span><span class="center-symbol">Na</span><span class="charge">+</span>
+</div>
+<svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" viewbox="0 0 420 190">
+<g class="build-step" data-build="2">
+<line stroke="#f43f5e" stroke-width="2" x1="118" x2="174" y1="40" y2="70"></line>
+<text fill="#f43f5e" font-size="14" font-weight="700" x="36" y="36">A = mass number</text>
+<line stroke="#38bdf8" stroke-width="2" x1="118" x2="174" y1="145" y2="116"></line>
+<text fill="#38bdf8" font-size="14" font-weight="700" x="30" y="162">Z = atomic number</text>
+</g>
+<g class="build-step" data-build="3">
+<line stroke="#2dd4bf" stroke-width="2" x1="300" x2="250" y1="95" y2="95"></line>
+<text fill="#2dd4bf" font-size="14" font-weight="700" x="304" y="88">element symbol</text>
+<line stroke="#fbbf24" stroke-width="2" x1="294" x2="251" y1="38" y2="67"></line>
+<text fill="#fbbf24" font-size="14" font-weight="700" x="302" y="32">ionic charge</text>
+</g>
+</svg>
+</div>
+<div class="grid-2" style="width:100%;max-width:900px">
+<div class="card build-step" data-build="2"><h4>Left Positions</h4><p>Upper left: mass number, A</p><p style="margin-top:.25rem">Lower left: atomic number, Z</p></div>
+<div class="card build-step" data-build="3"><h4>Center and Right</h4><p>Center: element symbol</p><p style="margin-top:.25rem">Upper right: ionic charge</p></div>
+</div>
+<div class="build-step" data-build="3"><div class="callout">A complete symbol may show all four positions.</div></div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 10 · Local Slide 7</span>
+<h1 class="slide-title">Guided Practice — Isotope Symbols and Particle Counts</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Convert in both directions between isotope notation and proton, neutron, and electron counts.</div>
+</div>
+<div class="slide-body">
+<div class="grid-2">
+<div class="card">
+<h4>Example A — Symbol to Particles</h4>
+<div style="text-align:center;margin:.3rem 0">
+<span class="symbol-box"><span class="left-stack"><span>27</span><span>13</span></span><span class="center-symbol">Al</span><span class="charge">3+</span></span>
+</div>
+<div class="build-step visible" data-build="1">
+<p>Protons = <span class="blank" contenteditable="false" data-answer="13" data-placeholder="[_______]">[_______]</span></p>
+<p style="margin-top:.25rem">Neutrons = <span class="blank" contenteditable="false" data-answer="14" data-placeholder="[_______]">[_______]</span></p>
+</div>
+<div class="build-step" data-build="2" style="margin-top:.35rem">
+<p>Electrons = <span class="blank" contenteditable="false" data-answer="10" data-placeholder="[_______]">[_______]</span></p>
+</div>
+</div>
+<div class="card build-step" data-build="3">
+<h4>Example B — Particles to Symbol</h4>
+<p><strong>Given:</strong> 16 protons, 18 neutrons, and 18 electrons</p>
+<div style="margin-top:.5rem">
+<p>Element = <span class="blank" contenteditable="false" data-answer="S" data-placeholder="[_______]">[_______]</span></p>
+<p style="margin-top:.25rem">Mass number = <span class="blank" contenteditable="false" data-answer="34" data-placeholder="[_______]">[_______]</span></p>
+<p style="margin-top:.25rem">Charge = <span class="blank" contenteditable="false" data-answer="2−" data-placeholder="[_______]">[_______]</span></p>
+<div class="answer-only" style="text-align:center;margin-top:.55rem">
+<span class="symbol-box"><span class="left-stack"><span>34</span><span>16</span></span><span class="center-symbol">S</span><span class="charge">2−</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="3" id="slide-8">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 11 · Local Slide 8</span>
+<h1 class="slide-title">Neutral Atoms versus Ions</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Relate net charge to the difference between proton and electron counts.</div>
+</div>
+<div class="slide-body">
+<div class="grid-3">
+<div class="card build-step visible" data-build="1">
+<h4>Neutral Atom</h4>
+<p>Protons = <span class="blank" contenteditable="false" data-answer="electrons" data-placeholder="[_______]">[_______]</span>.</p>
+<svg style="width:100%;height:90px;margin-top:.35rem" viewbox="0 0 120 70">
+<circle cx="60" cy="35" fill="#fbbf24" r="13"></circle><circle cx="22" cy="35" fill="#38bdf8" r="4"></circle><circle cx="98" cy="35" fill="#38bdf8" r="4"></circle>
+</svg>
+</div>
+<div class="card build-step" data-build="2">
+<h4 style="color:var(--accent-amber)">Cation</h4>
+<p>Protons &gt; electrons; net charge is <span class="blank" contenteditable="false" data-answer="positive" data-placeholder="[_______]">[_______]</span>.</p>
+<svg style="width:100%;height:90px;margin-top:.35rem" viewbox="0 0 120 70">
+<circle cx="60" cy="35" fill="#fbbf24" r="13"></circle><circle cx="24" cy="35" fill="#38bdf8" r="4"></circle>
+</svg>
+</div>
+<div class="card build-step" data-build="3">
+<h4 style="color:var(--accent-rose)">Anion</h4>
+<p>Electrons &gt; protons; net charge is <span class="blank" contenteditable="false" data-answer="negative" data-placeholder="[_______]">[_______]</span>.</p>
+<svg style="width:100%;height:90px;margin-top:.35rem" viewbox="0 0 120 70">
+<circle cx="60" cy="35" fill="#fbbf24" r="13"></circle><circle cx="20" cy="35" fill="#38bdf8" r="4"></circle><circle cx="100" cy="35" fill="#38bdf8" r="4"></circle><circle cx="60" cy="66" fill="#38bdf8" r="4"></circle>
+</svg>
+</div>
+</div>
+<div class="build-step" data-build="3"><div class="callout" style="text-align:center;font-weight:800">Net charge = number of protons − number of electrons.</div></div>
+</div>
+</div>
+
+</section>
+
+<section class="slide slide-container" data-max-builds="2" id="slide-9">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 12 · Local Slide 9</span>
+<h1 class="slide-title">Independent Check — Atomic Accounting</h1>
+<div class="lo lo-box"><strong>Learning Objective:</strong> Assess ability to interpret and construct atomic symbols.</div>
+</div>
+<div class="slide-body">
+<div class="question-grid">
+<div class="question-card build-step visible" data-build="1">
+<div><span class="qnum">1</span><span class="qtext">For <span class="symbol-box" style="padding:.2rem .45rem;vertical-align:middle"><span class="left-stack" style="font-size:.72rem"><span>56</span><span>26</span></span><span class="center-symbol" style="font-size:1.35rem">Fe</span><span class="charge" style="font-size:.72rem">2+</span></span>, determine p<sup>+</sup>, n<sup>0</sup>, and e<sup>−</sup>.</span></div>
+<div class="response">Student work space</div>
+</div>
+<div class="question-card build-step visible" data-build="1">
+<div><span class="qnum">2</span><span class="qtext">An ion has 17 p<sup>+</sup>, 18 n<sup>0</sup>, and 18 e<sup>−</sup>. Write its complete symbol.</span></div>
+<div class="response">Student work space</div>
+</div>
+<div class="question-card build-step" data-build="2">
+<div><span class="qnum">3</span><span class="qtext">Which change creates a different element: changing neutrons, electrons, or protons?</span></div>
+<div class="response">Student work space</div>
+</div>
+<div class="question-card build-step" data-build="2">
+<div><span class="qnum">4</span><span class="qtext">A student says Mg<sup>2+</sup> has two more protons than Mg. Identify the error.</span></div>
+<div class="response">Student work space</div>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+</main>
+
+<script>
+(() => {
+  let currentSlide = 1;
+  let currentBuild = 1;
+  let currentMode = 'student';
+  const totalSlides = 9;
+
+  const slides = () => Array.from(document.querySelectorAll('.slide, .slide-container'))
+    .filter((el, i, arr) => el.id && el.id.startsWith('slide-') && arr.findIndex(x => x.id === el.id) === i);
+
+  function buildMax(slide) {
+    const values = Array.from(slide.querySelectorAll('[data-build]'))
+      .map(el => parseInt(el.dataset.build || '1', 10))
+      .filter(Number.isFinite);
+    const declared = parseInt(slide.dataset.maxBuilds || '1', 10);
+    return Math.max(declared || 1, ...(values.length ? values : [1]));
+  }
+
+  function setMode(mode) {
+    currentMode = mode === 'answer' ? 'answer' : 'student';
+    document.body.className = 'mode-' + currentMode;
+
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === currentMode);
+    });
+
+    document.querySelectorAll('.blank[data-answer]').forEach(blank => {
+      if (currentMode === 'answer') {
+        blank.textContent = blank.dataset.answer || '';
+      } else {
+        blank.textContent = blank.dataset.placeholder || '[_______]';
+      }
+    });
+  }
+
+  function updateView() {
+    const deck = slides();
+    deck.forEach((slide, idx) => {
+      slide.classList.toggle('active', idx === currentSlide - 1);
+      if (idx === currentSlide - 1) {
+        slide.querySelectorAll('[data-build]').forEach(el => {
+          const b = parseInt(el.dataset.build || '1', 10);
+          el.classList.toggle('visible', b <= currentBuild);
+        });
+      }
+    });
+
+    const active = deck[currentSlide - 1];
+    const maxBuild = active ? buildMax(active) : 1;
+    currentBuild = Math.min(currentBuild, maxBuild);
+
+    const sc = document.getElementById('slideCounter');
+    const bc = document.getElementById('buildCounter');
+    if (sc) sc.textContent = `Slide ${currentSlide} / ${totalSlides}`;
+    if (bc) bc.textContent = `Build ${currentBuild} / ${maxBuild}`;
+
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
+    if (prev) prev.disabled = currentSlide === 1 && currentBuild === 1;
+    if (next) next.disabled = currentSlide === totalSlides && currentBuild === maxBuild;
+  }
+
+  window.nextBuild = function() {
+    const deck = slides();
+    const active = deck[currentSlide - 1];
+    const maxBuild = active ? buildMax(active) : 1;
+    if (currentBuild < maxBuild) currentBuild++;
+    else if (currentSlide < totalSlides) { currentSlide++; currentBuild = 1; }
+    updateView();
+  };
+
+  window.prevBuild = function() {
+    const deck = slides();
+    if (currentBuild > 1) currentBuild--;
+    else if (currentSlide > 1) {
+      currentSlide--;
+      currentBuild = buildMax(deck[currentSlide - 1]);
+    }
+    updateView();
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(btn =>
+      btn.addEventListener('click', () => setMode(btn.dataset.mode))
+    );
+
+    document.querySelectorAll('.blank[data-answer]').forEach(blank => {
+      if (!blank.dataset.placeholder) blank.dataset.placeholder = blank.textContent || '[_______]';
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') window.nextBuild();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') window.prevBuild();
+    });
+
+    setMode('student');
+    updateView();
+  });
+})();
+</script></body>
+</html>

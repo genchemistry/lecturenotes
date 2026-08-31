@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Topic T2.5 — Ions (Charge Patterns Focus) — Student</title>
+<style>
+:root{--bg-dark:#0f172a;--bg-card:#1e293b;--panel:#0b1220;--accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;--accent-rose:#f43f5e;--accent-purple:#c084fc;--text-main:#f8fafc;--text-muted:#94a3b8;--border:#475569;--blank:#334155;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border);padding:.5rem 1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;z-index:100}
+.deck-title{font-size:1.05rem;font-weight:700;color:var(--accent-blue);display:flex;gap:.5rem;align-items:center}
+.mode-selector{display:flex;background:#1e293b;border:1px solid var(--border);border-radius:8px;padding:3px}
+.mode-btn,.btn{border-radius:6px;font-weight:600;cursor:pointer;transition:.2s}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.35rem .75rem;font-size:.85rem}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.5rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border);padding:.38rem .8rem;font-size:.85rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter{font-size:.85rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border)}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:.85rem 1.25rem;max-width:1640px;width:100%;margin:0 auto}
+.slide{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:1.15rem 1.35rem;min-height:590px;max-height:calc(100vh - 100px);display:none;flex-direction:column;justify-content:space-between;overflow-y:auto}
+.slide.active{display:flex}
+.slide-header{margin-bottom:.5rem}
+.meta-pill{display:inline-block;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.15rem .45rem;border-radius:4px;border:1px solid rgba(45,212,191,.2);margin-bottom:.25rem}
+.slide-title{font-size:1.5rem;font-weight:800;line-height:1.2}
+.lo{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.45rem .8rem;border-radius:0 6px 6px 0;margin-top:.4rem;font-size:.9rem}
+.lo strong{color:var(--accent-blue)}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:.75rem;margin-top:.2rem}
+.build-step{opacity:.15;pointer-events:none;transform:translateY(6px);filter:blur(1px);transition:.35s}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.blank{display:inline-block;min-width:80px;padding:.1rem .45rem;background:var(--blank);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none}
+body.mode-student .blank{color:transparent!important}
+body.mode-reviewlegacy .blank.revealed{color:var(--accent-amber);background:rgba(251,191,36,.15)}
+body.mode-editlegacy .blank.revealed{color:var(--accent-teal);background:rgba(45,212,191,.15)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.8rem}
+.card h4{color:var(--accent-blue);font-size:.95rem;margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.04em}
+.callout{background:rgba(56,189,248,.09);border:1px solid var(--accent-blue);border-radius:8px;padding:.55rem .75rem}
+.warn{background:rgba(244,63,94,.08);border:1px solid var(--accent-rose);border-radius:8px;padding:.5rem .75rem;color:#fecdd3}
+.bigcue{font-size:1.1rem;font-weight:800;color:var(--accent-amber)}
+.family-row{display:flex;gap:1rem;align-items:center;justify-content:center;flex-wrap:wrap}
+.ion-card{min-width:180px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:.8rem;text-align:center}
+.ion-card .particle{font-size:1.65rem;font-weight:900;color:var(--accent-teal);margin-bottom:.2rem}
+.ion-card .desc{font-size:.9rem;color:var(--text-muted)}
+.arrow-big{font-size:1.8rem;color:var(--accent-amber);font-weight:900}
+.eq-row{display:flex;gap:.6rem;align-items:center;justify-content:center;flex-wrap:wrap;font-size:1.1rem}
+.eq-box{background:#111827;border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-weight:800}
+.ptable-shell{background:#09101d;border:1px solid var(--border);border-radius:10px;padding:.65rem;overflow-x:auto}
+.ptable-full{min-width:720px}
+.group-row{display:grid;grid-template-columns:repeat(18, 1fr);gap:3px;margin-bottom:3px}
+.glabel{font-size:.65rem;color:var(--text-muted);text-align:center;padding:.15rem 0;border-radius:4px;background:#111827;border:1px solid rgba(71,85,105,.35)}
+.glabel.blank{background:transparent;border-color:transparent;color:transparent}
+.group-row.modern .glabel{font-size:.56rem}
+.ptable-grid{display:grid;grid-template-columns:repeat(18,1fr);gap:3px}
+.ptile{min-height:34px;border-radius:6px;border:1px solid rgba(71,85,105,.55);background:#1f2937;color:var(--text-main);display:flex;align-items:center;justify-content:center;text-align:center;padding:.2rem;font-size:.68rem;font-weight:700;position:relative}
+.ptile .sym{line-height:1}
+.ptile.empty{background:transparent;border-color:transparent}
+.ptile.fixed{background:rgba(45,212,191,.18);border-color:rgba(45,212,191,.55)}
+.ptile.transition{background:rgba(192,132,252,.15);border-color:rgba(192,132,252,.5)}
+.ptile.anion{background:rgba(244,63,94,.15);border-color:rgba(244,63,94,.45)}
+.ptile.exception{outline:2px solid var(--accent-amber);outline-offset:-2px}
+.ptile.sample::after{content:"";position:absolute;inset:2px;border:1px dashed rgba(248,250,252,.45);border-radius:4px}
+.fblock-label{font-size:.7rem;color:var(--text-muted);margin:.45rem 0 .3rem}
+.fblock{display:flex;flex-direction:column;gap:3px}
+.frow{display:grid;grid-template-columns:64px repeat(15,1fr);gap:3px}
+.flabel{font-size:.68rem;display:flex;align-items:center;justify-content:center;background:#111827;border:1px solid rgba(71,85,105,.35);border-radius:6px;color:var(--text-muted)}
+.ftile{min-height:30px;font-size:.63rem;background:#172030}
+.legend{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.55rem}
+.legend span{display:inline-flex;align-items:center;gap:.35rem;background:#111827;border:1px solid rgba(71,85,105,.35);padding:.3rem .55rem;border-radius:999px;font-size:.77rem}
+.i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.two-col-focus{display:grid;grid-template-columns:1.5fr 1fr;gap:.85rem;align-items:start}
+.rule-list{display:flex;flex-direction:column;gap:.55rem}
+.rule{background:#111827;border:1px solid var(--border);border-radius:8px;padding:.55rem .65rem}
+.rule strong{color:var(--accent-blue)}
+.charge-pills{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.35rem}
+.pill{padding:.25rem .5rem;border-radius:999px;font-weight:800;font-size:.8rem;border:1px solid var(--border);background:#1f2937}
+.pill.fixed{background:rgba(45,212,191,.16);border-color:rgba(45,212,191,.45)}
+.pill.trans{background:rgba(192,132,252,.14);border-color:rgba(192,132,252,.45)}
+.pill.anion{background:rgba(244,63,94,.14);border-color:rgba(244,63,94,.4)}
+.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.practice-card{background:#111827;border:1px solid var(--border);border-radius:8px;padding:.7rem}
+.practice-card h5{color:var(--accent-teal);font-size:.95rem;margin-bottom:.35rem}
+.practice-card .prompt{font-weight:800;margin-bottom:.4rem}
+.steps{display:flex;flex-direction:column;gap:.35rem;font-size:.9rem}
+.center-big{text-align:center;font-size:1.65rem;font-weight:900;color:var(--accent-teal)}
+.e-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.e-table th,.e-table td{border:1px solid var(--border);padding:.45rem;text-align:center}
+.e-table th{background:#111827;color:var(--accent-blue)}
+.examples-inline{display:flex;gap:.65rem;flex-wrap:wrap;justify-content:center}
+.examples-inline .ex{background:#111827;border:1px solid var(--border);border-radius:8px;padding:.55rem .7rem;font-weight:800}
+.question-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}
+.question-card{background:#111827;border:1px solid var(--border);border-radius:8px;padding:.75rem}
+.qnum{display:inline-flex;width:26px;height:26px;border-radius:50%;align-items:center;justify-content:center;background:var(--accent-blue);color:#0f172a;font-weight:900;margin-right:.45rem}
+.response{margin-top:.45rem;min-height:54px;border:1px dashed var(--border);border-radius:8px;padding:.45rem;color:var(--text-muted)}
+.removed-drawer{display:none;margin-top:.85rem;background:#020617;border:1px solid var(--border);border-radius:10px;padding:.75rem}
+body.show-notes .removed-drawer{display:block}
+.removed-drawer h5{color:var(--accent-amber);margin-bottom:.35rem}
+.removed-drawer p{font-size:.88rem;color:#cbd5e1;margin-bottom:.35rem}
+.meta-list{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;margin-top:.45rem}
+.meta-item{background:#111827;border:1px solid rgba(71,85,105,.45);border-radius:8px;padding:.45rem;font-size:.78rem}
+@media (max-width: 980px){.two-col-focus,.grid-2,.grid-3,.practice-grid,.question-grid,.meta-list{grid-template-columns:1fr} .slide{min-height:unset}}
+</style>
+<style id="student-distribution-style">
+/* STUDENT DISTRIBUTION */
+body.mode-student .blank[data-answer]{
+  color:transparent !important;
+  background:var(--blank-bg, var(--blank, #334155)) !important;
+}
+body.mode-answer .blank[data-answer]{
+  color:var(--accent-amber, var(--amber, #fbbf24)) !important;
+  background:rgba(251,191,36,.15) !important;
+  border-bottom-color:var(--accent-amber, var(--amber, #fbbf24)) !important;
+}
+body.mode-student .answer-only{display:none !important;}
+body.mode-answer .answer-only{display:block !important;}
+body.mode-answer .response[data-review-note]::after,
+body.mode-answer .response-area[data-review-note]::after{
+  content:attr(data-review-note);
+  display:block;
+  color:var(--text-muted, var(--muted, #94a3b8));
+  font-style:normal;
+  font-size:.78rem;
+  margin-top:.25rem;
+}
+</style></head>
+<body class="mode-student">
+<header>
+<div class="deck-title">⚛️ Topic T2.5 — Ions (Charge Patterns Focus)</div>
+<div class="mode-selector"><button class="mode-btn active" data-mode="student" type="button">Student Mode</button><button class="mode-btn" data-mode="answer" type="button">Answer Mode</button></div>
+<div class="nav-controls">
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter" id="slideCounter">Slide 1 / 8</span>
+<span class="counter" id="buildCounter">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+
+</div>
+</header>
+<main>
+<section class="slide" data-max-builds="3" id="slide-1">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 26 · Local Slide 1</span><h1 class="slide-title">Why Atoms Form Ions</h1><div class="lo"><strong>Learning Objective:</strong> Connect ion formation to electron gain, electron loss, and the need for predictable ion charges in formulas and naming.</div></div>
+<div class="slide-body">
+<div class="family-row">
+<div class="ion-card build-step visible" data-build="1"><div class="particle">Na → Na<sup>+</sup></div><div class="desc">A metal atom loses electrons and forms a <strong>cation</strong>.</div></div>
+<div class="arrow-big build-step" data-build="2">⇄</div>
+<div class="ion-card build-step" data-build="2"><div class="particle">Cl + e<sup>−</sup> → Cl<sup>−</sup></div><div class="desc">A nonmetal atom gains electrons and forms an <strong>anion</strong>.</div></div>
+</div>
+<div class="callout build-step" data-build="3"><strong>Why this matters:</strong> In Module 2, ion charge is the bridge from <strong>atoms</strong> to <strong>chemical formulas</strong> and then to <strong>compound names</strong>. Before we write CaCl<sub>2</sub> or iron(III) oxide, we must know the ion charges.</div>
+<div class="grid-3 build-step" data-build="3">
+<div class="card"><h4>Today</h4><p>Read common charges from the periodic table.</p></div>
+<div class="card"><h4>Next</h4><p>Use those charges to write formulas.</p></div>
+<div class="card"><h4>Later</h4><p>Use those formulas in nomenclature.</p></div>
+</div>
+</div></div>
+
+</section>
+<section class="slide" data-max-builds="3" id="slide-2">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 27 · Local Slide 2</span><h1 class="slide-title">Cations and Anions</h1><div class="lo"><strong>Learning Objective:</strong> Distinguish electron loss from electron gain and relate each process to charge sign.</div></div>
+<div class="slide-body">
+<div class="grid-2">
+<div class="card build-step visible" data-build="1"><h4>Cation</h4><div class="center-big">positive ion</div><div class="eq-row" style="margin-top:.5rem"><div class="eq-box">Na → Na<sup>+</sup> + e<sup>−</sup></div></div><p style="margin-top:.45rem">Loses one or more electrons.</p><div class="charge-pills"><span class="pill fixed">Na<sup>+</sup></span><span class="pill fixed">Mg<sup>2+</sup></span><span class="pill fixed">Al<sup>3+</sup></span></div></div>
+<div class="card build-step" data-build="2"><h4>Anion</h4><div class="center-big" style="color:var(--accent-rose)">negative ion</div><div class="eq-row" style="margin-top:.5rem"><div class="eq-box">Cl + e<sup>−</sup> → Cl<sup>−</sup></div></div><p style="margin-top:.45rem">Gains one or more electrons.</p><div class="charge-pills"><span class="pill anion">N<sup>3−</sup></span><span class="pill anion">O<sup>2−</sup></span><span class="pill anion">F<sup>−</sup></span></div></div>
+</div>
+<div class="warn build-step" data-build="3"><strong>Common misconception:</strong> ions form by gaining or losing <strong>electrons</strong>, not by gaining or losing protons.</div>
+</div></div>
+
+</section>
+<section class="slide" data-max-builds="4" id="slide-3">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 28 · Local Slide 3</span><h1 class="slide-title">Predicting Common Ion Charges from the Periodic Table</h1><div class="lo"><strong>Learning Objective:</strong> Use the full periodic table to predict common main-group cation charges, transition-metal behavior, and common main-group anion charges.</div></div>
+<div class="slide-body">
+<div class="two-col-focus">
+<div class="ptable-shell"><div class="ptable-full"><div class="group-row legacy"><div class="glabel">1A</div><div class="glabel">2A</div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel">3A</div><div class="glabel">4A</div><div class="glabel">5A</div><div class="glabel">6A</div><div class="glabel">7A</div><div class="glabel">8A</div></div><div class="group-row modern"><div class="glabel">1</div><div class="glabel">2</div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel">13</div><div class="glabel">14</div><div class="glabel">15</div><div class="glabel">16</div><div class="glabel">17</div><div class="glabel">18</div></div><div class="ptable-grid"><div class="ptile"><span class="sym">H</span></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile"><span class="sym">He</span></div><div class="ptile fixed g1"><span class="sym">Li</span></div><div class="ptile fixed g2"><span class="sym">Be</span></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile"><span class="sym">B</span></div><div class="ptile"><span class="sym">C</span></div><div class="ptile anion sample"><span class="sym">N</span></div><div class="ptile anion sample"><span class="sym">O</span></div><div class="ptile anion"><span class="sym">F</span></div><div class="ptile"><span class="sym">Ne</span></div><div class="ptile fixed g1 sample"><span class="sym">Na</span></div><div class="ptile fixed g2 sample"><span class="sym">Mg</span></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile fixed g13 sample"><span class="sym">Al</span></div><div class="ptile"><span class="sym">Si</span></div><div class="ptile anion"><span class="sym">P</span></div><div class="ptile anion"><span class="sym">S</span></div><div class="ptile anion sample"><span class="sym">Cl</span></div><div class="ptile"><span class="sym">Ar</span></div><div class="ptile fixed g1"><span class="sym">K</span></div><div class="ptile fixed g2"><span class="sym">Ca</span></div><div class="ptile transition"><span class="sym">Sc</span></div><div class="ptile transition"><span class="sym">Ti</span></div><div class="ptile transition"><span class="sym">V</span></div><div class="ptile transition"><span class="sym">Cr</span></div><div class="ptile transition"><span class="sym">Mn</span></div><div class="ptile transition sample"><span class="sym">Fe</span></div><div class="ptile transition"><span class="sym">Co</span></div><div class="ptile transition"><span class="sym">Ni</span></div><div class="ptile transition sample"><span class="sym">Cu</span></div><div class="ptile transition"><span class="sym">Zn</span></div><div class="ptile fixed g13"><span class="sym">Ga</span></div><div class="ptile"><span class="sym">Ge</span></div><div class="ptile anion"><span class="sym">As</span></div><div class="ptile anion"><span class="sym">Se</span></div><div class="ptile anion"><span class="sym">Br</span></div><div class="ptile"><span class="sym">Kr</span></div><div class="ptile fixed g1"><span class="sym">Rb</span></div><div class="ptile fixed g2"><span class="sym">Sr</span></div><div class="ptile transition"><span class="sym">Y</span></div><div class="ptile transition"><span class="sym">Zr</span></div><div class="ptile transition"><span class="sym">Nb</span></div><div class="ptile transition"><span class="sym">Mo</span></div><div class="ptile transition"><span class="sym">Tc</span></div><div class="ptile transition"><span class="sym">Ru</span></div><div class="ptile transition"><span class="sym">Rh</span></div><div class="ptile transition"><span class="sym">Pd</span></div><div class="ptile transition"><span class="sym">Ag</span></div><div class="ptile transition"><span class="sym">Cd</span></div><div class="ptile"><span class="sym">In</span></div><div class="ptile exception sample"><span class="sym">Sn</span></div><div class="ptile anion"><span class="sym">Sb</span></div><div class="ptile anion"><span class="sym">Te</span></div><div class="ptile anion"><span class="sym">I</span></div><div class="ptile"><span class="sym">Xe</span></div><div class="ptile fixed g1"><span class="sym">Cs</span></div><div class="ptile fixed g2"><span class="sym">Ba</span></div><div class="ptile transition"><span class="sym">La–Lu</span></div><div class="ptile transition"><span class="sym">Hf</span></div><div class="ptile transition"><span class="sym">Ta</span></div><div class="ptile transition"><span class="sym">W</span></div><div class="ptile transition"><span class="sym">Re</span></div><div class="ptile transition"><span class="sym">Os</span></div><div class="ptile transition"><span class="sym">Ir</span></div><div class="ptile transition"><span class="sym">Pt</span></div><div class="ptile transition"><span class="sym">Au</span></div><div class="ptile transition"><span class="sym">Hg</span></div><div class="ptile"><span class="sym">Tl</span></div><div class="ptile exception sample"><span class="sym">Pb</span></div><div class="ptile anion"><span class="sym">Bi</span></div><div class="ptile anion"><span class="sym">Po</span></div><div class="ptile anion"><span class="sym">At</span></div><div class="ptile"><span class="sym">Rn</span></div><div class="ptile fixed g1"><span class="sym">Fr</span></div><div class="ptile fixed g2"><span class="sym">Ra</span></div><div class="ptile transition"><span class="sym">Ac–Lr</span></div><div class="ptile transition"><span class="sym">Rf</span></div><div class="ptile transition"><span class="sym">Db</span></div><div class="ptile transition"><span class="sym">Sg</span></div><div class="ptile transition"><span class="sym">Bh</span></div><div class="ptile transition"><span class="sym">Hs</span></div><div class="ptile transition"><span class="sym">Mt</span></div><div class="ptile transition"><span class="sym">Ds</span></div><div class="ptile transition"><span class="sym">Rg</span></div><div class="ptile transition"><span class="sym">Cn</span></div><div class="ptile"><span class="sym">Nh</span></div><div class="ptile"><span class="sym">Fl</span></div><div class="ptile"><span class="sym">Mc</span></div><div class="ptile"><span class="sym">Lv</span></div><div class="ptile anion"><span class="sym">Ts</span></div><div class="ptile"><span class="sym">Og</span></div></div><div class="fblock-label">Lanthanides and actinides shown below for completeness</div><div class="fblock"><div class="frow"><div class="flabel">La–Lu</div><div class="ptile ftile">La</div><div class="ptile ftile">Ce</div><div class="ptile ftile">Pr</div><div class="ptile ftile">Nd</div><div class="ptile ftile">Pm</div><div class="ptile ftile">Sm</div><div class="ptile ftile">Eu</div><div class="ptile ftile">Gd</div><div class="ptile ftile">Tb</div><div class="ptile ftile">Dy</div><div class="ptile ftile">Ho</div><div class="ptile ftile">Er</div><div class="ptile ftile">Tm</div><div class="ptile ftile">Yb</div><div class="ptile ftile">Lu</div></div><div class="frow"><div class="flabel">Ac–Lr</div><div class="ptile ftile">Ac</div><div class="ptile ftile">Th</div><div class="ptile ftile">Pa</div><div class="ptile ftile">U</div><div class="ptile ftile">Np</div><div class="ptile ftile">Pu</div><div class="ptile ftile">Am</div><div class="ptile ftile">Cm</div><div class="ptile ftile">Bk</div><div class="ptile ftile">Cf</div><div class="ptile ftile">Es</div><div class="ptile ftile">Fm</div><div class="ptile ftile">Md</div><div class="ptile ftile">No</div><div class="ptile ftile">Lr</div></div></div></div><div class="legend"><span><i class="i" style="background:rgba(45,212,191,.45)"></i>Fixed-charge main-group metals</span><span><i class="i" style="background:rgba(192,132,252,.45)"></i>Transition metals: often variable + charges</span><span><i class="i" style="background:rgba(244,63,94,.45)"></i>Common main-group anions</span><span><i class="i" style="background:transparent;border:2px solid var(--accent-amber)"></i>Exceptions: Sn and Pb</span></div></div>
+<div class="rule-list">
+<div class="rule build-step visible" data-build="1"><strong>Use the A-group labels.</strong><br/>For this quick charge rule, pay special attention to 1A, 2A, 3A, 5A, 6A, and 7A.</div>
+<div class="rule build-step" data-build="2"><strong>Main-group metals → fixed positive charge</strong><br/>1A → +1, 2A → +2, 3A → +3.<br/><span class="bigcue">Group number gives the charge magnitude, then add a plus sign.</span></div>
+<div class="rule build-step" data-build="3"><strong>Transition metals → often variable positive charges</strong><br/>Many transition metals can form more than one positive ion. When a metal has more than one possible charge, its charge is shown with a <strong>Roman numeral</strong> in the compound name.<br/><span style="color:var(--text-muted)">Common fixed-charge exceptions you should recognize: Ag<sup>+</sup>, Zn<sup>2+</sup>, and Cd<sup>2+</sup>.</span><br/><strong>Important main-group exceptions:</strong> Sn and Pb are main-group metals, but they commonly form more than one cation: <strong>Sn<sup>2+</sup> / Sn<sup>4+</sup></strong> and <strong>Pb<sup>2+</sup> / Pb<sup>4+</sup></strong>.</div>
+<div class="rule build-step" data-build="4"><strong>Main-group nonmetals → common negative charge</strong><br/>5A → −3, 6A → −2, 7A → −1.<br/><span class="bigcue">Magic number: 8</span> → A-group number minus 8 gives the charge.<br/><span style="color:var(--text-muted)">Why 8? We will explain the reason later in Module 8.</span></div>
+</div>
+</div>
+</div></div>
+
+</section>
+<section class="slide" data-max-builds="3" id="slide-4">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 29 · Local Slide 4</span><h1 class="slide-title">Guided Practice — Reading Charges from the Table</h1><div class="lo"><strong>Learning Objective:</strong> Apply the group-based charge rules to representative elements, including transition metals and the Sn/Pb exceptions.</div></div>
+<div class="slide-body">
+<div class="two-col-focus">
+<div class="ptable-shell"><div class="ptable-full"><div class="group-row legacy"><div class="glabel">1A</div><div class="glabel">2A</div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel">3A</div><div class="glabel">4A</div><div class="glabel">5A</div><div class="glabel">6A</div><div class="glabel">7A</div><div class="glabel">8A</div></div><div class="group-row modern"><div class="glabel">1</div><div class="glabel">2</div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel blank"></div><div class="glabel">13</div><div class="glabel">14</div><div class="glabel">15</div><div class="glabel">16</div><div class="glabel">17</div><div class="glabel">18</div></div><div class="ptable-grid"><div class="ptile"><span class="sym">H</span></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile"><span class="sym">He</span></div><div class="ptile fixed g1"><span class="sym">Li</span></div><div class="ptile fixed g2"><span class="sym">Be</span></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile"><span class="sym">B</span></div><div class="ptile"><span class="sym">C</span></div><div class="ptile anion sample"><span class="sym">N</span></div><div class="ptile anion sample"><span class="sym">O</span></div><div class="ptile anion"><span class="sym">F</span></div><div class="ptile"><span class="sym">Ne</span></div><div class="ptile fixed g1 sample"><span class="sym">Na</span></div><div class="ptile fixed g2 sample"><span class="sym">Mg</span></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile empty"></div><div class="ptile fixed g13 sample"><span class="sym">Al</span></div><div class="ptile"><span class="sym">Si</span></div><div class="ptile anion"><span class="sym">P</span></div><div class="ptile anion"><span class="sym">S</span></div><div class="ptile anion sample"><span class="sym">Cl</span></div><div class="ptile"><span class="sym">Ar</span></div><div class="ptile fixed g1"><span class="sym">K</span></div><div class="ptile fixed g2"><span class="sym">Ca</span></div><div class="ptile transition"><span class="sym">Sc</span></div><div class="ptile transition"><span class="sym">Ti</span></div><div class="ptile transition"><span class="sym">V</span></div><div class="ptile transition"><span class="sym">Cr</span></div><div class="ptile transition"><span class="sym">Mn</span></div><div class="ptile transition sample"><span class="sym">Fe</span></div><div class="ptile transition"><span class="sym">Co</span></div><div class="ptile transition"><span class="sym">Ni</span></div><div class="ptile transition sample"><span class="sym">Cu</span></div><div class="ptile transition"><span class="sym">Zn</span></div><div class="ptile fixed g13"><span class="sym">Ga</span></div><div class="ptile"><span class="sym">Ge</span></div><div class="ptile anion"><span class="sym">As</span></div><div class="ptile anion"><span class="sym">Se</span></div><div class="ptile anion"><span class="sym">Br</span></div><div class="ptile"><span class="sym">Kr</span></div><div class="ptile fixed g1"><span class="sym">Rb</span></div><div class="ptile fixed g2"><span class="sym">Sr</span></div><div class="ptile transition"><span class="sym">Y</span></div><div class="ptile transition"><span class="sym">Zr</span></div><div class="ptile transition"><span class="sym">Nb</span></div><div class="ptile transition"><span class="sym">Mo</span></div><div class="ptile transition"><span class="sym">Tc</span></div><div class="ptile transition"><span class="sym">Ru</span></div><div class="ptile transition"><span class="sym">Rh</span></div><div class="ptile transition"><span class="sym">Pd</span></div><div class="ptile transition"><span class="sym">Ag</span></div><div class="ptile transition"><span class="sym">Cd</span></div><div class="ptile"><span class="sym">In</span></div><div class="ptile exception sample"><span class="sym">Sn</span></div><div class="ptile anion"><span class="sym">Sb</span></div><div class="ptile anion"><span class="sym">Te</span></div><div class="ptile anion"><span class="sym">I</span></div><div class="ptile"><span class="sym">Xe</span></div><div class="ptile fixed g1"><span class="sym">Cs</span></div><div class="ptile fixed g2"><span class="sym">Ba</span></div><div class="ptile transition"><span class="sym">La–Lu</span></div><div class="ptile transition"><span class="sym">Hf</span></div><div class="ptile transition"><span class="sym">Ta</span></div><div class="ptile transition"><span class="sym">W</span></div><div class="ptile transition"><span class="sym">Re</span></div><div class="ptile transition"><span class="sym">Os</span></div><div class="ptile transition"><span class="sym">Ir</span></div><div class="ptile transition"><span class="sym">Pt</span></div><div class="ptile transition"><span class="sym">Au</span></div><div class="ptile transition"><span class="sym">Hg</span></div><div class="ptile"><span class="sym">Tl</span></div><div class="ptile exception sample"><span class="sym">Pb</span></div><div class="ptile anion"><span class="sym">Bi</span></div><div class="ptile anion"><span class="sym">Po</span></div><div class="ptile anion"><span class="sym">At</span></div><div class="ptile"><span class="sym">Rn</span></div><div class="ptile fixed g1"><span class="sym">Fr</span></div><div class="ptile fixed g2"><span class="sym">Ra</span></div><div class="ptile transition"><span class="sym">Ac–Lr</span></div><div class="ptile transition"><span class="sym">Rf</span></div><div class="ptile transition"><span class="sym">Db</span></div><div class="ptile transition"><span class="sym">Sg</span></div><div class="ptile transition"><span class="sym">Bh</span></div><div class="ptile transition"><span class="sym">Hs</span></div><div class="ptile transition"><span class="sym">Mt</span></div><div class="ptile transition"><span class="sym">Ds</span></div><div class="ptile transition"><span class="sym">Rg</span></div><div class="ptile transition"><span class="sym">Cn</span></div><div class="ptile"><span class="sym">Nh</span></div><div class="ptile"><span class="sym">Fl</span></div><div class="ptile"><span class="sym">Mc</span></div><div class="ptile"><span class="sym">Lv</span></div><div class="ptile anion"><span class="sym">Ts</span></div><div class="ptile"><span class="sym">Og</span></div></div><div class="fblock-label">Lanthanides and actinides shown below for completeness</div><div class="fblock"><div class="frow"><div class="flabel">La–Lu</div><div class="ptile ftile">La</div><div class="ptile ftile">Ce</div><div class="ptile ftile">Pr</div><div class="ptile ftile">Nd</div><div class="ptile ftile">Pm</div><div class="ptile ftile">Sm</div><div class="ptile ftile">Eu</div><div class="ptile ftile">Gd</div><div class="ptile ftile">Tb</div><div class="ptile ftile">Dy</div><div class="ptile ftile">Ho</div><div class="ptile ftile">Er</div><div class="ptile ftile">Tm</div><div class="ptile ftile">Yb</div><div class="ptile ftile">Lu</div></div><div class="frow"><div class="flabel">Ac–Lr</div><div class="ptile ftile">Ac</div><div class="ptile ftile">Th</div><div class="ptile ftile">Pa</div><div class="ptile ftile">U</div><div class="ptile ftile">Np</div><div class="ptile ftile">Pu</div><div class="ptile ftile">Am</div><div class="ptile ftile">Cm</div><div class="ptile ftile">Bk</div><div class="ptile ftile">Cf</div><div class="ptile ftile">Es</div><div class="ptile ftile">Fm</div><div class="ptile ftile">Md</div><div class="ptile ftile">No</div><div class="ptile ftile">Lr</div></div></div></div></div>
+<div class="practice-grid" style="grid-template-columns:1fr;">
+<div class="practice-card build-step visible" data-build="1"><h5>Main-group metals</h5><div class="prompt">Na, Mg, Al</div><div class="steps"><div>Na is in 1A → Na<sup>+</sup></div><div>Mg is in 2A → Mg<sup>2+</sup></div><div>Al is in 3A → Al<sup>3+</sup></div></div></div>
+<div class="practice-card build-step" data-build="2"><h5>Variable positive charges</h5><div class="prompt">Fe, Cu, Sn, Pb</div><div class="steps"><div>Fe commonly forms Fe<sup>2+</sup> or Fe<sup>3+</sup></div><div>Cu commonly forms Cu<sup>+</sup> or Cu<sup>2+</sup></div><div>Sn commonly forms Sn<sup>2+</sup> or Sn<sup>4+</sup></div><div>Pb commonly forms Pb<sup>2+</sup> or Pb<sup>4+</sup></div><div style="color:var(--text-muted);margin-top:.25rem">Remember: not every transition metal is variable-charge. Ag<sup>+</sup>, Zn<sup>2+</sup>, and Cd<sup>2+</sup> are common fixed-charge cases.</div></div></div>
+<div class="practice-card build-step" data-build="3"><h5>Main-group nonmetals</h5><div class="prompt">N, O, Cl</div><div class="steps"><div>N is in 5A → 5 − 8 = −3 → N<sup>3−</sup></div><div>O is in 6A → 6 − 8 = −2 → O<sup>2−</sup></div><div>Cl is in 7A → 7 − 8 = −1 → Cl<sup>−</sup></div></div></div>
+</div>
+</div>
+<div class="callout build-step" data-build="3"><strong>Takeaway:</strong> before you write a formula, say the ion charges out loud first. Example: calcium is +2, chloride is −1, so the neutral formula must be CaCl<sub>2</sub>.</div>
+</div></div>
+
+</section>
+<section class="slide" data-max-builds="3" id="slide-5">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 30 · Local Slide 5</span><h1 class="slide-title">Guided Practice — Counting Electrons in Ions</h1><div class="lo"><strong>Learning Objective:</strong> Determine the number of electrons in cations and anions from atomic number and ion charge.</div></div>
+<div class="slide-body">
+<div class="e-table build-step visible" data-build="1" style="display:table;">
+<table class="e-table"><thead><tr><th>Ion</th><th>Protons</th><th>Charge</th><th>Electrons</th></tr></thead><tbody>
+<tr><td>Ca<sup>2+</sup></td><td>20</td><td>+2</td><td><span class="blank" contenteditable="false" data-answer="18" data-placeholder="[_______]">[_______]</span></td></tr>
+<tr><td>N<sup>3−</sup></td><td>7</td><td>−3</td><td><span class="blank" contenteditable="false" data-answer="10" data-placeholder="[_______]">[_______]</span></td></tr>
+<tr><td>Al<sup>3+</sup></td><td>13</td><td>+3</td><td><span class="blank" contenteditable="false" data-answer="10" data-placeholder="[_______]">[_______]</span></td></tr>
+</tbody></table></div>
+<div class="grid-2 build-step" data-build="2"><div class="card"><h4>Cation shortcut</h4><p>Electrons = protons − charge magnitude</p><p style="margin-top:.4rem">Ca<sup>2+</sup>: 20 − 2 = 18 e<sup>−</sup></p></div><div class="card"><h4>Anion shortcut</h4><p>Electrons = protons + charge magnitude</p><p style="margin-top:.4rem">N<sup>3−</sup>: 7 + 3 = 10 e<sup>−</sup></p></div></div>
+<div class="warn build-step" data-build="3"><strong>Check yourself:</strong> a positive ion has <em>fewer</em> electrons than protons. A negative ion has <em>more</em> electrons than protons.</div>
+</div></div>
+
+</section>
+<section class="slide" data-max-builds="3" id="slide-6">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 31 · Local Slide 6</span><h1 class="slide-title">Naming Monatomic Ions</h1><div class="lo"><strong>Learning Objective:</strong> Name common monatomic cations and anions.</div></div>
+<div class="slide-body">
+<div class="grid-2">
+<div class="card build-step visible" data-build="1"><h4>Monatomic cations</h4><p>Name = element name + ion</p><div class="examples-inline" style="margin-top:.5rem"><div class="ex">Na<sup>+</sup> → sodium ion</div><div class="ex">Ca<sup>2+</sup> → calcium ion</div><div class="ex">Al<sup>3+</sup> → aluminum ion</div></div></div>
+<div class="card build-step" data-build="2"><h4>Monatomic anions</h4><p>Name = root + <span class="blank" contenteditable="false" data-answer="-ide" data-placeholder="[_______]">[_______]</span></p><div class="examples-inline" style="margin-top:.5rem"><div class="ex">Cl<sup>−</sup> → chloride ion</div><div class="ex">O<sup>2−</sup> → oxide ion</div><div class="ex">N<sup>3−</sup> → nitride ion</div></div></div>
+</div>
+<div class="callout build-step" data-build="3"><strong>Important boundary:</strong> here we are naming <em>ions</em> only. In T2.7 we will combine ions to name whole <em>ionic compounds</em>.</div>
+</div></div>
+
+</section>
+<section class="slide" data-max-builds="4" id="slide-7">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 32 · Local Slide 7</span><h1 class="slide-title">Polyatomic Ions — Use the Course Chart</h1><div class="lo"><strong>Learning Objective:</strong> Recognize polyatomic ions and use the course chart as a working reference.</div></div>
+<div class="slide-body">
+<div class="callout build-step visible" data-build="1"><strong>Before continuing:</strong> download and print the <strong>Polyatomic Ion Chart</strong> posted in the course shell. Keep it in front of you while watching this video and use it as we work through the examples.</div>
+<div class="warn build-step" data-build="1"><strong>Expectation:</strong> I will not cover every polyatomic ion in this lecture. We will focus on common examples, and the chart will serve as your larger reference.</div>
+<div class="grid-2 build-step" data-build="2"><div class="card"><h4>What is a polyatomic ion?</h4><p>An ion made of two or more atoms acting together as one charged unit.</p><div class="examples-inline" style="margin-top:.5rem"><div class="ex">NO<sub>3</sub><sup>−</sup> nitrate</div><div class="ex">SO<sub>4</sub><sup>2−</sup> sulfate</div><div class="ex">OH<sup>−</sup> hydroxide</div></div></div><div class="card"><h4>Do not split it apart</h4><p>When a polyatomic ion appears in a formula, keep the atoms together as one unit.</p><div class="examples-inline" style="margin-top:.5rem"><div class="ex">Ca(NO<sub>3</sub>)<sub>2</sub></div><div class="ex">NH<sub>4</sub>Cl</div></div></div></div>
+<div class="grid-2 build-step" data-build="3"><div class="card"><h4>Read with the chart</h4><p>Follow nitrate, sulfate, carbonate, hydroxide, and ammonium on the printed chart as they appear in examples.</p></div><div class="card"><h4>Preview for T2.7</h4><p>In compound naming, keep the polyatomic ion name unchanged: calcium nitrate, ammonium sulfate, iron(III) sulfate.</p></div></div>
+<div class="callout build-step" data-build="4"><strong>Composite example:</strong> Fe<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub> contains the transition-metal cation Fe<sup>3+</sup> and the polyatomic anion sulfate, SO<sub>4</sub><sup>2−</sup>.</div>
+</div></div>
+
+</section>
+<section class="slide" data-max-builds="2" id="slide-8">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 33 · Local Slide 8</span><h1 class="slide-title">Independent Check — Ion Identity</h1><div class="lo"><strong>Learning Objective:</strong> Assess charge prediction, electron counting, and ion recognition before moving into formulas and nomenclature.</div></div>
+<div class="slide-body">
+<div class="question-grid">
+<div class="question-card build-step visible" data-build="1"><div><span class="qnum">1</span>Predict the common ion charge of Mg, O, and Br.</div><div class="response">Student response area</div></div>
+<div class="question-card build-step visible" data-build="1"><div><span class="qnum">2</span>How many electrons are in Al<sup>3+</sup> and S<sup>2−</sup>?</div><div class="response">Student response area</div></div>
+<div class="question-card build-step" data-build="2"><div><span class="qnum">3</span>Which main-group metals are exceptions that can form +2 and +4 ions?</div><div class="response">Student response area</div></div>
+<div class="question-card build-step" data-build="2"><div><span class="qnum">4</span>Name NO<sub>3</sub><sup>−</sup> and explain why the atoms must stay together in Ca(NO<sub>3</sub>)<sub>2</sub>.</div><div class="response">Student response area</div></div>
+</div>
+<div class="callout build-step" data-build="2"><strong>Next topic connection:</strong> T2.6 uses these ion charges to write correct chemical formulas. T2.7 then uses the same charge logic again when naming ionic compounds.</div>
+</div></div>
+
+</section>
+</main>
+
+<script>
+(() => {
+  let currentSlide = 1;
+  let currentBuild = 1;
+  let currentMode = 'student';
+  const totalSlides = 8;
+
+  const slides = () => Array.from(document.querySelectorAll('.slide, .slide-container'))
+    .filter((el, i, arr) => el.id && el.id.startsWith('slide-') && arr.findIndex(x => x.id === el.id) === i);
+
+  function buildMax(slide) {
+    const values = Array.from(slide.querySelectorAll('[data-build]'))
+      .map(el => parseInt(el.dataset.build || '1', 10))
+      .filter(Number.isFinite);
+    const declared = parseInt(slide.dataset.maxBuilds || '1', 10);
+    return Math.max(declared || 1, ...(values.length ? values : [1]));
+  }
+
+  function setMode(mode) {
+    currentMode = mode === 'answer' ? 'answer' : 'student';
+    document.body.className = 'mode-' + currentMode;
+
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === currentMode);
+    });
+
+    document.querySelectorAll('.blank[data-answer]').forEach(blank => {
+      if (currentMode === 'answer') {
+        blank.textContent = blank.dataset.answer || '';
+      } else {
+        blank.textContent = blank.dataset.placeholder || '[_______]';
+      }
+    });
+  }
+
+  function updateView() {
+    const deck = slides();
+    deck.forEach((slide, idx) => {
+      slide.classList.toggle('active', idx === currentSlide - 1);
+      if (idx === currentSlide - 1) {
+        slide.querySelectorAll('[data-build]').forEach(el => {
+          const b = parseInt(el.dataset.build || '1', 10);
+          el.classList.toggle('visible', b <= currentBuild);
+        });
+      }
+    });
+
+    const active = deck[currentSlide - 1];
+    const maxBuild = active ? buildMax(active) : 1;
+    currentBuild = Math.min(currentBuild, maxBuild);
+
+    const sc = document.getElementById('slideCounter');
+    const bc = document.getElementById('buildCounter');
+    if (sc) sc.textContent = `Slide ${currentSlide} / ${totalSlides}`;
+    if (bc) bc.textContent = `Build ${currentBuild} / ${maxBuild}`;
+
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
+    if (prev) prev.disabled = currentSlide === 1 && currentBuild === 1;
+    if (next) next.disabled = currentSlide === totalSlides && currentBuild === maxBuild;
+  }
+
+  window.nextBuild = function() {
+    const deck = slides();
+    const active = deck[currentSlide - 1];
+    const maxBuild = active ? buildMax(active) : 1;
+    if (currentBuild < maxBuild) currentBuild++;
+    else if (currentSlide < totalSlides) { currentSlide++; currentBuild = 1; }
+    updateView();
+  };
+
+  window.prevBuild = function() {
+    const deck = slides();
+    if (currentBuild > 1) currentBuild--;
+    else if (currentSlide > 1) {
+      currentSlide--;
+      currentBuild = buildMax(deck[currentSlide - 1]);
+    }
+    updateView();
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(btn =>
+      btn.addEventListener('click', () => setMode(btn.dataset.mode))
+    );
+
+    document.querySelectorAll('.blank[data-answer]').forEach(blank => {
+      if (!blank.dataset.placeholder) blank.dataset.placeholder = blank.textContent || '[_______]';
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') window.nextBuild();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') window.prevBuild();
+    });
+
+    setMode('student');
+    updateView();
+  });
+})();
+</script></body>
+</html>
