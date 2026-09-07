@@ -1,0 +1,2120 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>T3.1 — The Mole and Chemical Quantities | Student</title><style>
+:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+  --accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+  --accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border-color:#475569;--blank-bg:#334155;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}
+.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}
+.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.75rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}
+.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}
+.slide-container.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide-header{margin-bottom:1.15rem}
+.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}
+.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}
+.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}
+.lo-box strong{color:var(--accent-blue)}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}
+.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}
+
+
+.visual-panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;align-items:stretch}
+.panel-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+.panel-card h4{color:var(--accent-blue);font-size:1.02rem;margin-bottom:.65rem;text-transform:uppercase;letter-spacing:.05em}
+.roadmap-container{display:flex;align-items:center;justify-content:space-between;background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem;overflow-x:auto}
+.roadmap-step{padding:.5rem .8rem;border-radius:6px;font-size:.88rem;font-weight:700;background:#1e293b;color:var(--text-muted);border:1px solid var(--border-color);white-space:nowrap}
+.roadmap-step.active-topic{background:var(--accent-blue);color:#0f172a;border-color:var(--accent-blue);box-shadow:0 0 10px rgba(56,189,248,.4)}
+.roadmap-arrow{color:var(--border-color);font-weight:900;margin:0 .2rem}
+.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}
+.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}
+.formula-tree{display:grid;grid-template-columns:1fr auto 1fr;gap:.7rem;align-items:center}
+.formula-box{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.75rem;text-align:center}
+.formula-large{font-size:2rem;font-weight:900;color:var(--accent-teal)}
+.arrow{color:var(--accent-amber);font-size:1.4rem;font-weight:900;text-align:center}
+.atom-count-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.55rem}
+.atom-chip{background:#1e293b;border:1px solid var(--border-color);border-radius:7px;padding:.55rem;text-align:center}
+.mass-lookup{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.element-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.65rem;text-align:center}
+.element-symbol{font-size:1.55rem;font-weight:900;color:var(--accent-blue)}
+.element-mass{font-size:.9rem;color:var(--text-muted)}
+.work-ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:.55rem;align-items:stretch}
+.work-step{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.65rem;text-align:center;position:relative}
+.work-step:not(:last-child)::after{content:"→";position:absolute;right:-.45rem;top:50%;transform:translateY(-50%);color:var(--accent-amber);font-weight:900}
+.step-label{display:block;color:var(--accent-blue);font-size:.78rem;text-transform:uppercase;font-weight:800;margin-bottom:.35rem}
+.calculation{font-size:1.1rem;font-weight:800;color:#e2e8f0;line-height:1.45}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.compare-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem}
+.compare-card h4{color:var(--accent-blue);margin-bottom:.5rem}
+.equal-banner{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.65rem;text-align:center;color:var(--accent-teal);font-weight:900;font-size:1.05rem}
+.error-table{width:100%;border-collapse:collapse;font-size:.92rem}
+.error-table th,.error-table td{border:1px solid var(--border-color);padding:.55rem;vertical-align:top}
+.error-table th{background:#1e293b;color:var(--accent-blue)}
+.bad{color:#fecdd3;font-weight:800}.good{color:var(--accent-teal);font-weight:800}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem;display:flex;flex-direction:column;gap:.65rem}
+.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}
+.question-text{font-size:1.05rem;font-weight:600;line-height:1.4}
+.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:62px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}
+
+
+
+
+
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.65rem;margin-top:.5rem}
+.meta-item{background:#1e293b;padding:.5rem .75rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.8rem;text-transform:uppercase}
+
+@media(max-width:900px){
+  .question-grid,.compare-grid,.formula-tree,.work-ladder,.mass-lookup,.atom-count-grid{grid-template-columns:1fr}
+  .work-step::after{display:none}
+  .slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mole-analogy{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center}
+.dozen-box,.mole-box{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:1rem;text-align:center}
+.big-number{font-size:2rem;font-weight:900;color:var(--accent-teal);line-height:1.2}
+.entity-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
+.entity-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.75rem;text-align:center}
+.entity-icon{font-size:1.55rem;font-weight:900;color:var(--accent-blue)}
+.avogadro-roadmap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.7rem}
+.road-node{background:#0f172a;border:2px solid var(--accent-blue);border-radius:10px;padding:1rem;text-align:center}
+.road-node.entities{border-color:var(--accent-teal)}
+.factor-stack{display:flex;flex-direction:column;gap:.4rem;text-align:center}
+.factor{background:#1e293b;border:1px solid var(--border-color);border-radius:7px;padding:.45rem .65rem;font-weight:800}
+.unit-cancel{text-decoration:line-through;color:var(--accent-rose)}
+.particle-dots{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;max-width:360px;margin:auto}
+.particle-dot{width:20px;height:20px;border-radius:50%;background:var(--accent-blue);display:inline-block}
+.scale-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+.scale-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.65rem;text-align:center}
+@media(max-width:900px){.mole-analogy,.entity-grid,.avogadro-roadmap,.scale-row{grid-template-columns:1fr}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mass-roadmap{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.6rem;align-items:center}
+.mass-node{background:#0f172a;border:2px solid var(--accent-blue);border-radius:10px;padding:.9rem;text-align:center}
+.mass-node.moles{border-color:var(--accent-amber)}
+.mass-node.particles{border-color:var(--accent-teal)}
+.mass-factor{background:#1e293b;border:1px solid var(--border-color);border-radius:7px;padding:.45rem .55rem;text-align:center;font-size:.86rem;font-weight:800}
+.mass-ledger{width:100%;border-collapse:collapse;font-size:.9rem}
+.mass-ledger th,.mass-ledger td{border:1px solid var(--border-color);padding:.48rem;text-align:center}
+.mass-ledger th{background:#1e293b;color:var(--accent-blue)}
+.unit-track{display:flex;gap:.45rem;align-items:center;justify-content:center;flex-wrap:wrap}
+.unit-box{background:#0f172a;border:1px solid var(--border-color);border-radius:7px;padding:.5rem .65rem;font-weight:800}
+.cancelled{text-decoration:line-through;color:var(--accent-rose)}
+.bridge-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.75rem;text-align:center}
+.bridge-card strong{color:var(--accent-blue)}
+@media(max-width:900px){.mass-roadmap{grid-template-columns:1fr}.mass-roadmap .arrow{transform:rotate(90deg)}}
+
+.fraction{
+  display:inline-grid;
+  grid-template-rows:auto auto;
+  align-items:center;
+  justify-items:center;
+  line-height:1.1;
+  vertical-align:middle;
+  margin:0 .18rem;
+  min-width:120px;
+}
+.fraction .num{
+  width:100%;
+  padding:.18rem .4rem .28rem;
+  border-bottom:2px solid var(--text-main);
+  text-align:center;
+}
+.fraction .den{
+  width:100%;
+  padding:.28rem .4rem .18rem;
+  text-align:center;
+}
+.factor-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem 1rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.45rem;
+  flex-wrap:wrap;
+}
+.cancel-pair{
+  position:relative;
+  display:inline-block;
+  color:var(--text-main);
+  padding:0 .08rem;
+}
+.cancel-pair::after{
+  content:"";
+  position:absolute;
+  left:-2px;
+  right:-2px;
+  top:50%;
+  height:2px;
+  background:var(--accent-rose);
+  transform:rotate(-10deg);
+  transform-origin:center;
+}
+.cancel-label{
+  display:block;
+  margin-top:.35rem;
+  color:var(--accent-rose);
+  font-size:.82rem;
+  font-weight:800;
+  text-align:center;
+}
+.survive{
+  color:var(--accent-teal);
+  font-weight:900;
+  border:1px solid var(--accent-teal);
+  border-radius:5px;
+  padding:.08rem .28rem;
+}
+.visual-equation{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  flex-wrap:wrap;
+  font-size:1.08rem;
+  font-weight:800;
+}
+.factor-arrow{
+  color:var(--accent-amber);
+  font-weight:900;
+  font-size:1.25rem;
+}
+@media(max-width:900px){
+  .visual-equation{font-size:.95rem}
+  .fraction{min-width:100px}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.percent-bar{
+  display:flex;
+  width:100%;
+  height:56px;
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid var(--border-color);
+  background:#0f172a;
+}
+.percent-segment{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  color:#0f172a;
+  min-width:55px;
+}
+.percent-segment.c{background:#94a3b8}
+.percent-segment.h{background:#f8fafc}
+.percent-segment.o{background:#fb7185}
+.empirical-flow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+  align-items:stretch;
+}
+.empirical-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.7rem;
+  text-align:center;
+  position:relative;
+}
+.empirical-step:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.48rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-size:1.25rem;
+  font-weight:900;
+}
+.empirical-step strong{color:var(--accent-blue)}
+.ratio-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.6rem;
+}
+.ratio-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+  padding:.65rem;
+  text-align:center;
+}
+.ratio-card .big{font-size:1.35rem;font-weight:900;color:var(--accent-teal)}
+.assumption-banner{
+  background:rgba(251,191,36,.1);
+  border:1px solid var(--accent-amber);
+  border-radius:8px;
+  padding:.65rem .9rem;
+  color:#fde68a;
+  font-weight:800;
+}
+@media(max-width:900px){
+  .empirical-flow,.ratio-row{grid-template-columns:1fr}
+  .empirical-step::after{display:none}
+}
+
+.practice-badge{
+  display:inline-block;
+  padding:.22rem .55rem;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  margin-bottom:.45rem;
+}
+.practice-badge.easy{background:rgba(45,212,191,.15);color:var(--accent-teal);border:1px solid var(--accent-teal)}
+.practice-badge.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}
+.practice-badge.acs{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem}
+.choice{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+  padding:.7rem;
+}
+.choice strong{color:var(--accent-blue)}
+.pause-box{
+  background:#0f172a;
+  border:2px dashed var(--accent-amber);
+  border-radius:9px;
+  padding:.8rem;
+  text-align:center;
+  color:#fde68a;
+  font-weight:800;
+}
+.setup-line{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.45rem;
+  flex-wrap:wrap;
+  margin:.35rem 0;
+}
+@media(max-width:900px){
+  .choice-grid{grid-template-columns:1fr}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.equation-stage{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:1rem;
+  text-align:center;
+}
+.chem-equation{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.65rem;
+  flex-wrap:wrap;
+  font-size:1.55rem;
+  font-weight:900;
+}
+.species{
+  background:#1e293b;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+  padding:.45rem .65rem;
+  min-width:110px;
+}
+.coeff{
+  color:var(--accent-amber);
+  font-weight:900;
+  display:inline-block;
+  min-width:20px;
+}
+.subscript{
+  color:var(--accent-blue);
+  font-weight:900;
+}
+.state{
+  color:var(--text-muted);
+  font-size:.78em;
+}
+.atom-ledger{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.92rem;
+}
+.atom-ledger th,.atom-ledger td{
+  border:1px solid var(--border-color);
+  padding:.5rem;
+  text-align:center;
+}
+.atom-ledger th{background:#1e293b;color:var(--accent-blue)}
+.balance-flow{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:.55rem;
+}
+.balance-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+  padding:.65rem;
+  text-align:center;
+  position:relative;
+}
+.balance-step:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.45rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.particle-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.65rem;
+  flex-wrap:wrap;
+}
+.molecule-icon{
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  padding:.4rem .5rem;
+  background:#1e293b;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+}
+.atom-ball{
+  width:24px;height:24px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:#0f172a;font-size:.68rem;font-weight:900;
+}
+.atom-ball.h{background:#f8fafc}
+.atom-ball.o{background:#fb7185}
+.atom-ball.c{background:#94a3b8}
+.atom-ball.fe{background:#f59e0b}
+.count-badge{
+  display:inline-block;
+  min-width:30px;
+  padding:.18rem .38rem;
+  background:rgba(45,212,191,.12);
+  border:1px solid var(--accent-teal);
+  border-radius:5px;
+  color:var(--accent-teal);
+  font-weight:900;
+}
+@media(max-width:900px){
+  .balance-flow{grid-template-columns:1fr}
+  .balance-step::after{display:none}
+  .chem-equation{font-size:1.15rem}
+}
+
+
+
+
+.practice-badge.hard{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.practice-badge.acs{background:rgba(56,189,248,.15);color:var(--accent-blue);border:1px solid var(--accent-blue)}
+
+
+.choice{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.7rem}
+
+.strategy-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.strategy-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.7rem;text-align:center}
+@media(max-width:900px){.choice-grid,.strategy-strip{grid-template-columns:1fr}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.stoich-road{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:.55rem;
+  align-items:stretch;
+}
+.stoich-node{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.7rem;
+  text-align:center;
+  position:relative;
+}
+.stoich-node:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.45rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.stoich-node strong{color:var(--accent-blue)}
+.ratio-bridge{
+  background:rgba(251,191,36,.12);
+  border:1px solid var(--accent-amber);
+  color:#fde68a;
+  border-radius:9px;
+  padding:.7rem;
+  text-align:center;
+  font-weight:900;
+}
+.given-wanted{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:.65rem;
+  align-items:center;
+}
+.gw-box{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.75rem;
+  text-align:center;
+}
+.gw-box strong{color:var(--accent-blue)}
+.setup-stack{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+}
+.mole-ratio-card{
+  background:#0f172a;
+  border:2px solid var(--accent-amber);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+}
+.method-tag{
+  display:inline-block;
+  background:rgba(45,212,191,.15);
+  border:1px solid var(--accent-teal);
+  color:var(--accent-teal);
+  border-radius:999px;
+  padding:.22rem .55rem;
+  font-weight:900;
+  font-size:.78rem;
+  text-transform:uppercase;
+  margin-bottom:.45rem;
+}
+@media(max-width:900px){
+  .stoich-road,.given-wanted{grid-template-columns:1fr}
+  .stoich-node::after{display:none}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.lr-compare{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.75rem;
+}
+.reactant-path{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+  text-align:center;
+}
+.reactant-path.limiting{
+  border:3px solid var(--accent-rose);
+  box-shadow:0 0 12px rgba(244,63,94,.35);
+}
+.reactant-path.excess{
+  border:2px solid var(--accent-teal);
+}
+.product-yield{
+  font-size:1.45rem;
+  font-weight:900;
+  color:var(--accent-teal);
+  margin:.35rem 0;
+}
+.limiting-label{
+  display:inline-block;
+  background:rgba(244,63,94,.15);
+  border:1px solid var(--accent-rose);
+  color:#fecdd3;
+  border-radius:999px;
+  padding:.25rem .6rem;
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:.8rem;
+}
+.excess-label{
+  display:inline-block;
+  background:rgba(45,212,191,.15);
+  border:1px solid var(--accent-teal);
+  color:var(--accent-teal);
+  border-radius:999px;
+  padding:.25rem .6rem;
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:.8rem;
+}
+.leftover-box{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.75rem;
+  text-align:center;
+}
+.limit-flow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+}
+.limit-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.65rem;
+  text-align:center;
+  position:relative;
+}
+.limit-step:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.45rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.limit-step strong{color:var(--accent-blue)}
+@media(max-width:900px){
+  .lr-compare,.limit-flow{grid-template-columns:1fr}
+  .limit-step::after{display:none}
+}
+
+.resource-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.7rem;
+  margin-top:.55rem;
+}
+.resource-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+  text-align:center;
+}
+.resource-card strong{color:var(--accent-blue)}
+.amount-pill{
+  display:inline-block;
+  margin-top:.35rem;
+  padding:.28rem .65rem;
+  border-radius:999px;
+  font-weight:900;
+  background:rgba(56,189,248,.15);
+  color:var(--accent-blue);
+  border:1px solid var(--accent-blue);
+}
+.recipe-box{
+  background:#0f172a;
+  border:2px dashed var(--accent-amber);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+  margin-top:.6rem;
+}
+.quicktest-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.7rem;
+  margin-top:.65rem;
+}
+.quicktest-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+}
+.quicktest-card h4{margin:0 0 .35rem 0;color:var(--accent-blue)}
+.quicktest-card .big{
+  font-size:1.25rem;
+  font-weight:900;
+  color:#f8fafc;
+}
+.picture-bar{
+  background:#0b1220;
+  border:1px solid var(--border-color);
+  border-radius:999px;
+  overflow:hidden;
+  height:22px;
+  display:flex;
+  margin-top:.4rem;
+}
+.used-segment{
+  background:linear-gradient(90deg,#f59e0b,#fbbf24);
+  color:#111827;
+  font-size:.8rem;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.left-segment{
+  background:linear-gradient(90deg,#14b8a6,#2dd4bf);
+  color:#042f2e;
+  font-size:.8rem;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.method-strip{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.55rem;
+}
+.method-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.65rem;
+  text-align:center;
+}
+.method-step strong{color:var(--accent-blue)}
+@media(max-width:900px){
+  .resource-row,.quicktest-grid,.method-strip{grid-template-columns:1fr}
+}
+
+
+.product-difference{
+  background:#0f172a;
+  border:2px solid var(--accent-amber);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+}
+.diff-arrow{
+  font-size:1.25rem;
+  color:var(--accent-amber);
+  font-weight:900;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.yield-gauge{
+  width:100%;
+  height:36px;
+  border:1px solid var(--border-color);
+  background:#0f172a;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:.55rem;
+}
+.yield-fill{
+  height:100%;
+  background:linear-gradient(90deg,#2dd4bf,#fbbf24);
+  color:#0f172a;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.atom-economy-map{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:.7rem;
+  align-items:center;
+}
+.atom-bucket{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+  text-align:center;
+}
+.atom-bucket.desired{
+  border:2px solid var(--accent-teal);
+}
+.atom-bucket.waste{
+  border:2px solid var(--accent-rose);
+}
+.metric-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+  text-align:center;
+}
+.metric-card h4{margin:0 0 .35rem 0;color:var(--accent-blue)}
+.metric-card .metric{
+  font-size:1.45rem;
+  font-weight:900;
+  color:var(--accent-teal);
+}
+.efficiency-flow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+}
+.efficiency-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.65rem;
+  text-align:center;
+  position:relative;
+}
+.efficiency-step:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.45rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.efficiency-step strong{color:var(--accent-blue)}
+@media(max-width:900px){
+  .atom-economy-map,.efficiency-flow{grid-template-columns:1fr}
+  .efficiency-step::after{display:none}
+}
+
+.product-only-banner{
+  background:rgba(56,189,248,.12);
+  border:2px solid var(--accent-blue);
+  color:#bae6fd;
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+  font-weight:900;
+}
+.reverse-road{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:.55rem;
+}
+.reverse-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.65rem;
+  text-align:center;
+  position:relative;
+}
+.reverse-step:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.45rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.reverse-step strong{color:var(--accent-blue)}
+@media(max-width:900px){
+  .reverse-road{grid-template-columns:1fr}
+  .reverse-step::after{display:none}
+}
+
+
+.topic-jump{display:flex;gap:.35rem;flex-wrap:wrap}.topic-btn{background:#1e293b;border:1px solid var(--border-color);color:var(--text-muted);padding:.3rem .55rem;border-radius:5px;font-weight:700;cursor:pointer;font-size:.8rem}.topic-btn.active{background:var(--accent-teal);color:#0f172a;border-color:var(--accent-teal)} .topic-label{color:var(--accent-teal);font-weight:800} .mini-note{font-size:.9rem;color:var(--text-muted);margin-top:.45rem}
+/* Student distribution mode */
+body.mode-answer .blank.revealed{
+  color:var(--accent-amber);
+  background:rgba(251,191,36,.15);
+}
+
+
+/* Fraction-format QA: compact stacked fractions for inline ratios and choices */
+.fraction.compact{
+  min-width:0;
+  font-size:.96em;
+  margin:0 .12rem;
+}
+.fraction.compact .num{
+  padding:.08rem .25rem .16rem;
+  border-bottom:1.8px solid var(--text-main);
+}
+.fraction.compact .den{
+  padding:.16rem .25rem .08rem;
+}
+.choice .fraction.compact,
+.mole-ratio-card .fraction.compact,
+.method-step .fraction.compact,
+.reverse-step .fraction.compact{
+  vertical-align:middle;
+}
+</style></head><body class="mode-student"><header><div class="deck-title"><span>🧪</span><span>Module 3 | T3.1 — The Mole and Chemical Quantities</span></div><div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div><div class="nav-controls"><button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button><span class="counter-badge" id="slideCounter">Slide 1 / 14</span><span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span><button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button></div></header><main><div class="slide-container active" data-integrated-slide="1" data-local-slide="1" data-topic="T3.1" id="slide-1"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 1 of 14</span><h1 class="slide-title">The Mole and Chemical Quantities — One Connected Map</h1><div class="lo-box"><strong>Learning Objective:</strong> Connect chemical formulas, particle-level mass, the mole, molar mass, grams, and representative particles in one quantitative pathway</div></div><div class="slide-body"><div class="build-step visible" data-build="1"><div class="callout"><strong>One continuous idea:</strong> a chemical formula tells us what one representative particle contains; the mole lets us scale that particle information to measurable amounts.</div></div><div class="build-step" data-build="2"><div class="roadmap-container"><div class="roadmap-step active-topic">Formula</div><span class="roadmap-arrow">→</span><div class="roadmap-step">Particle Mass</div><span class="roadmap-arrow">→</span><div class="roadmap-step">Mole</div><span class="roadmap-arrow">→</span><div class="roadmap-step">Molar Mass</div><span class="roadmap-arrow">→</span><div class="roadmap-step">Grams / Particles</div></div></div><div class="build-step" data-build="3"><div class="callout"><strong>Goal:</strong> instead of restarting the roadmap for each skill, we will keep using the mole as the central bridge.</div></div></div></div></div><div class="slide-container" data-integrated-slide="2" data-local-slide="2" data-topic="T3.1" id="slide-2"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 2 of 14</span><h1 class="slide-title">The Periodic Table Supplies Average Atomic Mass</h1><div class="lo-box"><strong>Learning Objective:</strong> Use average atomic mass as the mass contribution for each atom in a chemical formula.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="visual-panel-grid">
+<div class="panel-card"><h4>One Carbon Atom</h4><div class="formula-large">C</div><p>Average atomic mass ≈ <span class="blank" data-answer="12.01 amu">[ _______ ]</span></p></div>
+<div class="panel-card"><h4>One Oxygen Atom</h4><div class="formula-large">O</div><p>Average atomic mass ≈ <span class="blank" data-answer="16.00 amu">[ _______ ]</span></p></div>
+<div class="panel-card"><h4>One Sodium Atom</h4><div class="formula-large">Na</div><p>Average atomic mass ≈ <span class="blank" data-answer="22.99 amu">[ _______ ]</span></p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="formula-tree">
+<div class="formula-box"><strong>Periodic-table value</strong><p>Weighted average from naturally occurring isotopes</p></div>
+<div class="arrow">→</div>
+<div class="formula-box"><strong>Calculation role</strong><p>Mass contribution assigned to each atom of that element</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Boundary check:</strong> T2.3 explained how average atomic mass is obtained. T3.1 uses that value; it does not repeat the isotope-abundance calculation.</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="3" data-local-slide="3" data-topic="T3.1" id="slide-3"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 3 of 14</span><h1 class="slide-title">Choose the Correct Mass Term</h1><div class="lo-box"><strong>Learning Objective:</strong> Distinguish atomic mass, molecular mass, and formula mass by representative particle.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="visual-panel-grid">
+<div class="panel-card"><h4>Atomic Substance</h4><div class="formula-large">Ne</div><p><strong>Atomic mass</strong><br/>mass of one atom</p></div>
+<div class="panel-card"><h4>Molecular Substance</h4><div class="formula-large">CO₂</div><p><strong>Molecular mass</strong><br/>mass of one molecule</p></div>
+<div class="panel-card"><h4>Ionic Substance</h4><div class="formula-large">NaCl</div><p><strong>Formula mass</strong><br/>mass of one formula unit</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="equal-banner">All three are calculated by adding the average atomic masses represented in the symbol or formula.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="compare-grid">
+<div class="compare-card"><h4>Particle-Level Unit</h4><p>Atomic, molecular, and formula masses are expressed in <span class="blank" data-answer="amu">[ _______ ]</span>.</p></div>
+<div class="compare-card"><h4>Preview Only</h4><p>The corresponding mass of one mole is expressed in g/mol and will be developed later in this Topic.</p></div>
+</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="4" data-local-slide="4" data-topic="T3.1" id="slide-4"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 4 of 14</span><h1 class="slide-title">Guided Example A — Molecular Mass of P₂S₅</h1><div class="lo-box"><strong>Learning Objective:</strong> Calculate molecular mass by translating subscripts into atomic-mass contributions.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="formula-box">
+<div class="formula-large">P₂S₅</div>
+<div class="atom-count-grid">
+<div class="atom-chip"><strong>P:</strong> 2 atoms</div>
+<div class="atom-chip"><strong>S:</strong> 5 atoms</div>
+<div class="atom-chip"><strong>Particle:</strong> molecule</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="work-ladder">
+<div class="work-step"><span class="step-label">P contribution</span><div class="calculation">2(30.97 amu)</div></div>
+<div class="work-step"><span class="step-label">S contribution</span><div class="calculation">5(32.06 amu)</div></div>
+<div class="work-step"><span class="step-label">Add</span><div class="calculation">61.94 + 160.30</div></div>
+<div class="work-step"><span class="step-label">Term</span><div class="calculation">Molecular mass</div></div>
+<div class="work-step"><span class="step-label">Unit</span><div class="calculation">amu</div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">Molecular mass of P₂S₅ = <span class="blank" data-answer="222.24 amu">[ _______ ]</span></div>
+<div class="callout" style="margin-top:.55rem"><strong>Reasonableness:</strong> Five sulfur atoms contribute more mass than two phosphorus atoms, so the sulfur contribution should dominate.</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="5" data-local-slide="5" data-topic="T3.1" id="slide-5"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 5 of 14</span><h1 class="slide-title">Formula Mass with Parentheses and Hydrates</h1><div class="lo-box"><strong>Learning Objective:</strong> Calculate formula mass correctly when formulas contain grouped ions or waters of hydration</div></div><div class="slide-body"><div class="build-step visible" data-build="1">
+<div class="formula-box">
+<div class="formula-large">(NH₄)₂SO₄</div>
+<div class="atom-count-grid">
+<div class="atom-chip"><strong>N:</strong> 1 × 2 = 2</div>
+<div class="atom-chip"><strong>H:</strong> 4 × 2 = 8</div>
+<div class="atom-chip"><strong>S:</strong> 1</div>
+<div class="atom-chip"><strong>O:</strong> 4</div>
+<div class="atom-chip"><strong>Particle:</strong> formula unit</div>
+<div class="atom-chip"><strong>Mass term:</strong> formula mass</div>
+</div>
+</div>
+</div><div class="build-step" data-build="2">
+<div class="formula-box"><div class="calculation">2(14.01) + 8(1.008) + 1(32.06) + 4(16.00)</div><div class="calculation" style="margin-top:.4rem">= 28.02 + 8.064 + 32.06 + 64.00</div></div><div class="equal-banner" style="margin-top:.6rem">Formula mass of (NH₄)₂SO₄ = <span class="blank" data-answer="132.14 amu">[ _______ ]</span></div>
+</div><div class="build-step" data-build="3"><div class="formula-box"><div class="formula-large">Al(OH)<sub>3</sub>·4H<sub>2</sub>O</div><p>Expand every group before adding masses:</p><p><strong>Al = 1, O = 7, H = 11</strong></p></div><div class="warn" style="margin-top:.7rem"><strong>Do not miss the hydrate water:</strong> the coefficient 4 multiplies the entire H<sub>2</sub>O unit.</div><div class="formula-box" style="margin-top:.7rem"><div class="calculation">26.98 + 7(16.00) + 11(1.008) = 150.068 amu</div><div class="equal-banner" style="margin-top:.5rem">Formula mass of Al(OH)<sub>3</sub>·4H<sub>2</sub>O = <span class="blank" data-answer="150.07 amu">[ _______ ]</span></div></div></div></div></div></div><div class="slide-container" data-integrated-slide="6" data-local-slide="6" data-topic="T3.1" id="slide-6"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 6 of 14</span><h1 class="slide-title">The Mole and Avogadro Constant</h1><div class="lo-box"><strong>Learning Objective:</strong> Define the mole and use the exact Avogadro constant as the mole–entity relationship</div></div><div class="slide-body"><div class="build-step visible" data-build="1"><div class="compare-grid"><div class="compare-card"><h4>Everyday counting</h4><p><strong>1 dozen = 12 objects</strong></p></div><div class="compare-card"><h4>Chemical counting</h4><p><strong>1 mol = 6.02214076 × 10<sup>23</sup> specified entities</strong></p></div></div></div><div class="build-step" data-build="2"><div class="equal-banner">One mole contains exactly 6.02214076 × 10<sup>23</sup> elementary entities.</div><div class="mini-note">The entities may be atoms, molecules, formula units, or ions.</div><div class="callout" style="margin-top:.55rem"><strong>Why the number is so large: </strong>atoms and molecules are extremely small, so measurable samples contain extraordinarily many representative particles.</div></div><div class="build-step" data-build="3"><div class="formula-tree"><div class="formula-box"><div class="formula-large">1 mol</div></div><div class="arrow">↔</div><div class="formula-box"><div class="formula-large">6.022 × 10<sup>23</sup> entities</div></div></div><p class="mini-note">Choose the factor orientation that cancels the given unit.</p></div></div></div></div><div class="slide-container" data-integrated-slide="7" data-local-slide="7" data-topic="T3.1" id="slide-7"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 7 of 14</span><h1 class="slide-title">Name the Representative Particle</h1><div class="lo-box"><strong>Learning Objective:</strong> Match substance type with the correct representative-particle term.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="entity-grid">
+<div class="entity-card"><div class="entity-icon">Al</div><strong>Elemental metal</strong><p>atoms</p></div>
+<div class="entity-card"><div class="entity-icon">CO₂</div><strong>Molecular compound</strong><p>molecules</p></div>
+<div class="entity-card"><div class="entity-icon">NaCl</div><strong>Ionic compound</strong><p>formula units</p></div>
+<div class="entity-card"><div class="entity-icon">Na⁺</div><strong>Charged particle</strong><p>ions</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout"><strong>Examples:</strong> 1 mol Al = 6.022 × 10²³ Al atoms; 1 mol CO₂ = 6.022 × 10²³ CO₂ molecules; 1 mol NaCl = 6.022 × 10²³ NaCl formula units.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Important distinction:</strong> One CO₂ molecule contains three total atoms, but one mole of CO₂ contains 6.022 × 10²³ CO₂ molecules—not three times as many molecules.</div>
+<p style="margin-top:.55rem">The representative particle for an ionic compound is a <span class="blank" data-answer="formula unit">[ _______ ]</span>.</p>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="8" data-local-slide="8" data-topic="T3.1" id="slide-8"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 8 of 14</span><h1 class="slide-title">Moles ↔ Representative Particles</h1><div class="lo-box"><strong>Learning Objective:</strong> Convert in both directions between moles and the correct representative particles</div></div><div class="slide-body"><div class="build-step visible" data-build="1"><div class="roadmap-container"><div class="roadmap-step active-topic">mol</div><span class="roadmap-arrow">→</span><div class="roadmap-step">× <span class="fraction compact"><span class="num">6.022×10<sup>23</sup> entities</span><span class="den">1 mol</span></span></div><span class="roadmap-arrow">→</span><div class="roadmap-step">entities</div></div><p style="margin-top:.7rem">0.250 mol CO<sub>2</sub> = <span class="blank" data-answer="1.51 × 10²³ CO₂ molecules">[ _______ ]</span></p></div><div class="build-step" data-build="2"><div class="roadmap-container"><div class="roadmap-step active-topic">entities</div><span class="roadmap-arrow">→</span><div class="roadmap-step">× <span class="fraction compact"><span class="num">1 mol</span><span class="den">6.022×10<sup>23</sup> entities</span></span></div><span class="roadmap-arrow">→</span><div class="roadmap-step">mol</div></div><p style="margin-top:.7rem">3.01 × 10<sup>23</sup> NaCl formula units = <span class="blank" data-answer="0.500 mol NaCl">[ _______ ]</span></p></div><div class="build-step" data-build="3"><div class="callout">Reasonableness: 0.250 mol is one quarter of a mole, so it contains about one quarter of Avogadro number. 3.01 × 10²³ entities is about half of Avogadro number, so it is about 0.500 mol. Always name the representative particle.</div></div></div></div></div><div class="slide-container" data-integrated-slide="9" data-local-slide="9" data-topic="T3.1" id="slide-9"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 9 of 14</span><h1 class="slide-title">Molar Mass — The Grams-per-Mole Bridge</h1><div class="lo-box"><strong>Learning Objective:</strong> Define molar mass and distinguish g/mol from amu.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="compare-grid">
+<div class="compare-card"><h4>Particle-Level Mass</h4><p>One NO₂ molecule has a molecular mass of approximately <strong>46.01 amu</strong>.</p></div>
+<div class="compare-card"><h4>Mole-Level Mass</h4><p>One mole of NO₂ molecules has a molar mass of <strong>46.01 g/mol</strong>.</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="equal-banner">Molar mass = mass in grams of 1 mole of a substance</div>
+<div class="mass-ledger" style="margin-top:.6rem">
+<table class="mass-ledger">
+<thead><tr><th>Formula</th><th>Atomic-Mass Sum</th><th>Molar Mass</th></tr></thead>
+<tbody>
+<tr><td>NO₂</td><td>14.01 + 2(16.00)</td><td>46.01 g/mol</td></tr>
+<tr><td>C₂H₆</td><td>2(12.01) + 6(1.008)</td><td>30.07 g/mol</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>ACS misconception check:</strong> amu describes the mass of one particle; g/mol describes the mass of one mole. The numerical values correspond, but the units and scales do not.</div>
+<p style="margin-top:.55rem">The conversion factor between grams and moles is the <span class="blank" data-answer="molar mass">[ _______ ]</span>.</p>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="10" data-local-slide="10" data-topic="T3.1" id="slide-10"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 10 of 14</span><h1 class="slide-title">Guided Example A — Convert 237 g NO₂ to Moles</h1><div class="lo-box"><strong>Learning Objective:</strong> Convert mass to moles using the molar mass of NO₂.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="work-ladder">
+<div class="work-step"><span class="step-label">Given</span><div class="calculation">237 g NO₂</div></div>
+<div class="work-step"><span class="step-label">Molar mass</span><div class="calculation">46.01 g/mol</div></div>
+<div class="work-step"><span class="step-label">Direction</span><div class="calculation">grams → moles</div></div>
+<div class="work-step"><span class="step-label">Prediction</span><div class="calculation">more than 5 mol</div></div>
+<div class="work-step"><span class="step-label">Unit target</span><div class="calculation">mol NO₂</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card">
+<div class="visual-equation">
+<span>237 <span class="cancel-pair">g NO₂</span></span>
+<span class="factor-arrow">×</span>
+<span class="fraction">
+<span class="num">1 <span class="survive">mol NO₂</span></span>
+<span class="den">46.01 <span class="cancel-pair">g NO₂</span></span>
+</span>
+</div>
+<div style="width:100%">
+<span class="cancel-label">g NO₂ cancels with g NO₂ → mol NO₂ remains</span>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">237 g NO₂ = <span class="blank" data-answer="5.15 mol NO₂">[ _______ ]</span></div>
+<div class="compare-grid" style="margin-top:.55rem">
+<div class="compare-card"><h4>Significant Figures</h4><p>237 has 3 significant figures, so the result is reported with 3 significant figures.</p></div>
+<div class="compare-card"><h4>Reasonableness</h4><p>Five moles would weigh about 230 g, so 5.15 mol is plausible.</p></div>
+</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="11" data-local-slide="11" data-topic="T3.1" id="slide-11"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 11 of 14</span><h1 class="slide-title">Worked Example — Grams to Particles</h1><div class="lo-box"><strong>Learning Objective:</strong> Use molar mass and Avogadro constant in sequence to convert grams to representative particles</div></div><div class="slide-body"><div class="build-step visible" data-build="1"><div class="given-wanted"><div class="gw-box"><strong>Given</strong><br/>21.6 g Li</div><div class="gw-box"><strong>Wanted</strong><br/>Li atoms</div></div><div class="roadmap-container" style="margin-top:.7rem"><div class="roadmap-step active-topic">g Li</div><span class="roadmap-arrow">→</span><div class="roadmap-step">mol Li</div><span class="roadmap-arrow">→</span><div class="roadmap-step">Li atoms</div></div></div><div class="build-step" data-build="2"><div class="calculation">21.6 <span class="unit-cancel">g Li</span> × <span class="fraction"><span class="num">1 mol Li</span><span class="den">6.94 <span class="unit-cancel">g Li</span></span></span> × <span class="fraction"><span class="num">6.022 × 10<sup>23</sup> Li atoms</span><span class="den">1 mol Li</span></span></div></div><div class="build-step" data-build="3"><div class="equal-banner">21.6 g Li = <span class="blank" data-answer="1.87 × 10²⁴ Li atoms">[ _______ ]</span></div><div class="callout" style="margin-top:.7rem"><strong>Check:</strong> 21.6 g Li is a little over 3 mol, so the answer should be a little over 3 × Avogadro number.</div></div></div></div></div><div class="slide-container" data-integrated-slide="12" data-local-slide="12" data-topic="T3.1" id="slide-12"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 12 of 14</span><h1 class="slide-title">Guided Example B — Ethane Molecules to Grams</h1><div class="lo-box"><strong>Learning Objective:</strong> Complete a two-step molecules-to-grams conversion through moles.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="compare-grid">
+<div class="compare-card"><h4>Problem</h4><p>Convert 9.03 × 10²³ C₂H₆ molecules to grams of C₂H₆.</p></div>
+<div class="compare-card"><h4>Plan</h4><p>molecules → moles → grams</p><p>Molar mass of C₂H₆ = 30.07 g/mol</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card">
+<div class="visual-equation">
+<span>9.03 × 10²³ <span class="cancel-pair">C₂H₆ molecules</span></span>
+<span class="factor-arrow">×</span>
+<span class="fraction">
+<span class="num">1 <span class="cancel-pair">mol C₂H₆</span></span>
+<span class="den">6.022 × 10²³ <span class="cancel-pair">C₂H₆ molecules</span></span>
+</span>
+<span class="factor-arrow">×</span>
+<span class="fraction">
+<span class="num">30.07 <span class="survive">g C₂H₆</span></span>
+<span class="den">1 <span class="cancel-pair">mol C₂H₆</span></span>
+</span>
+</div>
+<div style="width:100%">
+<span class="cancel-label">C₂H₆ molecules cancel first; mol C₂H₆ cancels next; g C₂H₆ remains</span>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">9.03 × 10²³ C₂H₆ molecules = <span class="blank" data-answer="45.1 g C₂H₆">[ _______ ]</span></div>
+<div class="compare-grid" style="margin-top:.55rem">
+<div class="compare-card"><h4>Intermediate Check</h4><p>9.03 × 10²³ molecules is 1.50 mol C₂H₆.</p></div>
+<div class="compare-card"><h4>Final Check</h4><p>1.50 mol × about 30 g/mol should be about 45 g.</p></div>
+</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="13" data-local-slide="13" data-topic="T3.1" id="slide-13"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 13 of 14</span><h1 class="slide-title">Conversion Decision Check — Common Errors</h1><div class="lo-box"><strong>Learning Objective:</strong> Diagnose formula-reading, particle-label, and conversion-factor errors before calculation</div></div><div class="slide-body"><div class="build-step visible" data-build="1"><div class="error-table"><div class="bad"><strong>Formula error</strong><br/>Ignoring an outside subscript or hydrate coefficient.</div><div class="good"><strong>Fix</strong><br/>Expand the formula first; then calculate mass.</div></div></div><div class="build-step" data-build="2"><div class="error-table"><div class="bad"><strong>Particle error</strong><br/>Calling NaCl a molecule or multiplying molecule count by total atoms.</div><div class="good"><strong>Fix</strong><br/>Name atoms, molecules, formula units, or ions explicitly.</div></div></div><div class="build-step" data-build="3"><div class="error-table"><div class="bad"><strong>Conversion error</strong><br/>Going directly from grams to particles with only Avogadro number.</div><div class="good"><strong>Fix</strong><br/>grams ↔ moles by molar mass; moles ↔ particles by Avogadro constant.</div></div></div></div></div></div><div class="slide-container" data-integrated-slide="14" data-local-slide="14" data-topic="T3.1" id="slide-14"><div><div class="slide-header"><span class="meta-pill">T3.1 · Slide 14 of 14</span><h1 class="slide-title">Independent Check — Chemical Quantities</h1><div class="lo-box"><strong>Learning Objective:</strong> Demonstrate integrated mastery of particle mass, moles, molar mass, and gram–particle conversions</div></div><div class="slide-body"><div class="build-step visible" data-build="1"><div class="question-grid"><div class="question-card"><span class="question-num">1</span><p class="question-text">Distinguish molecular mass from formula mass and give the appropriate representative particle for CO₂ and CaCl₂.</p><div class="response-area">Student response</div></div><div class="question-card"><span class="question-num">2</span><p class="question-text">Calculate the formula mass of Ca(NO₃)₂.</p><div class="response-area">Show atom counts and unit.</div></div></div></div><div class="build-step" data-build="2"><div class="question-grid"><div class="question-card"><span class="question-num">3</span><p class="question-text">Convert 1.25 mol NH₃ to NH₃ molecules.</p><div class="response-area">Show factor orientation.</div></div><div class="question-card"><span class="question-num">4</span><p class="question-text">Convert 72.0 g H₂O to moles of H₂O.</p><div class="response-area">Show unit cancellation.</div></div></div></div><div class="build-step" data-build="3"><div class="question-card"><span class="question-num">5</span><p class="question-text">Convert 3.50 × 10²³ NaCl formula units to grams of NaCl, then explain why grams cannot be converted directly to particles with only Avogadro number.</p><div class="response-area">Show both bridges.</div></div></div></div></div></div></main><script>
+let currentSlide=1;
+const totalSlides=14;
+let currentBuild=1;
+const buildsPerSlide={"1": 3, "2": 3, "3": 3, "4": 3, "5": 3, "6": 3, "7": 3, "8": 3, "9": 3, "10": 3, "11": 3, "12": 3, "13": 3, "14": 3};
+let currentMode='student';
+
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>{
+    slide.classList.toggle('active',(index+1)===currentSlide);
+  });
+
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10);
+    step.classList.toggle('visible',n<=currentBuild);
+  });
+
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const parentSlide=blank.closest('.slide-container');
+    const visibleBuild=!parentBuild||parentBuild.classList.contains('visible');
+    const active=parentSlide&&parentSlide.classList.contains('active');
+
+    if(currentMode==='answer'&&active&&visibleBuild&&blank.dataset.answer){
+      blank.textContent=blank.dataset.answer;
+      blank.classList.add('revealed');
+    }else{
+      blank.textContent='[ _______ ]';
+      blank.classList.remove('revealed');
+    }
+  });
+
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+
+function nextBuild(){
+  const max=buildsPerSlide[currentSlide];
+  if(currentBuild<max)currentBuild++;
+  else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}
+  updateDisplay();
+}
+
+function prevBuild(){
+  if(currentBuild>1)currentBuild--;
+  else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}
+  updateDisplay();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}
+});
+
+updateDisplay();
+</script></body></html>

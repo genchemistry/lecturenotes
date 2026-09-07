@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>T3.2 — Composition and Chemical Formulas | Student</title><style>
+:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+  --accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+  --accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border-color:#475569;--blank-bg:#334155;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}
+.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}
+.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.75rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}
+.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}
+.slide-container.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide-header{margin-bottom:1.15rem}
+.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}
+.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}
+.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}
+.lo-box strong{color:var(--accent-blue)}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}
+.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}
+
+
+.visual-panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;align-items:stretch}
+.panel-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+.panel-card h4{color:var(--accent-blue);font-size:1.02rem;margin-bottom:.65rem;text-transform:uppercase;letter-spacing:.05em}
+.roadmap-container{display:flex;align-items:center;justify-content:space-between;background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem;overflow-x:auto}
+.roadmap-step{padding:.5rem .8rem;border-radius:6px;font-size:.88rem;font-weight:700;background:#1e293b;color:var(--text-muted);border:1px solid var(--border-color);white-space:nowrap}
+.roadmap-step.active-topic{background:var(--accent-blue);color:#0f172a;border-color:var(--accent-blue);box-shadow:0 0 10px rgba(56,189,248,.4)}
+.roadmap-arrow{color:var(--border-color);font-weight:900;margin:0 .2rem}
+.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}
+.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}
+.formula-tree{display:grid;grid-template-columns:1fr auto 1fr;gap:.7rem;align-items:center}
+.formula-box{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.75rem;text-align:center}
+.formula-large{font-size:2rem;font-weight:900;color:var(--accent-teal)}
+.arrow{color:var(--accent-amber);font-size:1.4rem;font-weight:900;text-align:center}
+.atom-count-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.55rem}
+.atom-chip{background:#1e293b;border:1px solid var(--border-color);border-radius:7px;padding:.55rem;text-align:center}
+.mass-lookup{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.element-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.65rem;text-align:center}
+.element-symbol{font-size:1.55rem;font-weight:900;color:var(--accent-blue)}
+.element-mass{font-size:.9rem;color:var(--text-muted)}
+.work-ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:.55rem;align-items:stretch}
+.work-step{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.65rem;text-align:center;position:relative}
+.work-step:not(:last-child)::after{content:"→";position:absolute;right:-.45rem;top:50%;transform:translateY(-50%);color:var(--accent-amber);font-weight:900}
+.step-label{display:block;color:var(--accent-blue);font-size:.78rem;text-transform:uppercase;font-weight:800;margin-bottom:.35rem}
+.calculation{font-size:1.1rem;font-weight:800;color:#e2e8f0;line-height:1.45}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.compare-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem}
+.compare-card h4{color:var(--accent-blue);margin-bottom:.5rem}
+.equal-banner{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.65rem;text-align:center;color:var(--accent-teal);font-weight:900;font-size:1.05rem}
+.error-table{width:100%;border-collapse:collapse;font-size:.92rem}
+.error-table th,.error-table td{border:1px solid var(--border-color);padding:.55rem;vertical-align:top}
+.error-table th{background:#1e293b;color:var(--accent-blue)}
+.bad{color:#fecdd3;font-weight:800}.good{color:var(--accent-teal);font-weight:800}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem;display:flex;flex-direction:column;gap:.65rem}
+.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}
+.question-text{font-size:1.05rem;font-weight:600;line-height:1.4}
+.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:62px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}
+
+
+
+
+
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.65rem;margin-top:.5rem}
+.meta-item{background:#1e293b;padding:.5rem .75rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.8rem;text-transform:uppercase}
+
+@media(max-width:900px){
+  .question-grid,.compare-grid,.formula-tree,.work-ladder,.mass-lookup,.atom-count-grid{grid-template-columns:1fr}
+  .work-step::after{display:none}
+  .slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mole-analogy{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center}
+.dozen-box,.mole-box{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:1rem;text-align:center}
+.big-number{font-size:2rem;font-weight:900;color:var(--accent-teal);line-height:1.2}
+.entity-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
+.entity-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.75rem;text-align:center}
+.entity-icon{font-size:1.55rem;font-weight:900;color:var(--accent-blue)}
+.avogadro-roadmap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.7rem}
+.road-node{background:#0f172a;border:2px solid var(--accent-blue);border-radius:10px;padding:1rem;text-align:center}
+.road-node.entities{border-color:var(--accent-teal)}
+.factor-stack{display:flex;flex-direction:column;gap:.4rem;text-align:center}
+.factor{background:#1e293b;border:1px solid var(--border-color);border-radius:7px;padding:.45rem .65rem;font-weight:800}
+.unit-cancel{text-decoration:line-through;color:var(--accent-rose)}
+.particle-dots{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;max-width:360px;margin:auto}
+.particle-dot{width:20px;height:20px;border-radius:50%;background:var(--accent-blue);display:inline-block}
+.scale-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+.scale-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.65rem;text-align:center}
+@media(max-width:900px){.mole-analogy,.entity-grid,.avogadro-roadmap,.scale-row{grid-template-columns:1fr}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mass-roadmap{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.6rem;align-items:center}
+.mass-node{background:#0f172a;border:2px solid var(--accent-blue);border-radius:10px;padding:.9rem;text-align:center}
+.mass-node.moles{border-color:var(--accent-amber)}
+.mass-node.particles{border-color:var(--accent-teal)}
+.mass-factor{background:#1e293b;border:1px solid var(--border-color);border-radius:7px;padding:.45rem .55rem;text-align:center;font-size:.86rem;font-weight:800}
+.mass-ledger{width:100%;border-collapse:collapse;font-size:.9rem}
+.mass-ledger th,.mass-ledger td{border:1px solid var(--border-color);padding:.48rem;text-align:center}
+.mass-ledger th{background:#1e293b;color:var(--accent-blue)}
+.unit-track{display:flex;gap:.45rem;align-items:center;justify-content:center;flex-wrap:wrap}
+.unit-box{background:#0f172a;border:1px solid var(--border-color);border-radius:7px;padding:.5rem .65rem;font-weight:800}
+.cancelled{text-decoration:line-through;color:var(--accent-rose)}
+.bridge-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.75rem;text-align:center}
+.bridge-card strong{color:var(--accent-blue)}
+@media(max-width:900px){.mass-roadmap{grid-template-columns:1fr}.mass-roadmap .arrow{transform:rotate(90deg)}}
+
+.fraction{
+  display:inline-grid;
+  grid-template-rows:auto auto;
+  align-items:center;
+  justify-items:center;
+  line-height:1.1;
+  vertical-align:middle;
+  margin:0 .18rem;
+  min-width:120px;
+}
+.fraction .num{
+  width:100%;
+  padding:.18rem .4rem .28rem;
+  border-bottom:2px solid var(--text-main);
+  text-align:center;
+}
+.fraction .den{
+  width:100%;
+  padding:.28rem .4rem .18rem;
+  text-align:center;
+}
+.factor-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem 1rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.45rem;
+  flex-wrap:wrap;
+}
+.cancel-pair{
+  position:relative;
+  display:inline-block;
+  color:var(--text-main);
+  padding:0 .08rem;
+}
+.cancel-pair::after{
+  content:"";
+  position:absolute;
+  left:-2px;
+  right:-2px;
+  top:50%;
+  height:2px;
+  background:var(--accent-rose);
+  transform:rotate(-10deg);
+  transform-origin:center;
+}
+.cancel-label{
+  display:block;
+  margin-top:.35rem;
+  color:var(--accent-rose);
+  font-size:.82rem;
+  font-weight:800;
+  text-align:center;
+}
+.survive{
+  color:var(--accent-teal);
+  font-weight:900;
+  border:1px solid var(--accent-teal);
+  border-radius:5px;
+  padding:.08rem .28rem;
+}
+.visual-equation{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  flex-wrap:wrap;
+  font-size:1.08rem;
+  font-weight:800;
+}
+.factor-arrow{
+  color:var(--accent-amber);
+  font-weight:900;
+  font-size:1.25rem;
+}
+@media(max-width:900px){
+  .visual-equation{font-size:.95rem}
+  .fraction{min-width:100px}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.percent-bar{
+  display:flex;
+  width:100%;
+  height:56px;
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid var(--border-color);
+  background:#0f172a;
+}
+.percent-segment{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  color:#0f172a;
+  min-width:55px;
+}
+.percent-segment.c{background:#94a3b8}
+.percent-segment.h{background:#f8fafc}
+.percent-segment.o{background:#fb7185}
+.empirical-flow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+  align-items:stretch;
+}
+.empirical-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.7rem;
+  text-align:center;
+  position:relative;
+}
+.empirical-step:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.48rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-size:1.25rem;
+  font-weight:900;
+}
+.empirical-step strong{color:var(--accent-blue)}
+.ratio-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.6rem;
+}
+.ratio-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+  padding:.65rem;
+  text-align:center;
+}
+.ratio-card .big{font-size:1.35rem;font-weight:900;color:var(--accent-teal)}
+.assumption-banner{
+  background:rgba(251,191,36,.1);
+  border:1px solid var(--accent-amber);
+  border-radius:8px;
+  padding:.65rem .9rem;
+  color:#fde68a;
+  font-weight:800;
+}
+@media(max-width:900px){
+  .empirical-flow,.ratio-row{grid-template-columns:1fr}
+  .empirical-step::after{display:none}
+}
+
+.practice-badge{
+  display:inline-block;
+  padding:.22rem .55rem;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  margin-bottom:.45rem;
+}
+.practice-badge.easy{background:rgba(45,212,191,.15);color:var(--accent-teal);border:1px solid var(--accent-teal)}
+.practice-badge.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}
+.practice-badge.acs{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem}
+.choice{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+  padding:.7rem;
+}
+.choice strong{color:var(--accent-blue)}
+.pause-box{
+  background:#0f172a;
+  border:2px dashed var(--accent-amber);
+  border-radius:9px;
+  padding:.8rem;
+  text-align:center;
+  color:#fde68a;
+  font-weight:800;
+}
+.setup-line{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.45rem;
+  flex-wrap:wrap;
+  margin:.35rem 0;
+}
+@media(max-width:900px){
+  .choice-grid{grid-template-columns:1fr}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.equation-stage{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:1rem;
+  text-align:center;
+}
+.chem-equation{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.65rem;
+  flex-wrap:wrap;
+  font-size:1.55rem;
+  font-weight:900;
+}
+.species{
+  background:#1e293b;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+  padding:.45rem .65rem;
+  min-width:110px;
+}
+.coeff{
+  color:var(--accent-amber);
+  font-weight:900;
+  display:inline-block;
+  min-width:20px;
+}
+.subscript{
+  color:var(--accent-blue);
+  font-weight:900;
+}
+.state{
+  color:var(--text-muted);
+  font-size:.78em;
+}
+.atom-ledger{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.92rem;
+}
+.atom-ledger th,.atom-ledger td{
+  border:1px solid var(--border-color);
+  padding:.5rem;
+  text-align:center;
+}
+.atom-ledger th{background:#1e293b;color:var(--accent-blue)}
+.balance-flow{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:.55rem;
+}
+.balance-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+  padding:.65rem;
+  text-align:center;
+  position:relative;
+}
+.balance-step:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.45rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.particle-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.65rem;
+  flex-wrap:wrap;
+}
+.molecule-icon{
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  padding:.4rem .5rem;
+  background:#1e293b;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+}
+.atom-ball{
+  width:24px;height:24px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:#0f172a;font-size:.68rem;font-weight:900;
+}
+.atom-ball.h{background:#f8fafc}
+.atom-ball.o{background:#fb7185}
+.atom-ball.c{background:#94a3b8}
+.atom-ball.fe{background:#f59e0b}
+.count-badge{
+  display:inline-block;
+  min-width:30px;
+  padding:.18rem .38rem;
+  background:rgba(45,212,191,.12);
+  border:1px solid var(--accent-teal);
+  border-radius:5px;
+  color:var(--accent-teal);
+  font-weight:900;
+}
+@media(max-width:900px){
+  .balance-flow{grid-template-columns:1fr}
+  .balance-step::after{display:none}
+  .chem-equation{font-size:1.15rem}
+}
+
+
+
+
+.practice-badge.hard{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.practice-badge.acs{background:rgba(56,189,248,.15);color:var(--accent-blue);border:1px solid var(--accent-blue)}
+
+
+.choice{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.7rem}
+
+.strategy-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.strategy-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:.7rem;text-align:center}
+@media(max-width:900px){.choice-grid,.strategy-strip{grid-template-columns:1fr}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.stoich-road{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:.55rem;
+  align-items:stretch;
+}
+.stoich-node{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.7rem;
+  text-align:center;
+  position:relative;
+}
+.stoich-node:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.45rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.stoich-node strong{color:var(--accent-blue)}
+.ratio-bridge{
+  background:rgba(251,191,36,.12);
+  border:1px solid var(--accent-amber);
+  color:#fde68a;
+  border-radius:9px;
+  padding:.7rem;
+  text-align:center;
+  font-weight:900;
+}
+.given-wanted{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:.65rem;
+  align-items:center;
+}
+.gw-box{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.75rem;
+  text-align:center;
+}
+.gw-box strong{color:var(--accent-blue)}
+.setup-stack{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+}
+.mole-ratio-card{
+  background:#0f172a;
+  border:2px solid var(--accent-amber);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+}
+.method-tag{
+  display:inline-block;
+  background:rgba(45,212,191,.15);
+  border:1px solid var(--accent-teal);
+  color:var(--accent-teal);
+  border-radius:999px;
+  padding:.22rem .55rem;
+  font-weight:900;
+  font-size:.78rem;
+  text-transform:uppercase;
+  margin-bottom:.45rem;
+}
+@media(max-width:900px){
+  .stoich-road,.given-wanted{grid-template-columns:1fr}
+  .stoich-node::after{display:none}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.lr-compare{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.75rem;
+}
+.reactant-path{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+  text-align:center;
+}
+.reactant-path.limiting{
+  border:3px solid var(--accent-rose);
+  box-shadow:0 0 12px rgba(244,63,94,.35);
+}
+.reactant-path.excess{
+  border:2px solid var(--accent-teal);
+}
+.product-yield{
+  font-size:1.45rem;
+  font-weight:900;
+  color:var(--accent-teal);
+  margin:.35rem 0;
+}
+.limiting-label{
+  display:inline-block;
+  background:rgba(244,63,94,.15);
+  border:1px solid var(--accent-rose);
+  color:#fecdd3;
+  border-radius:999px;
+  padding:.25rem .6rem;
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:.8rem;
+}
+.excess-label{
+  display:inline-block;
+  background:rgba(45,212,191,.15);
+  border:1px solid var(--accent-teal);
+  color:var(--accent-teal);
+  border-radius:999px;
+  padding:.25rem .6rem;
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:.8rem;
+}
+.leftover-box{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.75rem;
+  text-align:center;
+}
+.limit-flow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+}
+.limit-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.65rem;
+  text-align:center;
+  position:relative;
+}
+.limit-step:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.45rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.limit-step strong{color:var(--accent-blue)}
+@media(max-width:900px){
+  .lr-compare,.limit-flow{grid-template-columns:1fr}
+  .limit-step::after{display:none}
+}
+
+.resource-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.7rem;
+  margin-top:.55rem;
+}
+.resource-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+  text-align:center;
+}
+.resource-card strong{color:var(--accent-blue)}
+.amount-pill{
+  display:inline-block;
+  margin-top:.35rem;
+  padding:.28rem .65rem;
+  border-radius:999px;
+  font-weight:900;
+  background:rgba(56,189,248,.15);
+  color:var(--accent-blue);
+  border:1px solid var(--accent-blue);
+}
+.recipe-box{
+  background:#0f172a;
+  border:2px dashed var(--accent-amber);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+  margin-top:.6rem;
+}
+.quicktest-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.7rem;
+  margin-top:.65rem;
+}
+.quicktest-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+}
+.quicktest-card h4{margin:0 0 .35rem 0;color:var(--accent-blue)}
+.quicktest-card .big{
+  font-size:1.25rem;
+  font-weight:900;
+  color:#f8fafc;
+}
+.picture-bar{
+  background:#0b1220;
+  border:1px solid var(--border-color);
+  border-radius:999px;
+  overflow:hidden;
+  height:22px;
+  display:flex;
+  margin-top:.4rem;
+}
+.used-segment{
+  background:linear-gradient(90deg,#f59e0b,#fbbf24);
+  color:#111827;
+  font-size:.8rem;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.left-segment{
+  background:linear-gradient(90deg,#14b8a6,#2dd4bf);
+  color:#042f2e;
+  font-size:.8rem;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.method-strip{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.55rem;
+}
+.method-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.65rem;
+  text-align:center;
+}
+.method-step strong{color:var(--accent-blue)}
+@media(max-width:900px){
+  .resource-row,.quicktest-grid,.method-strip{grid-template-columns:1fr}
+}
+
+
+.product-difference{
+  background:#0f172a;
+  border:2px solid var(--accent-amber);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+}
+.diff-arrow{
+  font-size:1.25rem;
+  color:var(--accent-amber);
+  font-weight:900;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.yield-gauge{
+  width:100%;
+  height:36px;
+  border:1px solid var(--border-color);
+  background:#0f172a;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:.55rem;
+}
+.yield-fill{
+  height:100%;
+  background:linear-gradient(90deg,#2dd4bf,#fbbf24);
+  color:#0f172a;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.atom-economy-map{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:.7rem;
+  align-items:center;
+}
+.atom-bucket{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+  text-align:center;
+}
+.atom-bucket.desired{
+  border:2px solid var(--accent-teal);
+}
+.atom-bucket.waste{
+  border:2px solid var(--accent-rose);
+}
+.metric-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+  text-align:center;
+}
+.metric-card h4{margin:0 0 .35rem 0;color:var(--accent-blue)}
+.metric-card .metric{
+  font-size:1.45rem;
+  font-weight:900;
+  color:var(--accent-teal);
+}
+.efficiency-flow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+}
+.efficiency-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.65rem;
+  text-align:center;
+  position:relative;
+}
+.efficiency-step:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.45rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.efficiency-step strong{color:var(--accent-blue)}
+@media(max-width:900px){
+  .atom-economy-map,.efficiency-flow{grid-template-columns:1fr}
+  .efficiency-step::after{display:none}
+}
+
+.product-only-banner{
+  background:rgba(56,189,248,.12);
+  border:2px solid var(--accent-blue);
+  color:#bae6fd;
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+  font-weight:900;
+}
+.reverse-road{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:.55rem;
+}
+.reverse-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.65rem;
+  text-align:center;
+  position:relative;
+}
+.reverse-step:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.45rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.reverse-step strong{color:var(--accent-blue)}
+@media(max-width:900px){
+  .reverse-road{grid-template-columns:1fr}
+  .reverse-step::after{display:none}
+}
+
+
+.topic-jump{display:flex;gap:.35rem;flex-wrap:wrap}.topic-btn{background:#1e293b;border:1px solid var(--border-color);color:var(--text-muted);padding:.3rem .55rem;border-radius:5px;font-weight:700;cursor:pointer;font-size:.8rem}.topic-btn.active{background:var(--accent-teal);color:#0f172a;border-color:var(--accent-teal)} .topic-label{color:var(--accent-teal);font-weight:800} .mini-note{font-size:.9rem;color:var(--text-muted);margin-top:.45rem}
+/* Student distribution mode */
+body.mode-answer .blank.revealed{
+  color:var(--accent-amber);
+  background:rgba(251,191,36,.15);
+}
+
+
+/* Fraction-format QA: compact stacked fractions for inline ratios and choices */
+.fraction.compact{
+  min-width:0;
+  font-size:.96em;
+  margin:0 .12rem;
+}
+.fraction.compact .num{
+  padding:.08rem .25rem .16rem;
+  border-bottom:1.8px solid var(--text-main);
+}
+.fraction.compact .den{
+  padding:.16rem .25rem .08rem;
+}
+.choice .fraction.compact,
+.mole-ratio-card .fraction.compact,
+.method-step .fraction.compact,
+.reverse-step .fraction.compact{
+  vertical-align:middle;
+}
+</style></head><body class="mode-student"><header><div class="deck-title"><span>🧪</span><span>Module 3 | T3.2 — Composition and Chemical Formulas</span></div><div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div><div class="nav-controls"><button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button><span class="counter-badge" id="slideCounter">Slide 1 / 11</span><span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span><button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button></div></header><main><div class="slide-container active" data-integrated-slide="1" data-local-slide="1" data-topic="T3.2" id="slide-1"><div><div class="slide-header"><span class="meta-pill">T3.2 · Slide 1 of 11</span><h1 class="slide-title">Percent Composition, Empirical Formula, and Molecular Formula — Big Picture</h1><div class="lo-box"><strong>Learning Objective:</strong> Distinguish percent composition, empirical formula, and molecular formula and identify the pathway for each.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>T3.1 connection:</strong> Molar mass gives the total mass of one mole. T3.2 asks how that total mass is divided among elements, how composition data reveal the simplest atom ratio, and how molar mass connects an empirical formula to a molecular formula.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="visual-panel-grid">
+<div class="compare-card"><h4>Percent Composition</h4><p>Formula → element mass contribution → total molar mass → percent</p></div>
+<div class="compare-card"><h4>Empirical Formula</h4><p>Mass or percent → moles → divide by smallest → whole-number ratio</p></div>
+<div class="compare-card"><h4>Molecular Formula</h4><p>Empirical formula → empirical-formula mass → compare with molar mass → multiply all subscripts</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="pause-box">Before calculating: decide whether the problem asks for a percent, the simplest whole-number ratio, or the actual molecular formula.</div>
+<div class="equal-banner" style="margin-top:.55rem">This Topic includes percent-composition, empirical-formula, and molecular-formula practice before the final check.</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="2" data-local-slide="2" data-topic="T3.2" id="slide-2"><div><div class="slide-header"><span class="meta-pill">T3.2 · Slide 2 of 11</span><h1 class="slide-title">Easy Example — Mass Percent of Carbon in CH₃COOH</h1><div class="lo-box"><strong>Learning Objective:</strong> Calculate one element’s mass percent using a visual part-to-whole fraction.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="practice-badge easy">Easy · Fully Worked</span>
+<div class="ratio-row">
+<div class="ratio-card"><strong>Formula</strong><div class="big">C₂H₄O₂</div><p>2 C, 4 H, 2 O</p></div>
+<div class="ratio-card"><strong>Carbon Part</strong><div class="big">2(12.01)</div><p>= 24.02 g C</p></div>
+<div class="ratio-card"><strong>Total</strong><div class="big">60.05 g/mol</div><p>complete molar mass</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card">
+<div class="visual-equation">
+<span>% C =</span>
+<span class="fraction">
+<span class="num">24.02 <span class="cancel-pair">g C</span></span>
+<span class="den">60.05 <span class="cancel-pair">g compound</span></span>
+</span>
+<span>× 100</span>
+</div>
+<div style="width:100%"><span class="cancel-label">grams cancel; percent remains</span></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">Mass percent of carbon = <span class="blank" data-answer="40.00% C">[ _______ ]</span></div>
+<div class="callout" style="margin-top:.55rem"><strong>Reasonableness:</strong> Carbon contributes 24.02 g out of about 60 g, so the answer should be close to 40%.</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="3" data-local-slide="3" data-topic="T3.2" id="slide-3"><div><div class="slide-header"><span class="meta-pill">T3.2 · Slide 3 of 11</span><h1 class="slide-title">Guided Practice — Percent Oxygen in CaCO₃</h1><div class="lo-box"><strong>Learning Objective:</strong> Set up a mass-percent calculation before revealing the arithmetic.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="practice-badge medium">Guided Practice</span>
+<div class="pause-box">Pause: identify the oxygen contribution and total molar mass of CaCO₃.</div>
+<div class="ratio-row" style="margin-top:.55rem">
+<div class="ratio-card"><strong>Oxygen Part</strong><div class="big">3(16.00)</div></div>
+<div class="ratio-card"><strong>Total Molar Mass</strong><div class="big">40.08 + 12.01 + 3(16.00)</div></div>
+<div class="ratio-card"><strong>Prediction</strong><div class="big">less than 50%</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card">
+<div class="visual-equation">
+<span>% O =</span>
+<span class="fraction">
+<span class="num">48.00 <span class="cancel-pair">g O</span></span>
+<span class="den">100.09 <span class="cancel-pair">g CaCO₃</span></span>
+</span>
+<span>× 100</span>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">Mass percent of oxygen in CaCO₃ = <span class="blank" data-answer="47.96% O">[ _______ ]</span></div>
+<div class="callout" style="margin-top:.55rem"><strong>Check:</strong> 48 is slightly less than half of 100.09, so 47.96% is reasonable.</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="4" data-local-slide="4" data-topic="T3.2" id="slide-4"><div><div class="slide-header"><span class="meta-pill">T3.2 · Slide 4 of 11</span><h1 class="slide-title">Empirical Formula Workflow — Four Moves</h1><div class="lo-box"><strong>Learning Objective:</strong> Apply a consistent mass-to-mole-to-ratio sequence.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="empirical-flow">
+<div class="empirical-step"><strong>1. Mass</strong><p>Use grams; if percentages are given, assume 100 g.</p></div>
+<div class="empirical-step"><strong>2. Moles</strong><p>Divide by each element’s molar mass.</p></div>
+<div class="empirical-step"><strong>3. Normalize</strong><p>Divide all values by the smallest.</p></div>
+<div class="empirical-step"><strong>4. Whole Numbers</strong><p>Multiply every ratio only when needed.</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="assumption-banner">Percentages become grams only because a 100 g sample is assumed.</div>
+<div class="compare-grid" style="margin-top:.55rem">
+<div class="compare-card"><h4>Never Use</h4><p>40.0 : 6.7 : 53.3 directly as subscripts</p></div>
+<div class="compare-card"><h4>Always Use</h4><p>mole ratios as the basis for subscripts</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Rounding rule:</strong> 1.99 → 2 is acceptable. 1.50 → 2 is not; multiply all ratios by 2.</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="5" data-local-slide="5" data-topic="T3.2" id="slide-5"><div><div class="slide-header"><span class="meta-pill">T3.2 · Slide 5 of 11</span><h1 class="slide-title">Easy Empirical Formula — From Percent Composition</h1><div class="lo-box"><strong>Learning Objective:</strong> Determine the empirical formula from 40.00% C, 6.72% H, and 53.28% O.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="practice-badge easy">Easy · Clean Ratio</span>
+<div class="assumption-banner">Assume 100.00 g: 40.00 g C, 6.72 g H, 53.28 g O.</div>
+<div class="ratio-row" style="margin-top:.55rem">
+<div class="ratio-card"><strong>C</strong><div class="visual-equation" style="margin-top:.35rem"><span>40.00 <span class="cancel-pair">g</span></span> × <span class="fraction compact"><span class="num">1 mol</span><span class="den">12.01 <span class="cancel-pair">g</span></span></span></div><p>3.33 mol</p></div>
+<div class="ratio-card"><strong>H</strong><div class="visual-equation" style="margin-top:.35rem"><span>6.72 <span class="cancel-pair">g</span></span> × <span class="fraction compact"><span class="num">1 mol</span><span class="den">1.008 <span class="cancel-pair">g</span></span></span></div><p>6.67 mol</p></div>
+<div class="ratio-card"><strong>O</strong><div class="visual-equation" style="margin-top:.35rem"><span>53.28 <span class="cancel-pair">g</span></span> × <span class="fraction compact"><span class="num">1 mol</span><span class="den">16.00 <span class="cancel-pair">g</span></span></span></div><p>3.33 mol</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="ratio-row">
+<div class="ratio-card"><strong>C</strong><div class="big"><span class="fraction compact"><span class="num">3.33</span><span class="den">3.33</span></span> = 1.00</div></div>
+<div class="ratio-card"><strong>H</strong><div class="big"><span class="fraction compact"><span class="num">6.67</span><span class="den">3.33</span></span> = 2.00</div></div>
+<div class="ratio-card"><strong>O</strong><div class="big"><span class="fraction compact"><span class="num">3.33</span><span class="den">3.33</span></span> = 1.00</div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">Empirical formula = <span class="blank" data-answer="CH₂O">[ _______ ]</span></div>
+<div class="callout" style="margin-top:.55rem"><strong>Check:</strong> The subscripts 1:2:1 reproduce the original approximate mass percentages.</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="6" data-local-slide="6" data-topic="T3.2" id="slide-6"><div><div class="slide-header"><span class="meta-pill">T3.2 · Slide 6 of 11</span><h1 class="slide-title">Intermediate Empirical Formula — From Measured Masses</h1><div class="lo-box"><strong>Learning Objective:</strong> Determine the empirical formula from 2.82 g Na, 4.35 g Cl, and 7.83 g O.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="practice-badge medium">Intermediate · Measured Masses</span>
+<div class="pause-box">Pause: convert each mass to moles before comparing ratios.</div>
+<div class="ratio-row" style="margin-top:.55rem">
+<div class="ratio-card"><strong>Na</strong><div class="visual-equation" style="margin-top:.35rem"><span>2.82 <span class="cancel-pair">g</span></span> × <span class="fraction compact"><span class="num">1 mol</span><span class="den">22.99 <span class="cancel-pair">g</span></span></span></div><p>0.1227 mol</p></div>
+<div class="ratio-card"><strong>Cl</strong><div class="visual-equation" style="margin-top:.35rem"><span>4.35 <span class="cancel-pair">g</span></span> × <span class="fraction compact"><span class="num">1 mol</span><span class="den">35.45 <span class="cancel-pair">g</span></span></span></div><p>0.1227 mol</p></div>
+<div class="ratio-card"><strong>O</strong><div class="visual-equation" style="margin-top:.35rem"><span>7.83 <span class="cancel-pair">g</span></span> × <span class="fraction compact"><span class="num">1 mol</span><span class="den">16.00 <span class="cancel-pair">g</span></span></span></div><p>0.489 mol</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="ratio-row">
+<div class="ratio-card"><strong>Na</strong><div class="big">1.00</div></div>
+<div class="ratio-card"><strong>Cl</strong><div class="big">1.00</div></div>
+<div class="ratio-card"><strong>O</strong><div class="big">3.99 → 4</div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">Empirical formula = <span class="blank" data-answer="NaClO₄">[ _______ ]</span></div>
+<div class="callout" style="margin-top:.55rem"><strong>Reasonableness:</strong> 3.99 is close enough to 4.00 to round; 3.50 would not be.</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="7" data-local-slide="7" data-topic="T3.2" id="slide-7"><div><div class="slide-header"><span class="meta-pill">T3.2 · Slide 7 of 11</span><h1 class="slide-title">Decimal Ratios → Whole-Number Subscripts</h1><div class="lo-box"><strong>Learning Objective:</strong> Convert non-integer mole ratios into the smallest whole-number ratio.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="empirical-flow">
+<div class="empirical-step"><strong>Decimal Ratio</strong><p>Example: 1.00 : 1.50</p></div>
+<div class="empirical-step"><strong>Simple Fraction</strong><p>1.50 = <span class="fraction compact"><span class="num">3</span><span class="den">2</span></span></p></div>
+<div class="empirical-step"><strong>Multiply All Ratios</strong><p>× denominator</p></div>
+<div class="empirical-step"><strong>Whole Numbers</strong><p>2.00 : 3.00</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="choice-grid">
+<div class="choice"><strong>1.50 = <span class="fraction compact"><span class="num">3</span><span class="den">2</span></span></strong><br/>Multiply all ratios by 2.</div>
+<div class="choice"><strong>1.33 ≈ <span class="fraction compact"><span class="num">4</span><span class="den">3</span></span></strong><br/>Multiply all ratios by 3.</div>
+<div class="choice"><strong>1.67 ≈ <span class="fraction compact"><span class="num">5</span><span class="den">3</span></span></strong><br/>Multiply all ratios by 3.</div>
+<div class="choice"><strong>1.25 = <span class="fraction compact"><span class="num">5</span><span class="den">4</span></span></strong><br/>Multiply all ratios by 4.</div>
+<div class="choice"><strong>1.75 = <span class="fraction compact"><span class="num">7</span><span class="den">4</span></span></strong><br/>Multiply all ratios by 4.</div>
+<div class="choice"><strong>1.20 = <span class="fraction compact"><span class="num">6</span><span class="den">5</span></span></strong><br/>Multiply all ratios by 5.</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Do not force a formula:</strong> If you obtain values such as 1.30 or 1.10, first check whether intermediate mole ratios were rounded too early.</div>
+<div class="equal-banner" style="margin-top:.55rem">Multiply <strong>every</strong> ratio by the same number.</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="8" data-local-slide="8" data-topic="T3.2" id="slide-8"><div><div class="slide-header"><span class="meta-pill">T3.2 · Slide 8 of 11</span><h1 class="slide-title">Molecular Formula — Scale the Empirical Formula</h1><div class="lo-box"><strong>Learning Objective:</strong> Determine a molecular formula from an empirical formula and the compound molar mass.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="compare-grid">
+<div class="compare-card"><h4>Empirical Formula</h4><p>Simplest whole-number atom ratio.</p><div class="formula-box" style="margin-top:.55rem">Example: P₂O₅</div></div>
+<div class="compare-card"><h4>Molecular Formula</h4><p>Actual whole-number multiple of the empirical formula.</p><div class="formula-box" style="margin-top:.55rem">Molecular formula = n × empirical formula</div></div>
+</div>
+<div class="callout" style="margin-top:.65rem"><strong>Key idea:</strong> Every empirical-formula subscript must be multiplied by the same whole-number value of <strong>n</strong>.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="formula-box" style="font-size:1.05rem"><strong>n =</strong> <span class="fraction"><span class="num">molecular molar mass</span><span class="den">empirical-formula mass</span></span></div>
+<div class="empirical-flow" style="margin-top:.75rem">
+<div class="empirical-step"><strong>1. Find EF mass</strong><p>P₂O₅ = 2(30.97) + 5(16.00) = 141.94 g/mol</p></div>
+<div class="empirical-step"><strong>2. Compare masses</strong><p><span class="fraction compact"><span class="num">283.88 g/mol</span><span class="den">141.94 g/mol</span></span> = 2.00</p></div>
+<div class="empirical-step"><strong>3. Identify n</strong><p>n = 2</p></div>
+<div class="empirical-step"><strong>4. Scale subscripts</strong><p>P₂O₅ × 2 → P₄O₁₀</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">Molecular formula = <span class="blank" data-answer="P₄O₁₀">[ _______ ]</span></div>
+<div class="callout" style="margin-top:.55rem"><strong>Check:</strong> The molecular formula must be a whole-number multiple of the empirical formula. Its molar mass should match the given molecular molar mass.</div>
+<div class="warn" style="margin-top:.55rem"><strong>Do not change only one subscript.</strong> The same n multiplies every subscript in the empirical formula.</div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="9" data-local-slide="9" data-topic="T3.2" id="slide-9"><div><div class="slide-header"><span class="meta-pill">T3.2 · Slide 9 of 11</span><h1 class="slide-title">ACS-Style Diagnosis — Percent, Empirical, or Molecular Formula?</h1><div class="lo-box"><strong>Learning Objective:</strong> Diagnose incorrect setups and distinguish empirical from molecular formula reasoning</div></div><div class="slide-body"><div class="build-step visible" data-build="1">
+<span class="practice-badge acs">ACS-Style</span>
+<div class="question-card">
+<div class="question-text">Which setup correctly calculates the mass percent of nitrogen in NH₄NO₃?</div>
+<div class="choice-grid">
+<div class="choice"><strong>A.</strong> <span class="fraction compact"><span class="num">14.01</span><span class="den">80.05</span></span> × 100</div>
+<div class="choice"><strong>B.</strong> <span class="fraction compact"><span class="num">28.02</span><span class="den">80.05</span></span> × 100</div>
+<div class="choice"><strong>C.</strong> <span class="fraction compact"><span class="num">28.02</span><span class="den">14.01</span></span> × 100</div>
+<div class="choice"><strong>D.</strong> <span class="fraction compact"><span class="num">2</span><span class="den">9</span></span> × 100</div>
+</div>
+</div>
+</div><div class="build-step" data-build="2">
+<span class="practice-badge acs">ACS-Style</span>
+<div class="question-card">
+<div class="question-text">A phosphorus oxide is 43.64% P and 56.36% O by mass. What is its empirical formula?</div>
+<div class="choice-grid">
+<div class="choice"><strong>A.</strong> PO₂</div><div class="choice"><strong>B.</strong> P₂O₅</div><div class="choice"><strong>C.</strong> P₄O₁₀</div><div class="choice"><strong>D.</strong> P₅O₂</div>
+</div>
+</div>
+</div><div class="build-step" data-build="3"><div class="callout"><strong>Decision rule:</strong> first identify what the question is asking for; then choose the pathway. Percent composition is a mass fraction, empirical formula is the simplest whole-number ratio, and molecular formula is an integer multiple of the empirical formula.</div></div></div></div></div><div class="slide-container" data-integrated-slide="10" data-local-slide="10" data-topic="T3.2" id="slide-10"><div><div class="slide-header"><span class="meta-pill">T3.2 · Slide 10 of 11</span><h1 class="slide-title">ACS-Style Practice — From New Composition Data to Molecular Formula</h1><div class="lo-box"><strong>Learning Objective:</strong> Determine a new empirical formula from percent composition, then use the given molar mass to determine the molecular formula.</div></div><div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="practice-badge acs">ACS-Style</span>
+<div class="question-card">
+<div class="question-text">
+      A compound contains 53.31% C, 11.19% H, and 35.50% O by mass. Its molar mass is 90.12 g/mol.
+      What is its molecular formula?
+    </div>
+<div class="choice-grid">
+<div class="choice"><strong>A.</strong> C₂H₅O</div>
+<div class="choice"><strong>B.</strong> C₄H₁₀O₂</div>
+<div class="choice"><strong>C.</strong> C₆H₁₅O₃</div>
+<div class="choice"><strong>D.</strong> C₂H₁₀O₂</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="empirical-flow">
+<div class="empirical-step"><strong>1. Assume 100 g</strong><p>53.31 g C, 11.19 g H, 35.50 g O</p></div>
+<div class="empirical-step"><strong>2. Convert to moles</strong><p>C ≈ 4.44 mol; H ≈ 11.10 mol; O ≈ 2.22 mol</p></div>
+<div class="empirical-step"><strong>3. Divide by smallest</strong><p>2.00 : 5.00 : 1.00</p></div>
+<div class="empirical-step"><strong>4. Empirical formula</strong><p>C₂H₅O</p></div>
+</div>
+<div class="callout" style="margin-top:.55rem">
+<strong>Checkpoint:</strong> The percent composition gives the simplest whole-number ratio first. The molecular formula requires one more comparison.
+  </div>
+</div>
+<div class="build-step" data-build="3">
+<div class="compare-grid">
+<div class="compare-card"><h4>Empirical-formula mass</h4><p>C₂H₅O ≈ 45.06 g/mol</p></div>
+<div class="compare-card"><h4>Find n</h4><p><span class="fraction compact"><span class="num">90.12</span><span class="den">45.06</span></span> = 2.00</p></div>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">
+    Molecular formula: <span class="blank" data-answer="B: C₄H₁₀O₂">[ _______ ]</span>
+</div>
+<div class="warn" style="margin-top:.55rem">
+<strong>Trap:</strong> A is only the empirical formula. C uses the wrong integer multiple. D changes the subscripts inconsistently.
+  </div>
+</div>
+</div></div></div><div class="slide-container" data-integrated-slide="11" data-local-slide="11" data-topic="T3.2" id="slide-11"><div><div class="slide-header"><span class="meta-pill">T3.2 · Slide 11 of 11</span><h1 class="slide-title">Independent Check — Composition and Formula Relationships</h1><div class="lo-box"><strong>Learning Objective:</strong> Solve percent-composition, empirical-formula, and molecular-formula problems independently.</div></div><div class="slide-body">
+<div class="question-grid">
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">1</span> <span class="question-text">Calculate the mass percent of chlorine in MgCl₂.</span></div><div class="response-area">Show the chlorine contribution and total molar mass.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">2</span> <span class="question-text">Verify that the element percentages in H₂O total approximately 100%.</span></div><div class="response-area">Show both element percentages.</div></div></div>
+<div class="build-step" data-build="3"><div class="question-card"><div><span class="question-num">3</span> <span class="question-text">A compound is 52.14% C, 13.13% H, and 34.73% O. Determine its empirical formula.</span></div><div class="response-area">Use a 100 g sample and show all mole ratios.</div></div></div>
+<div class="build-step" data-build="4"><div class="question-card"><div><span class="question-num">4</span> <span class="question-text">A compound contains 4.60 g Na and 7.10 g Cl. Determine its empirical formula.</span></div><div class="response-area">Convert each mass to moles before comparing.</div></div></div>
+<div class="build-step" data-build="5" style="grid-column:1/-1"><div class="question-card"><div><span class="question-num">5</span> <span class="question-text">A student obtains a ratio of 1.00 : 1.33 : 1.00. Explain what multiplier should be tested and why direct rounding is inappropriate.</span></div><div class="response-area">State the multiplier and resulting whole-number ratio.</div></div></div>
+<div class="build-step" data-build="6" style="grid-column:1/-1"><div class="question-card"><div><span class="question-num">6</span> <span class="question-text">A compound has empirical formula CH₂O and molar mass 180.16 g/mol. Determine its molecular formula.</span></div><div class="response-area">Find the empirical-formula mass, determine n, and multiply every subscript by the same n.</div></div></div>
+</div>
+<div class="build-step" data-build="7"><div class="callout"><strong>Topic synthesis:</strong> percent composition = <span class="fraction compact"><span class="num">part</span><span class="den">whole</span></span> × 100; empirical formula = mass → moles → simplest whole-number ratio; molecular formula = empirical formula × whole-number n.</div></div>
+</div></div></div></main><script>
+let currentSlide=1;
+const totalSlides=11;
+let currentBuild=1;
+const buildsPerSlide={"1": 3, "2": 3, "3": 3, "4": 3, "5": 3, "6": 3, "7": 3, "8": 3, "9": 3, "10": 3, "11": 7};
+let currentMode='student';
+
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>{
+    slide.classList.toggle('active',(index+1)===currentSlide);
+  });
+
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10);
+    step.classList.toggle('visible',n<=currentBuild);
+  });
+
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const parentSlide=blank.closest('.slide-container');
+    const visibleBuild=!parentBuild||parentBuild.classList.contains('visible');
+    const active=parentSlide&&parentSlide.classList.contains('active');
+
+    if(currentMode==='answer'&&active&&visibleBuild&&blank.dataset.answer){
+      blank.textContent=blank.dataset.answer;
+      blank.classList.add('revealed');
+    }else{
+      blank.textContent='[ _______ ]';
+      blank.classList.remove('revealed');
+    }
+  });
+
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+
+function nextBuild(){
+  const max=buildsPerSlide[currentSlide];
+  if(currentBuild<max)currentBuild++;
+  else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}
+  updateDisplay();
+}
+
+function prevBuild(){
+  if(currentBuild>1)currentBuild--;
+  else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}
+  updateDisplay();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}
+});
+
+updateDisplay();
+</script></body></html>
