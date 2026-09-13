@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>T4.7 — Dilution, Titration, and Gravimetric Analysis — Student</title>
+<style>:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+  --accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+  --accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border-color:#475569;--blank-bg:#334155;
+}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}.mode-btn.active{background:var(--accent-blue);color:#0f172a}.nav-controls{display:flex;align-items:center;gap:.75rem}.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}.btn:disabled{opacity:.4;cursor:not-allowed}.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}.slide-container.active{display:flex}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.slide-header{margin-bottom:1.15rem}.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}.lo-box strong{color:var(--accent-blue)}.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem;display:flex;flex-direction:column;gap:.65rem}.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}.question-text{font-size:1.05rem;font-weight:600;line-height:1.4}.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:62px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}@media(max-width:900px){.question-grid,.compare-grid,.formula-tree,.work-ladder,.mass-lookup,.atom-count-grid{grid-template-columns:1fr}.slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}}.fraction{
+  display:inline-grid;
+  grid-template-rows:auto auto;
+  align-items:center;
+  justify-items:center;
+  line-height:1.1;
+  vertical-align:middle;
+  margin:0 .18rem;
+  min-width:120px;
+}.fraction .num{
+  width:100%;
+  padding:.18rem .4rem .28rem;
+  border-bottom:2px solid var(--text-main);
+  text-align:center;
+}.fraction .den{
+  width:100%;
+  padding:.28rem .4rem .18rem;
+  text-align:center;
+}@media(max-width:900px){.fraction{min-width:100px}}.eq-focus{font-size:1.32rem;font-weight:900;text-align:center;background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.65rem}.rule-pair{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}.rule-box{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.72rem;text-align:center}.rule-box strong{display:block;margin-bottom:.25rem}.exam-banner{background:rgba(251,191,36,.10);border:2px solid var(--accent-amber);border-radius:10px;padding:.75rem;text-align:center;font-weight:900;color:#fde68a}@media(max-width:900px){.rule-pair,.displace-intro,.dispro-grid{grid-template-columns:1fr}}.calc-road{display:grid;grid-template-columns:repeat(5,1fr);gap:.45rem;align-items:stretch}.calc-step{background:#0f172a;border:1px solid var(--border-color);border-radius:9px;padding:.65rem;text-align:center;position:relative}.calc-step:not(:last-child)::after{content:"→";position:absolute;right:-.38rem;top:50%;transform:translateY(-50%);color:var(--accent-amber);font-weight:900}.worked{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.85rem}.worked h4{color:var(--accent-blue);margin-bottom:.45rem}.work-lines{display:flex;flex-direction:column;gap:.32rem;line-height:1.45}.answer-box{margin-top:.5rem;background:rgba(45,212,191,.09);border:1px solid var(--accent-teal);border-radius:9px;padding:.55rem .7rem;color:#ccfbf1;font-weight:800}.error-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}.error-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.72rem}@media(max-width:900px){.molarity-hero,.meaning-grid,.prep-grid,.rule-stack,.error-grid{grid-template-columns:1fr}.calc-road{grid-template-columns:1fr}.calc-step::after{display:none}}.formula-box-centered{background:#0f172a;border:2px solid var(--accent-blue);border-radius:12px;padding:1rem;text-align:center}.formula-box-centered .big{font-size:1.45rem;font-weight:900;color:var(--accent-teal);margin:.35rem 0}.dilution-visual{display:grid;grid-template-columns:1fr auto 1fr;gap:.8rem;align-items:center}.soln-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.85rem;text-align:center}.dilution-beaker{width:180px;height:135px;margin:.45rem auto;position:relative;border:3px solid #94a3b8;border-top:none;border-radius:0 0 20px 20px;overflow:hidden}.liq{position:absolute;left:0;right:0;bottom:0;background:rgba(56,189,248,.16);border-top:2px solid var(--accent-blue)}.liq.stock{height:41%}.liq.dilute{height:82%}.particle{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--accent-teal);z-index:2}.center-arrow{font-size:2rem;font-weight:900;color:var(--accent-amber)}.grav-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;align-items:stretch}.grav-step{background:#0f172a;border:1px solid var(--border-color);border-radius:9px;padding:.65rem;text-align:center;position:relative}.grav-step:not(:last-child)::after{content:"→";position:absolute;right:-.42rem;top:50%;transform:translateY(-50%);font-weight:900;color:var(--accent-amber)}.filter-visual{display:grid;grid-template-columns:1fr auto 1fr;gap:.65rem;align-items:center}.funnel{width:100px;height:100px;margin:.3rem auto;clip-path:polygon(0 0,100% 0,60% 65%,55% 100%,45% 100%,40% 65%);background:#94a3b8;position:relative}.funnel::after{content:"solid";position:absolute;left:18px;right:18px;top:26px;height:30px;background:var(--accent-amber);color:#0f172a;font-weight:900;font-size:.72rem;display:flex;align-items:center;justify-content:center}.balance{width:150px;height:75px;margin:.6rem auto;position:relative;border-bottom:5px solid #94a3b8}.balance::before{content:"dry precipitate";position:absolute;left:16px;right:16px;bottom:5px;background:var(--accent-amber);color:#0f172a;font-weight:900;padding:.3rem;border-radius:7px;font-size:.72rem}.exam3{display:grid;grid-template-columns:1fr;gap:.75rem}@media(max-width:900px){.dilution-visual,.titration-layout,.filter-visual{grid-template-columns:1fr}.grav-flow{grid-template-columns:1fr}.grav-step::after{display:none}}.formula-box-centered sub,
+.eq-focus sub,
+.work-lines sub,
+.rule-box sub,
+.calc-step sub,
+.question-text sub{
+  font-size:0.7em;
+  vertical-align:sub;
+  line-height:0;
+}.equipment-grid-real{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}.equip-card-real{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;text-align:center}.caption-small{font-size:.88rem;color:var(--text-muted);line-height:1.4}@media(max-width:900px){.lab-setup,.equipment-grid-real{grid-template-columns:1fr 1fr}}@media(max-width:640px){.lab-setup,.equipment-grid-real{grid-template-columns:1fr}}
+body.mode-answer .blank.revealed{
+  color:var(--accent-amber);
+  background:rgba(251,191,36,.15);
+}
+</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧪</span><span>Topic T4.7 | Dilution, Titration, and Gravimetric Analysis</span></div>
+<div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 11</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+<div class="slide-container active" data-integrated-slide="55" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 55 · Local Slide 1</span>
+<h1 class="slide-title">Dilution — Same Solute, More Solvent</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Explain dilution visually and connect it to conservation of moles of solute.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="dilution-visual">
+<div class="soln-card">
+<h4>Before dilution — stock solution</h4>
+<div class="dilution-beaker">
+<div class="liq stock"></div>
+<span class="particle" style="left:24px; top:92px;"></span>
+<span class="particle" style="left:49px; top:103px;"></span>
+<span class="particle" style="left:77px; top:86px;"></span>
+<span class="particle" style="left:105px; top:101px;"></span>
+<span class="particle" style="left:132px; top:88px;"></span>
+<span class="particle" style="left:154px; top:108px;"></span>
+<span class="particle" style="left:35px; top:116px;"></span>
+<span class="particle" style="left:66px; top:122px;"></span>
+<span class="particle" style="left:113px; top:120px;"></span>
+<span class="particle" style="left:145px; top:124px;"></span>
+</div>
+<p><strong>smaller volume, higher concentration</strong></p>
+</div>
+<div class="center-arrow">+ H₂O →</div>
+<div class="soln-card">
+<h4>After dilution</h4>
+<div class="dilution-beaker">
+<div class="liq dilute"></div>
+<span class="particle" style="left:26px; top:48px;"></span>
+<span class="particle" style="left:62px; top:63px;"></span>
+<span class="particle" style="left:92px; top:52px;"></span>
+<span class="particle" style="left:128px; top:72px;"></span>
+<span class="particle" style="left:151px; top:58px;"></span>
+<span class="particle" style="left:41px; top:89px;"></span>
+<span class="particle" style="left:77px; top:100px;"></span>
+<span class="particle" style="left:113px; top:116px;"></span>
+<span class="particle" style="left:143px; top:98px;"></span>
+<span class="particle" style="left:57px; top:123px;"></span>
+</div>
+<p><strong>larger volume, lower concentration</strong></p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout"><strong>What changed?</strong> We added solvent, so volume increased and concentration decreased.</div>
+<div class="callout" style="margin-top:.5rem"><strong>What did NOT change?</strong> No solute was added or removed, so the <strong>moles of solute stay the same</strong>.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="formula-box-centered">
+<div class="big">M<sub>1</sub>V<sub>1</sub> = M<sub>2</sub>V<sub>2</sub></div>
+<p>because moles before dilution = moles after dilution</p>
+</div>
+<p style="margin-top:.55rem">Dilution changes concentration and volume, but keeps the moles of <span class="blank" data-answer="solute">[ _______ ]</span> constant.</p>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="56" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 56 · Local Slide 2</span>
+<h1 class="slide-title">Worked Dilution — Find the Final Volume</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Solve a dilution problem by labeling initial and final quantities before substituting.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="worked">
+<h4>Problem</h4>
+<p>A <strong>1.67 M NaOH</strong> solution is prepared from <strong>50.0 mL of 4.4 M NaOH</strong>. What is the final volume?</p>
+<div class="rule-pair" style="margin-top:.55rem">
+<div class="rule-box"><strong>Solution 1</strong>M<sub>1</sub> = 4.4 M<br/>V<sub>1</sub> = 50.0 mL</div>
+<div class="rule-box"><strong>Solution 2</strong>M<sub>2</sub> = 1.67 M<br/>V<sub>2</sub> = ?</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked">
+<h4>Set up before arithmetic</h4>
+<div class="work-lines">
+<div>M<sub>1</sub>V<sub>1</sub> = M<sub>2</sub>V<sub>2</sub></div>
+<div>V<sub>2</sub> = <span class="fraction"><span class="num">M<sub>1</sub>V<sub>1</sub></span><span class="den">M<sub>2</sub></span></span></div>
+<div>V<sub>2</sub> = <span class="fraction"><span class="num">(4.4 M)(50.0 mL)</span><span class="den">1.67 M</span></span></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="answer-box">V<sub>2</sub> = <strong>1.3 × 10² mL</strong></div>
+<div class="callout" style="margin-top:.55rem"><strong>Reasonableness:</strong> concentration decreased, so the final volume must be larger than 50.0 mL.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="57" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 57 · Local Slide 3</span>
+<h1 class="slide-title">Preparing a Dilute Solution from Stock</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Calculate the required stock volume and translate the answer into a laboratory preparation.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="worked">
+<h4>Problem</h4>
+<p>How would you prepare <strong>450. mL of 0.27 M saline</strong> from a <strong>1.40 M stock solution</strong>?</p>
+<div class="calc-road" style="margin-top:.6rem"><div class="calc-step">stock M<sub>1</sub></div><div class="calc-step">find V<sub>1</sub></div><div class="calc-step">transfer stock</div><div class="calc-step">add water</div><div class="calc-step">450. mL final</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked">
+<h4>Calculation</h4>
+<div class="work-lines">
+<div>M<sub>1</sub>V<sub>1</sub> = M<sub>2</sub>V<sub>2</sub></div>
+<div>V<sub>1</sub> = <span class="fraction"><span class="num">M<sub>2</sub>V<sub>2</sub></span><span class="den">M<sub>1</sub></span></span></div>
+<div>V<sub>1</sub> = <span class="fraction"><span class="num">(0.27 M)(450. mL)</span><span class="den">1.40 M</span></span> = <strong>87 mL</strong></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="worked">
+<h4>Prepare the diluted solution</h4>
+<div class="work-lines">
+<div>Measure <strong>87 mL</strong> of the <strong>1.40 M stock solution</strong>.</div>
+<div>Transfer it to a container used to make the final solution.</div>
+<div>Add distilled water until the <strong>final solution volume is 450. mL</strong>.</div>
+<div>Mix thoroughly.</div>
+</div>
+<div class="warn" style="margin-top:.55rem">
+<strong>Do not add 450. mL of water.</strong> The final <strong>solution volume</strong> must be 450. mL.
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="58" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 58 · Local Slide 4</span>
+<h1 class="slide-title">Titration — What Are We Measuring?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Identify the purpose and essential equipment of an acid–base titration.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout">
+<strong>Titration:</strong> use a solution of <strong>known concentration</strong> to find the concentration of an <strong>unknown solution</strong>.
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="equipment-grid-real">
+<div class="equip-card-real">
+<h4>Buret</h4>
+<p><strong>holds titrant</strong></p>
+<p class="caption-small">measures volume delivered</p>
+</div>
+<div class="equip-card-real">
+<h4>Volumetric pipette</h4>
+<p><strong>measures analyte</strong></p>
+<p class="caption-small">precise sample volume</p>
+</div>
+<div class="equip-card-real">
+<h4>Erlenmeyer flask</h4>
+<p><strong>holds analyte</strong></p>
+<p class="caption-small">swirl while titrating</p>
+</div>
+<div class="equip-card-real">
+<h4>Indicator</h4>
+<p><strong>signals endpoint</strong></p>
+<p class="caption-small">visible color change</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="rule-pair">
+<div class="rule-box">
+<strong>Titrant</strong><br/>
+    in the buret<br/>
+    known concentration
+  </div>
+<div class="rule-box">
+<strong>Analyte</strong><br/>
+    in the flask<br/>
+    unknown concentration
+  </div>
+</div>
+<div class="exam-banner" style="margin-top:.65rem">
+  volume delivered = final buret reading − initial buret reading
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="59" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 59 · Local Slide 5</span>
+<h1 class="slide-title">Titration Calculations — Use the Balanced Equation</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Solve titration problems through moles and the reaction coefficient ratio.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="calc-road">
+<div class="calc-step">buret reading difference</div><div class="calc-step">titrant volume</div><div class="calc-step">mol titrant</div><div class="calc-step">mol analyte</div><div class="calc-step">analyte M</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="rule-pair">
+<div class="rule-box"><strong>Step A</strong>volume × molarity → moles of known solution</div>
+<div class="rule-box"><strong>Step B</strong>balanced-equation ratio → moles of unknown solution</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Do not automatically use MₐVₐ = MᵦVᵦ.</strong> That shortcut works only when the balanced reaction gives a 1:1 mole ratio.</div>
+<div class="exam-banner" style="margin-top:.55rem">Safe method: volume → moles → mole ratio → moles → concentration.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="60" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 60 · Local Slide 6</span>
+<h1 class="slide-title">Worked Titration — Standardizing HCl with NaOH</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use buret readings, molarity, and a 1:1 reaction to find an unknown acid concentration.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="worked">
+<h4>Given</h4>
+<p>20.00 mL HCl is titrated with <strong>0.241 M NaOH</strong>.</p>
+<div class="rule-pair" style="margin-top:.5rem"><div class="rule-box"><strong>Initial buret</strong>1.56 mL</div><div class="rule-box"><strong>Final buret</strong>21.87 mL</div></div>
+<div class="eq-focus" style="margin-top:.55rem">HCl(aq) + NaOH(aq) → NaCl(aq) + H₂O(l)</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked">
+<h4>Step 1 — NaOH delivered → mol NaOH → mol HCl</h4>
+<div class="work-lines">
+<div>V(NaOH) = 21.87 mL − 1.56 mL = <strong>20.31 mL = 0.02031 L</strong></div>
+<div>0.02031 L × <span class="fraction"><span class="num">0.241 mol NaOH</span><span class="den">1 L</span></span> = <strong>0.004895 mol NaOH</strong></div>
+<div>0.004895 mol NaOH × <span class="fraction"><span class="num">1 mol HCl</span><span class="den">1 mol NaOH</span></span> = <strong>0.004895 mol HCl</strong></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="worked">
+<h4>Step 2 — mol HCl → molarity of HCl</h4>
+<div>M(HCl) = <span class="fraction"><span class="num">0.004895 mol HCl</span><span class="den">0.02000 L HCl</span></span> = <strong>0.245 M HCl</strong></div>
+<div class="answer-box">Answer: 0.245 M HCl</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="61" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 61 · Local Slide 7</span>
+<h1 class="slide-title">Gravimetric Analysis — Measure an Unknown by Weighing a Precipitate</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Explain the basic gravimetric-analysis workflow and connect precipitate mass to the amount of analyte.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Gravimetric analysis:</strong> convert the substance being measured into a solid precipitate, isolate the solid, dry it, and weigh it.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="grav-flow">
+<div class="grav-step"><strong>1. React</strong><br/>form an insoluble precipitate</div>
+<div class="grav-step"><strong>2. Filter</strong><br/>separate solid from solution</div>
+<div class="grav-step"><strong>3. Dry</strong><br/>remove water</div>
+<div class="grav-step"><strong>4. Weigh</strong><br/>mass precipitate</div>
+<div class="grav-step"><strong>5. Calculate</strong><br/>mass → mol → analyte</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="filter-visual">
+<div class="soln-card"><h4>Precipitation</h4><p>aqueous sample + reagent → solid</p></div>
+<div class="funnel"></div>
+<div class="soln-card"><h4>Dry &amp; weigh</h4><div class="balance"></div><p>use stoichiometry to work backward to the unknown</p></div>
+</div>
+<div class="warn" style="margin-top:.55rem"><strong>Why dry the precipitate?</strong> Water would add extra mass and make the calculated amount of analyte too large.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="62" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 62 · Local Slide 8</span>
+<h1 class="slide-title">Worked Gravimetric Analysis — Chloride from AgCl</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Determine chloride concentration from the mass of AgCl precipitate.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="worked">
+<h4>Problem</h4>
+<p>A 50.0 mL sample containing Cl⁻ produces <strong>0.287 g AgCl</strong> after excess AgNO₃ is added. Find [Cl⁻].</p>
+<div class="eq-focus" style="margin-top:.5rem">Ag⁺(aq) + Cl⁻(aq) → AgCl(s)</div>
+<div class="calc-road" style="margin-top:.55rem"><div class="calc-step">g AgCl</div><div class="calc-step">mol AgCl</div><div class="calc-step">mol Cl⁻</div><div class="calc-step">L sample</div><div class="calc-step">M Cl⁻</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked">
+<h4>Step 1 — precipitate mass → mol Cl⁻</h4>
+<div class="work-lines">
+<div>Molar mass AgCl = 143.32 g per mol</div>
+<div>0.287 g AgCl × <span class="fraction"><span class="num">1 mol AgCl</span><span class="den">143.32 g AgCl</span></span> = <strong>0.00200 mol AgCl</strong></div>
+<div>0.00200 mol AgCl × <span class="fraction"><span class="num">1 mol Cl⁻</span><span class="den">1 mol AgCl</span></span> = <strong>0.00200 mol Cl⁻</strong></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="worked">
+<h4>Step 2 — mol Cl⁻ → concentration</h4>
+<div>50.0 mL = 0.0500 L</div>
+<div style="margin-top:.35rem">[Cl⁻] = <span class="fraction"><span class="num">0.00200 mol Cl⁻</span><span class="den">0.0500 L</span></span> = <strong>0.0400 M Cl⁻</strong></div>
+<div class="answer-box">Answer: 0.0400 M Cl⁻</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="63" data-local-slide="9" id="slide-9">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 63 · Local Slide 9</span>
+<h1 class="slide-title">ACS-Style Practice — Easy → Medium → Hard</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Choose and execute the correct method for dilution, titration, and gravimetric analysis.</div>
+</div>
+<div class="slide-body">
+<div class="exam3">
+<div class="build-step visible" data-build="1">
+<div class="worked">
+<h4>Easy — Dilution</h4>
+<p>What volume of 2.00 M stock is needed to prepare 100.0 mL of 0.500 M solution?</p>
+<p>A. 25.0 mL   B. 50.0 mL   C. 100.0 mL   D. 400.0 mL</p>
+<div class="answer-box"><strong>Answer: A.</strong> V<sub>1</sub> = <span class="fraction"><span class="num">(0.500 M)(100.0 mL)</span><span class="den">2.00 M</span></span> = 25.0 mL.</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked">
+<h4>Medium — Titration</h4>
+<p>25.00 mL of HCl requires 30.00 mL of 0.100 M NaOH. HCl + NaOH is 1:1. What is M(HCl)?</p>
+<p>A. 0.0750 M   B. 0.100 M   C. 0.120 M   D. 0.300 M</p>
+<div class="answer-box"><strong>Answer: C.</strong> 0.03000 L × <span class="fraction"><span class="num">0.100 mol NaOH</span><span class="den">1 L</span></span> = 0.00300 mol NaOH = 0.00300 mol HCl; M = <span class="fraction"><span class="num">0.00300 mol</span><span class="den">0.02500 L</span></span> = 0.120 M.</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="worked">
+<h4>Hard — Gravimetric Analysis</h4>
+<p>A chloride sample gives 0.143 g AgCl. Which first calculation is correct?</p>
+<p>A. multiply 0.143 g by 143.32 g per mol<br/>B. divide 0.143 g by 143.32 g per mol<br/>C. divide 143.32 g by 0.143 g<br/>D. multiply by the sample volume first</p>
+<div class="answer-box"><strong>Answer: B.</strong> First convert measured precipitate mass to moles: 0.143 g AgCl × <span class="fraction"><span class="num">1 mol AgCl</span><span class="den">143.32 g AgCl</span></span>.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="64" data-local-slide="10" id="slide-10">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 64 · Local Slide 10</span>
+<h1 class="slide-title">EXAM REVIEW — Final Module 4 Calculation Checks</h1>
+<div class="lo-box"><strong>Use these checks before arithmetic.</strong></div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="error-grid">
+<div class="error-card"><strong>Dilution</strong><br/>moles solute stay constant; final volume is not the amount of water added.</div>
+<div class="error-card"><strong>Titration</strong><br/>buret delivered volume = final reading − initial reading.</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="error-grid">
+<div class="error-card"><strong>Titration stoichiometry</strong><br/>check the balanced-equation ratio; do not assume 1:1.</div>
+<div class="error-card"><strong>Gravimetric analysis</strong><br/>mass precipitate → moles precipitate → mole ratio → analyte.</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="exam-banner">Choose the chemistry path first. Then calculate.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="65" data-local-slide="11" id="slide-11">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 65 · Local Slide 11</span>
+<h1 class="slide-title">Independent Check — Dilution, Titration, and Gravimetric Analysis</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Assess the final Module 4 calculation and laboratory-analysis skills without answer cues.</div>
+</div>
+<div class="slide-body">
+<div class="question-grid">
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">1</span> <span class="question-text">During dilution, what happens to moles of solute, volume, and concentration?</span></div><div class="response-area">Explain all three.</div></div></div>
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">2</span> <span class="question-text">Calculate the stock volume needed to prepare 250.0 mL of 0.100 M solution from 0.500 M stock.</span></div><div class="response-area">Show the dilution setup.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">3</span> <span class="question-text">Name the role of the buret, pipet, Erlenmeyer flask, and indicator in an acid–base titration.</span></div><div class="response-area">One function for each.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">4</span> <span class="question-text">A buret reads 2.10 mL initially and 24.65 mL finally. What volume was delivered?</span></div><div class="response-area">Show the reading subtraction.</div></div></div>
+<div class="build-step" data-build="3"><div class="question-card"><div><span class="question-num">5</span> <span class="question-text">Explain why a 2:1 acid–base reaction cannot be solved by automatically setting MₐVₐ = MᵦVᵦ.</span></div><div class="response-area">Refer to the balanced equation.</div></div></div>
+<div class="build-step" data-build="3"><div class="question-card"><div><span class="question-num">6</span> <span class="question-text">List the gravimetric-analysis path from a measured precipitate mass to the amount of analyte.</span></div><div class="response-area">Write the conversion path.</div></div></div>
+</div>
+</div>
+</div>
+
+</div></main>
+<script>
+let currentSlide=1;
+const totalSlides=11;
+let currentBuild=1;
+const buildsPerSlide={"1":3,"2":3,"3":3,"4":3,"5":3,"6":3,"7":3,"8":3,"9":3,"10":3,"11":3};
+let currentMode='student';
+
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>{
+    slide.classList.toggle('active',(index+1)===currentSlide);
+  });
+
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  if(!activeSlide)return;
+
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10);
+    step.classList.toggle('visible',n<=currentBuild);
+  });
+
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const isActiveSlide=blank.closest('.slide-container')===activeSlide;
+    const visible=isActiveSlide && (!parentBuild||parentBuild.classList.contains('visible'));
+    if(currentMode==='answer' && visible && blank.dataset.answer){
+      blank.textContent=blank.dataset.answer;
+      blank.classList.add('revealed');
+    }else{
+      blank.textContent='[ _______ ]';
+      blank.classList.remove('revealed');
+    }
+  });
+
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+
+function nextBuild(){
+  const max=buildsPerSlide[currentSlide];
+  if(currentBuild<max)currentBuild++;
+  else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}
+  updateDisplay();
+}
+
+function prevBuild(){
+  if(currentBuild>1)currentBuild--;
+  else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}
+  updateDisplay();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}
+});
+
+updateDisplay();
+</script>
+</body>
+</html>

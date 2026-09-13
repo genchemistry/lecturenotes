@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>T4.5 — Oxidation–Reduction Reactions — Student</title>
+<style>:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+  --accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+  --accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border-color:#475569;--blank-bg:#334155;
+}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}.mode-btn.active{background:var(--accent-blue);color:#0f172a}.nav-controls{display:flex;align-items:center;gap:.75rem}.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}.btn:disabled{opacity:.4;cursor:not-allowed}.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}.slide-container.active{display:flex}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.slide-header{margin-bottom:1.15rem}.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}.lo-box strong{color:var(--accent-blue)}.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem;display:flex;flex-direction:column;gap:.65rem}.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}.question-text{font-size:1.05rem;font-weight:600;line-height:1.4}.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:62px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}@media(max-width:900px){.question-grid,.compare-grid,.formula-tree,.work-ladder,.mass-lookup,.atom-count-grid{grid-template-columns:1fr}.slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}}.eq-strip{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+  font-size:1.1rem;
+}.class-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+}.class-card strong{color:var(--accent-blue)}.mini-caption{
+  font-size:.9rem;
+  color:#cbd5e1;
+  line-height:1.35;
+}.redox-road{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem}.redox-step{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.75rem;text-align:center;position:relative}.redox-step:not(:last-child)::after{content:"→";position:absolute;right:-.48rem;top:50%;transform:translateY(-50%);color:var(--accent-amber);font-weight:900}.redox-step strong{color:var(--accent-blue)}.oilrig{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}.oilrig-card{background:#0f172a;border:2px solid var(--border-color);border-radius:12px;padding:.9rem;text-align:center}.oilrig-card.ox{border-color:var(--accent-rose)}.oilrig-card.red{border-color:var(--accent-teal)}.oilrig-card .big{font-size:1.35rem;font-weight:900;margin:.3rem 0}.rule-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem}.rule-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.7rem}.rule-card strong{color:var(--accent-blue)}.type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem}.type-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.72rem}.type-card h4{color:var(--accent-blue);margin-bottom:.35rem}@media(max-width:900px){.redox-road,.oilrig,.rule-grid,.agent-grid,.half-grid,.type-grid{grid-template-columns:1fr}.redox-step::after{display:none}}.on-work-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.85rem}.on-work-card h4{color:var(--accent-blue);margin-bottom:.45rem}.on-lines{display:flex;flex-direction:column;gap:.32rem;font-size:1.05rem;line-height:1.35}.on-lines .final{margin-top:.15rem;padding:.45rem .55rem;border-radius:8px;background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);color:#ccfbf1;font-weight:800}.practice-stack{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}.practice-work{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem}.practice-work h4{color:var(--accent-blue);margin-bottom:.35rem}.pathway-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.85rem}.pathway-card h4{color:var(--accent-blue);margin-bottom:.45rem}.method-note{font-size:.88rem;color:#cbd5e1;background:#111827;border:1px solid #334155;border-radius:8px;padding:.45rem .6rem}@media(max-width:900px){.on-work-grid,.practice-stack,.pathway-grid,.term-map{grid-template-columns:1fr}}.redox-split{display:grid;grid-template-columns:1fr 34px 1fr;gap:.45rem;align-items:stretch;margin-top:.55rem}.redox-side{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.75rem}.redox-side h4{color:var(--accent-blue);margin-bottom:.4rem}.redox-divider{position:relative;min-height:150px}.redox-divider::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--accent-amber);transform:translateX(-50%)}.redox-divider::after{content:"↓";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--bg-card);color:var(--accent-amber);font-size:1.25rem;font-weight:900;padding:.15rem}.species-row{display:grid;grid-template-columns:72px 1fr;gap:.45rem;align-items:start;margin:.45rem 0}.species-tag{font-weight:900;color:var(--accent-blue)}.species-main{font-size:1.08rem;line-height:1.45}.eq-focus{font-size:1.32rem;font-weight:900;text-align:center;background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.65rem}.rule-pair{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}.rule-box{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.72rem;text-align:center}.rule-box strong{display:block;margin-bottom:.25rem}.exam-banner{background:rgba(251,191,36,.10);border:2px solid var(--accent-amber);border-radius:10px;padding:.75rem;text-align:center;font-weight:900;color:#fde68a}.displace-intro{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}.displace-card{background:#0f172a;border:1px solid var(--border-color);border-radius:11px;padding:.8rem}.displace-card h4{color:var(--accent-blue);margin-bottom:.35rem}.hl-metal{color:#fbbf24;font-weight:900}.hl-halogen{color:#38bdf8;font-weight:900}.hl-hydrogen{color:#2dd4bf;font-weight:900}.m2-work{background:#0f172a;border:1px solid var(--border-color);border-radius:11px;padding:.8rem}.m2-work h4{color:var(--accent-blue);margin-bottom:.35rem}.m2-lines{display:flex;flex-direction:column;gap:.28rem;line-height:1.4}.m2-result{margin-top:.45rem;padding:.5rem .6rem;border-radius:8px;background:#111827;border-left:4px solid var(--accent-teal)}.dispro-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}.dispro-card{background:#0f172a;border:1px solid var(--border-color);border-radius:11px;padding:.8rem}.dispro-card h4{color:var(--accent-blue);margin-bottom:.35rem}@media(max-width:900px){.redox-split{grid-template-columns:1fr}.redox-divider{min-height:32px}.redox-divider::before{left:0;right:0;top:50%;bottom:auto;width:auto;height:2px;transform:none}.redox-divider::after{left:50%;top:50%}.rule-pair,.displace-intro,.dispro-grid{grid-template-columns:1fr}}
+body.mode-answer .blank.revealed{
+  color:var(--accent-amber);
+  background:rgba(251,191,36,.15);
+}
+</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧪</span><span>Topic T4.5 | Oxidation–Reduction Reactions</span></div>
+<div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 13</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+<div class="slide-container active" data-integrated-slide="33" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 33 · Local Slide 1</span>
+<h1 class="slide-title">Oxidation–Reduction Reactions — Electron Transfer</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Define oxidation and reduction and recognize that both occur together in a redox reaction.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="oilrig">
+<div class="oilrig-card ox"><h4>Oxidation</h4><div class="big">LOSS of e⁻</div><p>oxidation number increases</p></div>
+<div class="oilrig-card red"><h4>Reduction</h4><div class="big">GAIN of e⁻</div><p>oxidation number decreases</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="eq-strip">2Na → 2Na⁺ + 2e⁻     |     Cl₂ + 2e⁻ → 2Cl⁻</div>
+<div class="callout" style="margin-top:.55rem"><strong>OIL RIG:</strong> Oxidation Is Loss; Reduction Is Gain.</div><div class="warn" style="margin-top:.55rem"><strong>Redox always comes as a pair:</strong> if one species is oxidized, another species must be reduced. Electrons lost by one species are gained by another.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="redox-road">
+<div class="redox-step"><strong>Assign</strong><br/>oxidation numbers</div>
+<div class="redox-step"><strong>Compare</strong><br/>before → after</div>
+<div class="redox-step"><strong>Identify</strong><br/>oxidized / reduced</div>
+<div class="redox-step"><strong>Name</strong><br/>agents</div>
+</div>
+<p style="margin-top:.6rem">If one species loses electrons, another species must <span class="blank" data-answer="gain">[ _______ ]</span> electrons.</p>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="34" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 34 · Local Slide 2</span>
+<h1 class="slide-title">Oxidation Number Rules — Start with the Fixed Rules</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Apply the common oxidation-number rules used in General Chemistry I.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="rule-grid">
+<div class="rule-card"><strong>Free element</strong><br/>oxidation number = 0<br/>Na, H₂, O₂, P₄</div>
+<div class="rule-card"><strong>Monatomic ion</strong><br/>oxidation number = ion charge<br/>Fe³⁺ = +3</div>
+<div class="rule-card"><strong>Group 1 / Group 2</strong><br/>+1 / +2 in compounds</div>
+<div class="rule-card"><strong>Fluorine</strong><br/>−1 in compounds</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="rule-grid">
+<div class="rule-card"><strong>Oxygen</strong><br/>usually −2<br/><span class="mini-caption">peroxides: −1; with F, O can be positive</span></div>
+<div class="rule-card"><strong>Hydrogen</strong><br/>usually +1<br/><span class="mini-caption">metal hydrides: −1</span></div>
+</div>
+<div class="warn" style="margin-top:.55rem"><strong>Common error:</strong> O₂ is a free element, so O in O₂ is 0 — not −2.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Priority idea:</strong> use the known rules first, then use the sum rule to solve the unknown oxidation number.</div>
+<p style="margin-top:.55rem">For a monatomic ion, oxidation number equals its <span class="blank" data-answer="charge">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="35" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 35 · Local Slide 3</span>
+<h1 class="slide-title">The Sum Rule — Start Simple, Then Add Charge</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Find an unknown oxidation number by making the oxidation-number sum equal the overall charge.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="compare-grid">
+<div class="class-card"><strong>Neutral compound</strong><br/>The sum of all oxidation numbers = <strong>0</strong></div>
+<div class="class-card"><strong>Polyatomic ion</strong><br/>The sum of all oxidation numbers = <strong>the ion charge</strong></div>
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Strategy:</strong> write the formula as an oxidation-number equation, substitute the values you already know, then solve the unknown.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="on-work-card">
+<h4>Example 1 — PF₅ (neutral compound)</h4>
+<div class="on-lines">
+<div><strong>PF₅</strong></div>
+<div>P + 5F = 0</div>
+<div>P + 5(−1) = 0</div>
+<div>P = +5</div>
+<div class="final">Therefore, P = +5 and F = −1.</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="on-work-card">
+<h4>Example 2 — HCO₃⁻ (polyatomic ion)</h4>
+<div class="on-lines">
+<div><strong>HCO₃⁻</strong></div>
+<div>H + C + 3O = −1</div>
+<div>(+1) + C + 3(−2) = −1</div>
+<div>C = +4</div>
+<div class="final">Therefore, H = +1, C = +4, and O = −2.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="36" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 36 · Local Slide 4</span>
+<h1 class="slide-title">Guided Practice — Write the Oxidation-Number Equation First</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Solve oxidation numbers by writing the total-sum equation before doing the arithmetic.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="practice-work">
+<h4>Example — NaIO₃</h4>
+<div class="on-lines">
+<div><strong>Na + I + 3O = 0</strong></div>
+<div>Na = +1, O = −2</div>
+<div>(+1) + I + 3(−2) = 0</div>
+<div>I = <span class="blank" data-answer="+5">[ _______ ]</span></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="practice-stack">
+<div class="practice-work">
+<h4>K₂Cr₂O₇</h4>
+<div class="on-lines">
+<div>2K + 2Cr + 7O = 0</div>
+<div>K = +1, O = −2</div>
+<div>2(+1) + 2Cr + 7(−2) = 0</div>
+<div>Cr = <span class="blank" data-answer="+6">[ _______ ]</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="practice-work">
+<h4>Al₂(SO₄)₃ — Focus on S in SO₄²⁻</h4>
+<div class="on-lines">
+<div>S + 4O = −2</div>
+<div>O = −2</div>
+<div>S + 4(−2) = −2</div>
+<div>S = <span class="blank" data-answer="+6">[ _______ ]</span></div>
+</div>
+</div>
+<div class="warn" style="margin-top:.55rem"><strong>Habit to build:</strong> write the oxidation-number equation first. Do not jump straight to the answer.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="37" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 37 · Local Slide 5</span>
+<h1 class="slide-title">Two Ways to Track a Redox Reaction</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Connect electron movement and oxidation numbers (O.N.) using the same reaction.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="pathway-card">
+<h4>Method 1 — Follow the electrons directly</h4>
+<div class="eq-focus">2Mg + O₂ → 2MgO</div>
+<div class="redox-split">
+<div class="redox-side">
+<h4>Reactants</h4>
+<div class="species-row"><div class="species-tag">[Mg]</div><div class="species-main"><strong>2Mg</strong></div></div>
+<div class="species-row"><div class="species-tag">[O]</div><div class="species-main"><strong>O₂ + 4e⁻</strong></div></div>
+</div>
+<div class="redox-divider"></div>
+<div class="redox-side">
+<h4>Products / Electron change</h4>
+<div class="species-row"><div class="species-tag">[Mg]</div><div class="species-main"><strong>2Mg²⁺ + 4e⁻</strong><br/>Each Mg loses 2e⁻.<br/><strong>electron loss → oxidized</strong></div></div>
+<div class="species-row"><div class="species-tag">[O]</div><div class="species-main"><strong>2O²⁻</strong><br/>Each O atom gains 2e⁻; O₂ gains 4e⁻ total.<br/><strong>electron gain → reduced</strong></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="pathway-card">
+<h4>Method 2 — Follow the oxidation numbers (O.N.)</h4>
+<div class="eq-focus">2Mg + O₂ → 2MgO</div>
+<div class="method-note" style="margin-top:.55rem"><strong>First find the oxidation numbers in MgO.</strong></div>
+<div class="redox-split">
+<div class="redox-side">
+<h4>Reactants</h4>
+<div class="species-row"><div class="species-tag">[Mg]</div><div class="species-main">Mg in elemental Mg: <strong>0</strong></div></div>
+<div class="species-row"><div class="species-tag">[O]</div><div class="species-main">O in elemental O₂: <strong>0</strong></div></div>
+</div>
+<div class="redox-divider"></div>
+<div class="redox-side">
+<h4>Products</h4>
+<div class="on-lines">
+<div>Mg + O = 0</div>
+<div>Mg + (−2) = 0</div>
+<div>Mg = +2</div>
+</div>
+<div class="species-row"><div class="species-tag">[Mg]</div><div class="species-main"><strong>0 → +2</strong><br/>O.N. increases → loses e⁻ → oxidized</div></div>
+<div class="species-row"><div class="species-tag">[O]</div><div class="species-main"><strong>0 → −2</strong><br/>O.N. decreases → gains e⁻ → reduced</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="rule-pair">
+<div class="rule-box">
+<strong>O.N. increases</strong>
+loses e⁻ → oxidized → <strong>reducing agent</strong>
+</div>
+<div class="rule-box">
+<strong>O.N. decreases</strong>
+gains e⁻ → reduced → <strong>oxidizing agent</strong>
+</div>
+</div>
+<div class="exam-banner" style="margin-top:.6rem">If one species is oxidized, another species must be reduced — electrons are transferred, not created or destroyed.</div>
+<div class="callout" style="margin-top:.55rem"><strong>For 2Mg + O₂ → 2MgO:</strong> Mg is oxidized → reducing agent. O₂ is reduced → oxidizing agent.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="38" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 38 · Local Slide 6</span>
+<h1 class="slide-title">Worked Redox Example — Zn + CuSO₄</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use Method 2 — oxidation-number change — on a familiar metal-displacement reaction.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="m2-work">
+<h4>Step 1 — Write the reaction and assign oxidation numbers (O.N.)</h4>
+<div class="eq-focus">Zn(s) + CuSO₄(aq) → ZnSO₄(aq) + Cu(s)</div>
+<div class="redox-split">
+<div class="redox-side">
+<h4>Reactants</h4>
+<div class="m2-lines">
+<div>Elemental Zn = <strong>0</strong></div>
+<div>Cu in CuSO₄ = <strong>+2</strong></div>
+<div>S in SO₄²⁻ = +6, O = −2</div>
+</div>
+</div>
+<div class="redox-divider"></div>
+<div class="redox-side">
+<h4>Products</h4>
+<div class="m2-lines">
+<div>Zn in ZnSO₄ = <strong>+2</strong></div>
+<div>Elemental Cu = <strong>0</strong></div>
+<div>S in SO₄²⁻ = +6, O = −2</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="m2-work">
+<h4>Step 2 — Compare before and after</h4>
+<div class="m2-lines">
+<div><strong>Zn: 0 → +2</strong> → O.N. increases → loses e⁻ → <strong>oxidized</strong></div>
+<div><strong>Cu: +2 → 0</strong> → O.N. decreases → gains e⁻ → <strong>reduced</strong></div>
+<div><strong>S: +6 → +6</strong> and <strong>O: −2 → −2</strong> → no redox change</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="m2-result"><strong>Zn</strong> is oxidized → <strong>reducing agent</strong>.<br/><strong>Cu²⁺</strong> in CuSO₄ is reduced → <strong>oxidizing agent</strong>.</div>
+<div class="exam-banner" style="margin-top:.55rem">One O.N. increases and another decreases → redox confirmed.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="39" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 39 · Local Slide 7</span>
+<h1 class="slide-title">Worked Redox Example — Fe₂O₃ + C</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use Method 2 to assign oxidation numbers, identify what changes, and name the agents.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="m2-work">
+<h4>Step 1 — Assign oxidation numbers (O.N.)</h4>
+<div class="eq-focus">2Fe₂O₃(s) + 3C(s) → 4Fe(s) + 3CO₂(g)</div>
+<div class="redox-split">
+<div class="redox-side">
+<h4>Reactants</h4>
+<div class="m2-lines">
+<div>In Fe₂O₃: O = −2</div>
+<div>2Fe + 3(−2) = 0</div>
+<div>2Fe − 6 = 0</div>
+<div><strong>Fe = +3</strong></div>
+<div>Elemental C = <strong>0</strong></div>
+</div>
+</div>
+<div class="redox-divider"></div>
+<div class="redox-side">
+<h4>Products</h4>
+<div class="m2-lines">
+<div>Elemental Fe = <strong>0</strong></div>
+<div>In CO₂: C + 2(−2) = 0</div>
+<div>C − 4 = 0</div>
+<div><strong>C = +4</strong></div>
+<div>O remains <strong>−2</strong></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="m2-work">
+<h4>Step 2 — Compare before and after</h4>
+<div class="m2-lines">
+<div><strong>Fe: +3 → 0</strong> → O.N. decreases → gains e⁻ → <strong>reduced</strong></div>
+<div><strong>C: 0 → +4</strong> → O.N. increases → loses e⁻ → <strong>oxidized</strong></div>
+<div><strong>O: −2 → −2</strong> → no redox change</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="m2-result"><strong>Fe₂O₃</strong> contains Fe³⁺ that is reduced → <strong>oxidizing agent</strong>.<br/><strong>C</strong> is oxidized → <strong>reducing agent</strong>.</div>
+<div class="exam-banner" style="margin-top:.55rem">One O.N. decreased and another increased → redox confirmed.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="40" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 40 · Local Slide 8</span>
+<h1 class="slide-title">Three Displacement Redox Patterns to Recognize</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Recognize three common displacement redox patterns from the reactants and products.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Important:</strong> These are three common displacement redox patterns — not the only kinds of redox reactions.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="displace-intro">
+<div class="displace-card">
+<h4>Metal displacement</h4>
+<p>A free <span class="hl-metal">metal</span> replaces another metal ion in a compound.</p>
+<div class="eq-strip" style="margin-top:.45rem"><span class="hl-metal">Fe(s)</span> + CuSO₄(aq) → FeSO₄(aq) + <span class="hl-metal">Cu(s)</span></div>
+</div>
+<div class="displace-card">
+<h4>Halogen displacement</h4>
+<p>A free <span class="hl-halogen">halogen</span> replaces a halide ion.</p>
+<div class="eq-strip" style="margin-top:.45rem"><span class="hl-halogen">Cl₂(g)</span> + 2NaBr(aq) → 2NaCl(aq) + <span class="hl-halogen">Br₂(g)</span></div>
+</div>
+<div class="displace-card">
+<h4>Hydrogen displacement</h4>
+<p>An active <span class="hl-metal">metal</span> reacts with an acid and displaces H⁺, producing <span class="hl-hydrogen">H₂(g)</span>.</p>
+<div class="eq-strip" style="margin-top:.45rem"><span class="hl-metal">Mg(s)</span> + 2HCl(aq) → MgCl₂(aq) + <span class="hl-hydrogen">H₂(g)</span></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3"><div class="rule-pair">
+<div class="rule-box"><strong>Metal displacement</strong> Free metal + compound containing another metal ion.</div>
+<div class="rule-box"><strong>Halogen displacement</strong> Free halogen + compound containing a halide ion.</div>
+</div>
+<div class="rule-box" style="margin-top:.55rem"><strong>Hydrogen displacement</strong> Active metal + acid → H₂(g).</div>
+<div class="callout" style="margin-top:.55rem"><strong>Verification step:</strong> pattern recognition is only the first pass. Confirm redox by finding one oxidation number that increases and another that decreases.</div></div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="41" data-local-slide="9" id="slide-9">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 41 · Local Slide 9</span>
+<h1 class="slide-title">Disproportionation — One Element Is Both Oxidized and Reduced</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Track every element carefully and identify when the same element experiences both oxidation and reduction.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="dispro-card">
+<h4>Example 1 — Hydrogen peroxide</h4>
+<div class="eq-focus">2H₂O₂(aq) → 2H₂O(l) + O₂(g)</div>
+<div class="m2-lines" style="margin-top:.55rem">
+<div><strong>Before reaction:</strong> in H₂O₂, H = +1, so O = −1.</div>
+<div><strong>After reaction:</strong> in H₂O, H = +1 and O = −2.</div>
+<div><strong>After reaction:</strong> in O₂, elemental O = 0.</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="dispro-grid">
+<div class="dispro-card">
+<h4>One oxygen pathway</h4>
+<div><strong>O in H₂O₂: −1 → O in H₂O: −2</strong></div>
+<div style="margin-top:.3rem">O.N. decreases → gains e⁻ → <strong>reduced</strong></div>
+</div>
+<div class="dispro-card">
+<h4>Another oxygen pathway</h4>
+<div><strong>O in H₂O₂: −1 → O in O₂: 0</strong></div>
+<div style="margin-top:.3rem">O.N. increases → loses e⁻ → <strong>oxidized</strong></div>
+</div>
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Hydrogen check:</strong> H in H₂O₂ is +1 and H in H₂O is still +1. Hydrogen is <strong>neither oxidized nor reduced</strong>.</div>
+<div class="exam-banner" style="margin-top:.55rem">The same element, oxygen, is both oxidized and reduced → disproportionation.</div>
+</div>
+<div class="build-step" data-build="3"><div class="dispro-card">
+<h4>Second pattern check — chlorine in base</h4>
+<div class="eq-focus">Cl₂(g) + 2NaOH(aq) → NaCl(aq) + NaClO(aq) + H₂O(l)</div>
+<div class="dispro-grid" style="margin-top:.55rem">
+<div class="dispro-card"><strong>Cl: 0 → −1</strong><div>O.N. decreases → reduced</div></div>
+<div class="dispro-card"><strong>Cl: 0 → +1</strong><div>O.N. increases → oxidized</div></div>
+</div>
+<div class="m2-result"><strong>Conclusion:</strong> the same chlorine starts at 0 and ends at two different oxidation numbers, so chlorine is both reduced and oxidized.</div>
+</div></div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="42" data-local-slide="10" id="slide-10">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 42 · Local Slide 10</span>
+<h1 class="slide-title">Is It Redox? — Reaction-Type Diagnosis</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Distinguish redox from nonredox reactions by checking oxidation-number changes.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="type-grid">
+<div class="type-card"><h4>Combustion</h4>CH₄ + 2O₂ → CO₂ + 2H₂O<br/><strong>Redox</strong></div>
+<div class="type-card"><h4>Metal displacement</h4>Fe + CuSO₄ → FeSO₄ + Cu<br/><strong>Redox</strong></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="type-grid">
+<div class="type-card"><h4>Precipitation</h4>2KI + Pb(NO₃)₂ → PbI₂ + 2KNO₃<br/><strong>No oxidation-number change</strong><br/><span class="mini-caption">A double-displacement reaction.</span></div>
+<div class="type-card"><h4>Neutralization</h4>HCl + NaOH → H₂O + NaCl<br/><strong>No oxidation-number change</strong><br/><span class="mini-caption">A double-displacement reaction.</span></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Best test:</strong> redox requires one oxidation number to increase and another to decrease.</div>
+<div class="warn" style="margin-top:.55rem"><strong>Pattern is not enough:</strong> precipitation and neutralization are commonly double-displacement reactions, but they are not redox when oxidation numbers do not change.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="43" data-local-slide="11" id="slide-11">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 43 · Local Slide 11</span>
+<h1 class="slide-title">Independent Check — Oxidation–Reduction Reactions</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Assess oxidation-number assignment, redox identification, displacement types, disproportionation, and agent naming.</div>
+</div>
+<div class="slide-body">
+<div class="question-grid">
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">1</span> <span class="question-text">Assign the oxidation number of Mn in KMnO₄.</span></div><div class="response-area">Show the sum-rule setup.</div></div></div>
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">2</span> <span class="question-text">For Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s), identify what is oxidized and what is reduced.</span></div><div class="response-area">Use oxidation-number changes.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">3</span> <span class="question-text">Identify the oxidizing agent and reducing agent in Question 2.</span></div><div class="response-area">Keep process and agent names separate.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">4</span> <span class="question-text">Classify each as hydrogen displacement, metal displacement, or halogen displacement: Zn + 2HCl; Cu + 2AgNO₃; Br₂ + 2KI.</span></div><div class="response-area">Then verify that oxidation numbers change.</div></div></div>
+<div class="build-step" data-build="3"><div class="question-card"><div><span class="question-num">5</span> <span class="question-text">In 2H₂O₂ → 2H₂O + O₂, show why the reaction is disproportionation.</span></div><div class="response-area">Track oxygen from its initial oxidation number to both products.</div></div></div>
+<div class="build-step" data-build="3"><div class="question-card"><div><span class="question-num">6</span> <span class="question-text">Which is redox: HCl + NaOH → H₂O + NaCl or CH₄ + 2O₂ → CO₂ + 2H₂O? Justify with oxidation numbers.</span></div><div class="response-area">Do not classify by appearance alone.</div></div></div>
+</div>
+</div>
+</div>
+
+</div></main>
+<script>
+let currentSlide=1;
+const totalSlides=11;
+let currentBuild=1;
+const buildsPerSlide={"1":3,"2":3,"3":3,"4":3,"5":3,"6":3,"7":3,"8":3,"9":3,"10":3,"11":3};
+let currentMode='student';
+
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>{
+    slide.classList.toggle('active',(index+1)===currentSlide);
+  });
+
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  if(!activeSlide)return;
+
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10);
+    step.classList.toggle('visible',n<=currentBuild);
+  });
+
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const isActiveSlide=blank.closest('.slide-container')===activeSlide;
+    const visible=isActiveSlide && (!parentBuild||parentBuild.classList.contains('visible'));
+    if(currentMode==='answer' && visible && blank.dataset.answer){
+      blank.textContent=blank.dataset.answer;
+      blank.classList.add('revealed');
+    }else{
+      blank.textContent='[ _______ ]';
+      blank.classList.remove('revealed');
+    }
+  });
+
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+
+function nextBuild(){
+  const max=buildsPerSlide[currentSlide];
+  if(currentBuild<max)currentBuild++;
+  else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}
+  updateDisplay();
+}
+
+function prevBuild(){
+  if(currentBuild>1)currentBuild--;
+  else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}
+  updateDisplay();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}
+});
+
+updateDisplay();
+</script>
+</body>
+</html>

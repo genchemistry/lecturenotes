@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>T4.2 — Precipitation Reactions and Solubility Rules — Student</title>
+<style>:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+  --accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+  --accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border-color:#475569;--blank-bg:#334155;
+}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}.mode-btn.active{background:var(--accent-blue);color:#0f172a}.nav-controls{display:flex;align-items:center;gap:.75rem}.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}.btn:disabled{opacity:.4;cursor:not-allowed}.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}.slide-container.active{display:flex}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.slide-header{margin-bottom:1.15rem}.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}.lo-box strong{color:var(--accent-blue)}.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}.arrow{color:var(--accent-amber);font-size:1.4rem;font-weight:900;text-align:center}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem;display:flex;flex-direction:column;gap:.65rem}.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}.question-text{font-size:1.05rem;font-weight:600;line-height:1.4}.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:62px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}@media(max-width:900px){.question-grid,.compare-grid,.formula-tree,.work-ladder,.mass-lookup,.atom-count-grid{grid-template-columns:1fr}.slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}}.practice-badge{
+  display:inline-block;
+  padding:.22rem .55rem;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  margin-bottom:.45rem;
+}.practice-badge.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}.practice-badge.acs{background:rgba(56,189,248,.15);color:var(--accent-blue);border:1px solid var(--accent-blue)}.ion-chip{
+  display:inline-block;
+  padding:.22rem .5rem;
+  margin:.15rem;
+  border-radius:999px;
+  background:rgba(56,189,248,.14);
+  color:#bae6fd;
+  border:1px solid var(--accent-blue);
+  font-weight:900;
+}.eq-strip{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+  font-size:1.1rem;
+}.class-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+}.class-card strong{color:var(--accent-blue)}.mini-caption{
+  font-size:.9rem;
+  color:#cbd5e1;
+  line-height:1.35;
+}.precip-mix{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:.75rem;
+  align-items:center;
+}.mix-beaker{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.8rem;
+  text-align:center;
+}.product-grid{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:.65rem;
+  align-items:center;
+}.ion-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.75rem;
+  text-align:center;
+}.ion-card h4{margin:0 0 .45rem 0;color:var(--accent-blue)}.precip-highlight{
+  background:rgba(250,204,21,.14);
+  border:1px solid rgba(250,204,21,.55);
+  border-radius:12px;
+  padding:.75rem;
+}@media(max-width:900px){.precip-mix,.product-grid{grid-template-columns:1fr}}.clear-beaker{
+  width:98px;
+  height:116px;
+  margin:.3rem auto .55rem auto;
+  border:3px solid #cbd5e1;
+  border-top:none;
+  border-radius:0 0 16px 16px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(to top, rgba(255,255,255,.05), rgba(255,255,255,.02));
+}.clear-liquid-only{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:64%;
+  background:rgba(255,255,255,.10);
+}.cloudy-solid{
+  position:absolute;
+  left:12px; right:12px; bottom:12px;
+  height:34px;
+  border-radius:45% 55% 40% 60%;
+  background:
+    radial-gradient(ellipse at 28% 55%, rgba(255,255,255,.94) 0 17px, transparent 19px),
+    radial-gradient(ellipse at 52% 45%, rgba(255,255,255,.90) 0 20px, transparent 23px),
+    radial-gradient(ellipse at 74% 58%, rgba(255,255,255,.86) 0 16px, transparent 19px);
+  filter:blur(.15px);
+  box-shadow:0 0 16px rgba(255,255,255,.35);
+}.solubility-board{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.7rem;
+  margin-top:.55rem;
+}.rule-panel{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.75rem;
+}.rule-panel h4{
+  margin:0 0 .45rem 0;
+  color:var(--accent-blue);
+}.rule-panel ul{margin:.35rem 0 0 1.1rem; padding:0}.rule-panel li{margin:.18rem 0}.rule-good{color:#99f6e4;font-weight:900}.rule-bad{color:#fecdd3;font-weight:900}.rule-warn{color:#fde68a;font-weight:900}.outside-inside{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.7rem;
+  margin-top:.6rem;
+}.pair-card{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:12px;
+  padding:.7rem;
+  text-align:center;
+}.pair-card strong{color:var(--accent-blue)}.formula-work{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.8rem;
+  margin-top:.55rem;
+}.formula-line{
+  display:flex;
+  gap:.4rem;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  margin:.35rem 0;
+}.state-pill{
+  display:inline-block;
+  padding:.18rem .48rem;
+  border-radius:999px;
+  font-weight:900;
+}.aq-pill{background:rgba(96,165,250,.15);border:1px solid rgba(96,165,250,.5);color:#bfdbfe}.s-pill{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.6);color:#ffffff}@media(max-width:900px){.solubility-board,.swap-grid,.outside-inside{grid-template-columns:1fr}}
+body.mode-answer .blank.revealed{
+  color:var(--accent-amber);
+  background:rgba(251,191,36,.15);
+}
+</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧪</span><span>Topic T4.2 | Precipitation Reactions and Solubility Rules</span></div>
+<div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 8</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+<div class="slide-container active" data-integrated-slide="10" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 10 · Local Slide 1</span>
+<h1 class="slide-title">Precipitation Reactions — What Do We Observe?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Recognize precipitation as formation of an insoluble solid when two aqueous ionic solutions are mixed.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="precip-mix">
+<div class="mix-beaker"><h4>Solution A</h4><div class="clear-beaker"><div class="clear-liquid-only"></div></div><p class="mini-caption">clear aqueous solution</p></div>
+<div class="arrow">+</div>
+<div class="mix-beaker"><h4>Solution B</h4><div class="clear-beaker"><div class="clear-liquid-only"></div></div><p class="mini-caption">clear aqueous solution</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="precip-mix">
+<div class="mix-beaker"><h4>After Mixing</h4><div class="clear-beaker"><div class="clear-liquid-only"></div><div class="cloudy-solid"></div></div><p class="mini-caption">cloudy white solid forms</p></div>
+<div class="arrow">→</div>
+<div class="precip-highlight"><strong>Precipitate</strong><br/>an insoluble ionic solid formed from ions in solution</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Question we must answer:</strong> When two aqueous ionic compounds are mixed, which new ionic product is insoluble?</div>
+<p style="margin-top:.55rem">A precipitate is an <span class="blank" data-answer="insoluble">[ _______ ]</span> ionic solid.</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="11" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 11 · Local Slide 2</span>
+<h1 class="slide-title">Solubility Chart — The Decision Tool</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use the course solubility chart to decide whether an ionic compound is aqueous or solid.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Formal solubility-chart moment:</strong> In T4.1, AgCl was labeled insoluble for you. From here, the chart tells us.</div>
+<div class="solubility-board">
+<div class="rule-panel"><h4>Always / Generally Soluble</h4><ul>
+<li><span class="rule-good">Group 1 cations</span>: Li⁺, Na⁺, K⁺, Rb⁺, Cs⁺</li>
+<li><span class="rule-good">NH₄⁺</span> ammonium salts</li>
+<li><span class="rule-good">NO₃⁻</span> nitrate salts</li>
+<li><span class="rule-good">CH₃COO⁻</span> acetate salts</li>
+</ul></div>
+<div class="rule-panel"><h4>Usually Soluble, Check Exceptions</h4><ul>
+<li><span class="rule-good">Cl⁻, Br⁻, I⁻</span> except with <span class="rule-warn">Ag⁺, Pb²⁺, Hg₂²⁺</span></li>
+<li><span class="rule-good">SO₄²⁻</span> except with <span class="rule-warn">Ba²⁺, Sr²⁺, Pb²⁺</span>; Ca²⁺ is often low-solubility depending on chart</li>
+</ul></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="solubility-board">
+<div class="rule-panel"><h4>Usually Insoluble</h4><ul>
+<li><span class="rule-bad">CO₃²⁻</span> carbonate</li>
+<li><span class="rule-bad">PO₄³⁻</span> phosphate</li>
+<li><span class="rule-bad">CrO₄²⁻</span> chromate</li>
+<li><span class="rule-bad">OH⁻</span> hydroxide</li>
+<li><span class="rule-bad">S²⁻</span> sulfide</li>
+</ul></div>
+<div class="rule-panel"><h4>Insoluble-Rule Exceptions</h4><ul>
+<li>Often soluble with <span class="rule-good">Group 1</span> or <span class="rule-good">NH₄⁺</span></li>
+<li>Hydroxide and sulfide exceptions depend on the course chart</li>
+<li><strong>Use the course solubility chart as final authority</strong></li>
+</ul></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>How to read it:</strong> Find the anion family first, then check whether the cation is an exception.</div>
+<p style="margin-top:.55rem">Nitrates are generally <span class="blank" data-answer="soluble">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="12" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 12 · Local Slide 3</span>
+<h1 class="slide-title">Solubility Chart Practice — Read the Pattern</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Determine soluble or insoluble states by matching ion families and exceptions.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="compare-grid">
+<div class="class-card"><strong>KNO₃</strong><br/>contains K⁺ and NO₃⁻ → soluble by Group 1 and nitrate rules.</div>
+<div class="class-card"><strong>AgCl</strong><br/>chlorides are usually soluble, but Ag⁺ is an exception → insoluble.</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="compare-grid">
+<div class="class-card"><strong>CaCO₃</strong><br/>carbonates are usually insoluble; Ca²⁺ is not Group 1 or NH₄⁺ → insoluble.</div>
+<div class="class-card"><strong>Na₂SO₄</strong><br/>contains Na⁺ and SO₄²⁻ → soluble by Group 1 rule.</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Chart-reading routine:</strong> anion family → exception cation → state symbol.</div>
+<div class="formula-line"><span class="state-pill aq-pill">(aq)</span><span>soluble, stays dissolved</span><span class="state-pill s-pill">(s)</span><span>insoluble, precipitate</span></div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="13" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 13 · Local Slide 4</span>
+<h1 class="slide-title">Double Displacement — Outside–Outside, Inside–Inside</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Predict possible products of aqueous ionic reactants using the double-displacement pattern.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="eq-strip">AB(aq) + CD(aq) → ?</div>
+<div class="callout" style="margin-top:.55rem"><strong>Course pattern:</strong> In this course, precipitation reactions are predicted using the double-displacement pattern.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="outside-inside">
+<div class="pair-card"><strong>Outside + outside</strong><br/>A and D pair to form AD</div>
+<div class="pair-card"><strong>Inside + inside</strong><br/>B and C pair; write cation first, so CB</div>
+</div>
+<div class="eq-strip" style="margin-top:.55rem">AB + CD → AD + CB</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Important:</strong> this pattern predicts possible partners. You still must write charge-balanced formulas and then use the solubility chart.</div>
+<p style="margin-top:.55rem">In ionic formulas, the <span class="blank" data-answer="cation">[ _______ ]</span> is written first.</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="14" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 14 · Local Slide 5</span>
+<h1 class="slide-title">Product Formula Writing — KI + Pb(NO₃)₂</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Write neutral product formulas from ion charges before assigning states.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="practice-badge medium">Worked Formula Step</span>
+<div class="eq-strip">KI(aq) + Pb(NO₃)₂(aq) → ?</div>
+<div class="product-grid" style="margin-top:.55rem">
+<div class="ion-card"><h4>Outside pair</h4><span class="ion-chip">K⁺</span><span class="ion-chip">NO₃⁻</span><p>KNO₃</p></div>
+<div class="arrow">and</div>
+<div class="ion-card"><h4>Inside pair</h4><span class="ion-chip">Pb²⁺</span><span class="ion-chip">I⁻</span><p>PbI₂</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="formula-work">
+<div class="formula-line"><span>Pb²⁺</span><span>+</span><span>2 I⁻</span><span>→</span><strong>PbI₂</strong></div>
+<div class="formula-line"><span>K⁺</span><span>+</span><span>NO₃⁻</span><span>→</span><strong>KNO₃</strong></div>
+</div>
+<div class="warn" style="margin-top:.55rem"><strong>Do not write PbI.</strong> Pb²⁺ needs two iodide ions to make a neutral compound.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="compare-grid">
+<div class="class-card"><strong>PbI₂:</strong> iodide exception with Pb²⁺ → insoluble → <span class="state-pill s-pill">(s)</span></div>
+<div class="class-card"><strong>KNO₃:</strong> Group 1 and nitrate rules → soluble → <span class="state-pill aq-pill">(aq)</span></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="15" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 15 · Local Slide 6</span>
+<h1 class="slide-title">Molecular Equation Prediction — KI + Pb(NO₃)₂</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Write and balance a molecular equation for a precipitation reaction.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="eq-strip">KI(aq) + Pb(NO₃)₂(aq) → PbI₂(s) + KNO₃(aq)</div>
+<div class="callout" style="margin-top:.55rem"><strong>State symbols:</strong> PbI₂ is the precipitate; KNO₃ remains dissolved.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="eq-strip">Balance iodide and nitrate groups:</div>
+<div class="formula-work">
+<div class="formula-line"><span>Pb(NO₃)₂ has</span><strong>2 nitrate groups</strong><span>→ need</span><strong>2KNO₃</strong></div>
+<div class="formula-line"><span>PbI₂ has</span><strong>2 iodide ions</strong><span>→ need</span><strong>2KI</strong></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="eq-strip">2KI(aq) + Pb(NO₃)₂(aq) → PbI₂(s) + 2KNO₃(aq)</div>
+<div class="precip-highlight" style="margin-top:.55rem"><strong>Precipitate:</strong> <span class="blank" data-answer="PbI₂(s)">[ _______ ]</span></div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="16" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 16 · Local Slide 7</span>
+<h1 class="slide-title">Second Activity — AgNO₃ + NaCl</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Repeat the precipitation-prediction workflow for a new reaction.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="practice-badge acs">Guided Activity</span>
+<div class="question-card">
+<div class="question-text">Predict the products and states when AgNO₃(aq) and NaCl(aq) are mixed.</div>
+<div class="response-area">Use: ions → partner swap → neutral formulas → solubility chart → balanced molecular equation.</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="formula-work">
+<div class="formula-line"><span>Ag⁺ + Cl⁻ →</span><strong>AgCl</strong><span class="state-pill s-pill">(s)</span></div>
+<div class="formula-line"><span>Na⁺ + NO₃⁻ →</span><strong>NaNO₃</strong><span class="state-pill aq-pill">(aq)</span></div>
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Chart reason:</strong> chloride is usually soluble, but Ag⁺ is a listed exception.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="eq-strip">AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq)</div>
+<div class="precip-highlight" style="margin-top:.55rem"><strong>Precipitate:</strong> <span class="blank" data-answer="AgCl(s)">[ _______ ]</span></div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="17" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 17 · Local Slide 8</span>
+<h1 class="slide-title">Independent Check — Precipitation Prediction</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Predict precipitates by combining solubility-chart reasoning and molecular-equation writing.</div>
+</div>
+<div class="slide-body">
+<div class="question-grid">
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">1</span> <span class="question-text">Use the solubility chart to classify KNO₃, AgCl, CaCO₃, and Na₂SO₄ as soluble or insoluble.</span></div><div class="response-area">Cite the controlling rule or exception.</div></div></div>
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">2</span> <span class="question-text">Predict products and states for AgNO₃(aq) + KBr(aq).</span></div><div class="response-area">Write the balanced molecular equation.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">3</span> <span class="question-text">Predict products and states for BaCl₂(aq) + Na₂SO₄(aq).</span></div><div class="response-area">Identify the precipitate and write the balanced molecular equation.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">4</span> <span class="question-text">Predict products and states for Na₂CO₃(aq) + CaCl₂(aq).</span></div><div class="response-area">Use the carbonate rule and exceptions.</div></div></div>
+<div class="build-step" data-build="3" style="grid-column:1/-1"><div class="question-card"><div><span class="question-num">5</span> <span class="question-text">Diagnose the error: Pb²⁺ + I⁻ forms PbI(s).</span></div><div class="response-area">Correct the product formula and explain why.</div></div></div>
+</div>
+<div class="build-step" data-build="3"><div class="callout"><strong>Topic synthesis:</strong> prediction order = solubility chart + partner swap + neutral product formulas + molecular equation.</div></div>
+</div>
+</div>
+
+</div>
+</main>
+<script>
+let currentSlide=1;
+const totalSlides=8;
+let currentBuild=1;
+const buildsPerSlide={"1":3,"2":3,"3":3,"4":3,"5":3,"6":3,"7":3,"8":3};
+let currentMode='student';
+
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>{
+    slide.classList.toggle('active',(index+1)===currentSlide);
+  });
+
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  if(!activeSlide)return;
+
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10);
+    step.classList.toggle('visible',n<=currentBuild);
+  });
+
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const isActiveSlide=blank.closest('.slide-container')===activeSlide;
+    const visible=isActiveSlide && (!parentBuild||parentBuild.classList.contains('visible'));
+    if(currentMode==='answer' && visible && blank.dataset.answer){
+      blank.textContent=blank.dataset.answer;
+      blank.classList.add('revealed');
+    }else{
+      blank.textContent='[ _______ ]';
+      blank.classList.remove('revealed');
+    }
+  });
+
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+
+function nextBuild(){
+  const max=buildsPerSlide[currentSlide];
+  if(currentBuild<max)currentBuild++;
+  else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}
+  updateDisplay();
+}
+
+function prevBuild(){
+  if(currentBuild>1)currentBuild--;
+  else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}
+  updateDisplay();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}
+});
+
+updateDisplay();
+</script>
+</body>
+</html>

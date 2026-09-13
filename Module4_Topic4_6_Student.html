@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>T4.6 — Molarity and Solution Stoichiometry — Student</title>
+<style>:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+  --accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+  --accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border-color:#475569;--blank-bg:#334155;
+}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}.mode-btn.active{background:var(--accent-blue);color:#0f172a}.nav-controls{display:flex;align-items:center;gap:.75rem}.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}.btn:disabled{opacity:.4;cursor:not-allowed}.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}.slide-container.active{display:flex}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.slide-header{margin-bottom:1.15rem}.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}.lo-box strong{color:var(--accent-blue)}.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem;display:flex;flex-direction:column;gap:.65rem}.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}.question-text{font-size:1.05rem;font-weight:600;line-height:1.4}.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:62px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}@media(max-width:900px){.question-grid,.compare-grid,.formula-tree,.work-ladder,.mass-lookup,.atom-count-grid{grid-template-columns:1fr}.slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}}.fraction{
+  display:inline-grid;
+  grid-template-rows:auto auto;
+  align-items:center;
+  justify-items:center;
+  line-height:1.1;
+  vertical-align:middle;
+  margin:0 .18rem;
+  min-width:120px;
+}.fraction .num{
+  width:100%;
+  padding:.18rem .4rem .28rem;
+  border-bottom:2px solid var(--text-main);
+  text-align:center;
+}.fraction .den{
+  width:100%;
+  padding:.28rem .4rem .18rem;
+  text-align:center;
+}@media(max-width:900px){.fraction{min-width:100px}}.rule-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.7rem}.rule-card strong{color:var(--accent-blue)}.eq-focus{font-size:1.32rem;font-weight:900;text-align:center;background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.65rem}.exam-banner{background:rgba(251,191,36,.10);border:2px solid var(--accent-amber);border-radius:10px;padding:.75rem;text-align:center;font-weight:900;color:#fde68a}.meaning-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem}.meaning-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.75rem}.calc-road{display:grid;grid-template-columns:repeat(5,1fr);gap:.45rem;align-items:stretch}.calc-step{background:#0f172a;border:1px solid var(--border-color);border-radius:9px;padding:.65rem;text-align:center;position:relative}.calc-step:not(:last-child)::after{content:"→";position:absolute;right:-.38rem;top:50%;transform:translateY(-50%);color:var(--accent-amber);font-weight:900}.frac{display:inline-grid;grid-template-rows:auto 2px auto;text-align:center;vertical-align:middle;margin:.1rem .25rem;min-width:70px}.frac .bar{background:currentColor;height:2px}.worked{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.85rem}.worked h4{color:var(--accent-blue);margin-bottom:.45rem}.work-lines{display:flex;flex-direction:column;gap:.32rem;line-height:1.45}.answer-box{margin-top:.5rem;background:rgba(45,212,191,.09);border:1px solid var(--accent-teal);border-radius:9px;padding:.55rem .7rem;color:#ccfbf1;font-weight:800}.prep-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}.flask-diagram{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;text-align:center}.flask{width:130px;height:150px;margin:.45rem auto;position:relative}.flask-neck{position:absolute;left:50%;top:0;transform:translateX(-50%);width:34px;height:65px;border:3px solid #94a3b8;border-bottom:none}.flask-body{position:absolute;left:10px;right:10px;bottom:0;height:100px;border:3px solid #94a3b8;border-radius:50% 50% 28% 28%;overflow:hidden}.flask-liquid{position:absolute;left:0;right:0;bottom:0;height:58%;background:rgba(45,212,191,.18);border-top:2px solid var(--accent-teal)}.cal-line{position:absolute;left:50%;top:42px;transform:translateX(-50%);width:52px;border-top:3px solid var(--accent-amber)}.rule-stack{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem}.rule-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.72rem;text-align:center}.error-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}.error-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.72rem}@media(max-width:900px){.molarity-hero,.meaning-grid,.prep-grid,.rule-stack,.error-grid{grid-template-columns:1fr}.calc-road{grid-template-columns:1fr}.calc-step::after{display:none}}.concentration-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:stretch}.compare-beaker-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:1rem;text-align:center}.compare-beaker{width:200px;height:145px;margin:.55rem auto .75rem;position:relative;border:3px solid #94a3b8;border-top:none;border-radius:0 0 22px 22px;overflow:hidden}.compare-liquid{position:absolute;left:0;right:0;bottom:0;height:72%;background:rgba(56,189,248,.16);border-top:2px solid var(--accent-blue)}.compare-dot{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--accent-teal);z-index:3}.compare-label{margin-top:.25rem;font-weight:800;color:var(--accent-amber)}.formula-box-centered{background:#0f172a;border:2px solid var(--accent-blue);border-radius:12px;padding:1rem;text-align:center}.formula-box-centered .big{font-size:1.45rem;font-weight:900;color:var(--accent-teal);margin:.35rem 0}@media(max-width:900px){.concentration-compare{grid-template-columns:1fr}.compare-beaker{width:170px;height:130px}}
+body.mode-answer .blank.revealed{
+  color:var(--accent-amber);
+  background:rgba(251,191,36,.15);
+}
+</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧪</span><span>Topic T4.6 | Molarity and Solution Stoichiometry</span></div>
+<div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 11</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+<div class="slide-container active" data-integrated-slide="44" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 44 · Local Slide 1</span>
+<h1 class="slide-title">Molarity — How Much Solute Is in a Solution?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Define molarity and connect moles of solute with liters of solution.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="concentration-compare">
+<div class="compare-beaker-card">
+<div class="compare-beaker">
+<div class="compare-liquid"></div>
+<span class="compare-dot" style="left:20px; top:54px;"></span>
+<span class="compare-dot" style="left:44px; top:66px;"></span>
+<span class="compare-dot" style="left:76px; top:52px;"></span>
+<span class="compare-dot" style="left:107px; top:70px;"></span>
+<span class="compare-dot" style="left:140px; top:57px;"></span>
+<span class="compare-dot" style="left:165px; top:69px;"></span>
+<span class="compare-dot" style="left:32px; top:88px;"></span>
+<span class="compare-dot" style="left:62px; top:92px;"></span>
+<span class="compare-dot" style="left:91px; top:85px;"></span>
+<span class="compare-dot" style="left:124px; top:96px;"></span>
+<span class="compare-dot" style="left:152px; top:89px;"></span>
+<span class="compare-dot" style="left:23px; top:112px;"></span>
+<span class="compare-dot" style="left:48px; top:118px;"></span>
+<span class="compare-dot" style="left:75px; top:108px;"></span>
+<span class="compare-dot" style="left:98px; top:121px;"></span>
+<span class="compare-dot" style="left:126px; top:109px;"></span>
+<span class="compare-dot" style="left:154px; top:120px;"></span>
+<span class="compare-dot" style="left:170px; top:101px;"></span>
+<span class="compare-dot" style="left:58px; top:136px;"></span>
+<span class="compare-dot" style="left:116px; top:136px;"></span>
+</div>
+<div class="compare-label">concentrated solution</div>
+</div>
+<div class="compare-beaker-card">
+<div class="compare-beaker">
+<div class="compare-liquid"></div>
+<span class="compare-dot" style="left:28px; top:84px;"></span>
+<span class="compare-dot" style="left:67px; top:64px;"></span>
+<span class="compare-dot" style="left:101px; top:102px;"></span>
+<span class="compare-dot" style="left:138px; top:76px;"></span>
+<span class="compare-dot" style="left:162px; top:118px;"></span>
+</div>
+<div class="compare-label">dilute solution</div>
+</div>
+</div>
+<div class="callout" style="margin-top:.7rem">
+<strong>Solution concentration</strong><br/>
+    Concentration tells us how much <strong>solute</strong> is present in a given amount of <strong>solution</strong>.
+  </div>
+</div>
+<div class="build-step" data-build="2">
+<div class="formula-box-centered">
+<h4>Molarity (M)</h4>
+<div class="big">M = <span class="fraction"><span class="num">moles of solute</span><span class="den">liters of solution</span></span></div>
+<p><strong>Unit:</strong> <span class="fraction"><span class="num">mol</span><span class="den">L</span></span> , written as <strong>M</strong></p>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="meaning-grid">
+<div class="meaning-card"><strong>1.00 M NaCl</strong><br/>means 1.00 mol NaCl in 1.00 L of solution.</div>
+<div class="meaning-card"><strong>0.200 M NaOH</strong><br/>means 0.200 mol NaOH in 1.00 L of solution.</div>
+</div>
+<div class="callout" style="margin-top:.65rem"><strong>Very important:</strong> the denominator is liters of the <strong>final solution</strong>, not liters of solvent added.</div>
+<p style="margin-top:.55rem">Molarity always connects <span class="blank" data-answer="moles">[ _______ ]</span> of solute and liters of solution.</p>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="45" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 45 · Local Slide 2</span>
+<h1 class="slide-title">Read Molarity as a Conversion Factor</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use molarity in either direction: volume → moles or moles → volume.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="formula-box-centered">
+<div class="big">0.200 M NaOH = <span class="fraction"><span class="num">0.200 mol NaOH</span><span class="den">1.00 L solution</span></span></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="rule-stack">
+<div class="rule-card"><strong>Volume → moles</strong><br/>mol = M × L</div>
+<div class="rule-card"><strong>Moles → volume</strong><br/>L = <span class="fraction"><span class="num">mol</span><span class="den">M</span></span></div>
+<div class="rule-card"><strong>Molarity</strong><br/>M = <span class="fraction"><span class="num">mol</span><span class="den">L</span></span></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Unit check before arithmetic:</strong> if M = <span class="fraction"><span class="num">mol</span><span class="den">L</span></span>, the volume must be in <strong>liters</strong>.</div>
+<div class="warn" style="margin-top:.5rem"><strong>Common error:</strong> multiplying M directly by mL without converting mL → L.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="46" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 46 · Local Slide 3</span>
+<h1 class="slide-title">Worked Example — Find Molarity from Mass and Volume</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Convert solute mass to moles, then divide by liters of solution.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="worked">
+<h4>Problem</h4>
+<p>What is the molarity of a solution containing <strong>25.5 g KBr</strong> dissolved to make <strong>1.75 L of solution</strong>?</p>
+<div class="calc-road" style="margin-top:.7rem">
+<div class="calc-step"><strong>25.5 g KBr</strong><br/><span style="color:var(--text-muted)">given mass</span></div>
+<div class="calc-step"><strong>mol KBr</strong><br/><span style="color:var(--text-muted)">use molar mass</span></div>
+<div class="calc-step"><strong>1.75 L solution</strong><br/><span style="color:var(--text-muted)">given final volume</span></div>
+<div class="calc-step"><strong>M</strong><br/><span style="color:var(--text-muted)">moles over liters</span></div>
+</div>
+<div class="callout" style="margin-top:.65rem"><strong>Plan first:</strong> grams KBr → moles KBr → divide by liters of solution → molarity.</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked">
+<h4>Step 1 — grams → moles</h4>
+<div class="work-lines">
+<div>Molar mass KBr = 39.10 + 79.90 = <strong>119.00 g per mol</strong></div>
+<div>25.5 g KBr × <span class="frac"><span>1 mol KBr</span><span class="bar"></span><span>119.00 g KBr</span></span> = <strong>0.214 mol KBr</strong></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="worked">
+<h4>Step 2 — moles over liters</h4>
+<div class="work-lines">
+<div>M = <span class="fraction"><span class="num">0.214 mol KBr</span><span class="den">1.75 L solution</span></span></div>
+<div>M = <strong>0.122 M KBr</strong></div>
+</div>
+<div class="answer-box">Answer: 0.122 M KBr</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="47" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 47 · Local Slide 4</span>
+<h1 class="slide-title">Worked Example — Find Moles from Molarity and Volume</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Convert mL to L, then use mol = M × L.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="worked"><h4>Problem</h4><p>How many moles of NaOH are in <strong>25.0 mL</strong> of <strong>0.200 M NaOH</strong>?</p></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked">
+<h4>Step 1 — mL → L</h4>
+<div class="work-lines">
+<div>25.0 mL × <span class="frac"><span>1 L</span><span class="bar"></span><span>1000 mL</span></span> = <strong>0.0250 L</strong></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="worked">
+<h4>Step 2 — L → mol using molarity</h4>
+<div class="work-lines">
+<div>0.0250 L × <span class="frac"><span>0.200 mol NaOH</span><span class="bar"></span><span>1 L</span></span> = <strong>0.00500 mol NaOH</strong></div>
+</div>
+<div class="answer-box">Answer: 5.00 × 10⁻³ mol NaOH</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="48" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 48 · Local Slide 5</span>
+<h1 class="slide-title">Preparing a Solution from a Solid</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Calculate the solute mass needed, then describe the correct volumetric-flask preparation.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="worked">
+<h4>Problem</h4>
+<p>How many grams of NaNO₃ are needed to prepare <strong>100.0 mL of 1.30 × 10⁻² M NaNO₃</strong>?</p>
+<div class="calc-road" style="margin-top:.55rem">
+<div class="calc-step">100.0 mL</div><div class="calc-step">0.1000 L</div><div class="calc-step">mol NaNO₃</div><div class="calc-step">g NaNO₃</div><div class="calc-step">prepare solution</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked">
+<h4>Calculation</h4>
+<div class="work-lines">
+<div>0.1000 L × <span class="frac"><span>1.30 × 10⁻² mol</span><span class="bar"></span><span>1 L</span></span> = 1.30 × 10⁻³ mol NaNO₃</div>
+<div>Molar mass NaNO₃ = 85.00 g per mol</div>
+<div>1.30 × 10⁻³ mol × <span class="frac"><span>85.00 g</span><span class="bar"></span><span>1 mol</span></span> = <strong>0.111 g NaNO₃</strong></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="prep-grid">
+<div class="flask-diagram">
+<h4>Volumetric flask</h4>
+<div class="flask"><div class="flask-neck"></div><div class="cal-line"></div><div class="flask-body"><div class="flask-liquid"></div></div></div>
+<p>Bring the <strong>final solution</strong> to the calibration line.</p>
+</div>
+<div class="worked">
+<h4>Correct preparation sequence</h4>
+<div class="work-lines">
+<div>1. Weigh 0.111 g NaNO₃.</div>
+<div>2. Transfer it to the volumetric flask.</div>
+<div>3. Add some water and dissolve completely.</div>
+<div>4. Add water until the <strong>bottom of the meniscus</strong> reaches the calibration line.</div>
+<div>5. Stopper and mix thoroughly.</div>
+</div>
+<div class="warn" style="margin-top:.45rem"><strong>Do not add 100.0 mL of water.</strong> Make the final solution volume 100.0 mL.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="49" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 49 · Local Slide 6</span>
+<h1 class="slide-title">Worked Solution Stoichiometry — HNO₃ + Na₂CO₃</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Find the volume of one reacting solution from the volume and molarity of another.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="worked">
+<h4>Problem and balanced equation</h4>
+<p>What volume of <strong>0.150 M HNO₃</strong> reacts completely with <strong>35.7 mL of 0.108 M Na₂CO₃</strong>?</p>
+<div class="eq-focus" style="margin-top:.5rem">Na₂CO₃(aq) + 2HNO₃(aq) → 2NaNO₃(aq) + CO₂(g) + H₂O(l)</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked">
+<h4>Step 1 — Na₂CO₃ solution → mol HNO₃</h4>
+<div class="work-lines">
+<div>35.7 mL × <span class="frac"><span>1 L</span><span class="bar"></span><span>1000 mL</span></span> = 0.0357 L</div>
+<div>0.0357 L × <span class="frac"><span>0.108 mol Na₂CO₃</span><span class="bar"></span><span>1 L</span></span> = 0.00386 mol Na₂CO₃</div>
+<div>0.00386 mol Na₂CO₃ × <span class="frac"><span>2 mol HNO₃</span><span class="bar"></span><span>1 mol Na₂CO₃</span></span> = <strong>0.00771 mol HNO₃</strong></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="worked">
+<h4>Step 2 — mol HNO₃ → solution volume</h4>
+<div class="work-lines">
+<div>0.00771 mol HNO₃ × <span class="frac"><span>1 L</span><span class="bar"></span><span>0.150 mol HNO₃</span></span> = 0.0514 L</div>
+<div>0.0514 L × <span class="fraction"><span class="num">1000 mL</span><span class="den">1 L</span></span> = <strong>51.4 mL HNO₃</strong></div>
+</div>
+<div class="answer-box">Answer: 51.4 mL of 0.150 M HNO₃</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="50" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 50 · Local Slide 7</span>
+<h1 class="slide-title">Worked Mass → Solution Stoichiometry — Antacid + HCl</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Convert a solid reactant mass to the volume of a reacting solution.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="worked">
+<h4>Problem and equation</h4>
+<p>How many liters of <strong>0.69 M HCl</strong> react with <strong>16.7 g Mg(OH)₂</strong>?</p>
+<div class="eq-focus" style="margin-top:.5rem">Mg(OH)₂(s) + 2HCl(aq) → MgCl₂(aq) + 2H₂O(l)</div>
+<div class="calc-road" style="margin-top:.55rem">
+<div class="calc-step">g Mg(OH)₂</div><div class="calc-step">mol Mg(OH)₂</div><div class="calc-step">mol HCl</div><div class="calc-step">L HCl</div><div class="calc-step">check</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked">
+<h4>Step 1 — mass → required HCl moles</h4>
+<div class="work-lines">
+<div>Molar mass Mg(OH)₂ = 58.32 g per mol</div>
+<div>16.7 g × <span class="frac"><span>1 mol Mg(OH)₂</span><span class="bar"></span><span>58.32 g</span></span> = 0.286 mol Mg(OH)₂</div>
+<div>0.286 mol Mg(OH)₂ × <span class="frac"><span>2 mol HCl</span><span class="bar"></span><span>1 mol Mg(OH)₂</span></span> = <strong>0.573 mol HCl</strong></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="worked">
+<h4>Step 2 — HCl moles → HCl solution volume</h4>
+<div class="work-lines">
+<div>0.573 mol HCl × <span class="frac"><span>1 L solution</span><span class="bar"></span><span>0.69 mol HCl</span></span> = <strong>0.83 L HCl solution</strong></div>
+</div>
+<div class="answer-box">Answer: 0.83 L of 0.69 M HCl</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="51" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 51 · Local Slide 8</span>
+<h1 class="slide-title">Reverse Solution Stoichiometry — Precipitate Mass → Solution Volume</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Start from a product mass and work backward to the volume of a reacting solution.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="worked">
+<h4>Problem and equation</h4>
+<p>What volume of <strong>0.478 M NaI</strong> reacted if <strong>123.6 g PbI₂</strong> formed?</p>
+<div class="eq-focus" style="margin-top:.5rem">Pb(NO₃)₂(aq) + 2NaI(aq) → PbI₂(s) + 2NaNO₃(aq)</div>
+<div class="callout" style="margin-top:.5rem"><strong>Direction:</strong> g PbI₂ → mol PbI₂ → mol NaI → L NaI solution.</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked">
+<h4>Step 1 — product mass → reactant moles</h4>
+<div class="work-lines">
+<div>123.6 g PbI₂ × <span class="frac"><span>1 mol PbI₂</span><span class="bar"></span><span>461.0 g PbI₂</span></span> = 0.2681 mol PbI₂</div>
+<div>0.2681 mol PbI₂ × <span class="frac"><span>2 mol NaI</span><span class="bar"></span><span>1 mol PbI₂</span></span> = <strong>0.5362 mol NaI</strong></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="worked">
+<h4>Step 2 — NaI moles → solution volume</h4>
+<div class="work-lines">
+<div>0.5362 mol NaI × <span class="frac"><span>1 L solution</span><span class="bar"></span><span>0.478 mol NaI</span></span> = <strong>1.12 L NaI solution</strong></div>
+</div>
+<div class="answer-box">Answer: 1.12 L of 0.478 M NaI</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="52" data-local-slide="9" id="slide-9">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 52 · Local Slide 9</span>
+<h1 class="slide-title">EXAM REVIEW — Molarity &amp; Solution Stoichiometry</h1>
+<div class="lo-box"><strong>Use these checks before calculating.</strong></div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="error-grid">
+<div class="error-card"><strong>Error 1: mL used directly with M</strong><br/>M = <span class="fraction"><span class="num">mol</span><span class="den">L</span></span>, so convert mL → L first.</div>
+<div class="error-card"><strong>Error 2: no balanced equation</strong><br/>Without coefficients, there is no valid mole ratio.</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="error-grid">
+<div class="error-card"><strong>Error 3: assuming 1:1</strong><br/>Use the actual coefficients: e.g., Na₂CO₃ : HNO₃ = 1 : 2.</div>
+<div class="error-card"><strong>Error 4: wrong solution volume</strong><br/>For preparation, use final solution volume — not water added.</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="exam-banner">Equation first → units second → arithmetic last.</div>
+<div class="callout" style="margin-top:.55rem"><strong>Fast unit check:</strong> every unit should cancel except the unit requested in the question.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="53" data-local-slide="10" id="slide-10">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 53 · Local Slide 10</span>
+<h1 class="slide-title">ACS-Style Practice — Easy → Medium → Hard</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Apply molarity and solution stoichiometry in multiple-choice problems with common distractors.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="worked">
+<h4>Easy</h4>
+<p><strong>How many moles of NaCl are present in 50.0 mL of 0.200 M NaCl?</strong></p>
+<div style="line-height:1.55;margin-top:.4rem">
+A. 0.0100 mol<br/>
+B. 0.0400 mol<br/>
+C. 10.0 mol<br/>
+D. 100 mol
+</div>
+<div class="answer-box"><strong>Answer: A</strong><br/>50.0 mL = 0.0500 L, then 0.0500 L × 0.200 mol/L = 0.0100 mol.</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="worked">
+<h4>Medium</h4>
+<p><strong>What volume of 0.250 M HCl contains 0.0500 mol HCl?</strong></p>
+<div style="line-height:1.55;margin-top:.4rem">
+A. 20.0 mL<br/>
+B. 50.0 mL<br/>
+C. 200 mL<br/>
+D. 500 mL
+</div>
+<div class="answer-box"><strong>Answer: C</strong><br/>V = moles / molarity = 0.0500 mol / 0.250 mol/L = 0.200 L = 200 mL.</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="worked">
+<h4>Hard</h4>
+<p><strong>For H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O, what volume of 0.300 M NaOH is required to react completely with 25.0 mL of 0.150 M H₂SO₄?</strong></p>
+<div style="line-height:1.55;margin-top:.4rem">
+A. 12.5 mL<br/>
+B. 25.0 mL<br/>
+C. 37.5 mL<br/>
+D. 50.0 mL
+</div>
+<div class="answer-box"><strong>Answer: B</strong><br/>25.0 mL = 0.0250 L → 0.00375 mol H₂SO₄ → 0.00750 mol NaOH → 0.0250 L = 25.0 mL NaOH.</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="54" data-local-slide="11" id="slide-11">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 54 · Local Slide 11</span>
+<h1 class="slide-title">Independent Check — Molarity and Solution Stoichiometry</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Assess molarity, solution preparation, and solution stoichiometry without answer cues.</div>
+</div>
+<div class="slide-body">
+<div class="question-grid">
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">1</span> <span class="question-text">What does 0.350 M KCl mean in words and units?</span></div><div class="response-area">Explain the ratio.</div></div></div>
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">2</span> <span class="question-text">How many moles are in 45.0 mL of 0.250 M NaOH?</span></div><div class="response-area">Show the mL → L step.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">3</span> <span class="question-text">How many grams of KNO₃ are needed to prepare 250.0 mL of 0.0800 M KNO₃?</span></div><div class="response-area">Show molarity and molar-mass conversions.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">4</span> <span class="question-text">For H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O, determine the volume of 0.200 M NaOH needed for 25.0 mL of 0.100 M H₂SO₄.</span></div><div class="response-area">Use the coefficient ratio.</div></div></div>
+<div class="build-step" data-build="3"><div class="question-card"><div><span class="question-num">5</span> <span class="question-text">A student uses 35.0 mL directly in M = <span class="fraction"><span class="num">mol</span><span class="den">L</span></span>. Identify the error and state the correction.</span></div><div class="response-area">Explain before calculating.</div></div></div>
+<div class="build-step" data-build="3"><div class="question-card"><div><span class="question-num">6</span> <span class="question-text">In a solution-preparation problem, explain why “add 100 mL water” is not the same as “prepare 100 mL solution.”</span></div><div class="response-area">Use final solution volume.</div></div></div>
+</div>
+</div>
+</div>
+
+</div></main>
+<script>
+let currentSlide=1;
+const totalSlides=11;
+let currentBuild=1;
+const buildsPerSlide={"1":3,"2":3,"3":3,"4":3,"5":3,"6":3,"7":3,"8":3,"9":3,"10":3,"11":3};
+let currentMode='student';
+
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>{
+    slide.classList.toggle('active',(index+1)===currentSlide);
+  });
+
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  if(!activeSlide)return;
+
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10);
+    step.classList.toggle('visible',n<=currentBuild);
+  });
+
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const isActiveSlide=blank.closest('.slide-container')===activeSlide;
+    const visible=isActiveSlide && (!parentBuild||parentBuild.classList.contains('visible'));
+    if(currentMode==='answer' && visible && blank.dataset.answer){
+      blank.textContent=blank.dataset.answer;
+      blank.classList.add('revealed');
+    }else{
+      blank.textContent='[ _______ ]';
+      blank.classList.remove('revealed');
+    }
+  });
+
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+
+function nextBuild(){
+  const max=buildsPerSlide[currentSlide];
+  if(currentBuild<max)currentBuild++;
+  else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}
+  updateDisplay();
+}
+
+function prevBuild(){
+  if(currentBuild>1)currentBuild--;
+  else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}
+  updateDisplay();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}
+});
+
+updateDisplay();
+</script>
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>T4.3 — Molecular, Complete Ionic, and Net Ionic Equations — Student</title>
+<style>:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+  --accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+  --accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border-color:#475569;--blank-bg:#334155;
+}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}.mode-btn.active{background:var(--accent-blue);color:#0f172a}.nav-controls{display:flex;align-items:center;gap:.75rem}.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}.btn:disabled{opacity:.4;cursor:not-allowed}.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}.slide-container.active{display:flex}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.slide-header{margin-bottom:1.15rem}.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}.lo-box strong{color:var(--accent-blue)}.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}.arrow{color:var(--accent-amber);font-size:1.4rem;font-weight:900;text-align:center}.error-table{width:100%;border-collapse:collapse;font-size:.92rem}.error-table th,.error-table td{border:1px solid var(--border-color);padding:.55rem;vertical-align:top}.error-table th{background:#1e293b;color:var(--accent-blue)}.bad{color:#fecdd3;font-weight:800}.good{color:var(--accent-teal);font-weight:800}.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem;display:flex;flex-direction:column;gap:.65rem}.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}.question-text{font-size:1.05rem;font-weight:600;line-height:1.4}.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:62px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}@media(max-width:900px){.question-grid,.compare-grid,.formula-tree,.work-ladder,.mass-lookup,.atom-count-grid{grid-template-columns:1fr}.slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}}.practice-badge{
+  display:inline-block;
+  padding:.22rem .55rem;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  margin-bottom:.45rem;
+}.practice-badge.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}.solution-road{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:.55rem;
+  align-items:stretch;
+}.solution-node{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.7rem;
+  text-align:center;
+  position:relative;
+}.solution-node:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.45rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-weight:900;
+}.solution-node strong{color:var(--accent-blue)}.eq-strip{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+  font-size:1.1rem;
+}@media(max-width:900px){.solution-road,.particle-grid{grid-template-columns:1fr}.solution-node::after{display:none}}.nr-banner{
+  background:rgba(148,163,184,.12);
+  border:1px solid rgba(148,163,184,.45);
+  border-radius:12px;
+  padding:.75rem;
+  text-align:center;
+  font-weight:900;
+}.eq-level-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.75rem;
+}.eq-level-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.8rem;
+  text-align:center;
+}.eq-level-card h4{
+  margin:0 0 .45rem 0;
+  color:var(--accent-blue);
+}.eq-level-icon{
+  width:92px;
+  height:72px;
+  margin:.2rem auto .5rem auto;
+  border:2px solid #64748b;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#111827;
+  font-weight:900;
+  color:#e2e8f0;
+}.split-board{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.75rem;
+}.split-panel{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.8rem;
+}.split-panel h4{
+  margin:0 0 .45rem 0;
+  color:var(--accent-blue);
+}.split-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.5rem;
+  border:1px solid #334155;
+  background:#111827;
+  border-radius:10px;
+  padding:.42rem .55rem;
+  margin:.3rem 0;
+}.keep-tag,.split-tag{
+  display:inline-block;
+  border-radius:999px;
+  padding:.16rem .45rem;
+  font-weight:900;
+  font-size:.8rem;
+}.split-tag{background:rgba(45,212,191,.15);border:1px solid rgba(45,212,191,.55);color:#ccfbf1}.keep-tag{background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.55);color:#fde68a}.eq-row{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.72rem;
+  text-align:center;
+  font-size:1.02rem;
+}.eq-label{
+  display:inline-block;
+  padding:.16rem .5rem;
+  border-radius:999px;
+  background:rgba(96,165,250,.15);
+  border:1px solid rgba(96,165,250,.5);
+  color:#bfdbfe;
+  font-weight:900;
+  margin-right:.35rem;
+}.spectator{
+  display:inline-block;
+  padding:.08rem .42rem;
+  border:2px solid rgba(251,191,36,.72);
+  border-radius:999px;
+  background:rgba(251,191,36,.14);
+  color:#fde68a;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 0 0 1px rgba(251,191,36,.12) inset;
+}.net-highlight{
+  background:rgba(45,212,191,.12);
+  border:1px solid rgba(45,212,191,.55);
+  border-radius:12px;
+  padding:.75rem;
+  text-align:center;
+  font-weight:900;
+}.spectator-map{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:.65rem;
+  align-items:center;
+}.spectator-box{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.75rem;
+  text-align:center;
+}.cancel-cloud{
+  position:relative;
+  min-height:auto;
+  padding:0;
+}.cancel-cloud::before{
+  display:none;
+  content:none;
+}@media(max-width:900px){.eq-level-grid,.split-board,.spectator-map{grid-template-columns:1fr}}
+body.mode-answer .blank.revealed{
+  color:var(--accent-amber);
+  background:rgba(251,191,36,.15);
+}
+</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧪</span><span>Topic T4.3 | Molecular, Complete Ionic, and Net Ionic Equations</span></div>
+<div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 8</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+<div class="slide-container active" data-integrated-slide="18" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 18 · Local Slide 1</span>
+<h1 class="slide-title">Three Levels of Aqueous Equations</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Distinguish molecular, complete ionic, and net ionic representations.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>T4.2 connection:</strong> We already predicted the molecular precipitation equation. Now we ask what ions are actually changing.</div>
+<div class="eq-level-grid" style="margin-top:.55rem">
+<div class="eq-level-card"><h4>Molecular Equation</h4><div class="eq-level-icon">AB + CD</div><p>compounds shown as formulas</p></div>
+<div class="eq-level-card"><h4>Complete Ionic Equation</h4><div class="eq-level-icon">A⁺ B⁻ C⁺ D⁻</div><p>strong aqueous electrolytes split into ions</p></div>
+<div class="eq-level-card"><h4>Net Ionic Equation</h4><div class="eq-level-icon">C⁺ + B⁻ → CB(s)</div><p>only the chemical change remains</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="solution-road">
+<div class="solution-node"><strong>Start</strong><p>molecular equation</p></div>
+<div class="solution-node"><strong>Split</strong><p>strong aqueous electrolytes</p></div>
+<div class="solution-node"><strong>Keep</strong><p>solids, liquids, gases, weak electrolytes</p></div>
+<div class="solution-node"><strong>Cancel</strong><p>spectator ions</p></div>
+<div class="solution-node"><strong>Finish</strong><p>net ionic equation</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>For precipitation reactions:</strong> the net ionic equation shows the ions that combine to form the precipitate.</div>
+<p style="margin-top:.55rem">The equation showing only chemical change is the <span class="blank" data-answer="net ionic">[ _______ ]</span> equation.</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="19" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 19 · Local Slide 2</span>
+<h1 class="slide-title">What Splits and What Stays Intact?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Apply dissociation rules when writing complete ionic equations.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="split-board">
+<div class="split-panel"><h4>Split into ions</h4>
+<div class="split-item"><span>soluble strong electrolyte marked (aq)</span><span class="split-tag">split</span></div>
+<div class="split-item"><span>NaNO₃(aq)</span><span class="split-tag">Na⁺ + NO₃⁻</span></div>
+<div class="split-item"><span>KI(aq)</span><span class="split-tag">K⁺ + I⁻</span></div>
+</div>
+<div class="split-panel"><h4>Keep intact</h4>
+<div class="split-item"><span>precipitate (s)</span><span class="keep-tag">keep</span></div>
+<div class="split-item"><span>liquid (l)</span><span class="keep-tag">keep</span></div>
+<div class="split-item"><span>gas (g)</span><span class="keep-tag">keep</span></div>
+<div class="split-item"><span>weak electrolyte or molecular nonelectrolyte</span><span class="keep-tag">keep</span></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="eq-strip">AgNO₃(aq) → Ag⁺(aq) + NO₃⁻(aq)</div>
+<div class="eq-strip" style="margin-top:.45rem">AgCl(s) stays AgCl(s)</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Do not split a solid precipitate.</strong> The solid is the new compound being formed.</div>
+<p style="margin-top:.55rem">A precipitate remains <span class="blank" data-answer="intact">[ _______ ]</span> in the complete ionic equation.</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="20" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 20 · Local Slide 3</span>
+<h1 class="slide-title">Worked Stack — AgNO₃ + NaCl</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Derive molecular, complete ionic, and net ionic equations for AgCl precipitation.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="practice-badge medium">Worked Example</span>
+<div class="eq-row"><span class="eq-label">Molecular</span>AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq)</div>
+<div class="callout" style="margin-top:.55rem"><strong>From T4.2:</strong> AgCl is the precipitate and NaNO₃ remains aqueous.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="eq-row"><span class="eq-label">Complete ionic</span>Ag⁺(aq) + NO₃⁻(aq) + Na⁺(aq) + Cl⁻(aq) → AgCl(s) + Na⁺(aq) + NO₃⁻(aq)</div>
+<div class="warn" style="margin-top:.55rem"><strong>Notice:</strong> AgCl(s) is not split.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="eq-row"><span class="eq-label">Mark spectators</span>Ag⁺ + <span class="spectator">NO₃⁻</span> + <span class="spectator">Na⁺</span> + Cl⁻ → AgCl(s) + <span class="spectator">Na⁺</span> + <span class="spectator">NO₃⁻</span></div>
+<div class="net-highlight" style="margin-top:.55rem">Net ionic: <span class="blank" data-answer="Ag⁺(aq) + Cl⁻(aq) → AgCl(s)">[ _______ ]</span></div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="21" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 21 · Local Slide 4</span>
+<h1 class="slide-title">Spectator Ions — What Can Be Canceled?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Identify spectator ions as ions unchanged on both sides of a complete ionic equation.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="spectator-map">
+<div class="spectator-box"><h4>Reactant Side</h4><p>NO₃⁻(aq)</p><p>Na⁺(aq)</p></div>
+<div class="arrow">matches</div>
+<div class="spectator-box"><h4>Product Side</h4><p>NO₃⁻(aq)</p><p>Na⁺(aq)</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout"><strong>Meaning of the highlight:</strong> the circled ions are spectator ions. They are unchanged in formula, charge, physical state, and coefficient amount, so they can be canceled when writing the net ionic equation.</div>
+<div class="eq-row" style="margin-top:.55rem"><span class="spectator">Na⁺(aq)</span> and <span class="spectator">NO₃⁻(aq)</span> are spectators in AgNO₃(aq) + NaCl(aq).</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Do not cancel species just because they contain the same element.</strong> Ag⁺(aq) and AgCl(s) are not the same species.</div>
+<p style="margin-top:.55rem">Cancel only species that are identical on <span class="blank" data-answer="both sides">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="22" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 22 · Local Slide 5</span>
+<h1 class="slide-title">Worked Stack — Pb(NO₃)₂ + KI</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Write a complete ionic equation and net ionic equation for PbI₂ precipitation.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="practice-badge medium">Worked Example</span>
+<div class="eq-row"><span class="eq-label">Molecular</span>Pb(NO₃)₂(aq) + 2KI(aq) → PbI₂(s) + 2KNO₃(aq)</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="eq-row"><span class="eq-label">Complete ionic</span>Pb²⁺(aq) + 2NO₃⁻(aq) + 2K⁺(aq) + 2I⁻(aq) → PbI₂(s) + 2K⁺(aq) + 2NO₃⁻(aq)</div>
+<div class="callout" style="margin-top:.55rem"><strong>Coefficient check:</strong> the 2 in front of KI creates 2K⁺ and 2I⁻.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="eq-row"><span class="eq-label">Mark spectators</span>Pb²⁺ + <span class="spectator">2NO₃⁻</span> + <span class="spectator">2K⁺</span> + 2I⁻ → PbI₂(s) + <span class="spectator">2K⁺</span> + <span class="spectator">2NO₃⁻</span></div>
+<div class="callout" style="margin-top:.55rem"><strong>Meaning of the highlight:</strong> the amber-outlined ions are spectator ions. They appear unchanged on both sides, so they are canceled when writing the net ionic equation.</div><div class="net-highlight" style="margin-top:.55rem">Net ionic: <span class="blank" data-answer="Pb²⁺(aq) + 2I⁻(aq) → PbI₂(s)">[ _______ ]</span></div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="23" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 23 · Local Slide 6</span>
+<h1 class="slide-title">Complete Cancellation — When Nothing Changes</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Explain why a complete ionic equation can cancel completely when all ions are spectators.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="eq-row"><span class="eq-label">Molecular prediction</span>2KNO₃(aq) + (NH₄)₂SO₄(aq) → K₂SO₄(aq) + 2NH₄NO₃(aq)</div>
+<div class="callout" style="margin-top:.55rem"><strong>All products are aqueous:</strong> every ion remains dissolved.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="eq-row"><span class="eq-label">Complete ionic</span>2K⁺ + 2NO₃⁻ + 2NH₄⁺ + SO₄²⁻ → 2K⁺ + SO₄²⁻ + 2NH₄⁺ + 2NO₃⁻</div>
+<div class="warn" style="margin-top:.55rem"><strong>First check:</strong> this molecular prediction must be balanced before the ionic equation is trusted.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="cancel-cloud"><div class="nr-banner">After proper balancing, all ions cancel → no net ionic reaction.</div></div>
+<div class="callout" style="margin-top:.55rem"><strong>Interpretation:</strong> the beaker still contains the same dissolved ions; no precipitate, gas, or weak electrolyte forms.</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="24" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 24 · Local Slide 7</span>
+<h1 class="slide-title">ACS-Style Setup Diagnosis</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Diagnose common setup errors in complete ionic and net ionic equations.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<table class="error-table"><thead><tr><th>Incorrect Move</th><th>Why It Fails</th><th>Correct Move</th></tr></thead><tbody>
+<tr><td class="bad">AgCl(s) → Ag⁺ + Cl⁻</td><td>A precipitate stays intact.</td><td class="good">Keep AgCl(s).</td></tr>
+</tbody></table>
+</div>
+<div class="build-step" data-build="2">
+<table class="error-table"><thead><tr><th>Incorrect Move</th><th>Why It Fails</th><th>Correct Move</th></tr></thead><tbody>
+<tr><td class="bad">Cancel Ag⁺ against AgCl(s)</td><td>They are not identical species.</td><td class="good">Cancel only unchanged spectator ions.</td></tr>
+<tr><td class="bad">Drop coefficient 2 when splitting KI</td><td>Coefficients apply to each ion.</td><td class="good">2KI → 2K⁺ + 2I⁻.</td></tr>
+</tbody></table>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Fast checklist:</strong> balance molecular equation → split only strong aqueous electrolytes → keep solids/liquids/gases/weak electrolytes → cancel only identical aqueous ions.</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="25" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 25 · Local Slide 8</span>
+<h1 class="slide-title">Independent Check — Ionic Equations</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Assess molecular, complete ionic, net ionic, and spectator-ion reasoning.</div>
+</div>
+<div class="slide-body">
+<div class="question-grid">
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">1</span> <span class="question-text">State the split-or-keep rule for aqueous ionic equations.</span></div><div class="response-area">List what splits and what stays intact.</div></div></div>
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">2</span> <span class="question-text">For AgNO₃(aq) + KBr(aq), write the balanced molecular equation.</span></div><div class="response-area">Use T4.2 product-prediction steps.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">3</span> <span class="question-text">Write the complete ionic equation for Question 2.</span></div><div class="response-area">Split only soluble strong electrolytes.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">4</span> <span class="question-text">Identify the spectator ions in Question 2.</span></div><div class="response-area">Check formula, charge, state, and coefficient.</div></div></div>
+<div class="build-step" data-build="3" style="grid-column:1/-1"><div class="question-card"><div><span class="question-num">5</span> <span class="question-text">Write the net ionic equation for Question 2 and explain what chemical change it shows.</span></div><div class="response-area">For a precipitation reaction, connect the equation to the precipitate.</div></div></div>
+</div>
+<div class="build-step" data-build="3"><div class="callout"><strong>Topic synthesis:</strong> molecular equations show formulas; complete ionic equations show dissolved ions; net ionic equations show the actual chemical change.</div></div>
+</div>
+</div>
+
+</div>
+</main>
+<script>
+let currentSlide=1;
+const totalSlides=8;
+let currentBuild=1;
+const buildsPerSlide={"1":3,"2":3,"3":3,"4":3,"5":3,"6":3,"7":3,"8":3};
+let currentMode='student';
+
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>{
+    slide.classList.toggle('active',(index+1)===currentSlide);
+  });
+
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  if(!activeSlide)return;
+
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10);
+    step.classList.toggle('visible',n<=currentBuild);
+  });
+
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const isActiveSlide=blank.closest('.slide-container')===activeSlide;
+    const visible=isActiveSlide && (!parentBuild||parentBuild.classList.contains('visible'));
+    if(currentMode==='answer' && visible && blank.dataset.answer){
+      blank.textContent=blank.dataset.answer;
+      blank.classList.add('revealed');
+    }else{
+      blank.textContent='[ _______ ]';
+      blank.classList.remove('revealed');
+    }
+  });
+
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+
+function nextBuild(){
+  const max=buildsPerSlide[currentSlide];
+  if(currentBuild<max)currentBuild++;
+  else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}
+  updateDisplay();
+}
+
+function prevBuild(){
+  if(currentBuild>1)currentBuild--;
+  else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}
+  updateDisplay();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}
+});
+
+updateDisplay();
+</script>
+</body>
+</html>

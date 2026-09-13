@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>T4.1 — Aqueous Solutions, Electrolytes, and Ions in Solution — Student</title>
+<style>:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+  --accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+  --accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border-color:#475569;--blank-bg:#334155;
+}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}.mode-btn.active{background:var(--accent-blue);color:#0f172a}.nav-controls{display:flex;align-items:center;gap:.75rem}.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}.btn:disabled{opacity:.4;cursor:not-allowed}.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}.slide-container.active{display:flex}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.slide-header{margin-bottom:1.15rem}.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}.lo-box strong{color:var(--accent-blue)}.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.compare-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem}.compare-card h4{color:var(--accent-blue);margin-bottom:.5rem}.equal-banner{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.65rem;text-align:center;color:var(--accent-teal);font-weight:900;font-size:1.05rem}.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:8px;padding:1rem;display:flex;flex-direction:column;gap:.65rem}.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}.question-text{font-size:1.05rem;font-weight:600;line-height:1.4}.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:62px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}@media(max-width:900px){.question-grid,.compare-grid,.formula-tree,.work-ladder,.mass-lookup,.atom-count-grid{grid-template-columns:1fr}.slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}}.fraction{
+  display:inline-grid;
+  grid-template-rows:auto auto;
+  align-items:center;
+  justify-items:center;
+  line-height:1.1;
+  vertical-align:middle;
+  margin:0 .18rem;
+  min-width:120px;
+}.fraction .num{
+  width:100%;
+  padding:.18rem .4rem .28rem;
+  border-bottom:2px solid var(--text-main);
+  text-align:center;
+}.fraction .den{
+  width:100%;
+  padding:.28rem .4rem .18rem;
+  text-align:center;
+}.cancel-pair{
+  position:relative;
+  display:inline-block;
+  color:var(--text-main);
+  padding:0 .08rem;
+}.cancel-pair::after{
+  content:"";
+  position:absolute;
+  left:-2px;
+  right:-2px;
+  top:50%;
+  height:2px;
+  background:var(--accent-rose);
+  transform:rotate(-10deg);
+  transform-origin:center;
+}.cancel-label{
+  display:block;
+  margin-top:.35rem;
+  color:var(--accent-rose);
+  font-size:.82rem;
+  font-weight:800;
+  text-align:center;
+}.survive{
+  color:var(--accent-teal);
+  font-weight:900;
+  border:1px solid var(--accent-teal);
+  border-radius:5px;
+  padding:.08rem .28rem;
+}.visual-equation{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  flex-wrap:wrap;
+  font-size:1.08rem;
+  font-weight:800;
+}.factor-arrow{
+  color:var(--accent-amber);
+  font-weight:900;
+  font-size:1.25rem;
+}@media(max-width:900px){.visual-equation{font-size:.95rem}.fraction{min-width:100px}}.practice-badge{
+  display:inline-block;
+  padding:.22rem .55rem;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  margin-bottom:.45rem;
+}.practice-badge.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}.setup-stack{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+}.solution-road{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:.55rem;
+  align-items:stretch;
+}.solution-node{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.7rem;
+  text-align:center;
+  position:relative;
+}.solution-node:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.45rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent-amber);
+  font-weight:900;
+}.solution-node strong{color:var(--accent-blue)}.particle-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.75rem;
+}.particle-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.8rem;
+  text-align:center;
+}.particle-card h4{margin:0 0 .4rem 0;color:var(--accent-blue)}.bulb{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  border:2px solid var(--border-color);
+  margin:.3rem;
+  font-weight:900;
+}.bulb.on{background:#fde68a;color:#1f2937;border-color:#f59e0b;box-shadow:0 0 18px rgba(251,191,36,.55)}.bulb.dim{background:#334155;color:#fde68a;border-color:#f59e0b;box-shadow:0 0 8px rgba(251,191,36,.25)}.bulb.off{background:#111827;color:#94a3b8;border-color:#475569}.ion-chip{
+  display:inline-block;
+  padding:.22rem .5rem;
+  margin:.15rem;
+  border-radius:999px;
+  background:rgba(56,189,248,.14);
+  color:#bae6fd;
+  border:1px solid var(--accent-blue);
+  font-weight:900;
+}.molecule-chip{
+  display:inline-block;
+  padding:.22rem .5rem;
+  margin:.15rem;
+  border-radius:999px;
+  background:rgba(148,163,184,.14);
+  color:#e2e8f0;
+  border:1px solid #64748b;
+  font-weight:900;
+}.eq-strip{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+  font-size:1.1rem;
+}.class-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+}.class-card strong{color:var(--accent-blue)}.path-label{
+  display:inline-block;
+  padding:.22rem .55rem;
+  border-radius:999px;
+  background:rgba(45,212,191,.15);
+  border:1px solid var(--accent-teal);
+  color:var(--accent-teal);
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:.78rem;
+}@media(max-width:900px){.solution-road,.particle-grid{grid-template-columns:1fr}.solution-node::after{display:none}}.concept-illustration-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.75rem;
+  margin-top:.65rem;
+}.illustration-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.85rem;
+  text-align:center;
+}.illustration-card h4{
+  margin:0 0 .5rem 0;
+  color:var(--accent-blue);
+}.simple-beaker{
+  width:88px;
+  height:110px;
+  margin:.3rem auto .55rem auto;
+  border:3px solid #cbd5e1;
+  border-top:none;
+  border-radius:0 0 16px 16px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(to top, rgba(255,255,255,.06), rgba(255,255,255,.02));
+}.simple-liquid{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:62%;
+}.clear-liquid{ background:rgba(255,255,255,.12); }.tint-liquid{ background:rgba(96,165,250,.28); }.powder-bed{
+  position:absolute;
+  left:8%;
+  right:8%;
+  bottom:8px;
+  height:18px;
+  background:
+             radial-gradient(circle at 14% 55%, #60a5fa 0 3px, transparent 4px),
+             radial-gradient(circle at 28% 72%, #818cf8 0 3px, transparent 4px),
+             radial-gradient(circle at 44% 44%, #38bdf8 0 3px, transparent 4px),
+             radial-gradient(circle at 59% 70%, #93c5fd 0 3px, transparent 4px),
+             radial-gradient(circle at 74% 46%, #60a5fa 0 3px, transparent 4px),
+             radial-gradient(circle at 87% 63%, #818cf8 0 3px, transparent 4px);
+  background-size:100% 100%;
+}.solution-dots{
+  position:absolute;
+  left:10px; right:10px; top:28px; bottom:10px;
+  background:
+    radial-gradient(circle at 22% 42%, rgba(96,165,250,.65) 0 3px, transparent 4px),
+    radial-gradient(circle at 48% 34%, rgba(96,165,250,.55) 0 3px, transparent 4px),
+    radial-gradient(circle at 74% 44%, rgba(96,165,250,.55) 0 3px, transparent 4px),
+    radial-gradient(circle at 28% 60%, rgba(96,165,250,.55) 0 3px, transparent 4px),
+    radial-gradient(circle at 64% 67%, rgba(96,165,250,.55) 0 3px, transparent 4px),
+    radial-gradient(circle at 44% 76%, rgba(96,165,250,.55) 0 3px, transparent 4px);
+}.arrow-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.55rem;
+  margin-top:.4rem;
+  flex-wrap:wrap;
+}.arrow-chip{
+  display:inline-block;
+  padding:.22rem .55rem;
+  border-radius:999px;
+  background:rgba(251,191,36,.12);
+  color:#fde68a;
+  border:1px solid rgba(251,191,36,.5);
+  font-weight:800;
+}.mini-caption{
+  font-size:.9rem;
+  color:#cbd5e1;
+  line-height:1.35;
+}@media(max-width:900px){.concept-illustration-grid{grid-template-columns:1fr}}.bulb-beaker-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.8rem;
+}.bulb-beaker-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.8rem;
+  text-align:center;
+}.bulb-beaker-card h4{
+  margin:0 0 .45rem 0;
+  color:var(--accent-blue);
+}.circuit-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.35rem;
+}.circuit-top{
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  gap:.45rem;
+}.wire{
+  width:24px;
+  height:22px;
+  border-top:3px solid #94a3b8;
+  border-left:3px solid #94a3b8;
+  border-right:3px solid #94a3b8;
+  border-radius:10px 10px 0 0;
+  opacity:.8;
+}.bulb-shell{
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  border:2px solid #475569;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  letter-spacing:.02em;
+}.bulb-shell.on{background:#fde68a;color:#1f2937;border-color:#f59e0b;box-shadow:0 0 18px rgba(251,191,36,.55)}.bulb-shell.dim{background:#334155;color:#fde68a;border-color:#f59e0b;box-shadow:0 0 8px rgba(251,191,36,.25)}.bulb-shell.off{background:#111827;color:#94a3b8;border-color:#475569}.beaker-small{
+  width:86px;
+  height:92px;
+  border:3px solid #cbd5e1;
+  border-top:none;
+  border-radius:0 0 14px 14px;
+  position:relative;
+  overflow:hidden;
+  margin:.15rem auto .25rem auto;
+  background:linear-gradient(to top, rgba(255,255,255,.05), rgba(255,255,255,.01));
+}.liquid-small{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:62%;
+  background:rgba(255,255,255,.08);
+}@media(max-width:900px){.bulb-beaker-grid{grid-template-columns:1fr}}.rank-box{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.85rem;
+  margin-top:.6rem;
+}.rank-box h4{
+  margin:0 0 .45rem 0;
+  color:var(--accent-blue);
+}.option-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.45rem .85rem;
+  margin-top:.45rem;
+}.option-item{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:10px;
+  padding:.5rem .65rem;
+}.strategy-list{
+  margin:.4rem 0 0 1.1rem;
+}.strategy-list li{
+  margin:.22rem 0;
+}.rank-answer{
+  background:rgba(45,212,191,.12);
+  border:1px solid rgba(45,212,191,.45);
+  color:#ccfbf1;
+  border-radius:10px;
+  padding:.7rem;
+  margin-top:.55rem;
+}.beaker-dots-many,
+.beaker-dots-few,
+.beaker-dots-paired{
+  position:absolute;
+  left:8px; right:8px; top:24px; bottom:10px;
+}.beaker-dots-many{
+  background:
+    radial-gradient(circle at 16% 28%, rgba(96,165,250,.92) 0 3px, transparent 4px),
+    radial-gradient(circle at 40% 22%, rgba(96,165,250,.92) 0 3px, transparent 4px),
+    radial-gradient(circle at 67% 28%, rgba(96,165,250,.92) 0 3px, transparent 4px),
+    radial-gradient(circle at 82% 42%, rgba(96,165,250,.92) 0 3px, transparent 4px),
+    radial-gradient(circle at 24% 50%, rgba(96,165,250,.92) 0 3px, transparent 4px),
+    radial-gradient(circle at 54% 52%, rgba(96,165,250,.92) 0 3px, transparent 4px),
+    radial-gradient(circle at 77% 62%, rgba(96,165,250,.92) 0 3px, transparent 4px),
+    radial-gradient(circle at 32% 72%, rgba(96,165,250,.92) 0 3px, transparent 4px);
+}
+body.mode-answer .blank.revealed{
+  color:var(--accent-amber);
+  background:rgba(251,191,36,.15);
+}
+</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧪</span><span>Topic T4.1 | Aqueous Solutions, Electrolytes, and Ions in Solution</span></div>
+<div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 9</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+<div class="slide-container active" data-integrated-slide="1" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 1 · Local Slide 1</span>
+<h1 class="slide-title">Aqueous Solutions and Electrolytes — Roadmap</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Define aqueous solution, distinguish solute and solvent, and preview the particle–conductivity–symbolic pathway.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="concept-illustration-grid">
+<div class="illustration-card">
+<h4>Solute</h4>
+<div class="simple-beaker">
+<div class="powder-bed"></div>
+</div>
+<p class="mini-caption"><strong>Example illustration</strong><br/>solute particles before dissolving</p>
+</div>
+<div class="illustration-card">
+<h4>Solvent</h4>
+<div class="simple-beaker">
+<div class="simple-liquid clear-liquid"></div>
+</div>
+<p class="mini-caption"><strong>Example illustration</strong><br/>water as the solvent</p>
+</div>
+<div class="illustration-card">
+<h4>Solution</h4>
+<div class="simple-beaker">
+<div class="simple-liquid tint-liquid"></div>
+<div class="solution-dots"></div>
+</div>
+<p class="mini-caption"><strong>Example illustration</strong><br/>a uniform aqueous solution</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="arrow-row">
+<span class="arrow-chip">solute + solvent → solution</span>
+</div>
+<div class="compare-grid" style="margin-top:.55rem">
+<div class="compare-card"><h4>Gen Chem focus</h4><p>In this Topic, we mainly discuss <strong>aqueous solutions</strong>, so the solvent is <strong>water</strong>.</p></div>
+<div class="compare-card"><h4>Vocabulary</h4><p><strong>solution</strong> = homogeneous mixture<br/><strong>solute</strong> = substance present in the smaller amount; the substance dissolved<br/><strong>solvent</strong> = substance present in the larger amount; the substance doing the dissolving</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="solution-road">
+<div class="solution-node"><strong>Vocabulary</strong><p>solute + solvent</p></div>
+<div class="solution-node"><strong>Particles</strong><p>ions or molecules?</p></div>
+<div class="solution-node"><strong>Electrolytes</strong><p>form ions or not?</p></div>
+<div class="solution-node"><strong>Conductivity</strong><p>mobile charges</p></div>
+<div class="solution-node"><strong>Practice</strong><p>classify + calculate</p></div>
+</div>
+<p style="margin-top:.55rem">In an aqueous solution, water is the <span class="blank" data-answer="solvent">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<div class="slide-container" data-integrated-slide="2" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 2 · Local Slide 2</span>
+<h1 class="slide-title">What Can Happen When a Solute Enters Water?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Explain that a solute in water may form ions or remain molecular, and connect that outcome to the electrolyte concept.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="compare-grid">
+<div class="compare-card">
+<h4>Path 1 — Ions form</h4>
+<div class="arrow-row">
+<span class="molecule-chip">solute + H₂O</span>
+<span class="arrow-chip">→</span>
+<span class="ion-chip">ions in solution</span>
+</div>
+<p>This can happen by <strong>dissociation</strong> (ionic compounds) or <strong>ionization</strong> (some molecular substances).</p>
+</div>
+<div class="compare-card">
+<h4>Path 2 — No ions form</h4>
+<div class="arrow-row">
+<span class="molecule-chip">solute + H₂O</span>
+<span class="arrow-chip">→</span>
+<span class="molecule-chip">molecules only</span>
+</div>
+<p>The substance dissolves, but the particles remain neutral molecules.</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="particle-grid">
+<div class="particle-card"><h4>Dissociation</h4><div class="arrow-row"><span class="molecule-chip">NaCl(s)</span><span class="arrow-chip">→</span><span class="ion-chip">Na⁺</span><span class="ion-chip">Cl⁻</span></div><p>pre-existing ions separate</p></div>
+<div class="particle-card"><h4>Ionization</h4><div class="arrow-row"><span class="molecule-chip">CH₃COOH</span><span class="arrow-chip">⇌</span><span class="ion-chip">H⁺</span><span class="ion-chip">CH₃COO⁻</span></div><p>molecules form ions in water</p></div>
+<div class="particle-card"><h4>No ion formation</h4><div class="arrow-row"><span class="molecule-chip">C₆H₁₂O₆</span><span class="arrow-chip">→</span><span class="molecule-chip">C₆H₁₂O₆(aq)</span></div><p>molecules remain intact</p></div>
+</div>
+<div class="eq-strip" style="margin-top:.55rem">NaCl(s) → Na⁺(aq) + Cl⁻(aq)</div>
+<div class="eq-strip" style="margin-top:.45rem">CH₃COOH(aq) ⇌ H⁺(aq) + CH₃COO⁻(aq)</div>
+<div class="eq-strip" style="margin-top:.45rem">C₆H₁₂O₆(aq) remains molecular</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Electrolyte link:</strong> if ions are present in water, the solution is an <strong>electrolyte</strong>. If no ions are present, it is a <strong>nonelectrolyte</strong>.</div>
+<div class="warn" style="margin-top:.55rem"><strong>Next step:</strong> once ions form, the <em>amount</em> of ion formation determines whether the electrolyte is strong or weak.</div>
+<p style="margin-top:.55rem">If a solute forms ions in water, the solution is an <span class="blank" data-answer="electrolyte">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<div class="slide-container" data-integrated-slide="3" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 3 · Local Slide 3</span>
+<h1 class="slide-title">Electrolyte Strength and Conductivity</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Relate the number of mobile ions to strong, weak, and non-electrolyte behavior.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="bulb-beaker-grid">
+<div class="bulb-beaker-card">
+<h4>Strong Electrolyte</h4>
+<div class="circuit-wrap">
+<div class="circuit-top"><div class="wire"></div><div class="bulb-shell on">ON</div><div class="wire"></div></div>
+<div class="beaker-small"><div class="liquid-small"></div><div class="beaker-dots-many"></div></div>
+</div>
+<p>same beaker illustration + strongest conductivity</p>
+</div>
+<div class="bulb-beaker-card">
+<h4>Weak Electrolyte</h4>
+<div class="circuit-wrap">
+<div class="circuit-top"><div class="wire"></div><div class="bulb-shell dim">DIM</div><div class="wire"></div></div>
+<div class="beaker-small"><div class="liquid-small"></div><div class="beaker-dots-many"></div></div>
+</div>
+<p>same beaker illustration + weaker conductivity</p>
+</div>
+<div class="bulb-beaker-card">
+<h4>Nonelectrolyte</h4>
+<div class="circuit-wrap">
+<div class="circuit-top"><div class="wire"></div><div class="bulb-shell off">OFF</div><div class="wire"></div></div>
+<div class="beaker-small"><div class="liquid-small"></div><div class="beaker-dots-many"></div></div>
+</div>
+<p>same beaker illustration + no conductivity</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="compare-grid">
+<div class="class-card"><strong>Strong electrolyte:</strong> essentially complete dissociation or ionization.</div>
+<div class="class-card"><strong>Weak electrolyte:</strong> partial ionization, so fewer ions are present.</div>
+<div class="class-card"><strong>Nonelectrolyte:</strong> dissolves but stays molecular.</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Key idea:</strong> conductivity depends on <strong>mobile ions</strong>. A brighter bulb means stronger conductivity.</div>
+<p style="margin-top:.55rem">A solution conducts when it contains mobile <span class="blank" data-answer="ions">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+<div class="slide-container" data-integrated-slide="4" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 4 · Local Slide 4</span>
+<h1 class="slide-title">Classify NaCl, CH₃COOH, and Glucose in Water</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Classify common solutes as strong electrolytes, weak electrolytes, or nonelectrolytes and justify each with particles.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="path-label">Worked classification</span>
+<div class="particle-grid">
+<div class="particle-card"><h4>NaCl(aq)</h4><p>ionic compound</p><span class="ion-chip">Na⁺</span><span class="ion-chip">Cl⁻</span><div class="bulb on">ON</div></div>
+<div class="particle-card"><h4>CH₃COOH(aq)</h4><p>weak acid</p><span class="molecule-chip">mostly CH₃COOH</span><span class="ion-chip">few H⁺</span><span class="ion-chip">few CH₃COO⁻</span><div class="bulb dim">DIM</div></div>
+<div class="particle-card"><h4>C₆H₁₂O₆(aq)</h4><p>molecular sugar</p><span class="molecule-chip">glucose molecules</span><div class="bulb off">OFF</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="eq-strip">NaCl(aq) → Na⁺(aq) + Cl⁻(aq)</div>
+<div class="eq-strip" style="margin-top:.45rem">CH₃COOH(aq) ⇌ H⁺(aq) + CH₃COO⁻(aq)</div>
+<div class="eq-strip" style="margin-top:.45rem">C₆H₁₂O₆(aq) remains C₆H₁₂O₆ molecules</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="compare-grid">
+<div class="class-card"><strong>NaCl:</strong> strong electrolyte</div>
+<div class="class-card"><strong>CH₃COOH:</strong> weak electrolyte</div>
+<div class="class-card"><strong>Glucose:</strong> nonelectrolyte</div>
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Check:</strong> the bulb brightness follows the amount of mobile ions.</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="5" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 5 · Local Slide 5</span>
+<h1 class="slide-title">From Formula Units to Ions</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use ionic formulas and coefficients to determine the mole ratio of formula units to dissolved ions.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="particle-grid">
+<div class="particle-card"><h4>Formula Unit</h4><span class="molecule-chip">Li₂SO₄</span><p>one neutral ionic formula unit</p></div>
+<div class="particle-card"><h4>In Water</h4><div class="arrow-row"><span class="ion-chip">Li⁺</span><span class="ion-chip">Li⁺</span><span class="ion-chip">SO₄²⁻</span></div><p>particles separate</p></div>
+<div class="particle-card"><h4>Main Idea</h4><p>subscripts in the formula become coefficients of the ions after dissociation</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="eq-strip">Li₂SO₄(aq) → 2Li⁺(aq) + SO₄²⁻(aq)</div>
+<div class="callout" style="margin-top:.55rem"><strong>Formula-unit thinking:</strong> the subscript 2 in Li₂SO₄ becomes the coefficient 2 in front of Li⁺ after dissociation.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="compare-grid">
+<div class="compare-card"><h4>Mole Ratio</h4><p>1 mol Li₂SO₄ → 2 mol Li⁺ + 1 mol SO₄²⁻</p></div>
+<div class="compare-card"><h4>Careful!</h4><p>total ions and requested ion are not always the same thing</p></div>
+</div>
+<p style="margin-top:.55rem">One mole Li₂SO₄ produces <span class="blank" data-answer="2">[ _______ ]</span> mol Li⁺.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="slide-container" data-integrated-slide="6" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 6 · Local Slide 6</span>
+<h1 class="slide-title">Guided Calculation — Ions from Moles</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Calculate moles and number of ions produced by a soluble ionic compound.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="practice-badge medium">Guided Calculation</span>
+<div class="question-card">
+<div class="question-text">How many Li⁺ ions are present when 2.40 mol Li₂SO₄ fully dissociates in water?</div>
+<div class="response-area">Path: mol Li₂SO₄ → mol Li⁺ → Li⁺ ions</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="setup-stack">
+<div class="visual-equation">
+<span>2.40 <span class="cancel-pair">mol Li₂SO₄</span></span>
+<span class="factor-arrow">×</span>
+<span class="fraction"><span class="num">2 <span class="cancel-pair">mol Li⁺</span></span><span class="den">1 <span class="cancel-pair">mol Li₂SO₄</span></span></span>
+</div>
+<div class="cancel-label">mol Li₂SO₄ cancels; mol Li⁺ remains</div>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">2.40 mol Li₂SO₄ → 4.80 mol Li⁺</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="setup-stack">
+<div class="visual-equation">
+<span>4.80 <span class="cancel-pair">mol Li⁺</span></span>
+<span class="factor-arrow">×</span>
+<span class="fraction"><span class="num">6.022×10²³ <span class="survive">Li⁺ ions</span></span><span class="den">1 <span class="cancel-pair">mol Li⁺</span></span></span>
+</div>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">Number of Li⁺ ions = <span class="blank" data-answer="2.89×10²⁴ Li⁺ ions">[ _______ ]</span></div>
+<div class="callout" style="margin-top:.55rem"><strong>Reasonableness:</strong> more than 1 mole of formula units and 2 Li⁺ per unit should give more than 10²⁴ ions.</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="7" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 7 · Local Slide 7</span>
+<h1 class="slide-title">Transfer Practice — Ions from Mass</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Convert mass of a soluble ionic compound to the number of a specified ion.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="practice-badge medium">Transfer Practice</span>
+<div class="question-card">
+<div class="question-text">How many Na⁺ ions are present when 68.7 g Na₂CO₃ fully dissolves in water?</div>
+<div class="response-area">Path: g Na₂CO₃ → mol Na₂CO₃ → mol Na⁺ → Na⁺ ions</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="setup-stack">
+<div class="visual-equation">
+<span>68.7 <span class="cancel-pair">g Na₂CO₃</span></span>
+<span class="factor-arrow">×</span>
+<span class="fraction"><span class="num">1 <span class="cancel-pair">mol Na₂CO₃</span></span><span class="den">105.99 <span class="cancel-pair">g Na₂CO₃</span></span></span>
+<span class="factor-arrow">×</span>
+<span class="fraction"><span class="num">2 <span class="cancel-pair">mol Na⁺</span></span><span class="den">1 <span class="cancel-pair">mol Na₂CO₃</span></span></span>
+</div>
+<div class="cancel-label">g Na₂CO₃ → mol Na₂CO₃ → mol Na⁺</div>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">mol Na⁺ ≈ 1.30 mol Na⁺</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="setup-stack">
+<div class="visual-equation">
+<span>1.30 <span class="cancel-pair">mol Na⁺</span></span>
+<span class="factor-arrow">×</span>
+<span class="fraction"><span class="num">6.022×10²³ <span class="survive">Na⁺ ions</span></span><span class="den">1 <span class="cancel-pair">mol Na⁺</span></span></span>
+</div>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">Number of Na⁺ ions = <span class="blank" data-answer="7.81×10²³ Na⁺ ions">[ _______ ]</span></div>
+<div class="warn" style="margin-top:.55rem"><strong>Distractor check:</strong> forgetting the subscript 2 would make the answer half as large.</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="slide-container" data-integrated-slide="8" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 8 · Local Slide 8</span>
+<h1 class="slide-title">ACS-Style Electrolyte Ranking Practice</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Solve common electrolyte-conductivity ranking problems using solubility, acid/base strength, and number of ions formed.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="rank-box">
+<h4>Problem Type 1 — Soluble? Strong? How Many Ions?</h4>
+<p><strong>Question:</strong> At the same concentration, which solution would conduct electricity <strong>most strongly</strong>?</p>
+<div class="option-list">
+<div class="option-item">A. NaCl(aq)</div>
+<div class="option-item">B. CaCl₂(aq)</div>
+<div class="option-item">C. AgCl in water <br/><small>(given: AgCl is insoluble)</small></div>
+<div class="option-item">D. C₆H₁₂O₆(aq)</div>
+</div>
+<ul class="strategy-list">
+<li>Step 1: eliminate the <strong>nonelectrolyte</strong> and the <strong>insoluble compound</strong>.</li>
+<li>Step 2: among strong electrolytes, compare how many ions each formula unit produces.</li>
+</ul>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="rank-answer">
+<strong>Reasoning:</strong> AgCl is explicitly given as insoluble here, and glucose is a nonelectrolyte. Both NaCl and CaCl₂ are soluble strong electrolytes, but
+NaCl → Na⁺ + Cl⁻ gives <strong>2 ions</strong>, while
+CaCl₂ → Ca²⁺ + 2Cl⁻ gives <strong>3 ions</strong>.
+<br/><strong>Answer:</strong> <strong>CaCl₂(aq)</strong> conducts most strongly.
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>ACS pattern:</strong> for strong electrolytes at equal concentration, <em>more dissolved ions</em> usually means stronger conductivity.</div><div class="warn" style="margin-top:.55rem"><strong>T4.2 transition:</strong> In this problem, AgCl is labeled insoluble for you. In the next Topic, we will learn how to decide soluble vs. insoluble using the solubility chart.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="rank-box">
+<h4>Problem Type 2 — Strong vs. Weak Electrolyte Conductivity</h4>
+<p><strong>Question:</strong> At the same analytical concentration, which solutions belong in the <strong>stronger-conductivity group</strong> and which belong in the <strong>weaker-conductivity group</strong>?</p>
+<div class="option-list">
+<div class="option-item">HCl(aq)</div>
+<div class="option-item">NaOH(aq)</div>
+<div class="option-item">CH₃COOH(aq)</div>
+<div class="option-item">NH₃(aq)</div>
+</div>
+<div class="rank-answer">
+<strong>Reasoning:</strong> HCl is a <strong>strong acid</strong> and NaOH is a <strong>strong base</strong>, so both are strong electrolytes.
+CH₃COOH is a <strong>weak acid</strong>, and NH₃ is a <strong>weak base</strong>, so both are weak electrolytes.
+<br/><strong>Category-level conclusion:</strong> <strong>HCl and NaOH</strong> generally conduct much more strongly than <strong>CH₃COOH and NH₃</strong> at the same analytical concentration. Exact conductivity within each pair can differ because conductivity also depends on ion mobility and, for weak electrolytes, the extent of ionization.
+<br/><strong>Fast decision rule:</strong> first classify each substance as strong electrolyte, weak electrolyte, or nonelectrolyte; use exact within-category ranking only when enough additional information is provided.
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<div class="slide-container" data-integrated-slide="9" data-local-slide="9" id="slide-9">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 9 · Local Slide 9</span>
+<h1 class="slide-title">Independent Check — Aqueous Solutions and Electrolytes</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Assess solution vocabulary, particle representations, electrolyte strength, and ion counting.</div>
+</div>
+<div class="slide-body">
+<div class="question-grid">
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">1</span> <span class="question-text">Identify the solute and solvent in an aqueous salt solution.</span></div><div class="response-area">Student response</div></div></div>
+<div class="build-step visible" data-build="1"><div class="question-card"><div><span class="question-num">2</span> <span class="question-text">Match strong, weak, and nonelectrolyte particle diagrams to bulb brightness.</span></div><div class="response-area">Explain using mobile ions.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">3</span> <span class="question-text">Classify NaCl, CH₃COOH, and glucose as strong electrolyte, weak electrolyte, or nonelectrolyte.</span></div><div class="response-area">Justify each classification.</div></div></div>
+<div class="build-step" data-build="2"><div class="question-card"><div><span class="question-num">4</span> <span class="question-text">How many ions of each type are produced per formula unit of Al₂(SO₄)₃?</span></div><div class="response-area">Write the dissociation equation.</div></div></div>
+<div class="build-step" data-build="3" style="grid-column:1/-1"><div class="question-card"><div><span class="question-num">5</span> <span class="question-text">Calculate the number of Cl⁻ ions from a stated amount of CaCl₂. Show the ion-ratio factor.</span></div><div class="response-area">Path: amount CaCl₂ → amount Cl⁻ → particles</div></div></div>
+</div>
+<div class="build-step" data-build="3"><div class="callout"><strong>Topic synthesis:</strong> particle identity controls conductivity; formula subscripts control ion ratios; unit cancellation protects the calculation.</div></div>
+</div>
+</div>
+
+</div>
+</main>
+<script>
+let currentSlide=1;
+const totalSlides=9;
+let currentBuild=1;
+const buildsPerSlide={"1":3,"2":3,"3":3,"4":3,"5":3,"6":3,"7":3,"8":3,"9":3};
+let currentMode='student';
+
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>{
+    slide.classList.toggle('active',(index+1)===currentSlide);
+  });
+
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  if(!activeSlide)return;
+
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10);
+    step.classList.toggle('visible',n<=currentBuild);
+  });
+
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const isActiveSlide=blank.closest('.slide-container')===activeSlide;
+    const visible=isActiveSlide && (!parentBuild||parentBuild.classList.contains('visible'));
+    if(currentMode==='answer' && visible && blank.dataset.answer){
+      blank.textContent=blank.dataset.answer;
+      blank.classList.add('revealed');
+    }else{
+      blank.textContent='[ _______ ]';
+      blank.classList.remove('revealed');
+    }
+  });
+
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+
+function nextBuild(){
+  const max=buildsPerSlide[currentSlide];
+  if(currentBuild<max)currentBuild++;
+  else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}
+  updateDisplay();
+}
+
+function prevBuild(){
+  if(currentBuild>1)currentBuild--;
+  else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}
+  updateDisplay();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}
+});
+
+updateDisplay();
+</script>
+</body>
+</html>
