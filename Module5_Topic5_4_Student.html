@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>General Chemistry I — Module 5 — Topic T5.4 — Student</title>
+<style>:root{--bg-dark:#0f172a;--bg-card:#1e293b;--accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;--accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;--border:#475569;--blank:#334155}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column}
+header{background:#0b1120;border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.deck-title{font-size:1.16rem;font-weight:800;color:var(--accent-blue)}
+.mode-selector{display:flex;background:#1e293b;border:1px solid var(--border);border-radius:8px;padding:3px}
+.mode-btn{border:0;background:none;color:var(--text-muted);padding:.4rem .8rem;font-weight:700;border-radius:6px;cursor:pointer}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;gap:.65rem;align-items:center}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border);padding:.45rem .85rem;border-radius:6px;font-weight:700;cursor:pointer}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.btn:disabled{opacity:.4}
+.counter-badge{font-size:.9rem;color:var(--text-muted);font-weight:700;background:#1e293b;padding:.3rem .6rem;border:1px solid var(--border);border-radius:4px}
+main{flex:1;display:flex;justify-content:center;align-items:center;padding:1.4rem;max-width:1400px;width:100%;margin:auto}
+.slide-container{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.75rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;box-shadow:0 20px 25px -5px rgba(0,0,0,.45)}
+.slide-container.active{display:flex}
+.meta-pill{display:inline-block;font-size:.77rem;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:var(--accent-teal);background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.2);padding:.24rem .58rem;border-radius:4px;margin-bottom:.45rem}
+.slide-title{font-size:1.95rem;font-weight:900;line-height:1.2}
+.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.65rem 1rem;margin-top:.7rem;border-radius:0 6px 6px 0}
+.lo-box strong{color:var(--accent-blue)}
+.slide-body{display:flex;flex-direction:column;gap:.78rem;margin-top:.85rem}
+.build-step{opacity:.14;pointer-events:none;transform:translateY(6px);filter:blur(1px);transition:.35s}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.65rem .9rem}
+.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.65rem .9rem;color:#fecdd3}
+.equal-banner{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.66rem;text-align:center;color:var(--accent-teal);font-weight:900;font-size:1.13rem}
+.blank{display:inline-block;min-width:95px;background:var(--blank);border-bottom:2px solid var(--accent-amber);border-radius:4px;padding:.12rem .5rem;color:transparent;font-weight:800;text-align:center;user-select:none}
+.fraction{display:inline-grid;grid-template-rows:auto auto;vertical-align:middle;justify-items:center;line-height:1.05;margin:0 .15rem;min-width:82px}
+.fraction .num{width:100%;padding:.12rem .32rem .23rem;border-bottom:2px solid currentColor;text-align:center}
+.fraction .den{width:100%;padding:.23rem .32rem .12rem;text-align:center}
+.path{display:flex;align-items:center;justify-content:center;gap:.4rem;flex-wrap:wrap}
+.path-node{background:#0f172a;border:1px solid var(--border);border-radius:999px;padding:.42rem .65rem;font-weight:850;text-align:center}
+.arrow{color:var(--accent-amber);font-size:1.25rem;font-weight:900}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem}
+.panel-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.76rem}
+.panel-card h4{color:var(--accent-blue);margin-bottom:.38rem}
+.eq-card{background:#0f172a;border:2px solid var(--accent-teal);border-radius:12px;padding:.78rem;text-align:center;font-size:1.14rem;font-weight:900}
+.state-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:.75rem;align-items:stretch}
+.state-card{background:#0f172a;border:1px solid var(--border);border-radius:12px;padding:.8rem}
+.state-card h4{color:var(--accent-blue);margin-bottom:.45rem;text-align:center}
+.state-list{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.state-chip{background:#111827;border:1px solid #334155;border-radius:8px;padding:.48rem;text-align:center;font-weight:850}
+.constant{border-color:var(--accent-teal);color:#ccfbf1}
+.changing{border-color:var(--accent-amber);color:#fde68a}
+.crossout{position:relative;display:inline-block;padding:.05rem .12rem}
+.crossout::after{content:"";position:absolute;left:-3px;right:-3px;top:50%;height:3px;background:var(--accent-rose);transform:rotate(-8deg)}
+.derive-stack{display:flex;flex-direction:column;gap:.48rem;max-width:930px;margin:auto}
+.derive-step{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.62rem .8rem;text-align:center;font-weight:800}
+.coeff-map{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.coeff-card{background:#0f172a;border:1px solid var(--border);border-radius:12px;padding:.85rem;text-align:center}
+.coeff-num{font-size:1.75rem;font-weight:900;color:var(--accent-amber)}
+.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.method-card{background:#0f172a;border:1px solid var(--border);border-radius:12px;padding:.8rem}
+.method-card h4{color:var(--accent-blue);margin-bottom:.4rem}
+.factor-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.63rem .78rem;text-align:center;font-size:1.01rem}
+.answer-box{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.58rem .78rem;color:#ccfbf1;font-weight:800}
+.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.practice-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.76rem}
+.practice-badge{display:inline-block;padding:.2rem .5rem;border-radius:999px;font-size:.76rem;font-weight:900;text-transform:uppercase;margin-bottom:.4rem}
+.easy{background:rgba(45,212,191,.15);color:var(--accent-teal);border:1px solid var(--accent-teal)}
+.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}
+.hard{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.question-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.78rem;display:flex;flex-direction:column;gap:.42rem}
+.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:900;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px}
+.response-area{background:#1e293b;border:1px dashed var(--border);border-radius:6px;min-height:52px;padding:.45rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.5rem}
+.meta-item{background:#1e293b;padding:.48rem .62rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.77rem;text-transform:uppercase}
+@media (max-width:900px){.state-grid,.coeff-map,.method-grid,.practice-grid,.question-grid{grid-template-columns:1fr}
+.slide-title{font-size:1.5rem}
+.slide-container{min-height:auto;padding:1.15rem}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}}
+.master-footer{max-width:1400px;width:100%;margin:0 auto;padding:.7rem 1.5rem 1.1rem;text-align:center;color:var(--text-muted);font-size:.82rem;border-top:1px solid rgba(71,85,105,.45)}
+.slide-header{margin-bottom:1rem;}
+body{overflow-x:hidden;}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title">🧪 Topic T5.4 | Two-State Gas Problems → Gas Stoichiometry</div>
+<div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 10</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 4</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+
+<div class="slide-container active" data-integrated-slide="25" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header"><div class="meta-pill">Integrated Slide 25 · Local Slide 1</div><h1 class="slide-title">One Gas, Two States — Derive the Relationship</h1><div class="lo-box"><strong>Learning Objectives: </strong>Represent the initial and final conditions of the same gas sample with two ideal-gas equations. Use the two ideal-gas equations to remove quantities that are identical in both states.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="callout"><strong>New situation:</strong> the same sample of gas changes from an initial state to a final state. Some of P, V, n, and T may change; others may stay constant.</div>
+<div class="state-grid">
+<div class="state-card"><h4>Initial State</h4><div class="state-list"><div class="state-chip changing">P₁</div><div class="state-chip changing">V₁</div><div class="state-chip constant">n₁</div><div class="state-chip changing">T₁</div></div><div class="eq-card" style="margin-top:.6rem">P₁V₁ = n₁RT₁</div></div>
+<div class="arrow" style="align-self:center">→</div>
+<div class="state-card"><h4>Final State</h4><div class="state-list"><div class="state-chip changing">P₂</div><div class="state-chip changing">V₂</div><div class="state-chip constant">n₂</div><div class="state-chip changing">T₂</div></div><div class="eq-card" style="margin-top:.6rem">P₂V₂ = n₂RT₂</div></div>
+</div>
+<div class="panel-grid">
+<div class="panel-card"><h4>Same sample?</h4><p>Then the amount of gas does not change: <strong>n₁ = n₂</strong>.</p></div>
+<div class="panel-card"><h4>Same equation?</h4><p>R is a constant, so the same R appears in both states.</p></div>
+</div>
+</div><div class="build-step" data-build="2">
+<div class="equal-banner">Do not choose a memorized gas-law formula first. First ask: what changed, and what stayed constant?</div>
+</div><div class="build-step" data-build="3">
+<div class="factor-card"><strong>Cancel the quantities that are unchanged:</strong>
+<div class="formula-large">P₁V₁/T₁ = nR = P₂V₂/T₂</div></div>
+<div class="callout" style="margin-top:.55rem">Because the same gas sample has the same <strong>n</strong> and <strong>R</strong>, both states equal the same constant <strong>nR</strong>.</div>
+</div><div class="build-step" data-build="4">
+<div class="equal-banner"><span class="fraction"><span class="num">P₁V₁</span><span class="den">T₁</span></span> = <span class="fraction"><span class="num">P₂V₂</span><span class="den">T₂</span></span></div>
+<div class="warn"><strong>This is not another formula to memorize.</strong> It comes from writing PV=nRT for the two states and removing the common quantities.</div>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="26" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header"><div class="meta-pill">Integrated Slide 26 · Local Slide 2</div><h1 class="slide-title">General Two-State Calculation — P, V, and T All Change</h1><div class="lo-box"><strong>Learning Objective:</strong> Solve a two-state gas problem when no additional P, V, or T variable stays constant.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Problem:</strong> A gas sample occupies 2.50 L at 1.20 atm and 300 K. It changes to 2.00 L and 330 K. What is the final pressure?</div>
+<div class="state-grid">
+<div class="state-card">
+<h4>Initial State</h4>
+<div class="state-list">
+<div class="state-chip changing">P₁ = 1.20 atm</div>
+<div class="state-chip changing">V₁ = 2.50 L</div>
+<div class="state-chip constant">same n</div>
+<div class="state-chip changing">T₁ = 300 K</div>
+</div>
+</div>
+<div class="arrow" style="align-self:center">→</div>
+<div class="state-card">
+<h4>Final State</h4>
+<div class="state-list">
+<div class="state-chip changing">P₂ = ?</div>
+<div class="state-chip changing">V₂ = 2.00 L</div>
+<div class="state-chip constant">same n</div>
+<div class="state-chip changing">T₂ = 330 K</div>
+</div>
+</div>
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Constant check:</strong> n is constant because it is the same gas sample. P, V, and T all change, so none of them can be canceled.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="derive-stack">
+<div class="derive-step">Start with the general two-state relationship:</div>
+<div class="derive-step"><span class="fraction"><span class="num">P₁V₁</span><span class="den">T₁</span></span> = <span class="fraction"><span class="num">P₂V₂</span><span class="den">T₂</span></span></div>
+<div class="derive-step">Solve for the actual unknown:</div>
+<div class="derive-step">P₂ = <span class="fraction"><span class="num">P₁V₁T₂</span><span class="den">T₁V₂</span></span></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="factor-card">
+P₂ =
+<span class="fraction"><span class="num">(1.20 atm)(2.50 L)(330 K)</span><span class="den">(300 K)(2.00 L)</span></span>
+= <strong>1.65 atm</strong>
+</div>
+<div class="callout"><strong>Reasonableness:</strong> the gas is compressed and warmed. Both changes tend to increase pressure, so the final pressure should be above 1.20 atm. It is.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="27" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header"><div class="meta-pill">Integrated Slide 27 · Local Slide 3</div><h1 class="slide-title">Rigid Container Calculation — V Is Constant</h1><div class="lo-box"><strong>Learning Objective:</strong> Recognize constant volume in a sealed rigid container, cancel V, and solve the reduced relationship.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Problem:</strong> A sealed rigid container is at 0.950 atm and 20.0 °C. It is heated to 80.0 °C. Find the final pressure.</div>
+<div class="state-grid">
+<div class="state-card"><h4>Constants</h4><div class="state-list"><div class="state-chip constant">n</div><div class="state-chip constant">V</div></div></div>
+<div class="arrow" style="align-self:center">→</div>
+<div class="state-card"><h4>Changing Variables</h4><div class="state-list"><div class="state-chip changing">P</div><div class="state-chip changing">T</div></div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="derive-stack">
+<div class="derive-step">Start: <span class="fraction"><span class="num">P₁V₁</span><span class="den">T₁</span></span> = <span class="fraction"><span class="num">P₂V₂</span><span class="den">T₂</span></span></div>
+<div class="derive-step">Rigid container → V₁ = V₂. Cancel V.</div>
+<div class="derive-step"><span class="fraction"><span class="num">P₁</span><span class="den">T₁</span></span> = <span class="fraction"><span class="num">P₂</span><span class="den">T₂</span></span></div>
+<div class="derive-step">Solve for P₂:   P₂ = P₁ × <span class="fraction"><span class="num">T₂</span><span class="den">T₁</span></span></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="factor-card">T₁ = 20.0 + 273.15 = <strong>293.15 K</strong>    T₂ = 80.0 + 273.15 = <strong>353.15 K</strong></div>
+<div class="factor-card">P₂ = 0.950 atm × <span class="fraction"><span class="num">353.15 K</span><span class="den">293.15 K</span></span> = <strong>1.144 atm ≈ 1.14 atm</strong></div>
+<div class="callout"><strong>Reasonableness:</strong> the temperature increased while volume stayed fixed, so pressure should increase. It does.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="28" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header"><div class="meta-pill">Integrated Slide 28 · Local Slide 4</div><h1 class="slide-title">Gas Stoichiometry — Balanced Equation + Conversion Route</h1><div class="lo-box"><strong>Learning Objectives: </strong>Use the balanced equation as the mole-ratio bridge between a gas quantity and another reactant or product. Choose the correct gas-to-mole or mole-to-gas conversion from the stated conditions.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="callout"><strong>Gas stoichiometry is still stoichiometry.</strong> The only new question is: how do I convert the gas information to or from moles?</div>
+<div class="eq-card">N₂(g) + 3 H₂(g) → 2 NH₃(g)</div>
+<div class="coeff-map">
+<div class="coeff-card"><div class="coeff-num">1</div><strong>mol N₂</strong></div>
+<div class="coeff-card"><div class="coeff-num">3</div><strong>mol H₂</strong></div>
+<div class="coeff-card"><div class="coeff-num">2</div><strong>mol NH₃</strong></div>
+</div>
+<div class="callout"><strong>Coefficients are mole ratios.</strong> They are not gram ratios. They become gas-volume ratios only when the gases are compared at the same T and P.</div>
+</div><div class="build-step" data-build="2">
+<div class="path"><span class="path-node">given quantity</span><span class="arrow">→</span><span class="path-node">mol A</span><span class="arrow">→</span><span class="path-node">mole ratio</span><span class="arrow">→</span><span class="path-node">mol B</span><span class="arrow">→</span><span class="path-node">target quantity</span></div>
+<p style="text-align:center">The reaction bridge is always the <span class="blank" data-answer="mole ratio">[ _______ ]</span>.</p>
+</div><div class="build-step" data-build="3">
+<div class="visual-panel-grid">
+<div class="panel-card"><h4>Actual P, V, T</h4><div class="calculation">Use PV = nRT</div></div>
+<div class="panel-card"><h4>At Course STP</h4><div class="calculation">1 mol ≈ 22.4 L</div></div>
+<div class="panel-card"><h4>Gas → Gas, Same T and P</h4><div class="calculation">Use coefficient volume ratios</div></div>
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Decision rule:</strong> conditions determine the gas conversion; the balanced equation determines the mole ratio.</div>
+</div><div class="build-step" data-build="4">
+<div class="warn"><strong>Two common mistakes:</strong> using 22.4 L/mol away from STP, or using liters directly when gas conditions differ.</div>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="29" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header"><div class="meta-pill">Integrated Slide 29 · Local Slide 5</div><h1 class="slide-title">Same T and P — Gas Volume Can Follow the Coefficients Directly</h1><div class="lo-box"><strong>Learning Objective:</strong> Use stoichiometric coefficients as gas-volume ratios only when the gases are measured at identical temperature and pressure.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="eq-card">N₂(g) + 3 H₂(g) → 2 NH₃(g)</div>
+<div class="equal-banner">same T and P → 1 L N₂ : 3 L H₂ : 2 L NH₃</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card">4.00 L N₂ × <span class="fraction"><span class="num">3 L H₂</span><span class="den">1 L N₂</span></span> = <strong>12.0 L H₂</strong></div>
+<div class="factor-card">4.00 L N₂ × <span class="fraction"><span class="num">2 L NH₃</span><span class="den">1 L N₂</span></span> = <strong>8.00 L NH₃</strong></div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>If T or P differs:</strong> do not use liters as the reaction ratio. Convert through moles first.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="30" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header"><div class="meta-pill">Integrated Slide 30 · Local Slide 6</div><h1 class="slide-title">Worked Example — Gas Data to Reactant Mass</h1><div class="lo-box"><strong>Learning Objective:</strong> Use measured PVT data for SiF₄ to determine the mass of SiO₂ consumed.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="eq-card">SiO₂(s) + 4 HF(g) → SiF₄(g) + 2 H₂O(l)</div>
+<div class="callout"><strong>Given:</strong> 115 mL SiF₄ at 32.0 °C and 0.879 atm. M(SiO₂) = 60.1 g/mol.</div>
+<div class="path"><span class="path-node">mL SiF₄</span><span class="arrow">→</span><span class="path-node">L SiF₄</span><span class="arrow">→</span><span class="path-node">mol SiF₄</span><span class="arrow">→</span><span class="path-node">mol SiO₂</span><span class="arrow">→</span><span class="path-node">g SiO₂</span></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card">115 mL SiF₄ × <span class="fraction"><span class="num">1 L</span><span class="den">1000 mL</span></span> = <strong>0.115 L SiF₄</strong></div>
+<div class="factor-card">T = 32.0 + 273.15 = <strong>305.15 K</strong></div>
+<div class="factor-card">n(SiF₄) = <span class="fraction"><span class="num">PV</span><span class="den">RT</span></span> = <span class="fraction"><span class="num">(0.879 atm)(0.115 L)</span><span class="den">(0.08206 L·atm·mol⁻¹·K⁻¹)(305.15 K)</span></span> = <strong>0.00404 mol SiF₄</strong></div>
+</div>
+<div class="build-step" data-build="3">
+<div class="factor-card">0.00404 mol SiF₄ × <span class="fraction"><span class="num">1 mol SiO₂</span><span class="den">1 mol SiF₄</span></span> × <span class="fraction"><span class="num">60.1 g SiO₂</span><span class="den">1 mol SiO₂</span></span> = <strong>0.243 g SiO₂</strong></div>
+<div class="callout"><strong>Reasonableness:</strong> 0.115 L gas near 1 atm corresponds to only a few millimoles, so a sub-gram reactant mass is reasonable.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="31" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header"><div class="meta-pill">Integrated Slide 31 · Local Slide 7</div><h1 class="slide-title">Worked Example — Reactant Mass to Gas Product Volume</h1><div class="lo-box"><strong>Learning Objective:</strong> Convert glucose mass to CO₂ moles, then use the actual gas conditions to determine CO₂ volume.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="eq-card">C₆H₁₂O₆(s) + 6 O₂(g) → 6 CO₂(g) + 6 H₂O(l)</div>
+<div class="callout"><strong>Given:</strong> 5.60 g C₆H₁₂O₆ is consumed. Find V(CO₂) at 37.0 °C and 1.00 atm. M(C₆H₁₂O₆) = 180 g/mol.</div>
+<div class="path"><span class="path-node">g glucose</span><span class="arrow">→</span><span class="path-node">mol glucose</span><span class="arrow">→</span><span class="path-node">mol CO₂</span><span class="arrow">→</span><span class="path-node">V = nRT/P</span></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card">5.60 g C₆H₁₂O₆ × <span class="fraction"><span class="num">1 mol C₆H₁₂O₆</span><span class="den">180 g C₆H₁₂O₆</span></span> × <span class="fraction"><span class="num">6 mol CO₂</span><span class="den">1 mol C₆H₁₂O₆</span></span> = <strong>0.1867 mol CO₂</strong></div>
+<div class="factor-card">T = 37.0 + 273.15 = <strong>310.15 K</strong></div>
+</div>
+<div class="build-step" data-build="3">
+<div class="factor-card">V(CO₂) = <span class="fraction"><span class="num">nRT</span><span class="den">P</span></span> = <span class="fraction"><span class="num">(0.1867 mol)(0.08206 L·atm·mol⁻¹·K⁻¹)(310.15 K)</span><span class="den">1.00 atm</span></span> = <strong>4.751 L CO₂</strong></div>
+<div class="callout"><strong>Reasonableness:</strong> about 0.187 mol gas near room temperature at 1 atm should occupy several liters.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="32" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header"><div class="meta-pill">Integrated Slide 32 · Local Slide 8</div><h1 class="slide-title">Reverse Transfer + Method Selection</h1><div class="lo-box"><strong>Learning Objectives: </strong>Work backward from gas PVT data through a mole ratio to the mass of a solid reactant. Choose among PV=nRT, STP molar volume, and same-T/P gas-volume ratios from the conditions.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="eq-card">2 KClO₃(s) → 2 KCl(s) + 3 O₂(g)</div>
+<div class="callout"><strong>Constructed transfer problem:</strong> 1.85 L O₂ is produced at 27.0 °C and 0.975 atm. What mass of KClO₃ decomposed? M(KClO₃) = 122.55 g/mol.</div>
+<div class="path"><span class="path-node">P,V,T O₂</span><span class="arrow">→</span><span class="path-node">mol O₂</span><span class="arrow">→</span><span class="path-node">mol KClO₃</span><span class="arrow">→</span><span class="path-node">g KClO₃</span></div>
+</div><div class="build-step" data-build="2">
+<div class="factor-card">T = 27.0 + 273.15 = <strong>300.15 K</strong></div>
+<div class="factor-card">n(O₂) = <span class="fraction"><span class="num">(0.975 atm)(1.85 L)</span><span class="den">(0.08206 L·atm·mol⁻¹·K⁻¹)(300.15 K)</span></span> = <strong>0.0732 mol O₂</strong></div>
+</div><div class="build-step" data-build="3">
+<div class="factor-card">0.0732 mol O₂ × <span class="fraction"><span class="num">2 mol KClO₃</span><span class="den">3 mol O₂</span></span> × <span class="fraction"><span class="num">122.55 g KClO₃</span><span class="den">1 mol KClO₃</span></span> = <strong>5.98 g KClO₃</strong></div>
+<div class="callout"><strong>Ratio check:</strong> 3 mol O₂ comes from 2 mol KClO₃, so the KClO₃ mole amount must be smaller than the O₂ mole amount.</div>
+</div><div class="build-step" data-build="4">
+<div class="method-grid">
+<div class="method-card"><h4>Actual P and T given</h4><p>Use <strong>PV=nRT</strong>.</p></div>
+<div class="method-card"><h4>Explicitly at STP</h4><p>Use <strong>22.4 L/mol</strong> if helpful.</p></div>
+<div class="method-card"><h4>Two reacting gases at same T and P</h4><p>Use <strong>coefficient volume ratios</strong>.</p></div>
+</div>
+<div class="callout"><strong>Fast check:</strong> conditions decide the gas conversion. The balanced equation decides the stoichiometric ratio.</div>
+</div><div class="build-step" data-build="5">
+<div class="warn"><strong>Do not combine shortcuts casually.</strong> If the conditions do not satisfy a shortcut, return to moles and PV=nRT.</div>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="33" data-local-slide="9" id="slide-9">
+<div>
+<div class="slide-header"><div class="meta-pill">Integrated Slide 33 · Local Slide 9</div><h1 class="slide-title">Worked ACS-Style Practice — Gas Stoichiometry</h1><div class="lo-box"><strong>Learning Objective:</strong> Apply STP molar volume, same-T/P volume ratios, and full stoichiometry + PV=nRT in increasing difficulty.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="practice-grid">
+<div class="practice-card"><span class="practice-badge easy">Easy</span><h4>STP</h4><p>N₂ + 3H₂ → 2NH₃. If 3.00 mol H₂ reacts with excess N₂, what NH₃ volume forms at STP?</p><div class="answer-box">3.00 mol H₂ × <span class="fraction"><span class="num">2 mol NH₃</span><span class="den">3 mol H₂</span></span> × <span class="fraction"><span class="num">22.4 L NH₃</span><span class="den">1 mol NH₃</span></span> = <strong>44.8 L NH₃</strong></div></div>
+<div class="practice-card"><span class="practice-badge medium">Medium</span><h4>Same T and P</h4><p>For N₂ + 3H₂ → 2NH₃, what H₂ volume reacts with 5.00 L N₂ when both are measured at the same T and P?</p><div class="answer-box">5.00 L N₂ × <span class="fraction"><span class="num">3 L H₂</span><span class="den">1 L N₂</span></span> = <strong>15.0 L H₂</strong></div></div>
+<div class="practice-card"><span class="practice-badge hard">Hard</span><h4>Stoichiometry + PVT</h4><p>2Al + 6HCl → 2AlCl₃ + 3H₂. Find H₂ volume from 4.50 g Al at 24 °C and 0.950 atm.</p>
+<div class="factor-card">4.50 g Al × <span class="fraction"><span class="num">1 mol Al</span><span class="den">26.98 g Al</span></span> × <span class="fraction"><span class="num">3 mol H₂</span><span class="den">2 mol Al</span></span> = <strong>0.2502 mol H₂</strong></div>
+<div class="factor-card">T = 24 + 273.15 = <strong>297.15 K</strong></div>
+<div class="answer-box">V = <span class="fraction"><span class="num">nRT</span><span class="den">P</span></span> = <strong>6.42 L H₂</strong></div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="panel-card"><h4>Wrong shortcut</h4><p>22.4 L/mol at 24 °C → not STP.</p></div>
+<div class="panel-card"><h4>Wrong mole ratio</h4><p>1:1 Al:H₂ → ignores 2:3 coefficients.</p></div>
+<div class="panel-card"><h4>Wrong temperature</h4><p>24 used directly → must convert to Kelvin.</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">Balanced equation → moles → mole ratio → requested gas quantity</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="34" data-local-slide="10" id="slide-10">
+<div>
+<div class="slide-header"><div class="meta-pill">Integrated Slide 34 · Local Slide 10</div><h1 class="slide-title">Independent Check — Two-State Gas Reasoning and Gas Stoichiometry</h1><div class="lo-box"><strong>Learning Objective:</strong> Demonstrate constant identification, equation derivation, gas-conversion selection, and gas stoichiometry independently.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">1</span><p>A sealed rigid gas sample changes temperature. Which of P, V, n, and T are constant, and which change?</p><div class="response-area">Classify the variables.</div></div>
+<div class="question-card"><span class="question-num">2</span><p>Starting from the two-state relation, show what cancels for a sealed rigid container and write the remaining equation.</p><div class="response-area">Cancellation + equation.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">3</span><p>State the conditions required before using 22.4 L/mol.</p><div class="response-area">Write the conditions.</div></div>
+<div class="question-card"><span class="question-num">4</span><p>For 2H₂(g) + O₂(g) → 2H₂O(g), explain when the 2:1:2 coefficient ratio may be used directly as a gas-volume ratio.</p><div class="response-area">Condition + explanation.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">5</span><p>2KClO₃(s) → 2KCl(s) + 3O₂(g). Write the complete path from KClO₃ mass to O₂ volume at a stated non-STP P and T.</p><div class="response-area">Path only.</div></div>
+<div class="question-card"><span class="question-num">6</span><p>A student uses 22.4 L/mol for a gas at 35 °C and 0.92 atm. Diagnose the error and state the correct gas-conversion method.</p><div class="response-area">Error + correction.</div></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+</main>
+<footer class="master-footer"><div>General Chemistry I • Module 5</div><div>© Nara Chon</div></footer>
+<script>
+let currentSlide=1;
+const totalSlides=10;
+let currentBuild=1;
+const buildsPerSlide={"1":4,"2":3,"3":3,"4":4,"5":3,"6":3,"7":3,"8":5,"9":3,"10":3};
+let currentMode='student';
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>slide.classList.toggle('active',(index+1)===currentSlide));
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10); step.classList.toggle('visible',n<=currentBuild);
+  });
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const visible=!parentBuild||parentBuild.classList.contains('visible');
+    if(currentMode==='answer'&&visible&&blank.dataset.answer!==undefined){blank.textContent=blank.dataset.answer;blank.classList.add('revealed');}
+    else{blank.textContent='[ _______ ]';blank.classList.remove('revealed');}
+  });
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+function nextBuild(){const max=buildsPerSlide[currentSlide];if(currentBuild<max)currentBuild++;else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}updateDisplay();}
+function prevBuild(){if(currentBuild>1)currentBuild--;else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}updateDisplay();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}});
+updateDisplay();
+</script></body>
+</html>

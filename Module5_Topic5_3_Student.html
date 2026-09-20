@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>General Chemistry I — Module 5 — Topic T5.3 — Student</title>
+<style>:root{--bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+--accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+--accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+--border-color:#475569;--blank-bg:#334155;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}
+.deck-title{font-size:1.2rem;font-weight:800;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}
+.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.92rem;font-weight:700;cursor:pointer;border-radius:6px}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.7rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .85rem;border-radius:6px;font-size:.92rem;font-weight:700;cursor:pointer}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter-badge{font-size:.9rem;color:var(--text-muted);font-weight:700;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.4rem;max-width:1400px;width:100%;margin:0 auto}
+.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:1.8rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative}
+.slide-container.active{display:flex}
+.slide-header{margin-bottom:1rem}
+.meta-pill{display:inline-block;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.45rem;border:1px solid rgba(45,212,191,.2)}
+.slide-title{font-size:2rem;font-weight:900;line-height:1.2}
+.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.65rem 1rem;border-radius:0 6px 6px 0;margin-top:.7rem;font-size:.98rem;color:#e2e8f0}
+.lo-box strong{color:var(--accent-blue)}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:.85rem}
+.build-step{opacity:.14;pointer-events:none;transition:.35s;transform:translateY(6px);filter:blur(1px)}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.blank{display:inline-block;min-width:95px;padding:.13rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:800;user-select:none;vertical-align:middle}
+.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.65rem .9rem}
+.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.65rem .9rem;color:#fecdd3}
+.equal-banner{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.7rem;text-align:center;color:var(--accent-teal);font-weight:900;font-size:1.2rem}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.75rem}
+.panel-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem}
+.panel-card h4{color:var(--accent-blue);margin-bottom:.4rem}
+.variable-map{display:grid;grid-template-columns:1fr 1.35fr 1fr;grid-template-rows:auto auto;gap:.7rem;align-items:center;max-width:900px;margin:.25rem auto}
+.var-card{background:#0f172a;border:1px solid var(--border-color);border-radius:11px;padding:.7rem;text-align:center}
+.var-symbol{font-size:1.8rem;font-weight:900;color:var(--accent-amber)}
+.equation-core{grid-column:2;grid-row:1 / span 2;background:linear-gradient(135deg,rgba(56,189,248,.13),rgba(45,212,191,.10));border:2px solid var(--accent-teal);border-radius:16px;padding:1.3rem;text-align:center;font-size:2rem;font-weight:900;color:#ccfbf1}
+.unit-match{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem}
+.unit-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem;text-align:center}
+.unit-card .sym{font-size:1.35rem;font-weight:900;color:var(--accent-amber)}
+.r-card{max-width:900px;margin:.35rem auto;background:#0f172a;border:2px solid var(--accent-teal);border-radius:14px;padding:1rem;text-align:center}
+.r-value{font-size:1.45rem;font-weight:900;color:#ccfbf1}
+.fraction{display:inline-grid;grid-template-rows:auto auto;align-items:center;justify-items:center;line-height:1.05;vertical-align:middle;margin:0 .16rem;min-width:95px}
+.fraction .num{width:100%;padding:.12rem .34rem .24rem;border-bottom:2px solid currentColor;text-align:center}
+.fraction .den{width:100%;padding:.24rem .34rem .12rem;text-align:center}
+.path{display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap;margin:.25rem 0}
+.path-node{background:#0f172a;border:1px solid var(--border-color);border-radius:999px;padding:.45rem .7rem;font-weight:900}
+.arrow{color:var(--accent-amber);font-size:1.3rem;font-weight:900}
+.factor-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.7rem .9rem;text-align:center;font-size:1.05rem}
+.answer-box{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.6rem .8rem;color:#ccfbf1;font-weight:800}
+.stp-compare{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.stp-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.9rem;text-align:center}
+.stp-card h4{color:var(--accent-blue);margin-bottom:.45rem}
+.derivation{display:flex;flex-direction:column;gap:.55rem;max-width:900px;margin:auto}
+.derive-step{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.65rem .85rem;text-align:center;font-weight:800}
+.trend-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem}
+.trend-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.75rem;text-align:center}
+.trend-card .big{font-size:1.25rem;font-weight:900;color:#fde68a}
+.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.route-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.9rem}
+.route-card h4{color:var(--accent-blue);margin-bottom:.5rem}
+.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.practice-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem}
+.practice-badge{display:inline-block;padding:.2rem .5rem;border-radius:999px;font-size:.76rem;font-weight:900;text-transform:uppercase;margin-bottom:.4rem}
+.easy{background:rgba(45,212,191,.15);color:var(--accent-teal);border:1px solid var(--accent-teal)}
+.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}
+.hard{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem;display:flex;flex-direction:column;gap:.45rem}
+.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:900;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px}
+.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:54px;padding:.45rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.55rem;margin-top:.5rem}
+.meta-item{background:#1e293b;padding:.5rem .65rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.78rem;text-transform:uppercase}
+@media (max-width:900px){.unit-match,.stp-compare,.trend-grid,.route-grid,.practice-grid,.question-grid,.variable-map{grid-template-columns:1fr}
+.equation-core{grid-column:1;grid-row:auto}
+.slide-title{font-size:1.55rem}
+.slide-container{padding:1.2rem;min-height:auto}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}}
+.master-footer{max-width:1400px;width:100%;margin:0 auto;padding:.7rem 1.5rem 1.1rem;text-align:center;color:var(--text-muted);font-size:.82rem;border-top:1px solid rgba(71,85,105,.45)}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧪</span><span>Topic T5.3 | Ideal Gas Law, Gas Density, and Molar Mass</span></div>
+<div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 9</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+
+<div class="slide-container active" data-integrated-slide="16" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 16 · Local Slide 1</span>
+<h1 class="slide-title">Ideal Gas Law + R — One Equation, Unit-Matched</h1>
+<div class="lo-box"><strong>Learning Objectives: </strong>Use the ideal gas law to connect pressure, volume, amount, and absolute temperature for one gas state. Select and use the gas constant with compatible pressure, volume, mole, and temperature units.</div>
+</div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="callout"><strong>From T5.2:</strong> the simple gas laws changed two variables at a time while the others were held constant. Now all four gas variables can appear in one relationship.</div>
+<div class="variable-map">
+<div class="var-card"><div class="var-symbol">P</div><p>pressure</p></div>
+<div class="equation-core">PV = nRT</div>
+<div class="var-card"><div class="var-symbol">V</div><p>volume</p></div>
+<div class="var-card"><div class="var-symbol">n</div><p>amount in moles</p></div>
+<div class="var-card"><div class="var-symbol">T</div><p>temperature in K</p></div>
+</div>
+<div class="panel-grid">
+<div class="panel-card"><h4>Use it when...</h4><p>P, V, n, and T describe <strong>one gas state</strong>, and one variable is unknown.</p></div>
+<div class="panel-card"><h4>Before calculating...</h4><p>Make sure pressure, volume, and temperature units match the chosen value of R.</p></div>
+</div>
+</div><div class="build-step" data-build="2">
+<div class="equal-banner">PV = nRT</div>
+<p style="text-align:center">Temperature must be in <span class="blank" data-answer="Kelvin">[ _______ ]</span>.</p>
+<div class="r-card">
+<div class="r-value">R = 0.08206 L·atm·mol⁻¹·K⁻¹</div>
+<p style="margin-top:.45rem">This is the working R for problems using <strong>L</strong>, <strong>atm</strong>, <strong>mol</strong>, and <strong>K</strong>.</p>
+</div>
+</div><div class="build-step" data-build="3">
+<div class="unit-match">
+<div class="unit-card"><div class="sym">P</div><p>atm</p></div>
+<div class="unit-card"><div class="sym">V</div><p>L</p></div>
+<div class="unit-card"><div class="sym">n</div><p>mol</p></div>
+<div class="unit-card"><div class="sym">T</div><p>K</p></div>
+</div>
+<div class="path"><span class="path-node">mmHg or torr?</span><span class="arrow">→</span><span class="path-node">convert to atm</span><span class="arrow">→</span><span class="path-node">use R</span></div>
+<div class="warn"><strong>Common error:</strong> using 878 mmHg directly with an R written in L·atm·mol⁻¹·K⁻¹. Units must match before substitution.</div>
+<p style="margin-top:.5rem;text-align:center">°C must also be converted to <span class="blank" data-answer="K">[ _______ ]</span>.</p>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="17" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 17 · Local Slide 2</span>
+<h1 class="slide-title">Worked Ideal Gas Law — Find Volume</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Solve PV = nRT for volume using a N₂ problem and verify units and magnitude.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Given:</strong> n = 0.845 mol N₂, P = 1.37 atm, T = 315 K. Find V.</div>
+<div class="path"><span class="path-node">PV = nRT</span><span class="arrow">→</span><span class="path-node">solve for V</span><span class="arrow">→</span><span class="path-node">substitute matched units</span></div>
+<div class="equal-banner">V = <span class="fraction"><span class="num">nRT</span><span class="den">P</span></span></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card">V = <span class="fraction"><span class="num">(0.845 mol)(0.08206 L·atm·mol⁻¹·K⁻¹)(315 K)</span><span class="den">1.37 atm</span></span></div>
+<div class="callout"><strong>Unit check:</strong> mol, K, and atm cancel, leaving L.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="answer-box">V = <strong>15.9 L</strong></div>
+<div class="callout"><strong>Reasonableness:</strong> about 0.85 mol near room temperature and modest pressure should occupy on the order of tens of liters, so ~16 L is reasonable.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="18" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 18 · Local Slide 3</span>
+<h1 class="slide-title">Worked Ideal Gas Law — Find Moles with Large-Unit Conversions</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Convert volume, pressure, and temperature before solving the ideal gas law for moles.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Worked problem:</strong> How many moles of N₂ fill a room of 1232 ft³ at 878 mmHg and 23.0 °C?</div>
+<div class="path"><span class="path-node">ft³ → L</span><span class="arrow">→</span><span class="path-node">mmHg → atm</span><span class="arrow">→</span><span class="path-node">°C → K</span><span class="arrow">→</span><span class="path-node">n = PV/RT</span></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card">
+1232 ft³ × 
+<span class="fraction"><span class="num">(12 in)³</span><span class="den">(1 ft)³</span></span> ×
+<span class="fraction"><span class="num">(2.54 cm)³</span><span class="den">(1 in)³</span></span> ×
+<span class="fraction"><span class="num">1 L</span><span class="den">1000 cm³</span></span>
+= <strong>34,886 L</strong>
+</div>
+<div class="factor-card">
+878 mmHg × <span class="fraction"><span class="num">1 atm</span><span class="den">760 mmHg</span></span> = <strong>1.155 atm</strong>
+    T = 23.0 + 273.15 = <strong>296.15 K</strong>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">n = <span class="fraction"><span class="num">PV</span><span class="den">RT</span></span></div>
+<div class="factor-card">n = <span class="fraction"><span class="num">(1.155 atm)(34,886 L)</span><span class="den">(0.08206 L·atm·mol⁻¹·K⁻¹)(296.15 K)</span></span> = <strong>1.66 × 10<sup>3</sup> mol N₂</strong></div>
+<div class="callout"><strong>Reasonableness:</strong> a room contains a very large gas volume, so a result on the order of 10³ mol is plausible.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="19" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 19 · Local Slide 4</span>
+<h1 class="slide-title">STP and the Ideal Gas Law — Shortcut or General Equation?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use the course STP convention correctly and distinguish the STP molar-volume shortcut from the general ideal gas law.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="equal-banner">Course STP: 273.15 K and 1 atm</div>
+<div class="callout" style="text-align:center"><strong>At these conditions only:</strong> 1 mol ideal gas ≈ 22.4 L</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="stp-compare">
+<div class="stp-card"><h4>At STP</h4><p>If the problem is explicitly at 273.15 K and 1 atm, the molar-volume relationship can be used.</p><div class="answer-box">1 mol ↔ 22.4 L</div></div>
+<div class="stp-card"><h4>Not at STP</h4><p>Use the actual P and T in the ideal gas law.</p><div class="answer-box">PV = nRT</div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Do not treat 22.4 L/mol as universal.</strong> Gas volume changes when pressure or temperature changes.</div>
+<p style="text-align:center;margin-top:.45rem">The 22.4 L/mol shortcut is tied to <span class="blank" data-answer="STP">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="20" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 20 · Local Slide 5</span>
+<h1 class="slide-title">Gas Density from the Ideal Gas Law</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Derive the gas-density equation from familiar definitions and predict how density changes with P, M, and T.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="panel-grid">
+<div class="panel-card"><h4>Density</h4><div class="equal-banner">d = <span class="fraction"><span class="num">m</span><span class="den">V</span></span></div><p>mass per volume, usually g/L</p></div>
+<div class="panel-card"><h4>Moles from Mass</h4><div class="equal-banner">n = <span class="fraction"><span class="num">m</span><span class="den">M</span></span></div><p>M = molar mass in g/mol</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="derivation">
+<div class="derive-step">Start:   PV = nRT</div>
+<div class="derive-step">Replace n with <span class="fraction"><span class="num">m</span><span class="den">M</span></span>:   PV = <span class="fraction"><span class="num">mRT</span><span class="den">M</span></span></div>
+<div class="derive-step">Divide by V:   P = <span class="fraction"><span class="num">m</span><span class="den">V</span></span><span class="fraction"><span class="num">RT</span><span class="den">M</span></span></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">d = <span class="fraction"><span class="num">PM</span><span class="den">RT</span></span></div>
+<div class="trend-grid">
+<div class="trend-card"><div class="big">P ↑ → d ↑</div><p>more gas packed into a given volume</p></div>
+<div class="trend-card"><div class="big">M ↑ → d ↑</div><p>heavier particles at the same P and T</p></div>
+<div class="trend-card"><div class="big">T ↑ → d ↓</div><p>gas expands at fixed P</p></div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="21" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 21 · Local Slide 6</span>
+<h1 class="slide-title">Worked Gas Density — CO₂ at Two Conditions</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Calculate gas density from pressure, temperature, and molar mass and interpret the direction of change.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Worked comparison:</strong> Find the density of CO₂ at STP and at 65 °C and 1.13 atm. M(CO₂) = 44.01 g/mol.</div>
+<div class="equal-banner">d = <span class="fraction"><span class="num">PM</span><span class="den">RT</span></span></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="panel-card"><h4>At STP</h4>
+<div class="factor-card">d = <span class="fraction"><span class="num">(1.00 atm)(44.01 g·mol⁻¹)</span><span class="den">(0.08206 L·atm·mol⁻¹·K⁻¹)(273.15 K)</span></span></div>
+<div class="answer-box">d = <strong>1.963 g/L</strong></div>
+</div>
+<div class="panel-card"><h4>65 °C and 1.13 atm</h4>
+<p>T = 65 + 273.15 = 338.15 K</p>
+<div class="factor-card">d = <span class="fraction"><span class="num">(1.13 atm)(44.01 g·mol⁻¹)</span><span class="den">(0.08206 L·atm·mol⁻¹·K⁻¹)(338.15 K)</span></span></div>
+<div class="answer-box">d = <strong>1.792 g/L</strong></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Interpretation:</strong> the higher pressure tends to increase density, while the much higher temperature tends to decrease it. Here the temperature effect is large enough that the second density is lower than at STP.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="22" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 22 · Local Slide 7</span>
+<h1 class="slide-title">Molar Mass from Gas Data — Route Selection + Worked Identification</h1>
+<div class="lo-box"><strong>Learning Objectives: </strong>Select an efficient molar-mass equation from density data or from measured mass and PVT data. Calculate molar mass from gas density and use the result to identify a plausible gas.</div>
+</div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="route-grid">
+<div class="route-card"><h4>Route A — Density is given</h4><p>Start from d = PM/RT and solve for M.</p><div class="equal-banner">M = <span class="fraction"><span class="num">dRT</span><span class="den">P</span></span></div></div>
+<div class="route-card"><h4>Route B — Mass and volume are given</h4><p>Use n = m/M inside PV=nRT, then solve for M.</p><div class="equal-banner">M = <span class="fraction"><span class="num">mRT</span><span class="den">PV</span></span></div></div>
+</div>
+</div><div class="build-step" data-build="2">
+<div class="warn"><strong>Unit target:</strong> molar mass must finish in g/mol. If the result does not, inspect the R units and the pressure/volume conversions.</div>
+</div><div class="build-step" data-build="3">
+<div class="callout"><strong>Constructed identification problem:</strong> An unknown gas has d = 1.80 g/L at 1.00 atm and 25.0 °C. Which is most plausible: He, N₂, O₂, or CO₂?</div>
+<div class="path"><span class="path-node">density + P + T</span><span class="arrow">→</span><span class="path-node">M = dRT/P</span><span class="arrow">→</span><span class="path-node">compare molar masses</span></div>
+</div><div class="build-step" data-build="4">
+<div class="factor-card">T = 25.0 + 273.15 = 298.15 K</div>
+<div class="factor-card">M = <span class="fraction"><span class="num">(1.80 g·L⁻¹)(0.08206 L·atm·mol⁻¹·K⁻¹)(298.15 K)</span><span class="den">1.00 atm</span></span></div>
+<div class="answer-box">M ≈ <strong>44.0 g/mol</strong> → closest choice: <strong>CO₂ (44.01 g/mol)</strong></div>
+<div class="callout"><strong>Check:</strong> density is not the identity by itself; density first gives molar mass under the stated P and T.</div>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="23" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 23 · Local Slide 8</span>
+<h1 class="slide-title">Worked ACS-Style Practice — Ideal Gas, Density, and Molar Mass</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Apply ideal-gas reasoning across easy, medium, and hard problems while diagnosing common distractors.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="practice-grid">
+<div class="practice-card"><span class="practice-badge easy">Easy</span><h4>Ideal Gas Law</h4><p>0.500 mol of an ideal gas is at 1.00 atm and 298 K. Find V.</p><div class="answer-box">V = <span class="fraction"><span class="num">nRT</span><span class="den">P</span></span> = <strong>12.2 L</strong></div></div>
+<div class="practice-card"><span class="practice-badge medium">Medium</span><h4>Gas Density</h4><p>Find d of N₂ at 1.00 atm and 298 K. M = 28.02 g/mol.</p><div class="answer-box">d = <span class="fraction"><span class="num">PM</span><span class="den">RT</span></span> = <strong>1.146 g/L</strong></div></div>
+<div class="practice-card"><span class="practice-badge hard">Hard</span><h4>Identify the Gas</h4><p>d = 1.31 g/L at 1.00 atm and 298 K. Which common gas is closest?</p><div class="answer-box">M = <span class="fraction"><span class="num">dRT</span><span class="den">P</span></span> = <strong>32.1 g/mol → O₂</strong></div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="panel-card"><h4>Wrong R</h4><p>Pressure units do not match the units built into R.</p></div>
+<div class="panel-card"><h4>°C instead of K</h4><p>Creates physically meaningless gas-law ratios and results.</p></div>
+<div class="panel-card"><h4>22.4 L/mol outside STP</h4><p>Ignores the actual temperature and pressure.</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">ACS strategy: identify the target quantity → select the matching equation → check units before arithmetic.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="24" data-local-slide="9" id="slide-9">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 24 · Local Slide 9</span>
+<h1 class="slide-title">Independent Check — Ideal Gas Law, Density, and Molar Mass</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Assess unit matching, Kelvin, PV=nRT, STP boundaries, gas density, and molar-mass reasoning independently.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">1</span><p>For R = 0.08206 L·atm·mol⁻¹·K⁻¹, what units should P, V, n, and T use?</p><div class="response-area">Write the matched units.</div></div>
+<div class="question-card"><span class="question-num">2</span><p>A gas is at 35.0 °C. What temperature must be used in PV=nRT?</p><div class="response-area">Show the conversion.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">3</span><p>0.250 mol gas occupies 5.80 L at 298 K. Determine the pressure using PV=nRT.</p><div class="response-area">Set up and calculate.</div></div>
+<div class="question-card"><span class="question-num">4</span><p>A problem states 2.00 mol gas at 1 atm and 273.15 K. Decide whether 22.4 L/mol is appropriate and explain why.</p><div class="response-area">State the condition check.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">5</span><p>Predict how gas density changes when pressure increases at constant T and molar mass. Explain using d = PM/RT.</p><div class="response-area">Prediction + reasoning.</div></div>
+<div class="question-card"><span class="question-num">6</span><p>An unknown gas has known density, pressure, and temperature. Write the equation you would use to determine its molar mass and state the expected unit.</p><div class="response-area">Equation + unit.</div></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+</main>
+<footer class="master-footer"><div>General Chemistry I • Module 5</div><div>© Nara Chon</div></footer>
+<script>
+let currentSlide=1;
+const totalSlides=9;
+let currentBuild=1;
+const buildsPerSlide={"1":3,"2":3,"3":3,"4":3,"5":3,"6":3,"7":4,"8":3,"9":3};
+let currentMode='student';
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>slide.classList.toggle('active',(index+1)===currentSlide));
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10); step.classList.toggle('visible',n<=currentBuild);
+  });
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const visible=!parentBuild||parentBuild.classList.contains('visible');
+    if(currentMode==='answer'&&visible&&blank.dataset.answer!==undefined){blank.textContent=blank.dataset.answer;blank.classList.add('revealed');}
+    else{blank.textContent='[ _______ ]';blank.classList.remove('revealed');}
+  });
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+function nextBuild(){const max=buildsPerSlide[currentSlide];if(currentBuild<max)currentBuild++;else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}updateDisplay();}
+function prevBuild(){if(currentBuild>1)currentBuild--;else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}updateDisplay();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}});
+updateDisplay();
+</script></body>
+</html>

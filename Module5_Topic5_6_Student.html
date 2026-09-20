@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>General Chemistry I — Module 5 — Topic T5.6 — Student</title>
+<style>:root{--bg-dark:#0f172a;--bg-card:#1e293b;--accent-blue:#38bdf8;--accent-teal:#2dd4bf;
+--accent-amber:#fbbf24;--accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+--border:#475569;--blank:#334155}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column}
+header{background:#0b1120;border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.deck-title{font-size:1.16rem;font-weight:800;color:var(--accent-blue)}
+.mode-selector{display:flex;background:#1e293b;border:1px solid var(--border);border-radius:8px;padding:3px}
+.mode-btn{border:0;background:none;color:var(--text-muted);padding:.4rem .8rem;font-weight:700;border-radius:6px;cursor:pointer}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;gap:.65rem;align-items:center;flex-wrap:wrap}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border);padding:.45rem .85rem;border-radius:6px;font-weight:700;cursor:pointer}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.btn:disabled{opacity:.4}
+.counter-badge{font-size:.9rem;color:var(--text-muted);font-weight:700;background:#1e293b;padding:.3rem .6rem;border:1px solid var(--border);border-radius:4px}
+main{flex:1;display:flex;justify-content:center;align-items:center;padding:1.4rem;max-width:1400px;width:100%;margin:auto}
+.slide-container{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.75rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;box-shadow:0 20px 25px -5px rgba(0,0,0,.45)}
+.slide-container.active{display:flex}
+.meta-pill{display:inline-block;font-size:.77rem;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:var(--accent-teal);background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.2);padding:.24rem .58rem;border-radius:4px;margin-bottom:.45rem}
+.slide-title{font-size:1.95rem;font-weight:900;line-height:1.2}
+.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.65rem 1rem;margin-top:.7rem;border-radius:0 6px 6px 0}
+.lo-box strong{color:var(--accent-blue)}
+.slide-body{display:flex;flex-direction:column;gap:.78rem;margin-top:.85rem}
+.build-step{opacity:.14;pointer-events:none;transform:translateY(6px);filter:blur(1px);transition:.35s}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.65rem .9rem}
+.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.65rem .9rem;color:#fecdd3}
+.equal-banner{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.66rem;text-align:center;color:var(--accent-teal);font-weight:900;font-size:1.13rem}
+.blank{display:inline-block;min-width:95px;background:var(--blank);border-bottom:2px solid var(--accent-amber);border-radius:4px;padding:.12rem .5rem;color:transparent;font-weight:800;text-align:center;user-select:none}
+.fraction{display:inline-grid;grid-template-rows:auto auto;vertical-align:middle;justify-items:center;line-height:1.05;margin:0 .15rem;min-width:82px}
+.fraction .num{width:100%;padding:.12rem .32rem .23rem;border-bottom:2px solid currentColor;text-align:center}
+.fraction .den{width:100%;padding:.23rem .32rem .12rem;text-align:center}
+.path{display:flex;align-items:center;justify-content:center;gap:.4rem;flex-wrap:wrap}
+.path-node{background:#0f172a;border:1px solid var(--border);border-radius:999px;padding:.42rem .65rem;font-weight:850;text-align:center}
+.arrow{color:var(--accent-amber);font-size:1.25rem;font-weight:900}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem}
+.panel-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.76rem}
+.panel-card h4{color:var(--accent-blue);margin-bottom:.38rem}
+.mix-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:.75rem;align-items:stretch}
+.gas-box{min-height:230px;background:#111827;border:2px solid #64748b;border-radius:12px;position:relative;overflow:hidden}
+.dot{position:absolute;width:17px;height:17px;border-radius:50%}
+.n2{background:#38bdf8}
+.o2{background:#f43f5e}
+.ar{background:#fbbf24}
+.co2{background:#2dd4bf}
+.a{background:#38bdf8}
+.b{background:#f43f5e}
+.legend{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap;margin-top:.45rem}
+.key{display:flex;align-items:center;gap:.3rem;font-size:.85rem}
+.swatch{width:12px;height:12px;border-radius:50%;display:inline-block}
+.pressure-stack{display:flex;flex-direction:column;gap:.45rem}
+.pressure-chip{background:#0f172a;border:1px solid var(--border);border-radius:8px;padding:.55rem;text-align:center;font-weight:850}
+.air-bar{display:flex;width:100%;height:62px;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#0f172a}
+.air-n2{width:78%;background:rgba(56,189,248,.8)}
+.air-o2{width:21%;background:rgba(244,63,94,.82)}
+.air-other{width:1%;min-width:16px;background:rgba(251,191,36,.85)}
+.air-seg{display:flex;align-items:center;justify-content:center;font-weight:900;color:#0f172a;font-size:.84rem}
+.ratio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem}
+.ratio-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.7rem;text-align:center}
+.ratio-card .big{font-size:1.25rem;font-weight:900;color:var(--accent-teal)}
+.factor-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.63rem .78rem;text-align:center;font-size:1.01rem}
+.answer-box{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.58rem .78rem;color:#ccfbf1;font-weight:800}
+.water-scene{height:255px;background:#0f172a;border:1px solid var(--border);border-radius:12px;position:relative;overflow:hidden}
+.water{position:absolute;left:0;right:0;bottom:0;height:95px;background:rgba(56,189,248,.28);border-top:2px solid #38bdf8}
+.tube{position:absolute;width:170px;height:205px;left:50%;transform:translateX(-50%);top:18px;border:3px solid #cbd5e1;border-bottom:none;border-radius:14px 14px 0 0;background:rgba(15,23,42,.82)}
+.tube-water{position:absolute;left:3px;right:3px;bottom:0;height:58px;background:rgba(56,189,248,.33)}
+.bubble{position:absolute;width:14px;height:14px;border:2px solid #bae6fd;border-radius:50%}
+.vapor-dot{position:absolute;width:11px;height:11px;border-radius:50%;background:#94a3b8}
+.gas-dot{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--accent-teal)}
+.error-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.error-table th,.error-table td{border:1px solid var(--border);padding:.48rem;vertical-align:top}
+.error-table th{background:#0f172a;color:var(--accent-blue)}
+.bad{color:#fecdd3;font-weight:850}
+.good{color:#ccfbf1;font-weight:850}
+.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.practice-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.76rem}
+.practice-badge{display:inline-block;padding:.2rem .5rem;border-radius:999px;font-size:.76rem;font-weight:900;text-transform:uppercase;margin-bottom:.4rem}
+.easy{background:rgba(45,212,191,.15);color:var(--accent-teal);border:1px solid var(--accent-teal)}
+.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}
+.hard{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.question-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.78rem;display:flex;flex-direction:column;gap:.42rem}
+.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:900;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px}
+.response-area{background:#1e293b;border:1px dashed var(--border);border-radius:6px;min-height:52px;padding:.45rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.5rem}
+.meta-item{background:#1e293b;padding:.48rem .62rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.77rem;text-transform:uppercase}
+@media (max-width:900px){.mix-grid,.ratio-grid,.practice-grid,.question-grid{grid-template-columns:1fr}
+.slide-title{font-size:1.5rem}
+.slide-container{min-height:auto;padding:1.15rem}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}}
+.kmt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem}
+.kmt-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.72rem;text-align:center}
+.kmt-card h4{color:var(--accent-blue);margin-bottom:.35rem}
+.motion-box{height:185px;background:#111827;border:2px solid #64748b;border-radius:12px;position:relative;overflow:hidden}
+.particle{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--accent-blue)}
+.particle.heavy{width:22px;height:22px;background:var(--accent-rose)}
+.motion-arrow{position:absolute;color:var(--accent-amber);font-weight:900;font-size:1.15rem}
+.law-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.law-card{background:#0f172a;border:1px solid var(--border);border-radius:11px;padding:.78rem}
+.law-card h4{color:var(--accent-blue);margin-bottom:.35rem}
+.compare-speed{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.speed-card{background:#0f172a;border:1px solid var(--border);border-radius:12px;padding:.8rem;text-align:center}
+.speed-arrow-short,.speed-arrow-long{height:4px;background:var(--accent-amber);margin:.7rem auto;position:relative;border-radius:3px}
+.speed-arrow-short{width:70px}
+.speed-arrow-long{width:150px}
+.speed-arrow-short::after,.speed-arrow-long::after{content:"";position:absolute;right:-2px;top:-5px;border-left:10px solid var(--accent-amber);border-top:7px solid transparent;border-bottom:7px solid transparent}
+.formula-hero{background:linear-gradient(135deg,rgba(56,189,248,.12),rgba(45,212,191,.08));border:2px solid var(--accent-teal);border-radius:14px;padding:1rem;text-align:center;font-size:1.45rem;font-weight:900}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.diff-card{background:#0f172a;border:1px solid var(--border);border-radius:12px;padding:.85rem;text-align:center}
+.chamber{height:150px;border:2px solid #64748b;border-radius:10px;position:relative;background:#111827;overflow:hidden;margin:.45rem 0}
+.wall-hole{position:absolute;left:50%;top:0;bottom:0;width:5px;background:#64748b}
+.wall-hole::after{content:"";position:absolute;left:-4px;top:68px;width:13px;height:13px;border-radius:50%;background:#111827;border:1px solid #94a3b8}
+.real-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.real-card{background:#0f172a;border:1px solid var(--border);border-radius:12px;padding:.8rem;text-align:center}
+.crowded-box{height:150px;border:2px solid #64748b;border-radius:10px;background:#111827;position:relative;overflow:hidden}
+.attract-line{position:absolute;height:0;border-top:2px dashed var(--accent-rose);opacity:.75}
+.decision-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.decision-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.7rem;text-align:center}
+@media (max-width:900px){.kmt-grid,.law-grid,.compare-speed,.diff-grid,.real-grid,.decision-row{grid-template-columns:1fr}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}}
+.atom-glow{border-radius:50%;
+  display:inline-block;
+  box-shadow:0 0 0 1px rgba(255,255,255,.06) inset;}
+.atom-he{width:34px;height:34px;
+  background:radial-gradient(circle at 35% 35%, rgba(224,242,254,1) 0%, rgba(125,211,252,.95) 28%, rgba(56,189,248,.78) 56%, rgba(56,189,248,.30) 82%, rgba(56,189,248,.08) 100%);}
+.atom-xe{width:66px;height:66px;
+  background:radial-gradient(circle at 35% 35%, rgba(254,205,211,1) 0%, rgba(251,113,133,.96) 28%, rgba(244,63,94,.82) 58%, rgba(244,63,94,.36) 84%, rgba(244,63,94,.10) 100%);}
+.diffusion-mix-box{height:170px;background:#111827;border:2px solid #64748b;border-radius:12px;position:relative;overflow:hidden}
+.mix-blue,.mix-red{position:absolute;width:16px;height:16px;border-radius:50%}
+.mix-blue{background:#38bdf8}
+.mix-red{background:#f43f5e}
+.rate-box{background:#0f172a;border:1px solid var(--border);border-radius:12px;padding:.8rem}
+.rule-list{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.rule-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.75rem}
+.rule-card h4{color:var(--accent-blue);margin-bottom:.35rem}
+.cause-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.cause-card{background:#0f172a;border:1px solid var(--border);border-radius:12px;padding:.85rem}
+.cause-card h4{color:var(--accent-blue);margin-bottom:.35rem}
+.summary-list{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.summary-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.7rem;text-align:center}
+@media (max-width:900px){.rule-list,.cause-grid,.summary-list{grid-template-columns:1fr}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}}
+.master-footer{max-width:1400px;width:100%;margin:0 auto;padding:.7rem 1.5rem 1.1rem;text-align:center;color:var(--text-muted);font-size:.82rem;border-top:1px solid rgba(71,85,105,.45)}
+.slide-header{margin-bottom:1rem;}
+body{overflow-x:hidden;}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title">🧪 Topic T5.6 | Kinetic Molecular Theory, Molecular Speed, Effusion/Diffusion, and Real Gases</div>
+<div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 11</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+
+<div class="slide-container active" data-integrated-slide="46" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 46 · Local Slide 1</span><h1 class="slide-title">Kinetic Molecular Theory — Start with Moving Gas Particles</h1><div class="lo-box"><strong>Learning Objective:</strong> Describe the particle model used in the Kinetic Molecular Theory (KMT) of gases.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Kinetic Molecular Theory (KMT)</strong> explains gas behavior by treating a gas as many tiny particles in constant motion.</div>
+<div class="motion-box" style="margin-top:.55rem">
+<span class="particle" style="left:11%;top:22%"></span><span class="motion-arrow" style="left:17%;top:17%">↗</span>
+<span class="particle" style="left:34%;top:64%"></span><span class="motion-arrow" style="left:40%;top:58%">↘</span>
+<span class="particle" style="left:57%;top:27%"></span><span class="motion-arrow" style="left:63%;top:22%">→</span>
+<span class="particle" style="left:80%;top:66%"></span><span class="motion-arrow" style="left:72%;top:61%">←</span>
+<span class="particle" style="left:82%;top:17%"></span><span class="motion-arrow" style="left:75%;top:22%">↙</span>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="kmt-grid">
+<div class="kmt-card"><h4>Moving</h4><p>rapid, random motion</p></div>
+<div class="kmt-card"><h4>Far apart</h4><p>mostly empty space</p></div>
+<div class="kmt-card"><h4>Tiny particles</h4><p>particle volume is negligible in the ideal model</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="panel-grid">
+<div class="panel-card"><h4>Interactions</h4><p>ideal particles have negligible attractions and repulsions</p></div>
+<div class="panel-card"><h4>Collisions</h4><p>collisions are elastic; kinetic energy is transferred, not lost overall</p></div>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">The key starting point: <strong>gas particles are moving.</strong></div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="47" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 47 · Local Slide 2</span><h1 class="slide-title">Temperature, Average KE, and Molecular Speed</h1><div class="lo-box"><strong>Learning Objectives: </strong>Connect particle motion, kinetic energy, and Kelvin temperature without treating the relationship as an unexplained assumption. Explain why gases at the same temperature can have the same average translational kinetic energy but different molecular speeds.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="callout"><strong>Kinetic energy is energy of motion.</strong> For one moving particle, KE = ½mv².</div>
+<div class="formula-large" style="text-align:center;margin-top:.65rem">average translational KE = 3/2 k<sub>B</sub>T</div>
+<div class="callout" style="margin-top:.55rem">For a large gas sample, absolute temperature determines the <strong>average translational kinetic energy</strong>.</div>
+</div><div class="build-step" data-build="2">
+<div class="summary-list">
+<div class="summary-card"><strong>Why average?</strong><p>individual molecules have different speeds</p></div>
+<div class="summary-card"><strong>Why translational?</strong><p>we mean motion from place to place through the container</p></div>
+<div class="summary-card"><strong>Why T?</strong><p>k<sub>B</sub> is constant, so average translational KE ∝ T</p></div>
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Where this comes from:</strong> when the particle model for gas pressure is connected with the experimentally established ideal-gas relationship, the result is that average translational kinetic energy depends only on absolute temperature.</div>
+</div><div class="build-step" data-build="3">
+<div class="callout"><strong>Same temperature:</strong> He and Xe have the same <strong>average translational kinetic energy</strong>.</div>
+<div class="compare-speed" style="margin-top:.6rem">
+<div class="speed-card"><h4>He — lighter</h4><div class="atom-glow atom-he"></div><p style="margin-top:.45rem">smaller mass</p></div>
+<div class="speed-card"><h4>Xe — heavier</h4><div class="atom-glow atom-xe"></div><p style="margin-top:.45rem">larger mass</p></div>
+</div>
+<div class="formula-hero">KE = <span class="fraction"><span class="num">1</span><span class="den">2</span></span>mv²</div>
+<div class="path" style="margin-top:.6rem">
+<span class="path-node">same average KE</span><span class="arrow">→</span>
+<span class="path-node">smaller mass</span><span class="arrow">→</span>
+<span class="path-node">larger speed</span>
+</div>
+</div><div class="build-step" data-build="4">
+<div class="panel-grid">
+<div class="panel-card"><h4>Compare different gases at the same T</h4><p><strong>lighter gas → faster</strong></p></div>
+<div class="panel-card"><h4>Compare the same gas at different T</h4><p><strong>higher T → larger average KE → faster</strong></p></div>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">Molecular speed depends on <strong>both temperature and particle mass.</strong></div>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="48" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 48 · Local Slide 3</span><h1 class="slide-title">KMT Explains the Gas Laws — and PV = nRT Connects Them</h1><div class="lo-box"><strong>Learning Objective:</strong> Use particle-level reasoning to explain the four simple gas-law trends and connect them to the ideal gas law.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="law-grid">
+<div class="law-card"><h4>Boyle: V ↓ → P ↑</h4><p>same particles, less space → more frequent wall collisions</p></div>
+<div class="law-card"><h4>Gay-Lussac: T ↑ → P ↑</h4><p>greater average translational KE → faster, more forceful wall collisions</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="law-grid">
+<div class="law-card"><h4>Charles: T ↑ → V ↑</h4><p>faster particles → flexible container expands to maintain pressure</p></div>
+<div class="law-card"><h4>Avogadro: n ↑ → V ↑</h4><p>more particles → container expands to maintain pressure</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="path">
+<span class="path-node">Boyle</span>
+<span class="path-node">Charles</span>
+<span class="path-node">Gay-Lussac</span>
+<span class="path-node">Avogadro</span>
+<span class="arrow">→</span>
+<span class="path-node">PV = nRT</span>
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Big picture:</strong> the simple gas laws describe separate experimental relationships among P, V, n, and T. The ideal gas law combines them quantitatively, while KMT explains the same behavior at the particle level.</div>
+<div class="equal-banner" style="margin-top:.55rem">KMT tells us <strong>why</strong>. PV = nRT tells us <strong>how much</strong>.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="49" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 49 · Local Slide 4</span><h1 class="slide-title">RMS Speed — Meaning + Worked Calculation</h1><div class="lo-box"><strong>Learning Objectives: </strong>Explain why one representative molecular-speed value is useful and introduce root-mean-square speed. Apply the KMT-derived RMS-speed relationship by converting temperature and molar mass before substitution.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="callout">A gas sample contains molecules moving at many instantaneous speeds. <strong>RMS speed</strong> gives one useful representative speed for the sample.</div>
+<div class="formula-large" style="text-align:center;margin-top:.65rem">u<sub>rms</sub> = √(3RT/M)</div>
+</div><div class="build-step" data-build="2">
+<div class="compare-grid">
+<div class="compare-card"><h4>Temperature</h4><p>T ↑ → u<sub>rms</sub> ↑</p></div>
+<div class="compare-card"><h4>Molar Mass</h4><p>M ↑ → u<sub>rms</sub> ↓</p></div>
+</div>
+<div class="question-card" style="margin-top:.65rem"><div class="question-text"><strong>Worked problem:</strong> Calculate u<sub>rms</sub> for Cl₂(g) at 37.0 °C. M(Cl₂) = 70.90 g/mol.</div></div>
+<div class="callout" style="margin-top:.55rem">Path: °C → K; g/mol → kg/mol; then apply u<sub>rms</sub>.</div>
+</div><div class="build-step" data-build="3">
+<div class="factor-card">T = 37.0 + 273.15 = <strong>310.15 K</strong></div>
+<div class="factor-card">70.90 <span>g/mol</span> × <span class="fraction"><span class="num">1 kg</span><span class="den">1000 g</span></span> = <strong>0.07090 kg/mol</strong></div>
+</div><div class="build-step" data-build="4">
+<div class="factor-card">u<sub>rms</sub> = √<span class="fraction"><span class="num">3(8.314 J·mol⁻¹·K⁻¹)(310.15 K)</span><span class="den">0.07090 kg/mol</span></span></div>
+<div class="answer-box">u<sub>rms</sub> ≈ <strong>330 m/s</strong></div>
+<div class="callout" style="margin-top:.55rem"><strong>Reasonableness:</strong> hundreds of meters per second is a realistic molecular-speed scale for a gas near room temperature.</div>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="50" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 50 · Local Slide 5</span><h1 class="slide-title">Diffusion vs Effusion — Molecular Motion in Action</h1><div class="lo-box"><strong>Learning Objective:</strong> Distinguish diffusion from effusion using particle-level representations.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>KMT connection:</strong> gas particles are constantly moving. Diffusion and effusion are observable consequences of that molecular motion.</div>
+<div class="diff-grid" style="margin-top:.55rem">
+<div class="diff-card"><h4>Diffusion</h4><p>Different gases mix throughout the same space.</p>
+<div class="diffusion-mix-box">
+<span class="mix-blue" style="left:12%;top:20%"></span><span class="mix-red" style="left:25%;top:55%"></span>
+<span class="mix-blue" style="left:39%;top:68%"></span><span class="mix-red" style="left:52%;top:27%"></span>
+<span class="mix-blue" style="left:63%;top:42%"></span><span class="mix-red" style="left:74%;top:70%"></span>
+<span class="mix-blue" style="left:82%;top:23%"></span><span class="mix-red" style="left:18%;top:78%"></span>
+</div></div>
+<div class="diff-card"><h4>Effusion</h4><p>Gas particles pass through a tiny hole into another space.</p>
+<div class="chamber"><div class="wall-hole"></div>
+<span class="particle" style="left:15%;top:25%"></span><span class="particle" style="left:28%;top:67%"></span>
+<span class="motion-arrow" style="left:42%;top:43%">→</span>
+</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="panel-card"><h4>Diffusion</h4><p>mixing across the available volume</p></div>
+<div class="panel-card"><h4>Effusion</h4><p>escape through a very small opening</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">Both depend on molecular motion. Graham’s law in this Topic is mainly used for <strong>effusion-rate comparisons</strong>.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="51" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 51 · Local Slide 6</span><h1 class="slide-title">Graham’s Law — Read the Ratio + Worked O₂/Kr Comparison</h1><div class="lo-box"><strong>Learning Objectives: </strong>Interpret a single-gas effusion rate, set up a two-gas rate ratio correctly, and explain the meaning of the numerical answer. Calculate and interpret a two-gas effusion-rate ratio.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="rate-box">
+<h4 style="color:var(--accent-blue);margin-bottom:.35rem">First: one gas can have an effusion rate</h4>
+<p>The <strong>rate of effusion</strong> tells how much gas passes through a tiny opening per unit time.</p>
+<p style="margin-top:.45rem">Example: 12.0 mL/min</p>
+</div>
+<div class="callout" style="margin-top:.55rem">Graham’s law becomes useful when we want to <strong>compare the effusion rates of two gases</strong>.</div>
+<div class="callout"><strong>Read the wording first:</strong> “How many times faster does oxygen effuse than krypton?”</div>
+<div class="rule-list" style="margin-top:.55rem">
+<div class="rule-card">
+<h4>Rate fraction</h4>
+<p>The gas named as the one being compared — <strong>oxygen</strong> — goes on top.</p>
+<p style="margin-top:.35rem">The reference gas — <strong>krypton</strong> — goes on the bottom.</p>
+</div>
+<div class="rule-card">
+<h4>Molar-mass fraction</h4>
+<p>Under the square root, reverse that order:</p>
+<div class="factor-card" style="margin-top:.4rem">M(krypton) on top<br/>M(oxygen) on bottom</div>
+</div>
+</div>
+</div><div class="build-step" data-build="2">
+<div class="formula-hero" style="font-size:1.15rem">
+<span class="fraction"><span class="num">rate of oxygen</span><span class="den">rate of krypton</span></span>
+=
+√<span class="fraction"><span class="num">M(krypton)</span><span class="den">M(oxygen)</span></span>
+</div>
+<div class="panel-grid" style="margin-top:.55rem">
+<div class="panel-card"><h4>If the answer is 1.30</h4><p>that means <strong>1.30 : 1</strong></p></div>
+<div class="panel-card"><h4>Interpretation</h4><p>the gas on top effuses <strong>1.30 times as fast</strong> as the gas on the bottom</p></div>
+</div>
+</div><div class="build-step" data-build="3">
+<div class="callout"><strong>Worked problem:</strong> A mixture of O₂ and Kr is placed in an effusion apparatus. Calculate <span class="fraction"><span class="num">rate(O₂)</span><span class="den">rate(Kr)</span></span>.</div>
+<div class="panel-grid" style="margin-top:.55rem">
+<div class="panel-card"><h4>Step 1 — Predict</h4><p>O₂ is lighter than Kr, so O₂ should effuse faster.</p></div>
+<div class="panel-card"><h4>Step 2 — Direction check</h4><p>Because O₂ is in the numerator and should be faster, the final ratio should be <strong>greater than 1</strong>.</p></div>
+</div>
+</div><div class="build-step" data-build="4">
+<div class="factor-card"><span class="fraction"><span class="num">rate(O₂)</span><span class="den">rate(Kr)</span></span> = √<span class="fraction"><span class="num">M(Kr)</span><span class="den">M(O₂)</span></span></div>
+<div class="factor-card">= √<span class="fraction"><span class="num">83.80 g/mol</span><span class="den">32.00 g/mol</span></span></div>
+<div class="answer-box"><span class="fraction"><span class="num">rate(O₂)</span><span class="den">rate(Kr)</span></span> = <strong>1.62</strong> = <strong>1.62 : 1</strong></div>
+<div class="callout" style="margin-top:.55rem"><strong>Meaning:</strong> O₂ effuses <strong>1.62 times as fast</strong> as Kr. Because O₂ is in the numerator, the ratio describes how much faster O₂ is than Kr.</div>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="52" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 52 · Local Slide 7</span><h1 class="slide-title">Worked Graham’s Law — Find One Gas’s Effusion Rate from Another</h1><div class="lo-box"><strong>Learning Objective:</strong> Use a Graham’s-law ratio to calculate an actual effusion rate for a second gas.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Constructed practice:</strong> At the same T and P, O₂ effuses at 12.0 mL/min. What is the effusion rate of He?</div>
+<div class="path" style="margin-top:.55rem">
+<span class="path-node">compare the two gases</span><span class="arrow">→</span>
+<span class="path-node">find the ratio</span><span class="arrow">→</span>
+<span class="path-node">use the known rate</span>
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Prediction:</strong> He is lighter, so He should effuse faster than O₂.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card"><span class="fraction"><span class="num">rate(He)</span><span class="den">rate(O₂)</span></span> = √<span class="fraction"><span class="num">32.00</span><span class="den">4.003</span></span> = 2.83</div>
+<div class="factor-card">2.83 = 2.83 : 1 means He effuses 2.83 times as fast as O₂.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="factor-card">rate(He) = (2.83)(12.0 mL/min)</div>
+<div class="answer-box">rate(He) = <strong>34.0 mL/min</strong></div>
+<div class="callout" style="margin-top:.55rem"><strong>Meaning:</strong> once you know how many times faster He effuses, multiply the known O₂ rate by that factor.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="53" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 53 · Local Slide 8</span><h1 class="slide-title">Real Gases — When and Why the Ideal Model Fails</h1><div class="lo-box"><strong>Learning Objectives: </strong>Relate ideal-gas assumptions to the conditions that make real gases behave more or less ideally. Distinguish how intermolecular attractions and finite particle volume each make real gases deviate from ideal behavior.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="panel-grid">
+<div class="panel-card"><h4>Ideal-gas assumptions</h4><p>1) particles have negligible volume<br/>2) attractions are negligible</p></div>
+<div class="panel-card"><h4>So gases are most ideal when…</h4><p>particles are far apart and moving enough that attractions matter very little.</p></div>
+</div>
+<div class="summary-list">
+<div class="summary-card"><strong>Low pressure</strong><p>particles far apart</p></div>
+<div class="summary-card"><strong>High temperature</strong><p>faster particles, attractions less important</p></div>
+<div class="summary-card"><strong>Result</strong><p>behavior is closer to ideal</p></div>
+</div>
+<div class="summary-list" style="margin-top:.55rem">
+<div class="summary-card"><strong>High pressure</strong><p>particles crowded</p></div>
+<div class="summary-card"><strong>Low temperature</strong><p>attractions matter more</p></div>
+<div class="summary-card"><strong>Result</strong><p>greater deviation from ideal</p></div>
+</div>
+</div><div class="build-step" data-build="2">
+<div class="equal-banner">ACS-style decision rule: the least ideal gas behavior is expected under <strong>high P + low T</strong>, especially for gases with stronger intermolecular attractions or larger particles.</div>
+<div class="warn" style="margin-top:.55rem"><strong>Exam trap:</strong> do not memorize only “high P, low T.” Also ask whether the gas itself has stronger attractions than the alternatives.</div>
+</div><div class="build-step" data-build="3">
+<div class="cause-grid">
+<div class="cause-card">
+<h4>Cause 1 — Intermolecular attractions</h4>
+<p>Molecules attract one another, so some particles are pulled slightly away from a direct wall impact.</p>
+<p style="margin-top:.45rem"><strong>Effect:</strong> the observed pressure can be <strong>lower than the ideal prediction</strong> when attractions are important.</p>
+</div>
+<div class="cause-card">
+<h4>Cause 2 — Finite particle volume</h4>
+<p>Real particles occupy space, so the gas has less truly free volume than the ideal model assumes.</p>
+<p style="margin-top:.45rem"><strong>Effect:</strong> at very high pressure, finite particle volume can make the observed pressure <strong>higher than the ideal-gas prediction</strong>.</p>
+</div>
+</div>
+</div><div class="build-step" data-build="4">
+<div class="compare-grid">
+<div class="compare-card"><h4>Attractions dominate</h4><p>Lower T and higher P make intermolecular attractions more important, often lowering observed pressure below the ideal prediction.</p></div>
+<div class="compare-card"><h4>Finite volume dominates</h4><p>At very high P, particle size is no longer negligible and can push observed pressure above the ideal prediction.</p></div>
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Ask which ideal assumption fails:</strong> negligible attractions, negligible particle volume, or both.</div>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="54" data-local-slide="9" id="slide-9">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 54 · Local Slide 9</span><h1 class="slide-title">Worked ACS-Style Practice — Easy + Medium</h1><div class="lo-box"><strong>Learning Objective:</strong> Practice the two most common reasoning patterns: same-T KE/speed and ideal-vs-real behavior.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="panel-grid">
+<div class="panel-card"><h4>Easy</h4><p>Ne and Xe are both at 300 K. Which has the greater average translational kinetic energy? Which has the greater average molecular speed?</p></div>
+<div class="panel-card"><h4>Medium</h4><p>Which sample should behave <strong>more ideally</strong>: CO₂ at 1 atm and 500 K, or CO₂ at 25 atm and 250 K?</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="panel-card"><h4>Easy reasoning</h4><p>same T → same average translational KE</p><p>lighter Ne → faster average speed</p></div>
+<div class="panel-card"><h4>Medium reasoning</h4><p>Low P and high T push behavior closer to ideal. High P and low T push behavior away from ideal.</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="panel-grid">
+<div class="panel-card"><div class="answer-box"><strong>Average translational KE:</strong> equal<br/><strong>Average speed:</strong> Ne &gt; Xe</div></div>
+<div class="panel-card"><div class="answer-box"><strong>More ideal:</strong> CO₂ at 1 atm and 500 K</div><p style="margin-top:.45rem">It has lower pressure and higher temperature, so particles are farther apart and attractions matter less.</p></div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="55" data-local-slide="10" id="slide-10">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 55 · Local Slide 10</span><h1 class="slide-title">Worked ACS-Style Practice — Hard: Which Gas Is Least Ideal?</h1><div class="lo-box"><strong>Learning Objective:</strong> Combine pressure, temperature, and intermolecular-force reasoning to identify the sample with the greatest real-gas deviation.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Problem:</strong> Which sample should deviate most from ideal-gas behavior?</div>
+<div class="panel-grid" style="margin-top:.55rem">
+<div class="panel-card"><strong>A</strong><p>He at 1 atm, 500 K</p></div>
+<div class="panel-card"><strong>B</strong><p>CO₂ at 1 atm, 500 K</p></div>
+<div class="panel-card"><strong>C</strong><p>He at 50 atm, 250 K</p></div>
+<div class="panel-card"><strong>D</strong><p>CO₂ at 50 atm, 250 K</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="path">
+<span class="path-node">high P?</span><span class="arrow">→</span><span class="path-node">more crowding</span>
+<span class="path-node">low T?</span><span class="arrow">→</span><span class="path-node">attractions matter more</span>
+<span class="path-node">stronger attractions?</span><span class="arrow">→</span><span class="path-node">less ideal</span>
+</div>
+<div class="callout" style="margin-top:.55rem">Compared with He, CO₂ has stronger intermolecular attractions and a larger particle size, so under the same P and T it is expected to be less ideal.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="answer-box"><strong>D — CO₂ at 50 atm and 250 K</strong></div>
+<div class="callout" style="margin-top:.55rem"><strong>Reasoning:</strong> it combines all three nonideal factors: high pressure, lower temperature, and a gas with stronger attractions than He.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="56" data-local-slide="11" id="slide-11">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 56 · Local Slide 11</span><h1 class="slide-title">Independent Check — KMT, Molecular Speed, Effusion, and Real Gases</h1><div class="lo-box"><strong>Learning Objective:</strong> Demonstrate independent reasoning across the full particle-model, speed, effusion, and real-gas pathway.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">1</span><p>Define Kinetic Molecular Theory (KMT) and state three assumptions of the ideal-gas particle model.</p><div class="response-area">Write your response.</div></div>
+<div class="question-card"><span class="question-num">2</span><p>Explain why kinetic energy is relevant to gases and why the relationship uses <strong>average translational</strong> kinetic energy.</p><div class="response-area">Explain using wall collisions.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">3</span><p>He and Xe are at the same temperature. Explain why they have the same average translational kinetic energy but different molecular speeds.</p><div class="response-area">Compare both quantities.</div></div>
+<div class="question-card"><span class="question-num">4</span><p>Explain why root-mean-square (RMS) speed is useful, then state how increasing T or increasing M changes u<sub>rms</sub>.</p><div class="response-area">Show setup and unit preparation.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">5</span><p>Distinguish diffusion from effusion, then predict which of two gases will effuse faster from their molar masses.</p><div class="response-area">Define, predict, and justify.</div></div>
+<div class="question-card"><span class="question-num">6</span><p>Which conditions produce the greatest deviation from ideal-gas behavior? Explain how intermolecular attractions and finite particle volume cause the deviation.</p><div class="response-area">Use particle-level reasoning.</div></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</main>
+<footer class="master-footer"><div>General Chemistry I • Module 5</div><div>© Nara Chon</div></footer>
+<script>
+let currentSlide=1;
+const totalSlides=11;
+let currentBuild=1;
+const buildsPerSlide={"1":3,"2":4,"3":3,"4":4,"5":3,"6":4,"7":3,"8":4,"9":3,"10":3,"11":3};
+let currentMode='student';
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>slide.classList.toggle('active',(index+1)===currentSlide));
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10); step.classList.toggle('visible',n<=currentBuild);
+  });
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const visible=!parentBuild||parentBuild.classList.contains('visible');
+    if(currentMode==='answer'&&visible&&blank.dataset.answer!==undefined){blank.textContent=blank.dataset.answer;blank.classList.add('revealed');}
+    else{blank.textContent='[ _______ ]';blank.classList.remove('revealed');}
+  });
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+function nextBuild(){const max=buildsPerSlide[currentSlide];if(currentBuild<max)currentBuild++;else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}updateDisplay();}
+function prevBuild(){if(currentBuild>1)currentBuild--;else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}updateDisplay();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}});
+updateDisplay();
+</script></body>
+</html>

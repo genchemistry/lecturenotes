@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>General Chemistry I — Module 5 — Topic T5.5 — Student</title>
+<style>:root{--bg-dark:#0f172a;--bg-card:#1e293b;--accent-blue:#38bdf8;--accent-teal:#2dd4bf;
+--accent-amber:#fbbf24;--accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+--border:#475569;--blank:#334155}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column}
+header{background:#0b1120;border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.deck-title{font-size:1.16rem;font-weight:800;color:var(--accent-blue)}
+.mode-selector{display:flex;background:#1e293b;border:1px solid var(--border);border-radius:8px;padding:3px}
+.mode-btn{border:0;background:none;color:var(--text-muted);padding:.4rem .8rem;font-weight:700;border-radius:6px;cursor:pointer}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;gap:.65rem;align-items:center;flex-wrap:wrap}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border);padding:.45rem .85rem;border-radius:6px;font-weight:700;cursor:pointer}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.btn:disabled{opacity:.4}
+.counter-badge{font-size:.9rem;color:var(--text-muted);font-weight:700;background:#1e293b;padding:.3rem .6rem;border:1px solid var(--border);border-radius:4px}
+main{flex:1;display:flex;justify-content:center;align-items:center;padding:1.4rem;max-width:1400px;width:100%;margin:auto}
+.slide-container{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.75rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;box-shadow:0 20px 25px -5px rgba(0,0,0,.45)}
+.slide-container.active{display:flex}
+.meta-pill{display:inline-block;font-size:.77rem;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:var(--accent-teal);background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.2);padding:.24rem .58rem;border-radius:4px;margin-bottom:.45rem}
+.slide-title{font-size:1.95rem;font-weight:900;line-height:1.2}
+.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.65rem 1rem;margin-top:.7rem;border-radius:0 6px 6px 0}
+.lo-box strong{color:var(--accent-blue)}
+.slide-body{display:flex;flex-direction:column;gap:.78rem;margin-top:.85rem}
+.build-step{opacity:.14;pointer-events:none;transform:translateY(6px);filter:blur(1px);transition:.35s}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.65rem .9rem}
+.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.65rem .9rem;color:#fecdd3}
+.equal-banner{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.66rem;text-align:center;color:var(--accent-teal);font-weight:900;font-size:1.13rem}
+.blank{display:inline-block;min-width:95px;background:var(--blank);border-bottom:2px solid var(--accent-amber);border-radius:4px;padding:.12rem .5rem;color:transparent;font-weight:800;text-align:center;user-select:none}
+.fraction{display:inline-grid;grid-template-rows:auto auto;vertical-align:middle;justify-items:center;line-height:1.05;margin:0 .15rem;min-width:82px}
+.fraction .num{width:100%;padding:.12rem .32rem .23rem;border-bottom:2px solid currentColor;text-align:center}
+.fraction .den{width:100%;padding:.23rem .32rem .12rem;text-align:center}
+.path{display:flex;align-items:center;justify-content:center;gap:.4rem;flex-wrap:wrap}
+.path-node{background:#0f172a;border:1px solid var(--border);border-radius:999px;padding:.42rem .65rem;font-weight:850;text-align:center}
+.arrow{color:var(--accent-amber);font-size:1.25rem;font-weight:900}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem}
+.panel-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.76rem}
+.panel-card h4{color:var(--accent-blue);margin-bottom:.38rem}
+.mix-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:.75rem;align-items:stretch}
+.gas-box{min-height:230px;background:#111827;border:2px solid #64748b;border-radius:12px;position:relative;overflow:hidden}
+.dot{position:absolute;width:17px;height:17px;border-radius:50%}
+.n2{background:#38bdf8}
+.o2{background:#f43f5e}
+.ar{background:#fbbf24}
+.co2{background:#2dd4bf}
+.a{background:#38bdf8}
+.b{background:#f43f5e}
+.legend{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap;margin-top:.45rem}
+.key{display:flex;align-items:center;gap:.3rem;font-size:.85rem}
+.swatch{width:12px;height:12px;border-radius:50%;display:inline-block}
+.pressure-stack{display:flex;flex-direction:column;gap:.45rem}
+.pressure-chip{background:#0f172a;border:1px solid var(--border);border-radius:8px;padding:.55rem;text-align:center;font-weight:850}
+.air-bar{display:flex;width:100%;height:62px;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#0f172a}
+.air-n2{width:78%;background:rgba(56,189,248,.8)}
+.air-o2{width:21%;background:rgba(244,63,94,.82)}
+.air-other{width:1%;min-width:16px;background:rgba(251,191,36,.85)}
+.air-seg{display:flex;align-items:center;justify-content:center;font-weight:900;color:#0f172a;font-size:.84rem}
+.ratio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem}
+.ratio-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.7rem;text-align:center}
+.ratio-card .big{font-size:1.25rem;font-weight:900;color:var(--accent-teal)}
+.factor-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.63rem .78rem;text-align:center;font-size:1.01rem}
+.answer-box{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.58rem .78rem;color:#ccfbf1;font-weight:800}
+.water-scene{height:255px;background:#0f172a;border:1px solid var(--border);border-radius:12px;position:relative;overflow:hidden}
+.water{position:absolute;left:0;right:0;bottom:0;height:95px;background:rgba(56,189,248,.28);border-top:2px solid #38bdf8}
+.tube{position:absolute;width:170px;height:205px;left:50%;transform:translateX(-50%);top:18px;border:3px solid #cbd5e1;border-bottom:none;border-radius:14px 14px 0 0;background:rgba(15,23,42,.82)}
+.tube-water{position:absolute;left:3px;right:3px;bottom:0;height:58px;background:rgba(56,189,248,.33)}
+.bubble{position:absolute;width:14px;height:14px;border:2px solid #bae6fd;border-radius:50%}
+.vapor-dot{position:absolute;width:11px;height:11px;border-radius:50%;background:#94a3b8}
+.gas-dot{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--accent-teal)}
+.error-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.error-table th,.error-table td{border:1px solid var(--border);padding:.48rem;vertical-align:top}
+.error-table th{background:#0f172a;color:var(--accent-blue)}
+.bad{color:#fecdd3;font-weight:850}
+.good{color:#ccfbf1;font-weight:850}
+.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.practice-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.76rem}
+.practice-badge{display:inline-block;padding:.2rem .5rem;border-radius:999px;font-size:.76rem;font-weight:900;text-transform:uppercase;margin-bottom:.4rem}
+.easy{background:rgba(45,212,191,.15);color:var(--accent-teal);border:1px solid var(--accent-teal)}
+.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}
+.hard{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.question-card{background:#0f172a;border:1px solid var(--border);border-radius:10px;padding:.78rem;display:flex;flex-direction:column;gap:.42rem}
+.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:900;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px}
+.response-area{background:#1e293b;border:1px dashed var(--border);border-radius:6px;min-height:52px;padding:.45rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.5rem}
+.meta-item{background:#1e293b;padding:.48rem .62rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.77rem;text-transform:uppercase}
+@media (max-width:900px){.mix-grid,.ratio-grid,.practice-grid,.question-grid{grid-template-columns:1fr}
+.slide-title{font-size:1.5rem}
+.slide-container{min-height:auto;padding:1.15rem}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}}
+.master-footer{max-width:1400px;width:100%;margin:0 auto;padding:.7rem 1.5rem 1.1rem;text-align:center;color:var(--text-muted);font-size:.82rem;border-top:1px solid rgba(71,85,105,.45)}
+.slide-header{margin-bottom:1rem;}
+body{overflow-x:hidden;}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title">🧪 Topic T5.5 | Dalton’s Law, Mole Fraction, and Gas Collection over Water</div>
+<div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 11</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 4</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+
+<div class="slide-container active" data-integrated-slide="35" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 35 · Local Slide 1</span><h1 class="slide-title">Dalton’s Law — Total Pressure as a Sum of Component Pressures</h1><div class="lo-box"><strong>Learning Objectives: </strong>State Dalton’s law and preview how it connects total pressure, mole fraction, and gas collected over water. Apply Dalton’s law conceptually to atmospheric pressure as the sum of the partial pressures of the gases in air.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="callout"><strong>Dalton’s Law of Partial Pressures:</strong> for a mixture of nonreacting gases, each gas contributes a partial pressure and the total is their sum.</div>
+<div class="formula-large" style="text-align:center;margin-top:.65rem">P<sub>total</sub> = P₁ + P₂ + P₃ + …</div>
+<div class="equal-banner" style="margin-top:.55rem">partial pressure = one gas’s contribution to the mixture pressure</div>
+</div><div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="panel-card"><h4>1 · Add partial pressures</h4><p>Use Dalton directly: P<sub>total</sub> = ΣP<sub>i</sub>.</p></div>
+<div class="panel-card"><h4>2 · Use mole fraction</h4><p>A gas’s share of the moles gives its share of the total pressure: P<sub>i</sub> = X<sub>i</sub>P<sub>total</sub>.</p></div>
+<div class="panel-card"><h4>3 · Gas over water</h4><p>Water vapor is another gas contribution: P<sub>total</sub> = P<sub>gas</sub> + P<sub>H₂O</sub>.</p></div>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">One law → three ways we will use it in this Topic.</div>
+</div><div class="build-step" data-build="3"><div class="callout"><strong>Connection to Dalton:</strong> air is not one gas. Each gas in air contributes part of the atmospheric pressure.</div>
+<div class="air-bar"><div class="air-seg air-n2">N₂</div><div class="air-seg air-o2">O₂</div><div class="air-seg air-other">other</div></div>
+<p style="text-align:center;margin-top:.45rem">Air contains mostly N₂ and O₂, with smaller amounts of Ar, CO₂, and other gases.</p>
+<div class="equal-banner">P<sub>atm</sub> = P<sub>N₂</sub> + P<sub>O₂</sub> + P<sub>Ar</sub> + P<sub>CO₂</sub> + …</div>
+</div><div class="build-step" data-build="4">
+<div class="panel-grid">
+<div class="panel-card"><h4>Compare</h4><p>Each individual partial pressure is less than the total atmospheric pressure.</p></div>
+<div class="panel-card"><h4>Big idea</h4><p>The total does not belong to one gas. It is the sum of the contributions from all gases present.</p></div>
+</div>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="36" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 36 · Local Slide 2</span><h1 class="slide-title">Mole Fraction → Partial Pressure</h1><div class="lo-box"><strong>Learning Objectives: </strong>Calculate mole fraction and interpret it as a gas component’s share of the mixture. Connect mole fraction to Dalton’s law by calculating a component partial pressure from its share of the mixture.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1"><div class="callout"><strong>Why mole fraction matters here:</strong> Dalton tells us each gas contributes part of the total pressure. Mole fraction tells us what fraction of the mixture belongs to that gas.</div>
+<div class="equal-banner">X<sub>i</sub> = <span class="fraction"><span class="num">n<sub>i</sub></span><span class="den">n<sub>total</sub></span></span></div>
+<div class="ratio-grid" style="margin-top:.6rem">
+<div class="ratio-card"><div class="big">0 ≤ X<sub>i</sub> ≤ 1</div><p>fraction of total moles</p></div>
+<div class="ratio-card"><div class="big">ΣX<sub>i</sub> = 1</div><p>all fractions add to one</p></div>
+<div class="ratio-card"><div class="big">no units</div><p>mol ÷ mol → units cancel</p></div>
+</div>
+</div><div class="build-step" data-build="2">
+<div class="callout"><strong>Example:</strong> If a mixture has 2.0 mol A and 3.0 mol B, n<sub>total</sub> = 5.0 mol and X<sub>A</sub> = <span class="fraction"><span class="num">2.0 mol A</span><span class="den">5.0 mol total</span></span> = 0.40.</div>
+<div class="warn"><strong>Do not use mass fraction.</strong> Dalton’s mole-fraction relationship uses moles of gas particles, not grams.</div>
+</div><div class="build-step" data-build="3">
+<div class="path"><span class="path-node">moles of each gas</span><span class="arrow">→</span><span class="path-node">n<sub>total</sub></span><span class="arrow">→</span><span class="path-node">X<sub>i</sub></span><span class="arrow">→</span><span class="path-node">P<sub>i</sub></span></div>
+<div class="equal-banner">P<sub>i</sub> = X<sub>i</sub>P<sub>total</sub></div>
+<div class="callout" style="margin-top:.55rem">A gas that makes up a larger mole fraction contributes a larger fraction of the total pressure.</div>
+</div><div class="build-step" data-build="4">
+<div class="panel-grid">
+<div class="panel-card"><h4>Check 1</h4><p>ΣX<sub>i</sub> = 1</p></div>
+<div class="panel-card"><h4>Check 2</h4><p>ΣP<sub>i</sub> = P<sub>total</sub></p></div>
+<div class="panel-card"><h4>Check 3</h4><p>Every X<sub>i</sub> and P<sub>i</sub> must be positive and smaller than its corresponding total.</p></div>
+</div>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="37" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 37 · Local Slide 3</span><h1 class="slide-title">Worked Example — Natural Gas Mixture</h1><div class="lo-box"><strong>Learning Objective:</strong> Calculate a component partial pressure from its mole fraction.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Given:</strong> 8.24 mol CH₄, 0.421 mol C₂H₆, 0.116 mol C₃H₈; P<sub>total</sub> = 1.37 atm. Find P<sub>C₃H₈</sub>.</div>
+<div class="path" style="margin-top:.55rem"><span class="path-node">n<sub>total</sub></span><span class="arrow">→</span><span class="path-node">X<sub>C₃H₈</sub></span><span class="arrow">→</span><span class="path-node">P<sub>C₃H₈</sub></span></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card">n<sub>total</sub> = 8.24 + 0.421 + 0.116 = <strong>8.777 mol</strong></div>
+<div class="factor-card">X<sub>C₃H₈</sub> = <span class="fraction"><span class="num">0.116 mol C₃H₈</span><span class="den">8.777 mol total</span></span> = 0.01322</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="factor-card">P<sub>C₃H₈</sub> = (0.01322)(1.37 atm) = <strong>0.0181 atm</strong></div>
+<div class="answer-box">Reasonableness: propane is only about 1.3% of the moles, so its partial pressure should be only about 1.3% of the total pressure.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="38" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 38 · Local Slide 4</span><h1 class="slide-title">Worked Multi-Gas Flask — Masses to Total and Partial Pressures</h1><div class="lo-box"><strong>Learning Objective:</strong> Convert gas masses to moles, then determine total pressure, mole fractions, and partial pressures.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Given:</strong> A 4.55 L flask contains 3.25 g N₂ and 1.850 g O₂ at 21.0 °C.</div>
+<div class="path"><span class="path-node">g each gas</span><span class="arrow">→</span><span class="path-node">mol each gas</span><span class="arrow">→</span><span class="path-node">n<sub>total</sub></span><span class="arrow">→</span><span class="path-node">P<sub>total</sub>, X<sub>i</sub>, P<sub>i</sub></span></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="factor-card">3.25 g N₂ × <span class="fraction"><span class="num">1 mol N₂</span><span class="den">28.02 g N₂</span></span> = <strong>0.1160 mol N₂</strong></div>
+<div class="factor-card">1.850 g O₂ × <span class="fraction"><span class="num">1 mol O₂</span><span class="den">32.00 g O₂</span></span> = <strong>0.05781 mol O₂</strong></div>
+</div>
+<div class="factor-card">n<sub>total</sub> = 0.1738 mol; T = 294.15 K</div>
+<div class="factor-card">P<sub>total</sub> = <span class="fraction"><span class="num">nRT</span><span class="den">V</span></span> = <strong>0.922 atm</strong></div>
+</div>
+<div class="build-step" data-build="3">
+<div class="ratio-grid">
+<div class="ratio-card"><div class="big">X<sub>N₂</sub> = 0.667</div><p>P<sub>N₂</sub> = 0.615 atm</p></div>
+<div class="ratio-card"><div class="big">X<sub>O₂</sub> = 0.333</div><p>P<sub>O₂</sub> = 0.307 atm</p></div>
+<div class="ratio-card"><div class="big">Check</div><p>0.615 + 0.307 = 0.922 atm</p></div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="39" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 39 · Local Slide 5</span><h1 class="slide-title">Dalton Application 3 — Gas Collected over Water</h1><div class="lo-box"><strong>Learning Objective:</strong> Apply Dalton’s law to a gas collected over water by treating water vapor as one component of the gas mixture.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1"><div class="callout"><strong>Why this is Dalton’s law:</strong> the collection tube contains the target gas <em>and</em> H₂O vapor. Each gas contributes its own partial pressure.</div>
+<div class="mix-grid">
+<div class="water-scene">
+<div class="tube"><div class="tube-water"></div>
+<span class="gas-dot" style="left:25px;top:28px"></span><span class="gas-dot" style="left:100px;top:42px"></span><span class="gas-dot" style="left:55px;top:80px"></span>
+<span class="vapor-dot" style="left:120px;top:90px"></span><span class="vapor-dot" style="left:35px;top:115px"></span><span class="vapor-dot" style="left:85px;top:125px"></span>
+</div>
+<div class="water"></div>
+<span class="bubble" style="left:25%;bottom:35px"></span><span class="bubble" style="left:31%;bottom:58px"></span>
+</div>
+<div class="pressure-stack">
+<div class="pressure-chip">desired gas pressure: P<sub>gas</sub></div>
+<div class="pressure-chip">water-vapor pressure: P<sub>H₂O</sub></div>
+<div class="equal-banner">P<sub>total</sub> = P<sub>gas</sub> + P<sub>H₂O</sub></div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="equal-banner">P<sub>total</sub> = P<sub>gas</sub> + P<sub>H₂O</sub></div>
+<div class="path" style="margin-top:.55rem">
+<span class="path-node">Dalton’s law</span><span class="arrow">→</span>
+<span class="path-node">solve for target gas</span><span class="arrow">→</span>
+<span class="path-node">P<sub>gas</sub> = P<sub>total</sub> − P<sub>H₂O</sub></span>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Key sequence:</strong> the measured pressure is a mixture pressure. Use Dalton first to remove the water-vapor contribution, then use the dry-gas pressure in PV = nRT.</div>
+<div class="equal-banner" style="margin-top:.55rem">Dalton first → ideal gas law second.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="40" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 40 · Local Slide 6</span><h1 class="slide-title">Worked Gas over Water — Identify an Unknown Metal</h1><div class="lo-box"><strong>Learning Objective:</strong> Correct wet-gas pressure, use PV = nRT to find H₂ moles, and infer the metal molar mass.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Reaction:</strong> X(s) + 2HCl(aq) → XCl₂(aq) + H₂(g)</div>
+<div class="callout"><strong>Data:</strong> 0.0985 g metal; 42.84 mL H₂; 22 °C; P<sub>total</sub> = 647 torr; P<sub>H₂O</sub> = 19.8 torr.</div>
+<div class="path"><span class="path-node">wet P</span><span class="arrow">→</span><span class="path-node">dry H₂ P</span><span class="arrow">→</span><span class="path-node">mol H₂</span><span class="arrow">→</span><span class="path-node">mol X</span><span class="arrow">→</span><span class="path-node">M of X</span></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card">P<sub>H₂</sub> = 647 − 19.8 = <strong>627.2 torr</strong></div>
+<div class="factor-card">627.2 torr × <span class="fraction"><span class="num">1 atm</span><span class="den">760 torr</span></span> = <strong>0.8253 atm</strong></div>
+<div class="factor-card">n(H₂) = <span class="fraction"><span class="num">PV</span><span class="den">RT</span></span> = <span class="fraction"><span class="num">(0.8253 atm)(0.04284 L)</span><span class="den">(0.08206 L·atm·mol⁻¹·K⁻¹)(295.15 K)</span></span> = <strong>1.460 × 10⁻³ mol</strong></div>
+</div>
+<div class="build-step" data-build="3">
+<div class="factor-card">1 mol X : 1 mol H₂ → n(X) = 1.460 × 10⁻³ mol</div>
+<div class="factor-card">M(X) = <span class="fraction"><span class="num">0.0985 g</span><span class="den">1.460 × 10⁻³ mol</span></span> = <strong>67.5 g/mol</strong></div>
+<div class="answer-box">Closest common metal consistent with X²⁺ chemistry: Zn. The experimental value need not equal the tabulated molar mass exactly.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="41" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 41 · Local Slide 7</span><h1 class="slide-title">Worked Gas over Water — Acetylene</h1><div class="lo-box"><strong>Learning Objective:</strong> Find the mass of a gas collected over water by correcting its pressure before using the ideal gas law.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Reaction:</strong> CaC₂(s) + 2H₂O(l) → C₂H₂(g) + Ca(OH)₂(aq)</div>
+<div class="callout"><strong>Data:</strong> P<sub>total</sub> = 738 torr; P<sub>H₂O</sub> = 21 torr; V = 523 mL; T = 23 °C.</div>
+<div class="path"><span class="path-node">P<sub>dry</sub></span><span class="arrow">→</span><span class="path-node">atm, L, K</span><span class="arrow">→</span><span class="path-node">mol C₂H₂</span><span class="arrow">→</span><span class="path-node">g C₂H₂</span></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="factor-card">P<sub>C₂H₂</sub> = 738 − 21 = <strong>717 torr</strong> = 0.9434 atm</div>
+<div class="factor-card">V = 0.523 L; T = 296.15 K</div>
+<div class="factor-card">n = <span class="fraction"><span class="num">(0.9434 atm)(0.523 L)</span><span class="den">(0.08206 L·atm·mol⁻¹·K⁻¹)(296.15 K)</span></span> = <strong>0.02030 mol C₂H₂</strong></div>
+</div>
+<div class="build-step" data-build="3">
+<div class="factor-card">0.02030 mol C₂H₂ × <span class="fraction"><span class="num">26.04 g C₂H₂</span><span class="den">1 mol C₂H₂</span></span> = <strong>0.529 g C₂H₂</strong></div>
+<div class="answer-box"><strong>Why does the correction matter?</strong> The measured 738 torr contains both C₂H₂ and water vapor. 
+        If we incorrectly use 738 torr as if it were only C₂H₂, the pressure entered into PV = nRT is too high. 
+        That makes the calculated moles of C₂H₂ too high, so the calculated mass is also too high.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="42" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 42 · Local Slide 8</span><h1 class="slide-title">Dalton’s Law — Three Common Decision Errors</h1><div class="lo-box"><strong>Learning Objective:</strong> Diagnose mistakes by identifying which Dalton application the problem is testing.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1"><div class="callout"><strong>Application 3: gas over water</strong> — Did you remove the H₂O partial pressure?</div>
+<table class="error-table">
+<tr><th>Incorrect move</th><th>Why it fails</th><th>Correct move</th></tr>
+<tr><td class="bad">P<sub>gas</sub> = P<sub>total</sub> + P<sub>H₂O</sub></td><td>Total already includes water vapor.</td><td class="good">P<sub>gas</sub> = P<sub>total</sub> − P<sub>H₂O</sub></td></tr>
+<tr><td class="bad">Use grams to get X<sub>i</sub></td><td>Mole fraction is based on moles.</td><td class="good">Convert each component to mol first.</td></tr>
+</table>
+</div>
+<div class="build-step" data-build="2"><div class="callout"><strong>Application 2: mole fraction</strong> — Did you use moles, and do all X<sub>i</sub> values add to 1?</div>
+<table class="error-table">
+<tr><th>Incorrect move</th><th>Fast check</th><th>Correct relationship</th></tr>
+<tr><td class="bad">ΣX<sub>i</sub> ≠ 1</td><td>All fractions of the mixture must account for the whole.</td><td class="good">ΣX<sub>i</sub> = 1</td></tr>
+<tr><td class="bad">ΣP<sub>i</sub> ≠ P<sub>total</sub></td><td>All pressure contributions must rebuild the total.</td><td class="good">ΣP<sub>i</sub> = P<sub>total</sub></td></tr>
+</table>
+</div>
+<div class="build-step" data-build="3">
+<div class="panel-grid">
+<div class="panel-card"><h4>Application 1</h4><p>Partial pressures must add to P<sub>total</sub>.</p></div>
+<div class="panel-card"><h4>Application 2</h4><p>Mole fractions must add to 1, and P<sub>i</sub> = X<sub>i</sub>P<sub>total</sub>.</p></div>
+<div class="panel-card"><h4>Application 3</h4><p>For wet gas: P<sub>gas</sub> = P<sub>total</sub> − P<sub>H₂O</sub>.</p></div>
+</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="43" data-local-slide="9" id="slide-9">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 43 · Local Slide 9</span><h1 class="slide-title">Worked Transfer Practice — Dalton Applications</h1><div class="lo-box"><strong>Learning Objectives: </strong>Distinguish direct addition of partial pressures from using mole fraction to find one component pressure. Decide which pressure represents the dry gas before using the ideal gas law.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="panel-grid">
+<div class="panel-card">
+<h4>Easy — Add Partial Pressures</h4>
+<p><strong>Given:</strong> P<sub>N₂</sub> = 0.52 atm and P<sub>O₂</sub> = 0.31 atm.</p>
+<p style="margin-top:.45rem">Find P<sub>total</sub>.</p>
+</div>
+<div class="panel-card">
+<h4>Medium — Mole Fraction → Partial Pressure</h4>
+<p><strong>Given:</strong> X<sub>Ar</sub> = 0.0350 and P<sub>total</sub> = 745 torr.</p>
+<p style="margin-top:.45rem">Find P<sub>Ar</sub>.</p>
+</div>
+</div>
+<div class="panel-grid">
+<div class="panel-card">
+<h4>Easy setup</h4>
+<div class="equal-banner">P<sub>total</sub> = P<sub>N₂</sub> + P<sub>O₂</sub></div>
+<div class="factor-card" style="margin-top:.45rem">0.52 atm + 0.31 atm</div>
+</div>
+<div class="panel-card">
+<h4>Medium setup</h4>
+<div class="equal-banner">P<sub>Ar</sub> = X<sub>Ar</sub>P<sub>total</sub></div>
+<div class="factor-card" style="margin-top:.45rem">(0.0350)(745 torr)</div>
+</div>
+</div>
+</div><div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="panel-card">
+<h4>Easy answer</h4>
+<div class="answer-box"><strong>0.83 atm</strong></div>
+<p style="margin-top:.45rem">Check: the total must be larger than either individual partial pressure.</p>
+</div>
+<div class="panel-card">
+<h4>Medium answer</h4>
+<div class="answer-box"><strong>26.1 torr</strong></div>
+<p style="margin-top:.45rem">Check: 3.50% of 745 torr should be only a few tens of torr.</p>
+</div>
+</div>
+</div><div class="build-step" data-build="3">
+<div class="callout"><strong>Problem:</strong> H₂ is collected over water at 25 °C. P<sub>total</sub> = 755 torr and P<sub>H₂O</sub> = 23.8 torr. Which pressure belongs in PV = nRT when calculating moles of H₂?</div>
+<div class="path" style="margin-top:.55rem"><span class="path-node">Ask what the gauge measures</span><span class="arrow">→</span><span class="path-node">H₂ + H₂O vapor</span><span class="arrow">→</span><span class="path-node">remove H₂O contribution</span></div>
+<div class="equal-banner">P<sub>total</sub> = P<sub>H₂</sub> + P<sub>H₂O</sub></div>
+<div class="factor-card" style="margin-top:.55rem">P<sub>H₂</sub> = P<sub>total</sub> − P<sub>H₂O</sub></div>
+<div class="factor-card">P<sub>H₂</sub> = 755 torr − 23.8 torr</div>
+</div><div class="build-step" data-build="4">
+<div class="answer-box">P<sub>H₂</sub> = <strong>731.2 torr</strong></div>
+<div class="callout" style="margin-top:.55rem"><strong>Why?</strong> PV = nRT must use the pressure of the gas whose moles we are calculating. The measured total pressure also includes water vapor.</div>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="44" data-local-slide="10" id="slide-10">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 44 · Local Slide 10</span><h1 class="slide-title">Experimental Error Transfer — After Dalton’s Law</h1><div class="lo-box"><strong>Learning Objective:</strong> Predict how a gas-collection error propagates through measured volume, calculated moles, and a derived molar mass.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Scenario:</strong> A metal reacts with acid and produces H₂. The H₂ is collected over water, but the collection tube has a small crack. Some H₂ escapes before the gas volume is measured.</div>
+<div class="panel-grid" style="margin-top:.55rem">
+<div class="panel-card"><h4>What happens first?</h4><p>Less H₂ remains in the collection tube.</p></div>
+<div class="panel-card"><h4>Measured volume</h4><p>The recorded H₂ volume is <strong>too low</strong>.</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="path">
+<span class="path-node">H₂ escapes</span><span class="arrow">→</span>
+<span class="path-node">measured V ↓</span><span class="arrow">→</span>
+<span class="path-node">calculated n(H₂) ↓</span>
+</div>
+<div class="callout" style="margin-top:.55rem">At the same measured P and T, PV = nRT tells us that a smaller measured gas volume gives a smaller calculated amount of H₂.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="path">
+<span class="path-node">n(H₂) too low</span><span class="arrow">→</span>
+<span class="path-node">n(metal) too low</span><span class="arrow">→</span>
+<span class="path-node">M = mass ÷ mol</span><span class="arrow">→</span>
+<span class="path-node">calculated molar mass ↑</span>
+</div>
+<div class="answer-box" style="margin-top:.55rem"><strong>Final error direction:</strong> if H₂ escapes, the calculated molar mass of the metal is <strong>too high</strong>.</div>
+<div class="warn" style="margin-top:.55rem"><strong>Do not memorize the arrow chain.</strong> Follow the measured quantity first, then trace how that error enters each equation.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="45" data-local-slide="11" id="slide-11">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 45 · Local Slide 11</span><h1 class="slide-title">Independent Check — Connect All Three Dalton Applications</h1><div class="lo-box"><strong>Learning Objective:</strong> Demonstrate independent reasoning with Dalton’s law, mole fraction, wet-gas correction, and experimental-error direction.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">1</span><p>In one sentence, define the partial pressure of a gas in a mixture.</p><div class="response-area">Write your response.</div></div>
+<div class="question-card"><span class="question-num">2</span><p>Why is the partial pressure of O₂ in air smaller than the total atmospheric pressure?</p><div class="response-area">Explain conceptually.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">3</span><p>A mixture contains 1.50 mol He and 3.50 mol Ne. Calculate X<sub>He</sub>.</p><div class="response-area">Show setup and calculation.</div></div>
+<div class="question-card"><span class="question-num">4</span><p>If X<sub>N₂</sub> = 0.72 and P<sub>total</sub> = 1.25 atm, calculate P<sub>N₂</sub>.</p><div class="response-area">Show setup and units.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">5</span><p>A gas is collected over water at a total pressure of 742 torr. The water-vapor pressure is 21 torr. What pressure should be used for the dry gas?</p><div class="response-area">Show the pressure relationship.</div></div>
+<div class="question-card"><span class="question-num">6</span><p>During H₂ collection over water, a small leak allows some H₂ to escape before the volume is measured. Predict whether a molar mass calculated from that H₂ volume would be too high or too low, and trace the error through the calculation.</p><div class="response-area">Diagnose the error.</div></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</main>
+<footer class="master-footer"><div>General Chemistry I • Module 5</div><div>© Nara Chon</div></footer>
+<script>
+let currentSlide=1;
+const totalSlides=11;
+let currentBuild=1;
+const buildsPerSlide={"1":4,"2":4,"3":3,"4":3,"5":3,"6":3,"7":3,"8":3,"9":4,"10":3,"11":3};
+let currentMode='student';
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>slide.classList.toggle('active',(index+1)===currentSlide));
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10); step.classList.toggle('visible',n<=currentBuild);
+  });
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const visible=!parentBuild||parentBuild.classList.contains('visible');
+    if(currentMode==='answer'&&visible&&blank.dataset.answer!==undefined){blank.textContent=blank.dataset.answer;blank.classList.add('revealed');}
+    else{blank.textContent='[ _______ ]';blank.classList.remove('revealed');}
+  });
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+function nextBuild(){const max=buildsPerSlide[currentSlide];if(currentBuild<max)currentBuild++;else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}updateDisplay();}
+function prevBuild(){if(currentBuild>1)currentBuild--;else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}updateDisplay();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}});
+updateDisplay();
+</script></body>
+</html>

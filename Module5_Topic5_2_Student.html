@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>General Chemistry I — Module 5 — Topic T5.2 — Student</title>
+<style>:root{--bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+  --accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+  --accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border-color:#475569;--blank-bg:#334155;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}
+.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}
+.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.75rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}
+.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}
+.slide-container.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide-header{margin-bottom:1.15rem}
+.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}
+.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}
+.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}
+.lo-box strong{color:var(--accent-blue)}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}
+.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}
+.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}
+.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}
+.equal-banner{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.65rem;text-align:center;color:var(--accent-teal);font-weight:900;font-size:1.05rem}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.8rem}
+.panel-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.85rem;text-align:center}
+.panel-card h4{color:var(--accent-blue);font-size:1rem;margin-bottom:.5rem}
+.particle-box{height:130px;border:2px solid #64748b;border-radius:10px;position:relative;background:#111827;overflow:hidden;margin:.4rem auto .55rem}
+.dot{position:absolute;width:15px;height:15px;border-radius:50%;background:var(--accent-blue);box-shadow:0 0 6px rgba(56,189,248,.45)}
+.gas-scene{height:150px;border:2px solid #64748b;border-radius:12px;position:relative;background:linear-gradient(to bottom, rgba(148,163,184,.06), rgba(15,23,42,.25));overflow:hidden;margin:.45rem auto .6rem}
+.gas-particle{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--accent-blue);box-shadow:0 0 8px rgba(56,189,248,.5)}
+.space-note,.fill-note{position:absolute;left:50%;transform:translateX(-50%);padding:.22rem .55rem;border-radius:999px;font-size:.78rem;font-weight:900;white-space:nowrap}
+.space-note{top:8px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.45);color:#fde68a}
+.fill-note{bottom:8px;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.45);color:#ccfbf1}
+.distance-arrow{position:absolute;height:0;border-top:2px dashed rgba(251,191,36,.8)}
+.distance-arrow::before,.distance-arrow::after{content:"";position:absolute;top:-5px;border-top:4px solid transparent;border-bottom:4px solid transparent}
+.distance-arrow::before{left:-1px;border-right:7px solid rgba(251,191,36,.9)}
+.distance-arrow::after{right:-1px;border-left:7px solid rgba(251,191,36,.9)}
+.distance-label{position:absolute;color:#fde68a;font-size:.76rem;font-weight:800}
+.volume-guide{position:absolute;inset:12px;border:2px dashed rgba(45,212,191,.28);border-radius:10px}
+.volume-arrow{position:absolute;color:#2dd4bf;font-size:1.05rem;font-weight:900}
+.gas-tags{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center}
+.gas-tag{padding:.25rem .55rem;border-radius:999px;background:#111827;border:1px solid #475569;font-weight:800;color:#e2e8f0}
+.formula-large{font-size:2rem;font-weight:900;color:var(--accent-teal)}
+.fraction{display:inline-grid;grid-template-rows:auto auto;align-items:center;justify-items:center;line-height:1.08;vertical-align:middle;margin:0 .18rem;min-width:120px}
+.fraction .num{width:100%;padding:.18rem .4rem .28rem;border-bottom:2px solid var(--text-main);text-align:center}
+.fraction .den{width:100%;padding:.28rem .4rem .18rem;text-align:center}
+.factor-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem 1rem;display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap}
+.cancel-pair{position:relative;display:inline-block;color:var(--text-main);padding:0 .08rem}
+.cancel-pair::after{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:2px;background:var(--accent-rose);transform:rotate(-10deg)}
+.survive{color:var(--accent-teal);font-weight:900;border:1px solid var(--accent-teal);border-radius:5px;padding:.08rem .28rem}
+.arrow{color:var(--accent-amber);font-size:1.35rem;font-weight:900;text-align:center}
+.pressure-equivalence{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;align-items:stretch}
+.unit-card{background:#0f172a;border:1px solid var(--border-color);border-radius:9px;padding:.7rem;text-align:center}
+.unit-card .big{font-size:1.2rem;font-weight:900;color:var(--accent-teal)}
+.barometer-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center}
+.barometer{width:260px;height:320px;margin:auto;position:relative}
+.reservoir{position:absolute;bottom:15px;left:35px;width:190px;height:58px;border:3px solid #cbd5e1;border-radius:0 0 28px 28px;background:#64748b}
+.tube{position:absolute;bottom:65px;left:105px;width:50px;height:235px;border:3px solid #cbd5e1;border-bottom:none;border-radius:22px 22px 0 0;overflow:hidden;background:#111827}
+.hg-column{position:absolute;left:0;right:0;bottom:0;height:190px;background:#94a3b8}
+.vacuum{position:absolute;top:8px;left:0;right:0;text-align:center;font-size:.74rem;color:#cbd5e1}
+.height-line{position:absolute;right:58px;bottom:68px;height:190px;border-right:2px dashed var(--accent-amber)}
+.height-label{position:absolute;right:3px;bottom:145px;color:#fde68a;font-weight:900}
+.atm-arrow{position:absolute;left:4px;bottom:56px;color:var(--accent-blue);font-weight:900;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.02em}
+.altitude-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.mountain-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:1rem;text-align:center}
+.air-column{height:190px;border-left:3px solid #64748b;border-right:3px solid #64748b;border-bottom:3px solid #64748b;position:relative;margin:.5rem auto;width:190px;background:linear-gradient(to top,rgba(56,189,248,.08),transparent)}
+.air-dot{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--accent-blue)}
+.pressure-link-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:stretch}
+.pressure-visual-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.9rem;text-align:center}
+.pressure-visual-card h4{margin:0 0 .5rem 0;color:var(--accent-blue)}
+.container-scene{width:100%;height:285px;border:3px solid #64748b;border-radius:12px;position:relative;background:#111827;overflow:hidden}
+.wall-label{position:absolute;right:8px;top:8px;font-size:.75rem;color:#cbd5e1;background:rgba(15,23,42,.7);padding:.15rem .4rem;border-radius:999px}
+.hit-arrow{position:absolute;color:#fde68a;font-size:1.05rem;font-weight:900}
+.impact-burst{position:absolute;color:#fbbf24;font-size:1rem;font-weight:900}
+.earth-scene{width:100%;height:210px;border:1px solid var(--border-color);border-radius:12px;position:relative;overflow:hidden;background:linear-gradient(to bottom,#082f49 0%,#0f172a 68%,#1f2937 69%,#1f2937 100%)}
+.air-column-label{position:absolute;top:10px;left:50%;transform:translateX(-50%);padding:.18rem .55rem;border-radius:999px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.42);color:#bae6fd;font-size:.76rem;font-weight:900;white-space:nowrap}
+.ground-strip{position:absolute;left:0;right:0;bottom:0;height:56px;background:#334155}
+.surface-label{position:absolute;padding:.18rem .48rem;border-radius:999px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.42);color:#fde68a;font-size:.76rem;font-weight:900;white-space:nowrap}
+.down-arrow{position:absolute;color:#2dd4bf;font-size:1rem;font-weight:900}
+.atm-note{display:inline-block;margin-top:.45rem;padding:.3rem .65rem;border-radius:999px;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.4);color:#ccfbf1;font-weight:900}
+.reference-figure{width:100%;max-width:430px;height:auto;display:block;margin:.2rem auto .55rem auto;border:1px solid var(--border-color);border-radius:12px;background:#ffffff}
+.mountain-shape{position:absolute;left:34px;bottom:48px;width:150px;height:96px;background:#475569;clip-path:polygon(0% 100%,35% 58%,55% 20%,75% 58%,100% 100%)}
+.mountain-cap{position:absolute;left:91px;bottom:119px;width:42px;height:20px;background:#cbd5e1;clip-path:polygon(0% 100%,30% 15%,70% 15%,100% 100%)}
+.sea-shape{position:absolute;right:0;bottom:48px;width:145px;height:44px;background:rgba(56,189,248,.35);border-top:3px solid #38bdf8}
+.arrow-group{position:absolute}
+.arrow-shaft{border-radius:20px;background:linear-gradient(to bottom,#2dd4bf,#0ea5e9);position:relative;margin:auto}
+.arrow-shaft::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-14px;border-left:12px solid transparent;border-right:12px solid transparent;border-top:16px solid #0ea5e9}
+.arrow-shaft.small{width:18px;height:58px}
+.arrow-shaft.large{width:26px;height:104px}
+.arrow-text-vertical{position:absolute;left:30px;top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:center;font-size:.78rem;font-weight:900;color:#ccfbf1;white-space:nowrap}
+.pressure-value{position:absolute;padding:.18rem .48rem;border-radius:999px;font-size:.76rem;font-weight:900;white-space:nowrap;background:rgba(15,23,42,.75);border:1px solid rgba(45,212,191,.45);color:#ccfbf1}
+.practice-badge{display:inline-block;padding:.22rem .55rem;border-radius:999px;font-size:.78rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
+.practice-badge.easy{background:rgba(45,212,191,.15);color:var(--accent-teal);border:1px solid var(--accent-teal)}
+.practice-badge.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}
+.practice-badge.hard{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.practice-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem}
+.practice-card h4{color:var(--accent-blue);margin-bottom:.45rem}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.45rem}
+.choice{background:#111827;border:1px solid #334155;border-radius:8px;padding:.55rem}
+.answer-box{margin-top:.55rem;background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.55rem;color:#ccfbf1;font-weight:800}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.85rem;display:flex;flex-direction:column;gap:.55rem}
+.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}
+.question-text{font-size:1rem;font-weight:600;line-height:1.4}
+.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:60px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.65rem;margin-top:.5rem}
+.meta-item{background:#1e293b;padding:.5rem .75rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.8rem;text-transform:uppercase}
+@media (max-width:900px){.barometer-wrap,.altitude-grid,.practice-grid,.question-grid,.pressure-equivalence{grid-template-columns:1fr}
+.slide-title{font-size:1.6rem}
+.slide-container{padding:1.25rem;min-height:auto}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}}
+.law-hero{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:stretch}
+.law-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:1rem}
+.law-card h4{margin:0 0 .45rem;color:var(--accent-blue)}
+.variable-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem}
+.variable-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem;text-align:center}
+.variable-card .symbol{font-size:1.8rem;font-weight:900;color:#67e8f9}
+.constant-chip{display:inline-block;padding:.22rem .55rem;border:1px solid rgba(45,212,191,.45);border-radius:999px;background:rgba(45,212,191,.08);color:#99f6e4;font-weight:900;margin:.15rem}
+.graph-box{height:210px;border:1px solid var(--border-color);border-radius:12px;background:#0b1220;padding:.6rem;position:relative}
+.axis-x{position:absolute;left:42px;right:18px;bottom:32px;height:2px;background:#94a3b8}
+.axis-y{position:absolute;left:42px;top:18px;bottom:32px;width:2px;background:#94a3b8}
+.axis-label-x{position:absolute;right:14px;bottom:5px;font-size:.78rem;color:#cbd5e1}
+.axis-label-y{position:absolute;left:5px;top:8px;font-size:.78rem;color:#cbd5e1}
+.curve-inverse{position:absolute;left:60px;top:40px;width:190px;height:120px;border-top:4px solid #38bdf8;border-radius:80% 10% 0 0;transform:skewY(-18deg) rotate(6deg)}
+.line-direct{position:absolute;left:55px;bottom:34px;width:210px;height:4px;background:#38bdf8;transform-origin:left center;transform:rotate(-28deg)}
+.rigid-scene{height:210px;border:3px solid #64748b;border-radius:12px;background:#111827;position:relative;overflow:hidden}
+.hot-label,.cold-label{position:absolute;top:8px;font-size:.8rem;font-weight:900;padding:.2rem .5rem;border-radius:999px}
+.cold-label{left:8px;background:rgba(56,189,248,.12);color:#bae6fd}
+.hot-label{right:8px;background:rgba(251,191,36,.12);color:#fde68a}
+.selection-table{width:100%;border-collapse:collapse;font-size:.92rem}
+.selection-table th,.selection-table td{border:1px solid var(--border-color);padding:.55rem;text-align:center}
+.selection-table th{background:#0f172a;color:#67e8f9}
+.path-row{display:flex;gap:.55rem;align-items:center;flex-wrap:wrap}
+.path-box{padding:.45rem .7rem;border:1px solid var(--border-color);border-radius:10px;background:#0f172a;font-weight:900}
+.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+@media (max-width:900px){.law-hero,.practice-grid{grid-template-columns:1fr}
+.variable-grid{grid-template-columns:repeat(2,1fr)}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}}
+.boyle-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:.8rem;align-items:center}
+.gas-state-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;text-align:center}
+.gas-state-card h4{margin:0 0 .4rem;color:#67e8f9}
+.gas-chamber{height:165px;margin:.5rem auto;border:3px solid #64748b;border-radius:10px;position:relative;background:#111827;overflow:hidden}
+.gas-chamber.large{width:90%}
+.gas-chamber.small{width:55%}
+.inverse-center{text-align:center;font-weight:900;color:#fde68a;font-size:1.05rem}
+.inverse-center .big-arrow{font-size:2rem;display:block}
+.derivation-stack{display:flex;flex-direction:column;gap:.55rem;max-width:760px;margin:.4rem auto}
+.derivation-step{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.6rem .8rem;text-align:center;font-weight:800}
+.decision-hero{background:linear-gradient(135deg,rgba(56,189,248,.10),rgba(45,212,191,.08));border:2px solid rgba(56,189,248,.45);border-radius:14px;padding:.8rem}
+.decision-title{text-align:center;font-size:1.12rem;font-weight:900;color:#e0f2fe;margin-bottom:.65rem}
+.decision-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem}
+.decision-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.75rem;text-align:center}
+.decision-card .law-name{font-size:1.12rem;font-weight:900;color:#67e8f9}
+.decision-card .vars{font-size:1.3rem;font-weight:900;color:#fde68a;margin:.35rem 0}
+.decision-card .relation{font-size:.86rem;color:#cbd5e1}
+.decision-card .mini-eq{margin-top:.4rem;font-weight:900}
+.decision-path{display:flex;justify-content:center;align-items:center;gap:.45rem;flex-wrap:wrap;margin:.65rem 0}
+.decision-node{padding:.42rem .68rem;border-radius:999px;background:#0f172a;border:1px solid var(--border-color);font-weight:900}
+@media (max-width:900px){.boyle-compare,.decision-grid{grid-template-columns:1fr}
+.inverse-center{transform:rotate(90deg);margin:.2rem}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}}
+.direct-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:.8rem;align-items:center}
+.balloon-state-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;text-align:center}
+.balloon-state-card h4{margin:0 0 .4rem;color:#67e8f9}
+.balloon-scene{height:185px;position:relative;background:#111827;border:1px solid var(--border-color);border-radius:12px;overflow:hidden}
+.balloon-body{position:absolute;left:50%;transform:translateX(-50%);border-radius:50%;background:rgba(56,189,248,.22);border:3px solid #38bdf8}
+.balloon-body.small{width:82px;height:100px;bottom:48px}
+.balloon-body.large{width:126px;height:150px;bottom:38px}
+.balloon-knot{position:absolute;left:50%;transform:translateX(-50%);width:14px;height:14px;background:#38bdf8;clip-path:polygon(50% 100%,0 0,100% 0)}
+.balloon-string{position:absolute;left:50%;width:2px;background:#cbd5e1;transform:translateX(-50%)}
+.temp-tag{position:absolute;top:10px;padding:.18rem .48rem;border-radius:999px;font-size:.76rem;font-weight:900}
+.temp-tag.cold{left:10px;background:rgba(56,189,248,.12);color:#bae6fd}
+.temp-tag.warm{right:10px;background:rgba(251,191,36,.12);color:#fde68a}
+.state-note{margin-top:.45rem}
+.master-footer{max-width:1400px;width:100%;margin:0 auto;padding:.7rem 1.5rem 1.1rem;text-align:center;color:var(--text-muted);font-size:.82rem;border-top:1px solid rgba(71,85,105,.45)}
+.mode-answer .blank.revealed{color:var(--accent-teal);font-weight:700;}</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧪</span><span>Topic T5.2 | Simple Gas Laws</span></div>
+<div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 8</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+
+<div class="slide-container active" data-integrated-slide="8" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 8 · Local Slide 1</span><h1 class="slide-title">Four Variables Describe a Gas</h1><div class="lo-box"><strong>Learning Objective:</strong> Identify pressure, volume, amount, and temperature and determine which variables change and which are held constant in a simple gas-law experiment.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1"><div class="variable-grid">
+<div class="variable-card"><div class="symbol">P</div><strong>Pressure</strong><p>How strongly the gas pushes on surfaces</p></div>
+<div class="variable-card"><div class="symbol">V</div><strong>Volume</strong><p>Space occupied by the gas</p></div>
+<div class="variable-card"><div class="symbol">n</div><strong>Amount</strong><p>Number of moles of gas</p></div>
+<div class="variable-card"><div class="symbol">T</div><strong>Temperature</strong><p>Use <strong>Kelvin</strong> in gas-law calculations</p></div></div></div>
+<div class="build-step" data-build="2"><div class="callout"><strong>Gas-law strategy:</strong> Which two variables are changing? Which variables are constant?</div><div class="path-row" style="margin-top:.7rem"><div class="path-box">Scenario</div><div class="trend-arrow">→</div><div class="path-box">Changing variables</div><div class="trend-arrow">→</div><div class="path-box">Constants</div><div class="trend-arrow">→</div><div class="path-box">Choose law</div></div></div>
+<div class="build-step" data-build="3"><div class="warn"><strong>Temperature lock:</strong> convert °C to K before substitution.</div><p style="margin-top:.55rem">For gas-law calculations, temperature must be written in <span class="blank" data-answer="Kelvin">[ _______ ]</span>.</p></div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="9" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 9 · Local Slide 2</span><h1 class="slide-title">Boyle’s Law — Predict First, Then Calculate</h1><div class="lo-box"><strong>Learning Objectives: </strong>Predict and calculate how pressure and volume change when temperature and amount of gas are constant. Use Boyle’s law after predicting the direction of pressure change.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="law-hero">
+<div class="law-card"><h4>Everyday Example: A Syringe</h4><p>Close the tip of a syringe and push the plunger inward.</p><div class="callout" style="margin-top:.5rem"><strong>What you feel:</strong> the gas becomes harder to compress as the space gets smaller.</div></div>
+<div class="law-card"><h4>What Changes?</h4><p><strong>Volume decreases</strong> while the same gas is trapped inside.</p><div class="callout" style="margin-top:.5rem"><strong>Observation:</strong> V ↓ → P ↑</div></div>
+</div>
+</div><div class="build-step" data-build="2">
+<div class="boyle-compare">
+<div class="gas-state-card">
+<h4>Larger Volume</h4>
+<div class="gas-chamber large">
+<span class="gas-particle" style="left:13%;top:22%"></span>
+<span class="gas-particle" style="left:34%;top:65%"></span>
+<span class="gas-particle" style="left:55%;top:34%"></span>
+<span class="gas-particle" style="left:76%;top:68%"></span>
+<span class="gas-particle" style="left:84%;top:20%"></span>
+</div>
+<p><strong>More space</strong> → fewer wall collisions per unit time → <strong>lower P</strong></p>
+</div>
+<div class="inverse-center"><span class="big-arrow">⇄</span>same T<br/>same n<br/><strong>inverse</strong></div>
+<div class="gas-state-card">
+<h4>Smaller Volume</h4>
+<div class="gas-chamber small">
+<span class="gas-particle" style="left:12%;top:22%"></span>
+<span class="gas-particle" style="left:30%;top:65%"></span>
+<span class="gas-particle" style="left:50%;top:34%"></span>
+<span class="gas-particle" style="left:70%;top:68%"></span>
+<span class="gas-particle" style="left:82%;top:20%"></span>
+</div>
+<p><strong>Less space</strong> → more wall collisions per unit time → <strong>higher P</strong></p>
+</div>
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Boyle’s Law in one picture:</strong> when V decreases, P increases; when V increases, P decreases.</div>
+<div class="equal-banner">At constant <strong>T</strong> and <strong>n</strong>:   P ∝ <span class="fraction"><span class="num">1</span><span class="den">V</span></span>    and    P₁V₁ = P₂V₂</div>
+<div style="text-align:center;margin-top:.55rem"><span class="constant-chip">T constant</span><span class="constant-chip">n constant</span></div>
+<p style="margin-top:.55rem">Pressure and volume change in <span class="blank" data-answer="opposite directions">[ _______ ]</span>.</p>
+</div><div class="build-step" data-build="3">
+<div class="question-card"><div class="question-text"><strong>Worked example:</strong> O₂(g) occupies 12.0 L at 600. mmHg. What is the new pressure at 36.0 L? T and n are constant.</div></div>
+<div class="callout" style="margin-top:.55rem"><strong>Predict first:</strong> volume triples, so pressure should fall to about one-third.</div>
+<div class="answer-box" style="margin-top:.55rem">P₂ = <span class="fraction"><span class="num">P₁V₁</span><span class="den">V₂</span></span></div>
+</div><div class="build-step" data-build="4">
+<div class="answer-box">P₂ = <span class="fraction"><span class="num">(600. mmHg)(12.0 L)</span><span class="den">36.0 L</span></span> = <strong>200. mmHg</strong></div>
+<div class="callout" style="margin-top:.55rem"><strong>Reasonableness:</strong> 600. mmHg → 200. mmHg matches the inverse prediction.</div>
+</div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="10" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 10 · Local Slide 3</span><h1 class="slide-title">Charles’s Law — Kelvin Connects Temperature to Volume</h1><div class="lo-box"><strong>Learning Objectives: </strong>Relate gas volume to Kelvin temperature when pressure and amount of gas are constant. Convert Celsius to Kelvin and solve a Charles’s law problem.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="law-hero">
+<div class="law-card"><h4>Everyday Example: A Balloon</h4><p>A balloon placed in a warmer place becomes slightly larger; in a colder place, it becomes smaller.</p></div>
+<div class="law-card"><h4>What Changes?</h4><p>If outside pressure stays about constant, <strong>temperature and volume</strong> change together.</p><div class="callout" style="margin-top:.5rem"><strong>Observation:</strong> T ↑ → V ↑</div></div>
+</div>
+</div><div class="build-step" data-build="2">
+<div class="direct-compare">
+<div class="balloon-state-card">
+<h4>Colder Gas</h4>
+<div class="balloon-scene">
+<div class="temp-tag cold">lower T</div>
+<div class="balloon-body small"></div>
+<div class="balloon-knot" style="bottom:40px"></div>
+<div class="balloon-string" style="bottom:0;height:40px"></div>
+</div>
+<p class="state-note"><strong>Lower T</strong> → smaller V</p>
+</div>
+<div class="inverse-center"><span class="big-arrow">⇄</span>same P<br/>same n<br/><strong>direct</strong></div>
+<div class="balloon-state-card">
+<h4>Warmer Gas</h4>
+<div class="balloon-scene">
+<div class="temp-tag warm">higher T</div>
+<div class="balloon-body large"></div>
+<div class="balloon-knot" style="bottom:28px"></div>
+<div class="balloon-string" style="bottom:0;height:28px"></div>
+</div>
+<p class="state-note"><strong>Higher T</strong> → larger V</p>
+</div>
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Charles’s Law in one picture:</strong> when T increases, V increases; when T decreases, V decreases, provided P and n stay constant.</div>
+<div class="equal-banner">At constant <strong>P</strong> and <strong>n</strong>:   V ∝ T(K)    and    <span class="fraction"><span class="num">V₁</span><span class="den">T₁</span></span> = <span class="fraction"><span class="num">V₂</span><span class="den">T₂</span></span></div>
+<div style="text-align:center;margin-top:.55rem"><span class="constant-chip">P constant</span><span class="constant-chip">n constant</span></div>
+<p style="margin-top:.55rem">Charles’s law requires temperature in <span class="blank" data-answer="Kelvin">[ _______ ]</span>.</p>
+</div><div class="build-step" data-build="3"><div class="question-card"><div class="question-text"><strong>Worked example:</strong> A balloon has a volume of 785 mL at 21 °C. If the temperature drops to 0 °C, what is the new volume? P and n are constant.</div></div><div class="callout" style="margin-top:.55rem"><strong>Predict:</strong> temperature decreases, so volume should decrease.</div><div class="answer-box" style="margin-top:.55rem">T₁ = 21 + 273.15 = <strong>294.15 K</strong>    T₂ = 0 + 273.15 = <strong>273.15 K</strong></div><div class="answer-box" style="margin-top:.55rem">V₂ = V₁ × <span class="fraction"><span class="num">T₂</span><span class="den">T₁</span></span></div></div><div class="build-step" data-build="4"><div class="answer-box">V₂ = 785 mL × <span class="fraction"><span class="num">273.15 K</span><span class="den">294.15 K</span></span> = <strong>729 mL = 0.729 L</strong></div><div class="warn" style="margin-top:.55rem"><strong>Common error:</strong> never use 21 and 0 directly in the temperature ratio.</div></div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="11" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 11 · Local Slide 4</span><h1 class="slide-title">Gay-Lussac’s Law — Heating a Rigid Container</h1><div class="lo-box"><strong>Learning Objectives: </strong>Predict and calculate how pressure changes with Kelvin temperature in a rigid container. Use Kelvin temperature to calculate pressure change in a rigid container.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="law-hero">
+<div class="law-card"><h4>Everyday Example: A Sealed Can in a Hot Car</h4><p>A sealed rigid container can build up pressure as it gets hotter.</p><div class="warn" style="margin-top:.5rem"><strong>Safety context only:</strong> this is an observation, not an experiment to try.</div></div>
+<div class="law-card"><h4>What Changes?</h4><p>The container volume stays fixed, so <strong>temperature and pressure</strong> change together.</p><div class="callout" style="margin-top:.5rem"><strong>Observation:</strong> T ↑ → P ↑</div></div>
+</div>
+</div><div class="build-step" data-build="2">
+<div class="law-hero"><div class="rigid-scene"><div class="cold-label">lower T</div><div class="hot-label">higher T</div><span class="gas-particle" style="left:18%;top:36%"></span><span class="gas-particle" style="left:37%;top:68%"></span><span class="gas-particle" style="left:62%;top:34%"></span><span class="gas-particle" style="left:78%;top:65%"></span><div class="hit-arrow" style="left:67%;top:48%">→</div><div class="impact-burst" style="right:8px;top:46%">✦</div></div><div class="law-card"><h4>Particle Explanation</h4><p>Heating makes particles move faster. Because the container cannot expand, they strike the walls more often and with greater momentum change.</p><div class="callout" style="margin-top:.5rem"><strong>Microscopic → macroscopic:</strong> faster particles + fixed V → higher P.</div></div></div>
+<div class="equal-banner">At constant <strong>V</strong> and <strong>n</strong>:   P ∝ T(K)    and    <span class="fraction"><span class="num">P₁</span><span class="den">T₁</span></span> = <span class="fraction"><span class="num">P₂</span><span class="den">T₂</span></span></div>
+<div style="text-align:center;margin-top:.55rem"><span class="constant-chip">V constant</span><span class="constant-chip">n constant</span></div>
+<p style="margin-top:.55rem">This law applies when volume is <span class="blank" data-answer="constant">[ _______ ]</span>.</p>
+</div><div class="build-step" data-build="3"><div class="question-card"><div class="question-text">A rigid gas container is at 1.00 atm and 25.0 °C. If it is heated to 100.0 °C, what pressure will it reach?</div></div><div class="callout" style="margin-top:.55rem"><strong>Predict:</strong> higher T in a rigid container → higher P.</div><div class="answer-box" style="margin-top:.55rem">T₁ = 298.15 K    T₂ = 373.15 K</div><div class="answer-box" style="margin-top:.55rem">P₂ = P₁ × <span class="fraction"><span class="num">T₂</span><span class="den">T₁</span></span></div></div><div class="build-step" data-build="4"><div class="answer-box">P₂ = 1.00 atm × <span class="fraction"><span class="num">373.15 K</span><span class="den">298.15 K</span></span> = <strong>1.25 atm</strong></div><div class="warn" style="margin-top:.55rem"><strong>Distractor alert:</strong> <span class="fraction"><span class="num">100</span><span class="den">25</span></span> is not a valid gas-law temperature ratio.</div></div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="12" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 12 · Local Slide 5</span><h1 class="slide-title">Avogadro’s Law + STP — Amount, Volume, and a Special Reference Condition</h1><div class="lo-box"><strong>Learning Objectives: </strong>Relate gas volume to number of moles when temperature and pressure are constant. Solve an Avogadro’s law problem and recognize the course STP reference.</div></div>
+<div class="slide-body"><div class="build-step" data-build="1">
+<div class="law-hero">
+<div class="law-card"><h4>Everyday Example: Blowing Up a Balloon</h4><p>Each breath adds more gas particles to the balloon, and the balloon gets larger.</p></div>
+<div class="law-card"><h4>What Changes?</h4><p>At roughly constant temperature and outside pressure, <strong>amount of gas and volume</strong> increase together.</p><div class="callout" style="margin-top:.5rem"><strong>Observation:</strong> n ↑ → V ↑</div></div>
+</div>
+<div class="law-hero"><div class="law-card"><h4>Particle Explanation</h4><p>More gas particles need more space if temperature and pressure are to remain the same.</p><div class="callout" style="margin-top:.5rem"><strong>Microscopic → macroscopic:</strong> more particles → larger volume.</div></div><div class="law-card"><h4>Same T and P</h4><p>If the number of moles doubles, the volume doubles.</p></div></div>
+</div><div class="build-step" data-build="2">
+<div class="equal-banner">At constant <strong>T</strong> and <strong>P</strong>:   V ∝ n    and    <span class="fraction"><span class="num">V₁</span><span class="den">n₁</span></span> = <span class="fraction"><span class="num">V₂</span><span class="den">n₂</span></span></div>
+<div style="text-align:center;margin-top:.55rem"><span class="constant-chip">T constant</span><span class="constant-chip">P constant</span></div>
+<p style="margin-top:.55rem">Volume is directly proportional to the number of <span class="blank" data-answer="moles">[ _______ ]</span>.</p>
+</div><div class="build-step" data-build="3"><div class="question-card"><div class="question-text"><strong>Worked example:</strong> 0.75 mol He occupies 1.5 L. What volume will 1.2 mol He occupy at the same T and P?</div></div><div class="callout" style="margin-top:.55rem"><strong>Predict:</strong> more moles → larger volume.</div><div class="answer-box" style="margin-top:.55rem">V₂ = V₁ × <span class="fraction"><span class="num">n₂</span><span class="den">n₁</span></span> = 1.5 L × <span class="fraction"><span class="num">1.2 mol</span><span class="den">0.75 mol</span></span> = <strong>2.4 L</strong></div></div><div class="build-step" data-build="4"><div class="equal-banner">Course STP: 273.15 K and 1 atm → 1 mol ideal gas ≈ 22.4 L</div><div class="warn" style="margin-top:.55rem"><strong>STP lock:</strong> 22.4 L/mol is condition-specific, not universal.</div></div></div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="13" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 13 · Local Slide 6</span><h1 class="slide-title">Which Gas Law Should I Use?</h1><div class="lo-box"><strong>Learning Objective:</strong> Select a simple gas law from the variables that change and the variables that remain constant.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="decision-hero">
+<div class="decision-title">Do not start with a formula. Start with: <strong>WHAT CHANGES?</strong></div>
+<div class="decision-path">
+<div class="decision-node">Read the situation</div><div class="trend-arrow">→</div>
+<div class="decision-node">Circle the 2 changing variables</div><div class="trend-arrow">→</div>
+<div class="decision-node">Confirm the other 2 are constant</div><div class="trend-arrow">→</div>
+<div class="decision-node">Choose the law</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="decision-grid">
+<div class="decision-card"><div class="law-name">Boyle</div><div class="vars">P ∝ <span class="fraction"><span class="num">1</span><span class="den">V</span></span></div><div class="relation">T and n constant<br/><strong>inverse</strong></div><div class="mini-eq">P₁V₁ = P₂V₂</div></div>
+<div class="decision-card"><div class="law-name">Charles</div><div class="vars">V ∝ T</div><div class="relation">P and n constant<br/><strong>direct</strong></div><div class="mini-eq"><span class="fraction"><span class="num">V₁</span><span class="den">T₁</span></span> = <span class="fraction"><span class="num">V₂</span><span class="den">T₂</span></span></div></div>
+<div class="decision-card"><div class="law-name">Gay-Lussac</div><div class="vars">P ∝ T</div><div class="relation">V and n constant<br/><strong>direct</strong></div><div class="mini-eq"><span class="fraction"><span class="num">P₁</span><span class="den">T₁</span></span> = <span class="fraction"><span class="num">P₂</span><span class="den">T₂</span></span></div></div>
+<div class="decision-card"><div class="law-name">Avogadro</div><div class="vars">V ∝ n</div><div class="relation">T and P constant<br/><strong>direct</strong></div><div class="mini-eq"><span class="fraction"><span class="num">V₁</span><span class="den">n₁</span></span> = <span class="fraction"><span class="num">V₂</span><span class="den">n₂</span></span></div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">THE TWO VARIABLES THAT CHANGE TELL YOU THE LAW.</div>
+<div class="decision-grid" style="margin-top:.65rem">
+<div class="practice-card"><h4>Compress a gas at constant T</h4><p><strong>P and V</strong> change → <strong>Boyle</strong></p></div>
+<div class="practice-card"><h4>Warm a balloon at constant P</h4><p><strong>V and T</strong> change → <strong>Charles</strong></p></div>
+<div class="practice-card"><h4>Heat a rigid container</h4><p><strong>P and T</strong> change → <strong>Gay-Lussac</strong></p></div>
+<div class="practice-card"><h4>Add gas to a balloon at constant T and P</h4><p><strong>V and n</strong> change → <strong>Avogadro</strong></p></div>
+</div>
+<div class="warn" style="margin-top:.6rem"><strong>Temperature reminder:</strong> if T appears in the equation, convert °C → K before calculating.</div>
+</div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="14" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 14 · Local Slide 7</span><h1 class="slide-title">Worked ACS-Style Practice: Simple Gas Laws</h1><div class="lo-box"><strong>Learning Objective:</strong> Apply proportional reasoning, Kelvin conversion, and controlled-variable recognition.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1"><div class="practice-grid">
+<div class="practice-card"><span class="practice-badge easy">Easy</span><h4>Trend</h4><p>A gas is compressed at constant T and n. What happens to P?</p><div class="answer-box"><strong>P increases.</strong> Boyle’s law is inverse.</div></div>
+<div class="practice-card"><span class="practice-badge medium">Medium</span><h4>Kelvin calculation</h4><p>A rigid container is 1.20 atm at 15.0 °C. Find P at 90.0 °C.</p><div class="answer-box">P₂ = 1.20 atm × <span class="fraction"><span class="num">363.15 K</span><span class="den">288.15 K</span></span> = <strong>1.51 atm</strong></div></div>
+<div class="practice-card"><span class="practice-badge hard">Hard</span><h4>Choose the law</h4><p>A flexible balloon warms while external pressure stays constant. Which law applies?</p><div class="answer-box"><strong>Charles’s law</strong>: V and T change.</div></div></div></div>
+<div class="build-step" data-build="2"><div class="warn"><strong>Common distractors:</strong> °C used directly, direct/inverse reversed, or wrong controlled variable.</div></div>
+<div class="build-step" data-build="3"><div class="callout"><strong>Representation check:</strong> the equation, graph, and particle story should all predict the same direction.</div></div>
+</div>
+</div>
+
+</div><div class="slide-container" data-integrated-slide="15" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header"><span class="meta-pill">Integrated Slide 15 · Local Slide 8</span><h1 class="slide-title">Independent Check: Simple Gas Laws</h1><div class="lo-box"><strong>Learning Objective:</strong> Demonstrate independent understanding of Boyle, Charles, Gay-Lussac, Avogadro, Kelvin temperature, and STP.</div></div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="question-card"><div><span class="question-num">1</span> <span class="question-text">A gas volume decreases while T and n remain constant. What happens to pressure, and which law describes the change?</span></div><div class="response-area">State the direction and law.</div></div>
+<div class="question-card"><div><span class="question-num">2</span> <span class="question-text">Why must Celsius temperature be converted to Kelvin before using a simple gas-law ratio?</span></div><div class="response-area">Explain using absolute temperature.</div></div></div>
+<div class="build-step" data-build="2">
+<div class="question-card"><div><span class="question-num">3</span> <span class="question-text">A balloon has V = 420 mL at 18 °C. At constant P and n, what temperature in °C would give V = 640 mL?</span></div><div class="response-area">Show Kelvin conversion and a stacked ratio.</div></div>
+<div class="question-card"><div><span class="question-num">4</span> <span class="question-text">A rigid container is heated. Use particle collisions to explain why pressure changes.</span></div><div class="response-area">Connect temperature, particle speed, and wall collisions.</div></div></div>
+<div class="build-step" data-build="3">
+<div class="question-card"><div><span class="question-num">5</span> <span class="question-text">0.75 mol of a gas occupies 1.5 L at constant T and P. Predict whether 1.5 mol would occupy more, less, or the same volume and identify the law.</span></div><div class="response-area">No arithmetic is required unless helpful.</div></div>
+<div class="question-card"><div><span class="question-num">6</span> <span class="question-text">State the course STP conditions and explain why 22.4 L/mol should not be used for every gas problem.</span></div><div class="response-area">Include both the conditions and the limitation.</div></div>
+<div class="callout" style="margin-top:.6rem"><strong>Topic synthesis:</strong> choose the law from changing variables, protect the constants, and use Kelvin for every temperature ratio.</div></div>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</main>
+<footer class="master-footer"><div>General Chemistry I • Module 5</div><div>© Nara Chon</div></footer>
+<script>
+let currentSlide=1;
+const totalSlides=8;
+let currentBuild=1;
+const buildsPerSlide={"1":3,"2":4,"3":4,"4":4,"5":4,"6":3,"7":3,"8":3};
+let currentMode='student';
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+function setMode(mode,button){
+  currentMode=(mode==='answer')?'answer':'student';
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${currentMode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>slide.classList.toggle('active',(index+1)===currentSlide));
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10); step.classList.toggle('visible',n<=currentBuild);
+  });
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const visible=!parentBuild||parentBuild.classList.contains('visible');
+    if(currentMode==='answer'&&visible&&blank.dataset.answer!==undefined){blank.textContent=blank.dataset.answer;blank.classList.add('revealed');}
+    else{blank.textContent='[ _______ ]';blank.classList.remove('revealed');}
+  });
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+function nextBuild(){const max=buildsPerSlide[currentSlide];if(currentBuild<max)currentBuild++;else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}updateDisplay();}
+function prevBuild(){if(currentBuild>1)currentBuild--;else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}updateDisplay();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}});
+updateDisplay();
+</script></body>
+</html>
