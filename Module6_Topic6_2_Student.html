@@ -1,0 +1,3104 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>General Chemistry I — Module 6 — T6.2</title>
+<style>
+:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+  --accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+  --accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border-color:#475569;--blank-bg:#334155;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}
+.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}
+.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.75rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}
+.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}
+.slide-container.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide-header{margin-bottom:1.15rem}
+.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}
+.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}
+.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}
+.lo-box strong{color:var(--accent-blue)}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}
+.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}
+body.mode-answer .blank.revealed{color:var(--accent-amber);background:rgba(251,191,36,.15)}
+.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}
+.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}
+.equal-banner{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.65rem;text-align:center;color:var(--accent-teal);font-weight:900;font-size:1.05rem}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.8rem}
+.panel-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.85rem;text-align:center}
+.panel-card h4{color:var(--accent-blue);font-size:1rem;margin-bottom:.5rem}
+.particle-box{height:130px;border:2px solid #64748b;border-radius:10px;position:relative;background:#111827;overflow:hidden;margin:.4rem auto .55rem}
+.dot{position:absolute;width:15px;height:15px;border-radius:50%;background:var(--accent-blue);box-shadow:0 0 6px rgba(56,189,248,.45)}
+.gas-scene{height:150px;border:2px solid #64748b;border-radius:12px;position:relative;background:linear-gradient(to bottom, rgba(148,163,184,.06), rgba(15,23,42,.25));overflow:hidden;margin:.45rem auto .6rem}
+.gas-particle{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--accent-blue);box-shadow:0 0 8px rgba(56,189,248,.5)}
+.space-note,.fill-note{position:absolute;left:50%;transform:translateX(-50%);padding:.22rem .55rem;border-radius:999px;font-size:.78rem;font-weight:900;white-space:nowrap}
+.space-note{top:8px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.45);color:#fde68a}
+.fill-note{bottom:8px;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.45);color:#ccfbf1}
+.distance-arrow{position:absolute;height:0;border-top:2px dashed rgba(251,191,36,.8)}
+.distance-arrow::before,.distance-arrow::after{content:"";position:absolute;top:-5px;border-top:4px solid transparent;border-bottom:4px solid transparent}
+.distance-arrow::before{left:-1px;border-right:7px solid rgba(251,191,36,.9)}
+.distance-arrow::after{right:-1px;border-left:7px solid rgba(251,191,36,.9)}
+.distance-label{position:absolute;color:#fde68a;font-size:.76rem;font-weight:800}
+.volume-guide{position:absolute;inset:12px;border:2px dashed rgba(45,212,191,.28);border-radius:10px}
+.volume-arrow{position:absolute;color:#2dd4bf;font-size:1.05rem;font-weight:900}
+.gas-tags{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center}
+.gas-tag{padding:.25rem .55rem;border-radius:999px;background:#111827;border:1px solid #475569;font-weight:800;color:#e2e8f0}
+.formula-large{font-size:2rem;font-weight:900;color:var(--accent-teal)}
+.fraction{display:inline-grid;grid-template-rows:auto auto;align-items:center;justify-items:center;line-height:1.08;vertical-align:middle;margin:0 .18rem;min-width:120px}
+.fraction .num{width:100%;padding:.18rem .4rem .28rem;border-bottom:2px solid var(--text-main);text-align:center}
+.fraction .den{width:100%;padding:.28rem .4rem .18rem;text-align:center}
+.factor-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem 1rem;display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap}
+.cancel-pair{position:relative;display:inline-block;color:var(--text-main);padding:0 .08rem}
+.cancel-pair::after{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:2px;background:var(--accent-rose);transform:rotate(-10deg)}
+.survive{color:var(--accent-teal);font-weight:900;border:1px solid var(--accent-teal);border-radius:5px;padding:.08rem .28rem}
+.arrow{color:var(--accent-amber);font-size:1.35rem;font-weight:900;text-align:center}
+.pressure-equivalence{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;align-items:stretch}
+.unit-card{background:#0f172a;border:1px solid var(--border-color);border-radius:9px;padding:.7rem;text-align:center}
+.unit-card .big{font-size:1.2rem;font-weight:900;color:var(--accent-teal)}
+.barometer-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center}
+.barometer{width:260px;height:320px;margin:auto;position:relative}
+.reservoir{position:absolute;bottom:15px;left:35px;width:190px;height:58px;border:3px solid #cbd5e1;border-radius:0 0 28px 28px;background:#64748b}
+.tube{position:absolute;bottom:65px;left:105px;width:50px;height:235px;border:3px solid #cbd5e1;border-bottom:none;border-radius:22px 22px 0 0;overflow:hidden;background:#111827}
+.hg-column{position:absolute;left:0;right:0;bottom:0;height:190px;background:#94a3b8}
+.vacuum{position:absolute;top:8px;left:0;right:0;text-align:center;font-size:.74rem;color:#cbd5e1}
+.height-line{position:absolute;right:58px;bottom:68px;height:190px;border-right:2px dashed var(--accent-amber)}
+.height-label{position:absolute;right:3px;bottom:145px;color:#fde68a;font-weight:900}
+.atm-arrow{position:absolute;left:4px;bottom:56px;color:var(--accent-blue);font-weight:900;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.02em}
+.altitude-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.mountain-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:1rem;text-align:center}
+.air-column{height:190px;border-left:3px solid #64748b;border-right:3px solid #64748b;border-bottom:3px solid #64748b;position:relative;margin:.5rem auto;width:190px;background:linear-gradient(to top,rgba(56,189,248,.08),transparent)}
+.air-dot{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--accent-blue)}
+
+.pressure-link-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:stretch}
+.pressure-visual-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.9rem;text-align:center}
+.pressure-visual-card h4{margin:0 0 .5rem 0;color:var(--accent-blue)}
+.container-scene{width:100%;height:285px;border:3px solid #64748b;border-radius:12px;position:relative;background:#111827;overflow:hidden}
+.wall-label{position:absolute;right:8px;top:8px;font-size:.75rem;color:#cbd5e1;background:rgba(15,23,42,.7);padding:.15rem .4rem;border-radius:999px}
+.hit-arrow{position:absolute;color:#fde68a;font-size:1.05rem;font-weight:900}
+.impact-burst{position:absolute;color:#fbbf24;font-size:1rem;font-weight:900}
+.earth-scene{width:100%;height:210px;border:1px solid var(--border-color);border-radius:12px;position:relative;overflow:hidden;background:linear-gradient(to bottom,#082f49 0%,#0f172a 68%,#1f2937 69%,#1f2937 100%)}
+.air-column-label{position:absolute;top:10px;left:50%;transform:translateX(-50%);padding:.18rem .55rem;border-radius:999px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.42);color:#bae6fd;font-size:.76rem;font-weight:900;white-space:nowrap}
+.ground-strip{position:absolute;left:0;right:0;bottom:0;height:56px;background:#334155}
+.surface-label{position:absolute;padding:.18rem .48rem;border-radius:999px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.42);color:#fde68a;font-size:.76rem;font-weight:900;white-space:nowrap}
+.down-arrow{position:absolute;color:#2dd4bf;font-size:1rem;font-weight:900}
+.atm-note{display:inline-block;margin-top:.45rem;padding:.3rem .65rem;border-radius:999px;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.4);color:#ccfbf1;font-weight:900}
+.reference-figure{width:100%;max-width:430px;height:auto;display:block;margin:.2rem auto .55rem auto;border:1px solid var(--border-color);border-radius:12px;background:#ffffff}
+.mountain-shape{position:absolute;left:34px;bottom:48px;width:150px;height:96px;background:#475569;clip-path:polygon(0% 100%,35% 58%,55% 20%,75% 58%,100% 100%)}
+.mountain-cap{position:absolute;left:91px;bottom:119px;width:42px;height:20px;background:#cbd5e1;clip-path:polygon(0% 100%,30% 15%,70% 15%,100% 100%)}
+.sea-shape{position:absolute;right:0;bottom:48px;width:145px;height:44px;background:rgba(56,189,248,.35);border-top:3px solid #38bdf8}
+.arrow-group{position:absolute}
+.arrow-shaft{border-radius:20px;background:linear-gradient(to bottom,#2dd4bf,#0ea5e9);position:relative;margin:auto}
+.arrow-shaft::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-14px;border-left:12px solid transparent;border-right:12px solid transparent;border-top:16px solid #0ea5e9}
+.arrow-shaft.small{width:18px;height:58px}
+.arrow-shaft.large{width:26px;height:104px}
+.arrow-text-vertical{position:absolute;left:30px;top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:center;font-size:.78rem;font-weight:900;color:#ccfbf1;white-space:nowrap}
+.pressure-value{position:absolute;padding:.18rem .48rem;border-radius:999px;font-size:.76rem;font-weight:900;white-space:nowrap;background:rgba(15,23,42,.75);border:1px solid rgba(45,212,191,.45);color:#ccfbf1}
+.practice-badge{display:inline-block;padding:.22rem .55rem;border-radius:999px;font-size:.78rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
+.practice-badge.easy{background:rgba(45,212,191,.15);color:var(--accent-teal);border:1px solid var(--accent-teal)}
+.practice-badge.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}
+.practice-badge.hard{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.practice-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem}
+.practice-card h4{color:var(--accent-blue);margin-bottom:.45rem}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.45rem}
+.choice{background:#111827;border:1px solid #334155;border-radius:8px;padding:.55rem}
+.answer-box{margin-top:.55rem;background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.55rem;color:#ccfbf1;font-weight:800}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.85rem;display:flex;flex-direction:column;gap:.55rem}
+.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}
+.question-text{font-size:1rem;font-weight:600;line-height:1.4}
+.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:60px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.65rem;margin-top:.5rem}
+.meta-item{background:#1e293b;padding:.5rem .75rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.8rem;text-transform:uppercase}
+@media(max-width:900px){
+  .barometer-wrap,.altitude-grid,.practice-grid,.question-grid,.pressure-equivalence{grid-template-columns:1fr}
+  .slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}
+}
+
+.energy-flow{display:grid;grid-template-columns:1fr auto 1fr;gap:.8rem;align-items:center}
+.energy-object{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.9rem;text-align:center;min-height:150px;display:flex;flex-direction:column;justify-content:center}
+.energy-object h4{color:var(--accent-blue);margin-bottom:.45rem}
+.flow-arrow{font-size:2rem;color:var(--accent-amber);font-weight:900;text-align:center}
+.ball-track{height:120px;position:relative;border-bottom:4px solid #64748b;margin:.3rem 0 .6rem}
+.ball{position:absolute;width:40px;height:40px;border-radius:50%;top:48px;box-shadow:0 0 12px rgba(56,189,248,.35)}
+.ball.white{left:16%;background:#f8fafc;border:2px solid #cbd5e1}
+.ball.purple{right:16%;background:#a78bfa;border:2px solid #8b5cf6}
+.motion-line{position:absolute;top:67px;height:0;border-top:3px dashed var(--accent-amber)}
+.motion-line.left{left:2%;width:15%}
+.motion-line.right{right:2%;width:15%}
+.temp-pair{display:grid;grid-template-columns:1fr auto 1fr;gap:.7rem;align-items:center}
+.thermo{height:155px;width:62px;margin:.25rem auto;position:relative}
+.thermo .tube{position:absolute;left:26px;top:5px;width:12px;height:115px;border-radius:8px;background:#334155;border:2px solid #94a3b8}
+.thermo .mercury{position:absolute;left:29px;bottom:35px;width:6px;border-radius:4px;background:var(--accent-rose)}
+.thermo.hot .mercury{height:83px}.thermo.cold .mercury{height:40px}
+.thermo .bulb{position:absolute;left:16px;bottom:10px;width:32px;height:32px;border-radius:50%;background:var(--accent-rose);border:2px solid #fecdd3}
+.energy-type-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
+.energy-type{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem;text-align:center}
+.energy-type h4{color:var(--accent-blue);margin-bottom:.4rem}
+.icon-big{font-size:2rem;margin:.2rem 0 .45rem}
+.unit-map{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+.unit-chip{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.75rem;text-align:center}
+.unit-chip strong{display:block;color:var(--accent-teal);font-size:1.05rem}
+.boundary-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:1rem;align-items:center}
+.system-box{height:250px;border:3px solid var(--accent-blue);border-radius:16px;position:relative;background:#0f172a;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem}
+.system-label{font-size:1.3rem;font-weight:900;color:var(--accent-blue)}
+.surr-label{position:absolute;right:10px;top:10px;color:#cbd5e1;font-weight:800}
+.energy-arrow{position:absolute;font-size:1.55rem;font-weight:900;color:var(--accent-amber)}
+.energy-arrow.q{left:-70px;top:55px}.energy-arrow.w{right:-76px;bottom:52px}
+.universe-ring{border:2px dashed #64748b;border-radius:20px;padding:1rem;background:rgba(148,163,184,.04)}
+.system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.system-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.85rem;text-align:center}
+.system-card h4{color:var(--accent-blue);margin-bottom:.5rem}
+.container-icon{height:120px;border:3px solid #64748b;border-radius:8px 8px 16px 16px;position:relative;margin:.4rem auto .6rem;width:110px}
+.container-icon.open{border-top:none}
+.container-icon.closed::before,.container-icon.isolated::before{content:"";position:absolute;left:-5px;right:-5px;top:-10px;height:12px;background:#94a3b8;border-radius:5px}
+.container-icon.isolated{border:7px double #94a3b8}
+.exchange-tags{display:flex;gap:.35rem;justify-content:center;flex-wrap:wrap}
+.exchange-tag{font-size:.78rem;font-weight:900;padding:.2rem .45rem;border-radius:999px;border:1px solid #475569}
+.exchange-tag.yes{color:#ccfbf1;border-color:var(--accent-teal);background:rgba(45,212,191,.08)}
+.exchange-tag.no{color:#fecdd3;border-color:var(--accent-rose);background:rgba(244,63,94,.08)}
+@media(max-width:900px){
+  .energy-flow,.temp-pair,.boundary-wrap,.system-grid,.energy-type-grid,.unit-map{grid-template-columns:1fr}
+}
+
+.collision-scene{height:150px;position:relative;border-bottom:4px solid #64748b;margin:.35rem 0 .6rem;background:linear-gradient(180deg, rgba(30,41,59,.22), rgba(15,23,42,.02));border-radius:10px}
+.collision-ball{position:absolute;width:44px;height:44px;border-radius:50%;top:54px;box-shadow:0 0 12px rgba(56,189,248,.35)}
+.collision-ball.left{left:35%;background:#f8fafc;border:2px solid #cbd5e1}
+.collision-ball.right{left:52%;background:#a78bfa;border:2px solid #8b5cf6}
+.collision-line{position:absolute;top:75px;height:0;border-top:3px dashed var(--accent-amber)}
+.collision-line.left{left:18%;width:15%}
+.collision-line.right{left:67%;width:12%}
+.collision-burst{position:absolute;left:48.5%;top:62px;font-size:1.2rem;color:var(--accent-amber);font-weight:900}
+.universe-diagram{position:relative;min-height:270px;border:2px dashed #64748b;border-radius:20px;background:rgba(148,163,184,.04);padding:1rem}
+.universe-title{position:absolute;top:10px;left:16px;color:#cbd5e1;font-weight:900}
+.surroundings-zone{position:absolute;inset:42px 18px 18px 18px;border:2px solid #475569;border-radius:18px;background:rgba(15,23,42,.20)}
+.surroundings-label{position:absolute;top:14px;right:16px;color:#e2e8f0;font-weight:800}
+.system-core{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:220px;height:140px;border:3px solid var(--accent-blue);border-radius:16px;background:#0f172a;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem}
+.system-core .system-label{font-size:1.25rem;font-weight:900;color:var(--accent-blue)}
+.energy-arrow-in,.energy-arrow-out{position:absolute;font-size:1.15rem;font-weight:900;color:var(--accent-amber)}
+.energy-arrow-in{left:70px;top:112px}
+.energy-arrow-out{right:66px;bottom:94px}
+.boundary-note{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);color:#cbd5e1;font-size:.86rem}
+.logic-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.logic-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.7rem;text-align:center}
+
+
+.energy-arrow-in,.energy-arrow-out{
+  position:absolute;
+  font-size:1rem;
+  font-weight:900;
+  color:var(--accent-amber);
+  background:rgba(15,23,42,.9);
+  padding:.2rem .4rem;
+  border-radius:8px;
+  border:1px solid rgba(245,158,11,.35);
+  z-index:3;
+  white-space:nowrap;
+}
+.energy-arrow-in{
+  left:calc(50% - 178px);
+  top:110px;
+}
+.energy-arrow-out{
+  left:calc(50% + 78px);
+  top:150px;
+}
+.boundary-note{display:none}
+
+.energy-arrow-in,.energy-arrow-out{
+  position:absolute;
+  z-index:4;
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  font-size:1rem;
+  font-weight:900;
+  color:var(--accent-amber);
+  background:transparent;
+  border:none;
+  padding:0;
+  white-space:nowrap;
+}
+.energy-arrow-in{
+  left:calc(50% - 300px);
+  top:118px;
+}
+.energy-arrow-out{
+  left:calc(50% + 122px);
+  top:118px;
+}
+.energy-arrow-in .flow-line,
+.energy-arrow-out .flow-line{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:68px;
+  height:0;
+  border-top:4px solid var(--accent-amber);
+  position:relative;
+}
+.energy-arrow-in .flow-line::after,
+.energy-arrow-out .flow-line::after{
+  content:"";
+  position:absolute;
+  right:-2px;
+  top:-7px;
+  width:0;
+  height:0;
+  border-top:7px solid transparent;
+  border-bottom:7px solid transparent;
+  border-left:13px solid var(--accent-amber);
+}
+.energy-arrow-in .label,
+.energy-arrow-out .label{
+  text-shadow:0 1px 0 rgba(0,0,0,.25);
+}
+
+/* Slide 4 solid-shape arrow update */
+.energy-arrow-in,.energy-arrow-out{
+  position:absolute;
+  z-index:4;
+  display:flex;
+  align-items:center;
+  gap:.55rem;
+  font-size:1rem;
+  font-weight:900;
+  color:var(--accent-amber);
+  background:transparent;
+  border:none;
+  padding:0;
+  white-space:nowrap;
+}
+.energy-arrow-in{ left:calc(50% - 250px); top:114px; }
+.energy-arrow-out{ left:calc(50% + 118px); top:114px; }
+
+.shape-arrow{
+  position:relative;
+  display:inline-block;
+  width:82px;
+  height:14px;
+  background:var(--accent-amber);
+  border-radius:999px;
+  box-shadow:0 0 0 1px rgba(245,158,11,.18);
+}
+.shape-arrow::after{
+  content:"";
+  position:absolute;
+  right:-12px;
+  top:50%;
+  transform:translateY(-50%);
+  width:0;height:0;
+  border-top:11px solid transparent;
+  border-bottom:11px solid transparent;
+  border-left:16px solid var(--accent-amber);
+}
+.energy-arrow-in .shape-arrow,
+.energy-arrow-out .shape-arrow{
+  flex:0 0 auto;
+}
+
+
+/* --- Slide 1 collision spacing refinement --- */
+.collision-ball.left{left:36.5% !important;}
+.collision-ball.right{left:58.5% !important;}
+.collision-line.left{left:21% !important;width:14.5% !important;}
+.collision-line.right{left:63.8% !important;width:12.2% !important;}
+.collision-burst{left:48.2% !important;top:61px !important;}
+
+/* --- Slide 4 arrow spacing refinement --- */
+.energy-arrow-in,
+.energy-arrow-out{
+  position:absolute;
+  z-index:4;
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  font-size:1rem;
+  font-weight:900;
+  color:var(--accent-amber);
+  white-space:nowrap;
+}
+
+.energy-arrow-in{
+  left:calc(50% - 275px);
+  top:114px;
+  gap:.9rem;
+}
+.energy-arrow-out{
+  left:calc(50% + 105px);
+  top:114px;
+  gap:.9rem;
+}
+
+.shape-arrow{
+  position:relative;
+  display:inline-block;
+  width:92px;
+  height:14px;
+  background:var(--accent-amber);
+  border-radius:999px;
+  box-shadow:0 0 0 1px rgba(245,158,11,.18);
+}
+
+
+/* incoming arrow reaches the system boundary */
+.energy-arrow-in .shape-arrow{
+  margin-right:-18px;
+}
+
+/* outgoing arrow starts inside / across the system boundary */
+.energy-arrow-out .shape-arrow{
+  margin-right:0;
+  margin-left:-22px;
+}
+
+
+
+/* =========================================================
+   FINAL RESPONSIVE ILLUSTRATION POSITIONING
+   Horizontal geometry uses percentages of the illustration
+   container rather than monitor-dependent pixel offsets.
+   ========================================================= */
+
+/* ---------- Slide 1: collision illustration ---------- */
+.collision-scene{
+  position:relative;
+}
+
+/* Keep the approved left ball position. */
+.collision-ball.left{
+  left:36.5% !important;
+}
+
+/* Right ball stays visually attached to the outgoing dotted path. */
+.collision-ball.right{
+  left:58.5% !important;
+}
+
+/* Motion paths now scale with the collision scene width. */
+.collision-line.left{
+  left:21% !important;
+  width:14.5% !important;
+}
+.collision-line.right{
+  left:63.8% !important;
+  width:12.2% !important;
+}
+
+/* Collision/transfer marker remains positioned proportionally. */
+.collision-burst{
+  left:48.2% !important;
+  top:61px !important;
+}
+
+
+/* ---------- Slide 4: universe / system / surroundings ---------- */
+
+/* System size and position are relative to the surroundings box. */
+.system-core{
+  left:50% !important;
+  top:52% !important;
+  width:24% !important;
+  height:58% !important;
+  transform:translate(-50%,-50%) !important;
+}
+
+/*
+  System horizontal boundaries:
+  left  = 50% - 12% = 38%
+  right = 50% + 12% = 62%
+
+  Incoming arrow ends just INSIDE the 38% boundary.
+  Outgoing arrow begins just INSIDE the 62% boundary.
+*/
+.energy-arrow-in,
+.energy-arrow-out{
+  position:absolute !important;
+  top:46% !important;
+  z-index:4 !important;
+  display:flex !important;
+  align-items:center !important;
+  font-size:1rem !important;
+  font-weight:900 !important;
+  color:var(--accent-amber) !important;
+  background:transparent !important;
+  border:none !important;
+  padding:0 !important;
+  white-space:nowrap !important;
+}
+
+/* Incoming: label then arrow, ending slightly across system boundary. */
+.energy-arrow-in{
+  left:13% !important;
+  width:25.8% !important;
+  right:auto !important;
+  justify-content:flex-end !important;
+  gap:5% !important;
+}
+
+/* Outgoing: arrow begins slightly inside system boundary, then label. */
+.energy-arrow-out{
+  left:61.2% !important;
+  width:25.8% !important;
+  right:auto !important;
+  bottom:auto !important;
+  justify-content:flex-start !important;
+  gap:5% !important;
+}
+
+/* Arrow body scales with its own arrow group. */
+.energy-arrow-in .shape-arrow,
+.energy-arrow-out .shape-arrow{
+  width:47% !important;
+  height:14px !important;
+  margin:0 !important;
+  flex:0 0 47% !important;
+}
+
+/* Keep label and arrow clearly separated. */
+.energy-arrow-in .label,
+.energy-arrow-out .label{
+  flex:0 0 auto !important;
+  margin:0 !important;
+}
+
+/* Small-screen refinement while preserving the same relative geometry. */
+@media(max-width:900px){
+  .system-core{
+    width:28% !important;
+  }
+  .energy-arrow-in{
+    left:7% !important;
+    width:29% !important;
+  }
+  .energy-arrow-out{
+    left:64% !important;
+    width:29% !important;
+  }
+  .energy-arrow-in .shape-arrow,
+  .energy-arrow-out .shape-arrow{
+    width:42% !important;
+    flex-basis:42% !important;
+  }
+}
+
+/* =========================================================
+   SHARED ILLUSTRATION SYSTEM
+   Relative geometry is used whenever multiple shapes must
+   preserve spatial relationships across different screens.
+   ========================================================= */
+
+.energy-balance{
+  position:relative;
+  height:230px;
+  border:2px dashed #64748b;
+  border-radius:18px;
+  background:rgba(148,163,184,.04);
+  overflow:hidden;
+}
+.balance-system{
+  position:absolute;
+  left:39%;
+  top:22%;
+  width:22%;
+  height:56%;
+  border:3px solid var(--accent-blue);
+  border-radius:16px;
+  background:#0f172a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-weight:900;
+  color:var(--accent-blue);
+}
+.balance-side{
+  position:absolute;
+  top:13%;
+  width:25%;
+  height:74%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+  color:#cbd5e1;
+}
+.balance-side.left{left:4%}
+.balance-side.right{right:4%}
+.energy-transfer-arrow{
+  position:absolute;
+  top:46%;
+  width:18%;
+  height:16px;
+  background:var(--accent-amber);
+  border-radius:999px;
+}
+.energy-transfer-arrow::after{
+  content:"";
+  position:absolute;
+  right:-1.8%;
+  top:50%;
+  transform:translate(100%,-50%);
+  border-top:12px solid transparent;
+  border-bottom:12px solid transparent;
+  border-left:18px solid var(--accent-amber);
+}
+.energy-transfer-arrow.to-system{left:22%}
+.energy-transfer-arrow.from-system{left:60%}
+.balance-equation{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.55rem;
+  flex-wrap:wrap;
+  font-size:1.45rem;
+  font-weight:900;
+  color:var(--accent-teal);
+}
+
+.route-diagram{
+  position:relative;
+  height:220px;
+  border:1px solid var(--border-color);
+  border-radius:14px;
+  background:#0f172a;
+  overflow:hidden;
+}
+.state-node{
+  position:absolute;
+  width:17%;
+  min-width:120px;
+  padding:.7rem .5rem;
+  border:2px solid var(--accent-blue);
+  border-radius:12px;
+  text-align:center;
+  background:#111827;
+}
+.state-node.initial{left:8%;top:38%}
+.state-node.final{right:8%;top:38%}
+.route-path{
+  position:absolute;
+  left:25%;
+  width:50%;
+  border-top:4px solid var(--accent-amber);
+}
+.route-path.top{top:30%;transform:rotate(-5deg)}
+.route-path.bottom{top:68%;transform:rotate(5deg)}
+.route-label{
+  position:absolute;
+  left:48%;
+  transform:translateX(-50%);
+  padding:.25rem .55rem;
+  border-radius:999px;
+  background:#1e293b;
+  border:1px solid #475569;
+  color:#e2e8f0;
+  font-weight:800;
+}
+.route-label.top{top:15%}
+.route-label.bottom{bottom:12%}
+
+.sign-map{
+  position:relative;
+  height:265px;
+  border:2px dashed #64748b;
+  border-radius:18px;
+  background:rgba(148,163,184,.04);
+}
+.sign-system{
+  position:absolute;
+  left:40%;
+  top:29%;
+  width:20%;
+  height:42%;
+  border:3px solid var(--accent-blue);
+  border-radius:16px;
+  background:#0f172a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--accent-blue);
+  font-weight:900;
+}
+.sign-label{
+  position:absolute;
+  font-weight:900;
+  color:var(--accent-amber);
+  white-space:nowrap;
+}
+.sign-label.qin{left:8%;top:23%}
+.sign-label.win{left:8%;bottom:23%}
+.sign-label.qout{right:7%;top:23%}
+.sign-label.wout{right:7%;bottom:23%}
+.sign-shape{
+  position:absolute;
+  width:23%;
+  height:14px;
+  background:var(--accent-amber);
+  border-radius:999px;
+}
+.sign-shape::after{
+  content:"";
+  position:absolute;
+  right:-1.5%;
+  top:50%;
+  transform:translate(100%,-50%);
+  border-top:11px solid transparent;
+  border-bottom:11px solid transparent;
+  border-left:16px solid var(--accent-amber);
+}
+.sign-shape.qin{left:18%;top:36%}
+.sign-shape.win{left:18%;bottom:36%}
+.sign-shape.qout{left:59%;top:36%}
+.sign-shape.wout{left:59%;bottom:36%}
+
+.calc-path{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.65rem;
+  align-items:stretch;
+}
+.calc-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+}
+.calc-step strong{color:var(--accent-blue);display:block;margin-bottom:.35rem}
+.math-line{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem 1rem;
+  text-align:center;
+  font-size:1.25rem;
+  font-weight:850;
+}
+.math-line .positive{color:var(--accent-teal)}
+.math-line .negative{color:#fda4af}
+
+.piston-stage{
+  position:relative;
+  height:245px;
+  border:1px solid var(--border-color);
+  border-radius:14px;
+  background:#0f172a;
+  overflow:hidden;
+}
+.piston-cylinder{
+  position:absolute;
+  left:38%;
+  bottom:13%;
+  width:24%;
+  height:60%;
+  border:4px solid #94a3b8;
+  border-top:none;
+  border-radius:0 0 12px 12px;
+  background:#111827;
+}
+.piston-head{
+  position:absolute;
+  left:36%;
+  width:28%;
+  height:9%;
+  background:#94a3b8;
+  border-radius:6px;
+}
+.piston-head.expanded{top:19%}
+.piston-head.compressed{top:43%}
+.piston-rod{
+  position:absolute;
+  left:49%;
+  width:2%;
+  background:#64748b;
+}
+.piston-rod.expanded{top:5%;height:15%}
+.piston-rod.compressed{top:20%;height:24%}
+.piston-gas{
+  position:absolute;
+  left:41%;
+  width:18%;
+  bottom:17%;
+  border-radius:8px;
+  background:rgba(56,189,248,.13);
+  border:1px dashed rgba(56,189,248,.5);
+}
+.piston-gas.expanded{height:50%}
+.piston-gas.compressed{height:26%}
+.piston-force{
+  position:absolute;
+  left:67%;
+  top:17%;
+  width:21%;
+  text-align:center;
+  color:#fde68a;
+  font-weight:900;
+}
+.piston-note{
+  position:absolute;
+  left:6%;
+  width:25%;
+  top:34%;
+  text-align:center;
+  color:#cbd5e1;
+  font-weight:800;
+}
+.piston-arrow{
+  position:absolute;
+  left:68%;
+  top:42%;
+  width:13%;
+  height:14px;
+  background:var(--accent-amber);
+  border-radius:999px;
+}
+.piston-arrow.up{
+  width:14px;height:29%;
+  left:73%;top:20%;
+}
+.piston-arrow.up::after{
+  content:"";
+  position:absolute;
+  top:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  border-left:11px solid transparent;
+  border-right:11px solid transparent;
+  border-bottom:16px solid var(--accent-amber);
+}
+.piston-arrow.down{
+  width:14px;height:29%;
+  left:73%;top:31%;
+}
+.piston-arrow.down::after{
+  content:"";
+  position:absolute;
+  bottom:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  border-left:11px solid transparent;
+  border-right:11px solid transparent;
+  border-top:16px solid var(--accent-amber);
+}
+
+.pv-compare{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.8rem;
+}
+.pv-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.8rem;
+}
+.pv-card h4{color:var(--accent-blue);text-align:center;margin-bottom:.45rem}
+.pv-mini{
+  position:relative;
+  height:155px;
+  border:1px solid #334155;
+  border-radius:10px;
+  overflow:hidden;
+}
+.pv-mini .cyl{
+  position:absolute;
+  left:34%;
+  bottom:10%;
+  width:32%;
+  height:67%;
+  border:3px solid #94a3b8;
+  border-top:none;
+  background:#111827;
+}
+.pv-mini .head{
+  position:absolute;
+  left:31%;
+  width:38%;
+  height:10%;
+  background:#94a3b8;
+  border-radius:5px;
+}
+.pv-mini.expansion .head{top:17%}
+.pv-mini.compression .head{top:42%}
+.pv-mini .dir{
+  position:absolute;
+  right:13%;
+  top:27%;
+  font-size:2rem;
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.pv-mini .caption{
+  position:absolute;
+  left:6%;
+  bottom:8%;
+  font-size:.85rem;
+  color:#cbd5e1;
+  font-weight:800;
+}
+
+.reason-box{
+  background:rgba(45,212,191,.08);
+  border:1px solid var(--accent-teal);
+  border-radius:10px;
+  padding:.7rem 1rem;
+  color:#ccfbf1;
+}
+
+@media(max-width:900px){
+  .calc-path,.pv-compare{grid-template-columns:1fr 1fr}
+  .balance-system{width:28%;left:36%}
+  .energy-transfer-arrow.to-system{left:17%;width:20%}
+  .energy-transfer-arrow.from-system{left:63%;width:20%}
+  .sign-system{left:36%;width:28%}
+  .sign-shape.qin,.sign-shape.win{left:15%;width:22%}
+  .sign-shape.qout,.sign-shape.wout{left:63%;width:22%}
+}
+
+.fixed-illustration{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:340px;
+  object-fit:contain;
+  margin:.55rem auto;
+  border-radius:14px;
+}
+
+.fixed-illustration{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:330px;
+  object-fit:contain;
+  margin:.55rem auto;
+  border-radius:14px;
+}
+.heat-focus{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.75rem;
+}
+.quantity-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.85rem;
+}
+.quantity-card h4{
+  color:var(--accent-blue);
+  margin-bottom:.45rem;
+  text-align:center;
+}
+.quantity-card .eq{
+  text-align:center;
+  color:var(--accent-teal);
+  font-size:1.45rem;
+  font-weight:900;
+  margin:.35rem 0;
+}
+.equation-map{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+}
+.eq-part{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+}
+.eq-part strong{display:block;color:var(--accent-blue);font-size:1.25rem}
+.temp-sign-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.7rem;
+}
+.temp-sign-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+}
+.path-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+}
+.path-box{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.7rem;
+  text-align:center;
+}
+.path-box strong{display:block;color:var(--accent-blue);margin-bottom:.3rem}
+.energy-ledger{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:.65rem;
+}
+.ledger-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.8rem;
+  text-align:center;
+}
+.ledger-arrow{
+  font-size:1.6rem;
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.error-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.65rem;
+}
+.error-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+}
+.error-card h4{color:var(--accent-rose);margin-bottom:.35rem}
+@media(max-width:900px){
+  .heat-focus,.equation-map,.temp-sign-grid,.path-row,.error-grid{grid-template-columns:1fr 1fr}
+}
+
+.two-col-worked{
+  display:grid;
+  grid-template-columns:1.04fr .96fr;
+  gap:.8rem;
+}
+.worked-col{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.8rem;
+}
+.worked-col h4{
+  color:var(--accent-blue);
+  margin-bottom:.45rem;
+}
+.eq-sequence{
+  display:grid;
+  gap:.45rem;
+}
+.eq-sequence .step{
+  background:#111827;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.55rem .7rem;
+}
+.system-tag{
+  display:inline-block;
+  background:rgba(244,63,94,.12);
+  color:#fecdd3;
+  border:1px solid rgba(244,63,94,.35);
+  border-radius:999px;
+  padding:.16rem .5rem;
+  font-size:.82rem;
+  font-weight:800;
+}
+.surr-tag{
+  display:inline-block;
+  background:rgba(56,189,248,.12);
+  color:#bae6fd;
+  border:1px solid rgba(56,189,248,.35);
+  border-radius:999px;
+  padding:.16rem .5rem;
+  font-size:.82rem;
+  font-weight:800;
+}
+@media(max-width:900px){
+  .two-col-worked{grid-template-columns:1fr}
+}
+
+.acs-route{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.55rem;
+  margin-top:.55rem;
+}
+.acs-route-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.6rem;
+  text-align:center;
+}
+.acs-route-card strong{
+  display:block;
+  color:var(--accent-blue);
+  margin-bottom:.25rem;
+}
+.mc-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.5rem;
+  margin-top:.5rem;
+}
+.mc-choice{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:8px;
+  padding:.52rem .65rem;
+}
+.trap-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.6rem;
+  margin-top:.55rem;
+}
+.trap-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.65rem;
+}
+.trap-card h4{
+  color:var(--accent-amber);
+  margin-bottom:.3rem;
+}
+@media(max-width:900px){
+  .acs-route,.trap-grid{grid-template-columns:1fr 1fr}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:900px){
+  .barometer-wrap,.altitude-grid,.practice-grid,.question-grid,.pressure-equivalence{grid-template-columns:1fr}
+  .slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:900px){
+  .energy-flow,.temp-pair,.boundary-wrap,.system-grid,.energy-type-grid,.unit-map{grid-template-columns:1fr}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Slide 4 solid-shape arrow update */
+
+
+
+
+
+
+
+
+
+/* --- Slide 1 collision spacing refinement --- */
+
+
+
+
+
+
+/* --- Slide 4 arrow spacing refinement --- */
+
+
+
+
+
+
+
+
+/* incoming arrow reaches the system boundary */
+
+
+/* outgoing arrow starts inside / across the system boundary */
+
+
+
+
+/* =========================================================
+   FINAL RESPONSIVE ILLUSTRATION POSITIONING
+   Horizontal geometry uses percentages of the illustration
+   container rather than monitor-dependent pixel offsets.
+   ========================================================= */
+
+/* ---------- Slide 1: collision illustration ---------- */
+
+
+/* Keep the approved left ball position. */
+
+
+/* Right ball stays visually attached to the outgoing dotted path. */
+
+
+/* Motion paths now scale with the collision scene width. */
+
+
+
+/* Collision/transfer marker remains positioned proportionally. */
+
+
+
+/* ---------- Slide 4: universe / system / surroundings ---------- */
+
+/* System size and position are relative to the surroundings box. */
+
+
+/*
+  System horizontal boundaries:
+  left  = 50% - 12% = 38%
+  right = 50% + 12% = 62%
+
+  Incoming arrow ends just INSIDE the 38% boundary.
+  Outgoing arrow begins just INSIDE the 62% boundary.
+*/
+
+
+/* Incoming: label then arrow, ending slightly across system boundary. */
+
+
+/* Outgoing: arrow begins slightly inside system boundary, then label. */
+
+
+/* Arrow body scales with its own arrow group. */
+
+
+/* Keep label and arrow clearly separated. */
+
+
+/* Small-screen refinement while preserving the same relative geometry. */
+@media(max-width:900px){
+  .system-core{
+    width:28% !important;
+  }
+  .energy-arrow-in{
+    left:7% !important;
+    width:29% !important;
+  }
+  .energy-arrow-out{
+    left:64% !important;
+    width:29% !important;
+  }
+  .energy-arrow-in .shape-arrow,
+  .energy-arrow-out .shape-arrow{
+    width:42% !important;
+    flex-basis:42% !important;
+  }
+}
+
+/* =========================================================
+   SHARED ILLUSTRATION SYSTEM
+   Relative geometry is used whenever multiple shapes must
+   preserve spatial relationships across different screens.
+   ========================================================= */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:900px){
+  .calc-path,.pv-compare{grid-template-columns:1fr 1fr}
+  .balance-system{width:28%;left:36%}
+  .energy-transfer-arrow.to-system{left:17%;width:20%}
+  .energy-transfer-arrow.from-system{left:63%;width:20%}
+  .sign-system{left:36%;width:28%}
+  .sign-shape.qin,.sign-shape.win{left:15%;width:22%}
+  .sign-shape.qout,.sign-shape.wout{left:63%;width:22%}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:900px){
+  .heat-focus,.equation-map,.temp-sign-grid,.path-row,.error-grid{grid-template-columns:1fr 1fr}
+}
+
+
+
+
+
+
+
+
+@media(max-width:900px){
+  .two-col-worked{grid-template-columns:1fr}
+}
+
+
+
+
+
+
+
+
+
+@media(max-width:900px){
+  .acs-route,.trap-grid{grid-template-columns:1fr 1fr}
+}
+
+.enthalpy-key{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:.8rem;align-items:center;
+}
+.big-symbol{
+  background:#0f172a;border:2px solid var(--accent-blue);border-radius:14px;
+  padding:1rem;text-align:center;font-size:2rem;font-weight:900;color:var(--accent-blue);
+}
+.cheat-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:stretch;
+}
+.cheat-side{
+  background:#0f172a;border:2px solid var(--border-color);border-radius:14px;padding:.9rem;
+}
+.cheat-side h3{text-align:center;margin-bottom:.55rem;font-size:1.25rem}
+.cheat-side.exo{border-color:#f59e0b}
+.cheat-side.endo{border-color:#38bdf8}
+.cheat-row{
+  display:grid;grid-template-columns:150px 1fr;gap:.5rem;padding:.34rem 0;
+  border-bottom:1px solid #334155;align-items:start;
+}
+.cheat-row:last-child{border-bottom:none}
+.cheat-label{font-weight:900;color:#cbd5e1}
+.energy-level{
+  position:relative;height:150px;background:#111827;border:1px solid #334155;
+  border-radius:10px;margin-top:.5rem;overflow:hidden;
+}
+.level-line{
+  position:absolute;left:15%;right:15%;height:4px;background:#94a3b8;border-radius:99px;
+}
+.level-line.react{top:35%}.level-line.prod{top:70%}
+.level-line.react.low{top:70%}.level-line.prod.high{top:35%}
+.level-text{position:absolute;font-size:.8rem;font-weight:800;color:#e2e8f0}
+.level-text.react{left:16%;top:22%}.level-text.prod{left:16%;top:73%}
+.level-text.react.low{top:73%}.level-text.prod.high{top:22%}
+.energy-arrow-down,.energy-arrow-up{
+  position:absolute;right:20%;width:12px;background:var(--accent-amber);border-radius:99px;
+}
+.energy-arrow-down{top:38%;height:42%}
+.energy-arrow-down::after{
+  content:"";position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);
+  border-left:10px solid transparent;border-right:10px solid transparent;border-top:14px solid var(--accent-amber);
+}
+.energy-arrow-up{top:32%;height:42%}
+.energy-arrow-up::after{
+  content:"";position:absolute;left:50%;top:-10px;transform:translateX(-50%);
+  border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:14px solid var(--accent-amber);
+}
+.beaker-icon{
+  width:110px;height:110px;margin:.35rem auto;position:relative;border:4px solid #94a3b8;
+  border-top:none;border-radius:0 0 18px 18px;background:linear-gradient(to top,rgba(56,189,248,.26) 0 60%,transparent 60%);
+}
+.beaker-icon::before{
+  content:"";position:absolute;left:-4px;right:-4px;top:-7px;border-top:4px solid #94a3b8;
+}
+.hand-note{text-align:center;font-weight:900;margin-top:.25rem}
+.word-bank{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;margin-top:.55rem;
+}
+.word-chip{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.6rem;text-align:center;
+}
+.word-chip strong{display:block;color:var(--accent-blue);margin-bottom:.2rem}
+.bridge-chain{
+  display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap;
+  font-size:1.08rem;font-weight:850;
+}
+.bridge-node{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:9px;padding:.55rem .75rem;
+}
+.state-route{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:.75rem;align-items:center;
+}
+.state-box{
+  background:#0f172a;border:2px solid var(--accent-blue);border-radius:12px;padding:.8rem;text-align:center;
+}
+@media(max-width:900px){
+  .cheat-grid,.enthalpy-key,.state-route{grid-template-columns:1fr}
+  .word-bank{grid-template-columns:1fr 1fr}
+  .cheat-row{grid-template-columns:120px 1fr}
+}
+
+.intuition-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.8rem;
+  align-items:stretch;
+}
+.intuition-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.85rem;
+}
+.intuition-card h4{
+  color:var(--accent-blue);
+  margin-bottom:.45rem;
+}
+.energy-budget{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:.7rem;
+  align-items:center;
+  margin-top:.55rem;
+}
+.budget-box{
+  background:#0f172a;
+  border:2px solid var(--accent-blue);
+  border-radius:12px;
+  padding:.8rem;
+  text-align:center;
+  min-height:105px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.budget-box strong{
+  color:var(--accent-blue);
+  font-size:1.2rem;
+}
+.open-beaker{
+  width:150px;
+  height:125px;
+  margin:.35rem auto;
+  position:relative;
+  border:4px solid #94a3b8;
+  border-top:none;
+  border-radius:0 0 22px 22px;
+  background:linear-gradient(to top,rgba(56,189,248,.24) 0 58%,transparent 58%);
+}
+.open-beaker::before{
+  content:"";
+  position:absolute;
+  left:-4px;right:-4px;top:-7px;
+  border-top:4px solid #94a3b8;
+}
+.air-arrows{
+  text-align:center;
+  color:var(--accent-amber);
+  font-weight:900;
+  font-size:1.1rem;
+}
+.chem-definition{
+  background:rgba(45,212,191,.08);
+  border:2px solid var(--accent-teal);
+  border-radius:12px;
+  padding:.8rem 1rem;
+}
+@media(max-width:900px){
+  .intuition-grid,.energy-budget{grid-template-columns:1fr}
+}
+
+.reactant-text{color:var(--accent-blue)!important;font-weight:900}
+.product-text{color:var(--accent-rose)!important;font-weight:900}
+.system-negative{color:var(--accent-rose);font-weight:900}
+.system-positive{color:var(--accent-blue);font-weight:900}
+
+.thermo-eq{
+  background:#0f172a;border:2px solid var(--border-color);border-radius:12px;
+  padding:.9rem;text-align:center;font-size:1.35rem;font-weight:850;
+}
+.eq-react{color:var(--accent-blue);font-weight:900}
+.eq-prod{color:var(--accent-rose);font-weight:900}
+.heat-ratio{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-top:.6rem;
+}
+.ratio-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:10px;
+  padding:.75rem;text-align:center;
+}
+.ratio-card strong{color:var(--accent-teal);display:block;margin-bottom:.3rem}
+.rule-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;
+}
+.rule-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem;
+}
+.rule-card h4{color:var(--accent-blue);margin-bottom:.4rem}
+.path-strip{
+  display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap;
+}
+.path-node{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:9px;
+  padding:.55rem .75rem;font-weight:850;
+}
+@media(max-width:900px){
+  .heat-ratio,.rule-grid{grid-template-columns:1fr}
+}
+
+.heat-product{
+  color:var(--accent-rose)!important;
+  font-weight:900;
+}
+.heat-reactant{
+  color:var(--accent-blue)!important;
+  font-weight:900;
+}
+.practice-stack{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.55rem;
+}
+.practice-line{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.65rem .8rem;
+}
+.practice-line strong{color:var(--accent-blue)}
+
+.standard-badge-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;
+}
+.standard-badge{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;
+  padding:.85rem;text-align:center;
+}
+.standard-badge strong{display:block;color:var(--accent-teal);font-size:1.15rem;margin-bottom:.3rem}
+.form-route{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;
+  font-size:1.05rem;font-weight:850;
+}
+.form-node{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:10px;
+  padding:.6rem .8rem;
+}
+.sort-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:.8rem;
+}
+.sort-col{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;
+}
+.sort-col h3{text-align:center;margin-bottom:.55rem}
+.zero{border-color:var(--accent-teal)}
+.notzero{border-color:var(--accent-rose)}
+.species-chip{
+  display:inline-block;background:#111827;border:1px solid #475569;border-radius:999px;
+  padding:.3rem .55rem;margin:.18rem;font-weight:800;
+}
+.formation-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:.75rem;
+}
+.formation-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.75rem;
+}
+.formation-card h4{color:var(--accent-blue);margin-bottom:.35rem}
+.ledger{
+  display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.55rem;
+}
+.ledger-col{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;
+}
+.ledger-col h3{text-align:center;color:var(--accent-blue);margin-bottom:.5rem}
+.ledger-row{
+  display:flex;justify-content:space-between;gap:.7rem;padding:.34rem 0;border-bottom:1px solid #334155;
+}
+.ledger-row:last-child{border-bottom:none}
+.ledger-total{
+  margin-top:.5rem;padding:.45rem;border-radius:8px;background:rgba(45,212,191,.08);
+  border:1px solid var(--accent-teal);font-weight:900;text-align:center;
+}
+@media(max-width:900px){
+  .standard-badge-grid,.sort-grid,.formation-grid,.ledger{grid-template-columns:1fr}
+}
+
+.product-highlight{color:var(--accent-rose)!important;font-weight:900}
+.read-aloud{
+  display:inline-block;margin-left:.45rem;padding:.18rem .5rem;border-radius:999px;
+  background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.45);
+  color:#fde68a;font-size:.82rem;font-weight:900;
+}
+.step-ladder{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:.6rem;
+}
+.step-box{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;
+}
+.step-box strong{display:block;color:var(--accent-blue);margin-bottom:.35rem}
+.baseline-wrap{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:.7rem;align-items:center;
+}
+.baseline-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;text-align:center;
+}
+@media(max-width:900px){.step-ladder,.baseline-wrap{grid-template-columns:1fr}}
+
+.reference-line{
+  position:relative;
+  height:150px;
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  margin-top:.6rem;
+  overflow:hidden;
+}
+.reference-zero{
+  position:absolute;
+  left:10%;right:10%;top:65%;
+  border-top:3px solid var(--accent-teal);
+}
+.reference-label{
+  position:absolute;
+  left:12%;top:68%;
+  color:var(--accent-teal);
+  font-weight:900;
+}
+.reference-point{
+  position:absolute;
+  width:16px;height:16px;
+  border-radius:50%;
+  background:var(--accent-teal);
+  left:48%;top:60%;
+}
+.reference-name{
+  position:absolute;
+  left:52%;top:48%;
+  font-weight:900;
+}
+.reference-up{
+  position:absolute;
+  right:18%;top:18%;
+  padding:.35rem .55rem;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+  background:#111827;
+}
+
+.target-box{
+  background:#0f172a;border:2px solid var(--accent-teal);border-radius:12px;
+  padding:.8rem;text-align:center;font-size:1.22rem;font-weight:900;
+}
+.operation-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;
+}
+.operation-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;
+}
+.operation-card h4{color:var(--accent-blue);margin-bottom:.45rem}
+.hess-stack{
+  display:grid;grid-template-columns:1fr auto;gap:.45rem .8rem;align-items:center;
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;
+}
+.hess-eq{font-size:1.02rem;font-weight:800}
+.hess-dh{text-align:right;font-weight:900;white-space:nowrap}
+.cancel-species{
+  text-decoration:line-through;
+  text-decoration-thickness:3px;
+  text-decoration-color:#f43f5e;
+  opacity:.72;
+}
+.keep-species{
+  font-weight:900;
+  border-bottom:3px solid var(--accent-teal);
+}
+.step-banner{
+  display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;justify-content:center;
+}
+.step-chip{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:999px;
+  padding:.42rem .68rem;font-weight:850;
+}
+.error-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:.7rem;
+}
+.error-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;
+}
+.error-card h4{color:var(--accent-rose);margin-bottom:.4rem}
+.path-energy{
+  position:relative;height:180px;background:#0f172a;border:1px solid var(--border-color);
+  border-radius:12px;margin-top:.55rem;overflow:hidden;
+}
+.path-start,.path-end{
+  position:absolute;width:120px;text-align:center;font-weight:900;
+}
+.path-start{left:6%;bottom:25px}
+.path-end{right:6%;top:24px}
+.path-direct{
+  position:absolute;left:20%;right:20%;top:48%;border-top:4px solid var(--accent-teal);
+}
+.path-direct::after{
+  content:"";position:absolute;right:-2px;top:-8px;
+  border-left:14px solid var(--accent-teal);border-top:6px solid transparent;border-bottom:6px solid transparent;
+}
+.path-step1{
+  position:absolute;left:20%;width:28%;top:70%;border-top:4px solid #94a3b8;
+  transform:rotate(-22deg);transform-origin:left center;
+}
+.path-step2{
+  position:absolute;left:45%;width:32%;top:42%;border-top:4px solid #94a3b8;
+  transform:rotate(-22deg);transform-origin:left center;
+}
+@media(max-width:900px){
+  .operation-grid,.error-grid{grid-template-columns:1fr}
+  .hess-stack{grid-template-columns:1fr}
+  .hess-dh{text-align:left}
+}
+
+.hero-image-wrap{background:#fff;border-radius:16px;padding:1rem;border:1px solid #cbd5e1;display:flex;justify-content:center;align-items:center}
+.hero-image-wrap img{width:100%;max-width:980px;height:auto;border-radius:12px;display:block}
+.target-box{background:#0f172a;border:2px solid var(--accent-teal);border-radius:12px;padding:.85rem;text-align:center;font-size:1.16rem;font-weight:900}
+.equation-grid{display:grid;grid-template-columns:1fr;gap:.65rem}
+.eq-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem}
+.eq-top{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;flex-wrap:wrap}
+.eq-label{font-weight:900;color:var(--accent-blue);min-width:70px}
+.eq-rxn{font-size:1.05rem;font-weight:850;line-height:1.4;flex:1}
+.eq-dh{font-weight:900;color:#f8fafc;white-space:nowrap}
+.trans-grid{display:grid;grid-template-columns:1fr;gap:.7rem;margin-top:.6rem}
+.trans-card{background:#071425;border:1px solid var(--border-color);border-radius:12px;padding:.8rem}
+.op-scale,.op-reverse{font-weight:900;padding:.08rem .45rem;border-radius:999px;display:inline-block;margin-right:.35rem}
+.op-scale{background:rgba(45,212,191,.18);color:#2dd4bf}
+.op-reverse{background:rgba(248,113,113,.18);color:#f87171}
+.highlight-num{color:#fbbf24;font-weight:900}
+.highlight-plus{color:#4ade80;font-weight:900}
+.transform-note{margin-top:.35rem;color:#cbd5e1;font-size:.96rem}
+.cancel-line{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem}
+.cancel-row{display:grid;grid-template-columns:1fr auto;gap:.7rem;align-items:center;margin:.25rem 0}
+.cancel-eq{font-size:1.02rem;font-weight:850;line-height:1.45}
+.cancel-dh{font-weight:900;white-space:nowrap}
+.cancelled{text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:#f43f5e;opacity:.75}
+.final-reaction{background:#082f49;border:2px solid var(--accent-teal);border-radius:12px;padding:.8rem;text-align:center;font-size:1.08rem;font-weight:900}
+.acs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.acs-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem}
+.acs-card h4{margin-bottom:.45rem}
+.acs-card.easy h4{color:#4ade80}.acs-card.medium h4{color:#38bdf8}.acs-card.hard h4{color:#f59e0b}
+.formula-box{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem}
+.big-idea{background:#082f49;border-left:4px solid var(--accent-teal);padding:.7rem .85rem;border-radius:10px}
+@media(max-width:900px){.acs-grid{grid-template-columns:1fr}}
+
+/* v3 targeted revisions */
+.hero-image-wrap{
+  padding:.65rem;
+  max-width:760px;
+  margin:.35rem auto 0 auto;
+}
+.hero-image-wrap img{
+  max-width:720px;
+  max-height:410px;
+  object-fit:contain;
+}
+.eq-stack{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.58rem;
+}
+.eq-line-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.65rem .78rem;
+}
+.eq-main{
+  font-size:1.02rem;
+  font-weight:850;
+  line-height:1.4;
+}
+.eq-delta{
+  margin-top:.22rem;
+  font-weight:900;
+}
+@media(max-width:900px){
+  .hero-image-wrap{max-width:100%}
+  .hero-image-wrap img{max-width:100%;max-height:330px}
+}
+
+/* =========================================================
+   MERGED SOLUTION-ENTHALPY CONTENT STYLES
+   Shared UI/button/navigation system is unchanged.
+   ========================================================= */
+.solution-path{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;
+}
+.solution-step{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;
+  padding:.8rem;text-align:center;min-height:145px;
+}
+.solution-step h4{color:var(--accent-blue);margin-bottom:.4rem}
+.absorb{border-color:var(--accent-amber)}
+.release{border-color:var(--accent-teal)}
+.energy-balance-strip{
+  display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap;
+}
+.energy-chip{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:999px;
+  padding:.45rem .7rem;font-weight:850;
+}
+.ownership-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.ownership-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.85rem;
+}
+.ownership-card h4{color:var(--accent-blue);margin-bottom:.45rem}
+.sign-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.sign-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;
+}
+.sign-card h3{text-align:center;margin-bottom:.5rem}
+.sign-card.warm{border-color:#f59e0b}
+.sign-card.cool{border-color:#38bdf8}
+.sign-sequence{
+  display:flex;align-items:center;justify-content:center;gap:.35rem;flex-wrap:wrap;
+  font-size:1.02rem;font-weight:850;
+}
+.sign-node{
+  background:#111827;border:1px solid #475569;border-radius:8px;padding:.45rem .6rem;
+}
+.work-stack{display:grid;grid-template-columns:1fr;gap:.5rem}
+.work-step{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.68rem .8rem;
+}
+.work-step strong{color:var(--accent-blue)}
+.dilution-scene{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:.75rem;align-items:center;
+}
+.conc-box{
+  background:#0f172a;border:2px solid var(--accent-blue);border-radius:12px;
+  padding:.9rem;text-align:center;min-height:150px;
+}
+.conc-box.dilute{border-color:var(--accent-teal)}
+.particle-field{
+  position:relative;height:95px;border:1px solid #334155;border-radius:10px;margin-top:.45rem;background:#111827;
+}
+.solute-dot{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--accent-rose)}
+.solvent-dot{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--accent-blue);opacity:.75}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.compare-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;
+}
+.compare-card h3{color:var(--accent-blue);margin-bottom:.45rem}
+.practice-wide{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;
+}
+.answer-reveal{
+  background:rgba(45,212,191,.09);border:1px solid var(--accent-teal);border-radius:9px;
+  padding:.6rem .75rem;color:#ccfbf1;font-weight:800;
+}
+@media(max-width:900px){
+  .solution-path,.ownership-grid,.sign-grid,.compare-grid,.dilution-scene{grid-template-columns:1fr}
+}
+
+
+.beaker{
+  position:relative;
+  height:120px;
+  margin-top:.45rem;
+  border:3px solid #94a3b8;
+  border-top:none;
+  border-radius:0 0 14px 14px;
+  background:linear-gradient(to top, rgba(15,23,42,.85), rgba(15,23,42,.55));
+  overflow:hidden;
+}
+.water-fill{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  background:linear-gradient(to top, rgba(56,189,248,.35), rgba(125,211,252,.6));
+}
+.water-fill.low{height:42%;}
+.water-fill.high{height:74%;}
+.water-surface{
+  position:absolute;
+  left:0; right:0;
+  height:3px;
+  background:#7dd3fc;
+  box-shadow:0 0 0 1px rgba(125,211,252,.18);
+}
+.water-surface.low{bottom:42%;}
+.water-surface.high{bottom:74%;}
+.beaker-label{
+  font-size:.92rem;
+  color:#bfdbfe;
+  font-weight:800;
+  text-align:center;
+  margin-top:.35rem;
+}
+.solute-dot.in-water{background:var(--accent-rose); width:13px; height:13px; border:1px solid rgba(255,255,255,.18)}
+
+.footer-copyright{position:fixed;right:.75rem;bottom:.3rem;z-index:250;color:#64748b;font-size:.72rem;letter-spacing:.01em;pointer-events:none}
+</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧪</span><span>Topic T6.2 | Heat Transfer, Calorimetry &amp; Solution Enthalpy</span></div>
+<div class="mode-selector">
+<button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button>
+<button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button>
+</div>
+<div class="nav-controls">
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 18</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main><div class="slide-container active" data-integrated-slide="17" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 17 · Local Slide 1</span>
+<h1 class="slide-title">From Work to Heat — The Second Energy-Transfer Term in ΔE = q + w</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Connect this topic to T6.1 by recognizing that work, w, has already been developed and that this topic now begins the second energy-transfer term, heat, q.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Transition from T6.1:</strong> In the First Law, <strong>ΔE = q + w</strong>, the internal energy of the system changes through two energy-transfer terms. In T6.1, we developed the <strong>work term, w</strong>. Now we begin the <strong>heat term, q</strong>.</div>
+<div class="panel-grid" style="margin-top:.6rem">
+<div class="panel-card">
+<h4>T6.1</h4>
+<p>focus on <strong>work, w</strong></p>
+<p>pressure–volume work</p>
+</div>
+<div class="panel-card">
+<h4>T6.2</h4>
+<p>focus on <strong>heat, q</strong></p>
+<p>calorimetry and heat transfer</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout"><strong>System perspective still stays the same:</strong> if heat leaves the system, q<sub>system</sub> is negative; if heat enters the system, q<sub>system</sub> is positive.</div>
+<div class="math-line">q<sub>system</sub> + q<sub>surroundings</sub> = 0</div>
+<div class="math-line" style="margin-top:.45rem">q<sub>system</sub> = −q<sub>surroundings</sub></div>
+<div class="equal-banner" style="margin-top:.55rem">Same energy amount, opposite transfer direction → opposite signs.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Topic focus:</strong> T6.2 is not starting a new law. It is developing the <strong>second term</strong> in the same First-Law relationship, ΔE = q + w.</div>
+<p style="margin-top:.55rem">In T6.2, the transfer term we now study is <span class="blank" data-answer="heat">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="18" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 18 · Local Slide 2</span>
+<h1 class="slide-title">Why Use a Calorimeter? — Measure the Surroundings to Infer q of the System</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Explain why calorimetry often determines q<sub>system</sub> indirectly from a measurable temperature change in the surroundings.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>We usually do not read q directly from the reaction or object itself.</strong> Instead, we observe how the surroundings respond.</div>
+<img alt="Why calorimetry diagram showing system heat transfer to surroundings, measured temperature change, and inferred system heat" class="fixed-illustration" src="data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTEwMCAzNjAiPgogIDxyZWN0IHg9IjE4IiB5PSIxOCIgd2lkdGg9IjEwNjQiIGhlaWdodD0iMzI0IiByeD0iMjQiIGZpbGw9IiMwZjE3MmEiIHN0cm9rZT0iIzQ3NTU2OSIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPHRleHQgeD0iNTUwIiB5PSI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzM4YmRmOCIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iOTAwIj5XaHkgY2Fsb3JpbWV0cnk/PC90ZXh0PgoKICA8cmVjdCB4PSI2NSIgeT0iMTEwIiB3aWR0aD0iMjE1IiBoZWlnaHQ9IjExMCIgcng9IjE4IiBmaWxsPSIjMTExODI3IiBzdHJva2U9IiNmNDNmNWUiIHN0cm9rZS13aWR0aD0iNCIvPgogIDx0ZXh0IHg9IjE3MiIgeT0iMTQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmVjZGQzIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI5MDAiPlNZU1RFTTwvdGV4dD4KICA8dGV4dCB4PSIxNzIiIHk9IjE3OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZlY2RkMyIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4Ij5yZWFjdGlvbiAvIGhvdCBvYmplY3Q8L3RleHQ+CgogIDxwYXRoIGQ9Ik0yOTUgMTU1IEg0MTAgVjE0MiBMNDQ1IDE2NSBMNDEwIDE4OCBWMTc1IEgyOTUgWiIgZmlsbD0iI2ZiYmYyNCIvPgogIDx0ZXh0IHg9IjM2NSIgeT0iMTMyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmJiZjI0IiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTkiIGZvbnQtd2VpZ2h0PSI5MDAiPmhlYXQgdHJhbnNmZXI8L3RleHQ+CgogIDxyZWN0IHg9IjQ3MCIgeT0iOTUiIHdpZHRoPSIyNTAiIGhlaWdodD0iMTQwIiByeD0iMjAiIGZpbGw9IiMxMTE4MjciIHN0cm9rZT0iIzM4YmRmOCIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgPHRleHQgeD0iNTk1IiB5PSIxMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNiYWU2ZmQiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjkwMCI+U1VSUk9VTkRJTkdTPC90ZXh0PgogIDx0ZXh0IHg9IjU5NSIgeT0iMTY1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjYmFlNmZkIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiPndhdGVyIC8gc29sdXRpb24gLyBjYWxvcmltZXRlcjwvdGV4dD4KICA8dGV4dCB4PSI1OTUiIHk9IjE5OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzJkZDRiZiIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iOTAwIj5tZWFzdXJlIM6UVCBoZXJlPC90ZXh0PgoKICA8cGF0aCBkPSJNNzM1IDE1NSBIODQwIFYxNDIgTDg3NSAxNjUgTDg0MCAxODggVjE3NSBINzM1IFoiIGZpbGw9IiNmYmJmMjQiLz4KCiAgPHJlY3QgeD0iODkwIiB5PSIxMTAiIHdpZHRoPSIxNDUiIGhlaWdodD0iMTEwIiByeD0iMTgiIGZpbGw9IiMxMTE4MjciIHN0cm9rZT0iIzJkZDRiZiIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgPHRleHQgeD0iOTYyIiB5PSIxNDgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNjY2ZiZjEiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjkwMCI+Q0FMQ1VMQVRFPC90ZXh0PgogIDx0ZXh0IHg9Ijk2MiIgeT0iMTc4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjY2NmYmYxIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiPnEoc3Vycik8L3RleHQ+CiAgPHRleHQgeD0iOTYyIiB5PSIyMDUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNjY2ZiZjEiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCI+dGhlbiBpbmZlciBxKHN5cyk8L3RleHQ+CgogIDx0ZXh0IHg9IjU1MCIgeT0iMjg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMmRkNGJmIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjUiIGZvbnQtd2VpZ2h0PSI5MDAiPnEoc3lzdGVtKSArIHEoc3Vycm91bmRpbmdzKSA9IDA8L3RleHQ+CiAgPHRleHQgeD0iNTUwIiB5PSIzMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNjYmQ1ZTEiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOSI+c2FtZSBtYWduaXR1ZGUsIG9wcG9zaXRlIGRpcmVjdGlvbiDihpIgb3Bwb3NpdGUgc2lnbnM8L3RleHQ+Cjwvc3ZnPgo="/>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout"><strong>What we measure:</strong> the temperature change, ΔT, of water, solution, or the calorimeter.</div>
+<div class="math-line" style="margin-top:.55rem">q<sub>surroundings</sub> = mcΔT   or   q<sub>calorimeter</sub> = C<sub>cal</sub>ΔT</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="math-line" style="font-size:1.55rem">
+<span class="survive">q<sub>system</sub> = −q<sub>surroundings</sub></span>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">
+  Same magnitude, opposite direction → opposite signs.
+</div>
+<div class="callout" style="margin-top:.55rem">
+<strong>Why this matters:</strong> calorimetry usually measures the temperature change of the surroundings first. We calculate q<sub>surroundings</sub>, then infer q<sub>system</sub> from the opposite sign.
+</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="19" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 19 · Local Slide 3</span>
+<h1 class="slide-title">How the Surroundings Reveal q — Heat Capacity and Specific Heat</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use heat capacity or specific heat capacity to convert a measured temperature change into q for the surroundings.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="heat-focus">
+<div class="quantity-card"><h4>Heat Capacity, C</h4><p>Property of a whole object or calorimeter.</p><div class="eq">q = CΔT</div><p>Typical unit: J/°C or J/K</p></div>
+<div class="quantity-card"><h4>Specific Heat Capacity, c</h4><p>Property normalized per gram of substance.</p><div class="eq">q = mcΔT</div><p>Typical unit: J/(g·°C)</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="temp-sign-grid">
+<div class="temp-sign-card"><h4 style="color:var(--accent-blue)">Sample warms</h4><p>T<sub>final</sub> &gt; T<sub>initial</sub></p><p>ΔT &gt; 0 → q &gt; 0</p><p><strong>heat enters the sample</strong></p></div>
+<div class="temp-sign-card"><h4 style="color:var(--accent-blue)">Sample cools</h4><p>T<sub>final</sub> &lt; T<sub>initial</sub></p><p>ΔT &lt; 0 → q &lt; 0</p><p><strong>heat leaves the sample</strong></p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>High-frequency error:</strong> ΔT is never just the final temperature. Always calculate T<sub>final</sub> − T<sub>initial</sub>.</div>
+<div class="callout" style="margin-top:.55rem"><strong>Fast check:</strong> if your sample warms but your calculated q is negative, stop and inspect ΔT or your system definition.</div>
+<p style="margin-top:.55rem">ΔT = T<sub>final</sub> − <span class="blank" data-answer="Tinitial">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="20" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 20 · Local Slide 4</span>
+<h1 class="slide-title">Read the Temperature Change Correctly — q = mcΔT</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Calculate ΔT correctly and use its sign to interpret whether the surroundings absorb or release heat.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Concrete picture:</strong> place a hot object into cooler water inside an insulated calorimeter. Heat flows from the hotter object to the cooler water until thermal equilibrium is reached.</div>
+<img alt="Hot object transferring heat to cooler water inside an insulated calorimeter" class="fixed-illustration" src="data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTAwMCAzMzAiPgogIDxyZWN0IHg9IjE4IiB5PSIxOCIgd2lkdGg9Ijk2NCIgaGVpZ2h0PSIyOTQiIHJ4PSIyMiIgZmlsbD0iIzBmMTcyYSIgc3Ryb2tlPSIjNDc1NTY5IiBzdHJva2Utd2lkdGg9IjMiLz4KICA8dGV4dCB4PSI1MDAiIHk9IjUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzhiZGY4IiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjciIGZvbnQtd2VpZ2h0PSI5MDAiPkluc3VsYXRlZCBjYWxvcmltZXRlcjogZW5lcmd5IHN0YXlzIHdpdGhpbiB0aGUgbWVhc3VyZWQgZXhjaGFuZ2U8L3RleHQ+CgogIDwhLS0gY2Fsb3JpbWV0ZXIgLS0+CiAgPHJlY3QgeD0iMjcwIiB5PSI4NSIgd2lkdGg9IjQ2MCIgaGVpZ2h0PSIxODAiIHJ4PSIyNCIgZmlsbD0iIzExMTgyNyIgc3Ryb2tlPSIjOTRhM2I4IiBzdHJva2Utd2lkdGg9IjciLz4KICA8cmVjdCB4PSIzMDAiIHk9IjExMCIgd2lkdGg9IjQwMCIgaGVpZ2h0PSIxMzAiIHJ4PSIxOCIgZmlsbD0iIzFlMjkzYiIgc3Ryb2tlPSIjNDc1NTY5IiBzdHJva2Utd2lkdGg9IjIiLz4KCiAgPCEtLSBob3Qgb2JqZWN0IC0tPgogIDxjaXJjbGUgY3g9IjM5MCIgY3k9IjE3NSIgcj0iNTAiIGZpbGw9IiM3ZjFkMWQiIHN0cm9rZT0iI2Y0M2Y1ZSIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgPHRleHQgeD0iMzkwIiB5PSIxNzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZWNkZDMiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjkwMCI+SE9UPC90ZXh0PgogIDx0ZXh0IHg9IjM5MCIgeT0iMTk1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmVjZGQzIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiPm9iamVjdDwvdGV4dD4KCiAgPCEtLSB3YXRlciAtLT4KICA8cmVjdCB4PSI1NDAiIHk9IjEzMCIgd2lkdGg9IjExNSIgaGVpZ2h0PSI5MiIgcng9IjEyIiBmaWxsPSIjMDgyZjQ5IiBzdHJva2U9IiMzOGJkZjgiIHN0cm9rZS13aWR0aD0iNCIvPgogIDx0ZXh0IHg9IjU5OCIgeT0iMTcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjYmFlNmZkIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI5MDAiPkNPT0xFUjwvdGV4dD4KICA8dGV4dCB4PSI1OTgiIHk9IjE5NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2JhZTZmZCIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2Ij53YXRlcjwvdGV4dD4KCiAgPCEtLSB3aG9sZSBzaGFwZSBhcnJvdyAtLT4KICA8cGF0aCBkPSJNNDQ1IDE2NiBINTA1IFYxNTQgTDUzNSAxNzYgTDUwNSAxOTggVjE4NiBINDQ1IFoiIGZpbGw9IiNmYmJmMjQiLz4KICA8dGV4dCB4PSI0OTAiIHk9IjE0NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZiYmYyNCIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iOTAwIj5oZWF0PC90ZXh0PgoKICA8dGV4dCB4PSI1MDAiIHk9IjI5MyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzJkZDRiZiIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iOTAwIj5xKGhvdCBvYmplY3QpICsgcSh3YXRlcikgPSAwPC90ZXh0Pgo8L3N2Zz4K"/>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout"><strong>General energy balance:</strong> in an ideally insulated calorimeter, heat lost by one part is gained by another part.</div>
+<div class="eq-sequence" style="margin-top:.55rem">
+<div class="step"><strong>General form:</strong> q<sub>lost</sub> + q<sub>gained</sub> = 0</div>
+<div class="step"><strong>Rearranged:</strong> q<sub>lost</sub> = −q<sub>gained</sub></div>
+<div class="step"><strong>For this problem:</strong> q<sub>hot object</sub> + q<sub>water</sub> = 0</div>
+<div class="step"><strong>Because the hot object is the system:</strong> q<sub>lost by system</sub> = q<sub>hot object</sub> = −q<sub>gained by surroundings</sub> = −q<sub>water</sub></div>
+</div>
+<div class="equal-banner" style="margin-top:.6rem">General equation first, then the problem-specific labels.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Always name the parts.</strong> In this worked example, the <span class="system-tag">system = hot solid</span> and the <span class="surr-tag">surroundings = water</span>.</div>
+<p style="margin-top:.55rem">So in this problem, q<sub>hot object</sub> = <span class="blank" data-answer="-qwater">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="21" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 21 · Local Slide 5</span>
+<h1 class="slide-title">Two Common Calorimetry Conditions — Constant Pressure vs. Constant Volume</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Compare coffee-cup calorimetry at approximately constant pressure with bomb calorimetry at constant volume.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Why control conditions?</strong> We want a clean connection between measured heat transfer and the energy quantity of interest.</div>
+<img alt="Comparison of coffee-cup calorimetry at constant pressure and bomb calorimetry at constant volume" class="fixed-illustration" src="data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTEwMCAzOTAiPgogIDxyZWN0IHg9IjE4IiB5PSIxOCIgd2lkdGg9IjEwNjQiIGhlaWdodD0iMzU0IiByeD0iMjQiIGZpbGw9IiMwZjE3MmEiIHN0cm9rZT0iIzQ3NTU2OSIgc3Ryb2tlLXdpZHRoPSIzIi8+CgogIDx0ZXh0IHg9IjI4MCIgeT0iNTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzOGJkZjgiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyOCIgZm9udC13ZWlnaHQ9IjkwMCI+Q29uc3RhbnQgcHJlc3N1cmU8L3RleHQ+CiAgPHRleHQgeD0iODIwIiB5PSI1NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzM4YmRmOCIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iOTAwIj5Db25zdGFudCB2b2x1bWU8L3RleHQ+CgogIDwhLS0gY29mZmVlIGN1cCAtLT4KICA8cGF0aCBkPSJNMTM1IDEwNSBMNDI1IDEwNSBMMzkwIDI3NSBRMjgwIDMwMCAxNzAgMjc1IFoiIGZpbGw9IiMxMTE4MjciIHN0cm9rZT0iIzk0YTNiOCIgc3Ryb2tlLXdpZHRoPSI2Ii8+CiAgPHBhdGggZD0iTTE2MCAxMjggTDQwMCAxMjggTDM3MiAyNTUgUTI4MCAyNzUgMTg4IDI1NSBaIiBmaWxsPSIjMDgyZjQ5IiBzdHJva2U9IiMzOGJkZjgiIHN0cm9rZS13aWR0aD0iNCIvPgogIDx0ZXh0IHg9IjI4MCIgeT0iMTc1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjYmFlNmZkIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI5MDAiPmNvZmZlZS1jdXA8L3RleHQ+CiAgPHRleHQgeD0iMjgwIiB5PSIyMDUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNiYWU2ZmQiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCI+YXBwcm94aW1hdGVseSBjb25zdGFudCBQPC90ZXh0PgogIDx0ZXh0IHg9IjI4MCIgeT0iMzMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMmRkNGJmIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI5MDAiPm1lYXN1cmUgcSBhdCBjb25zdGFudCBwcmVzc3VyZTwvdGV4dD4KCiAgPCEtLSBib21iIGNhbG9yaW1ldGVyIC0tPgogIDxyZWN0IHg9IjY5MCIgeT0iMTEyIiB3aWR0aD0iMjYwIiBoZWlnaHQ9IjE1MCIgcng9IjU4IiBmaWxsPSIjMTExODI3IiBzdHJva2U9IiM5NGEzYjgiIHN0cm9rZS13aWR0aD0iNyIvPgogIDxyZWN0IHg9Ijc3NSIgeT0iODgiIHdpZHRoPSI5MCIgaGVpZ2h0PSIyOCIgcng9IjgiIGZpbGw9IiM2NDc0OGIiLz4KICA8dGV4dCB4PSI4MjAiIHk9IjE2MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2UyZThmMCIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iOTAwIj5ib21iIGNhbG9yaW1ldGVyPC90ZXh0PgogIDx0ZXh0IHg9IjgyMCIgeT0iMTkzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjY2JkNWUxIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiPnJpZ2lkIOKGkiBjb25zdGFudCBWPC90ZXh0PgogIDx0ZXh0IHg9IjgyMCIgeT0iMjI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjY2JkNWUxIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiPs6UViA9IDAg4oaSIHcoUFYpID0gMDwvdGV4dD4KICA8dGV4dCB4PSI4MjAiIHk9IjMzMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzJkZDRiZiIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iOTAwIj5xKHYpID0gzpRFPC90ZXh0PgoKICA8bGluZSB4MT0iNTUwIiB5MT0iODAiIHgyPSI1NTAiIHkyPSIzNDAiIHN0cm9rZT0iIzQ3NTU2OSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjwvc3ZnPgo="/>
+</div>
+<div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="panel-card">
+<h4>Coffee-cup calorimeter</h4>
+<p>approximately constant pressure</p>
+<p>often used for solution reactions</p>
+<p style="margin-top:.4rem"><strong>q<sub>p</sub> = ΔH</strong></p>
+<p style="margin-top:.25rem;color:#cbd5e1">Preview: enthalpy, H, is developed in T6.3.</p>
+</div>
+<div class="panel-card">
+<h4>Bomb calorimeter</h4>
+<p>rigid, sealed vessel</p>
+<p>constant volume</p>
+<p>ΔV = 0 → w<sub>PV</sub> = 0</p>
+<p style="margin-top:.4rem"><strong>q<sub>v</sub> = ΔE</strong></p>
+</div>
+</div>
+<div class="warn" style="margin-top:.6rem">
+<strong>Condition lock:</strong> q<sub>p</sub> = ΔH and q<sub>v</sub> = ΔE are not interchangeable. The controlled condition matters.
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout">
+<strong>What happens to temperature?</strong> The system and surroundings usually begin at different temperatures, so heat flows between them.
+</div>
+<div class="math-line" style="margin-top:.55rem">
+  T<sub>initial, system</sub> ≠ T<sub>initial, surroundings</sub>
+</div>
+<div class="arrow" style="margin:.35rem 0">↓ heat transfer ↓</div>
+<div class="math-line">
+<span class="survive">T<sub>final, system</sub> = T<sub>final, surroundings</sub></span>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">
+<strong>Thermal equilibrium:</strong> the state in which the system and surroundings have reached the same temperature, so there is no net heat transfer between them.
+</div>
+<div class="warn" style="margin-top:.55rem">
+<strong>Do not confuse the conditions.</strong> Constant pressure or constant volume describes the calorimeter condition. Thermal equilibrium describes the final temperature relationship between the interacting parts.
+</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="22" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 22 · Local Slide 6</span>
+<h1 class="slide-title">Constant-Volume Calorimetry — Bomb Calorimeter Calculation</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use calorimeter heat capacity and temperature change to determine q<sub>cal</sub>, q<sub>rxn</sub>, and ΔE at constant volume.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<span class="practice-badge medium">Worked Example</span>
+<div class="question-card">
+<div class="question-text">A food sample is burned in a bomb calorimeter. The temperature rises from 22.9 °C to 32.7 °C. If C<sub>cal</sub> = 8.151 kJ/K, determine the heat absorbed by the calorimeter and the energy change of the reaction. Then compare the released energy with 25 Food Calories.</div>
+<div class="response-area">Path: ΔT → q<sub>cal</sub> = C<sub>cal</sub>ΔT → q<sub>rxn</sub> = −q<sub>cal</sub> → constant V: ΔE = q<sub>v</sub></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="setup-stack">
+<p><strong>1. Temperature change</strong><br/>ΔT = 32.7 − 22.9 = <strong>+9.8 K</strong></p>
+<p style="margin-top:.45rem"><strong>2. Calorimeter heat</strong><br/>q<sub>cal</sub> = (8.151 kJ/K)(+9.8 K) = <strong>+79.9 kJ</strong></p>
+<p style="margin-top:.45rem"><strong>3. Reaction heat</strong><br/>q<sub>rxn</sub> = −q<sub>cal</sub> = <strong>−79.9 kJ</strong></p>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">Rigid bomb calorimeter: ΔV = 0 → w<sub>PV</sub> = 0 → ΔE = q<sub>v</sub> = −79.9 kJ</div>
+<div class="callout" style="margin-top:.55rem">79.9 kJ ÷ 4.184 kJ/Cal = <strong>19.1 Cal</strong>. This is below 25 Food Calories.</div>
+<div class="warn" style="margin-top:.55rem"><strong>Do not report ΔH from this measurement.</strong> A rigid bomb calorimeter directly gives constant-volume heat, q<sub>v</sub>, which equals ΔE when PV work is the only work mode.</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="23" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 23 · Local Slide 7</span>
+<h1 class="slide-title">Worked Example Part 1 — Thermal Equilibrium, System, and q for the Water</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use thermal equilibrium to identify the common final temperature, keep the hot solid as the system, and calculate q<sub>water</sub>.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1"><div class="callout" style="margin-bottom:.6rem">
+<strong>Thermal equilibrium:</strong> heat flows from the hotter object to the cooler water until both reach the <strong>same final temperature</strong>. At that point there is no net heat transfer between them.
+</div><div class="equal-banner" style="margin-bottom:.6rem">
+  T<sub>final, solid</sub> = T<sub>final, water</sub> = 42.8 °C
+</div>
+<div class="eq-sequence" style="margin-top:.55rem">
+<div class="step"><strong>Energy balance:</strong> q<sub>system</sub> + q<sub>surroundings</sub> = 0</div>
+<div class="step"><strong>For this problem:</strong> q<sub>hot solid</sub> + q<sub>water</sub> = 0</div>
+<div class="step"><strong>Useful calculation form:</strong> q<sub>hot solid</sub> = −q<sub>water</sub></div>
+</div>
+<div class="callout"><strong>Problem:</strong> 23.6 g of a hot solid at 178.0 °C is placed into 78 mL of water at 23.0 °C. The final temperature becomes 42.8 °C. Find the specific heat capacity of the solid.</div>
+<div class="two-col-worked" style="margin-top:.65rem">
+<div class="worked-col">
+<h4>Concept side</h4>
+<p><span class="system-tag">system = hot solid</span></p>
+<p style="margin-top:.45rem"><span class="surr-tag">surroundings = water</span></p>
+<ul style="margin-top:.55rem;padding-left:1.1rem">
+<li>The solid starts hotter, so it <strong>loses</strong> heat.</li>
+<li>The water starts cooler, so it <strong>gains</strong> heat.</li>
+<li>q<sub>hot object</sub> + q<sub>water</sub> = 0</li>
+<li>So q<sub>hot object</sub> = −q<sub>water</sub></li>
+</ul>
+<div class="eq-sequence" style="margin-top:.55rem">
+<div class="step">ΔT<sub>water</sub> = 42.8 − 23.0 = +19.8 °C</div>
+<div class="step">ΔT<sub>solid</sub> = 42.8 − 178.0 = −135.2 °C</div>
+</div>
+</div>
+<div class="worked-col">
+<h4>Water calculation side</h4>
+<p>Use water first because its mass and specific heat are known.</p>
+<div class="eq-sequence" style="margin-top:.5rem">
+<div class="step">m<sub>water</sub> = 78 mL ≈ 78 g</div>
+<div class="step">ΔT<sub>water</sub> = 42.8 − 23.0 = +19.8 °C</div>
+<div class="step">water warms → q<sub>water</sub> &gt; 0</div>
+</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout" style="margin-bottom:.55rem">
+<strong>Calculation strategy:</strong> calculate q<sub>water</sub> completely first because m<sub>water</sub>, c<sub>water</sub>, and ΔT<sub>water</sub> are known. Then transfer that value to the system using q<sub>hot solid</sub> = −q<sub>water</sub>.
+</div>
+<div class="two-col-worked">
+<div class="worked-col">
+<h4>Concept side</h4>
+<div class="eq-sequence">
+<div class="step"><strong>Known first:</strong> q<sub>water</sub></div>
+<div class="step"><strong>Then:</strong> q<sub>hot object</sub> = −q<sub>water</sub></div>
+<div class="step"><strong>Last:</strong> solve for c<sub>solid</sub></div>
+</div>
+</div>
+<div class="worked-col">
+<h4>Water calculation side</h4>
+<div class="math-line">q<sub>water</sub> = m<sub>water</sub>c<sub>water</sub>ΔT<sub>water</sub></div>
+<div class="factor-card" style="margin-top:.55rem">
+<span>(78 g)</span><span>×</span>
+<span class="fraction"><span class="num">4.184 J</span><span class="den">g·°C</span></span>
+<span>×</span><span>(+19.8 °C)</span>
+</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="two-col-worked">
+<div class="worked-col">
+<h4>Concept side</h4>
+<div class="callout"><strong>Interpretation:</strong> the surroundings, water, absorb heat. Because the <span class="system-tag">system = hot solid</span>, the system must lose exactly that amount of heat.</div>
+</div>
+<div class="worked-col">
+<h4>Water calculation side</h4>
+<div class="math-line">q<sub>water</sub> = <span class="survive">+6.46 × 10³ J</span></div>
+<div class="reason-box" style="margin-top:.55rem"><strong>Reasonableness:</strong> the water warms, so q<sub>water</sub> must be positive.</div>
+<p style="margin-top:.55rem">Therefore q<sub>hot object</sub> = <span class="blank" data-answer="-6.46×10^3J">[ _______ ]</span>.</p>
+</div>
+</div>
+<div class="math-line" style="margin-top:.55rem">
+  q<sub>hot solid</sub> = −q<sub>water</sub> = −(+6.46 × 10³ J) = <span class="survive">−6.5 × 10³ J</span>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">
+  Water gains +6.5 kJ → the system loses 6.46 kJ.
+</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="24" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 24 · Local Slide 8</span>
+<h1 class="slide-title">Worked Example Part 2 — Use the System Temperature Change to Solve for c of the Solid</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use q<sub>hot object</sub> = −q<sub>water</sub> and the system temperature change to determine the specific heat capacity of the solid.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout">
+<strong>Start from conservation, then use the convenient form:</strong><br/>
+  q<sub>hot solid</sub> + q<sub>water</sub> = 0
+   → 
+  q<sub>hot solid</sub> = −q<sub>water</sub>
+   → 
+  q<sub>hot solid</sub> = −6.5 × 10³ J
+</div>
+<div class="equal-banner" style="margin-bottom:.55rem">
+<strong>Thermal-equilibrium checkpoint:</strong> both the system and surroundings use the same final temperature, 42.8 °C, but each has its own initial temperature and therefore its own ΔT.
+</div>
+<div class="energy-ledger" style="margin-top:.6rem">
+<div class="ledger-card"><h4 style="color:var(--accent-blue)">Surroundings</h4><p>water</p><p>q<sub>water</sub> = +6.46 × 10³ J</p></div>
+<div class="ledger-arrow">⇄</div>
+<div class="ledger-card"><h4 style="color:var(--accent-blue)">System</h4><p>hot solid</p><p>q<sub>hot object</sub> = −6.5 × 10³ J</p></div>
+</div>
+<div class="math-line" style="margin-top:.55rem">ΔT<sub>system</sub> = ΔT<sub>solid</sub> = 42.8 − 178.0 = −135.2 °C</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="equal-banner" style="margin-bottom:.55rem">
+  Use the system value directly:
+  q<sub>system</sub> = q<sub>hot solid</sub> = −6.5 × 10³ J
+</div>
+<div class="equal-banner" style="margin-bottom:.55rem"><strong>Use the system values:</strong> q<sub>hot object</sub>, m<sub>solid</sub>, and ΔT<sub>solid</sub>.</div>
+<div class="math-line">q<sub>solid</sub> = m<sub>solid</sub>c<sub>solid</sub>ΔT<sub>solid</sub></div>
+<div class="math-line" style="margin-top:.5rem">c<sub>solid</sub> = q<sub>solid</sub> / (m<sub>solid</sub>ΔT<sub>solid</sub>)</div>
+<div class="factor-card" style="margin-top:.55rem">
+<span class="fraction"><span class="num">−6.5 × 10³ J</span><span class="den">(23.6 g)(−135.2 °C)</span></span>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="math-line">c<sub>solid</sub> = <span class="survive">2.03 J/(g·°C)</span></div>
+<div class="reason-box" style="margin-top:.55rem"><strong>Sign check:</strong> specific heat capacity is positive. The negative q and negative ΔT cancel, as they should for a cooling object.</div>
+<div class="warn" style="margin-top:.55rem"><strong>Common error:</strong> do not switch systems halfway through. Once the hot solid is chosen as the system, keep using the system q and the system ΔT for the final calculation.</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="25" data-local-slide="9" id="slide-9">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 25 · Local Slide 9</span>
+<h1 class="slide-title">Guided Transfer Example — Find the Final Temperature at Thermal Equilibrium</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Solve a calorimetry problem in which the shared final temperature is unknown by applying q<sub>system</sub> + q<sub>surroundings</sub> = 0.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Guided problem:</strong> A 32.5 g aluminum cube at 45.8 °C is submerged in 105.3 g of water at 15.4 °C. Assume the aluminum and water are thermally isolated from everything else. Find the final temperature at thermal equilibrium. Use c<sub>Al</sub> = 0.903 J/(g·°C) and c<sub>water</sub> = 4.184 J/(g·°C).</div>
+<div class="panel-grid" style="margin-top:.6rem">
+<div class="panel-card"><h4>System</h4><p>Aluminum</p><p>starts hotter → loses heat</p></div>
+<div class="panel-card"><h4>Surroundings</h4><p>Water</p><p>starts cooler → gains heat</p></div>
+<div class="panel-card"><h4>Before algebra</h4><p>15.4 °C &lt; T<sub>f</sub> &lt; 45.8 °C</p><p>T<sub>f</sub> should be closer to 15.4 °C because the water has the larger heat capacity.</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout">
+<strong>Use the heat-transfer relationship directly:</strong>
+  at thermal equilibrium, heat lost by the aluminum equals the negative of the heat gained by the water.
+</div>
+<div class="math-line" style="margin-top:.55rem">
+  q<sub>Al</sub> = −q<sub>water</sub>
+</div>
+<div class="panel-grid" style="margin-top:.55rem">
+<div class="panel-card">
+<h4>Aluminum — system</h4>
+<p>q<sub>Al</sub> = m<sub>Al</sub>c<sub>Al</sub>ΔT<sub>Al</sub></p>
+<p style="margin-top:.35rem">
+      q<sub>Al</sub> =
+      (32.5 g)(0.903 J/(g·°C))(T<sub>f</sub> − 45.8 °C)
+    </p>
+</div>
+<div class="panel-card">
+<h4>Water — surroundings</h4>
+<p>q<sub>water</sub> = m<sub>water</sub>c<sub>water</sub>ΔT<sub>water</sub></p>
+<p style="margin-top:.35rem">
+      q<sub>water</sub> =
+      (105.3 g)(4.184 J/(g·°C))(T<sub>f</sub> − 15.4 °C)
+    </p>
+</div>
+</div>
+<div class="math-line" style="margin-top:.55rem">
+  (32.5)(0.903)(T<sub>f</sub> − 45.8)
+  =
+  −(105.3)(4.184)(T<sub>f</sub> − 15.4)
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="eq-sequence">
+<div class="step">
+    29.35(T<sub>f</sub> − 45.8) = −440.58(T<sub>f</sub> − 15.4)
+  </div>
+<div class="step">
+    29.35T<sub>f</sub> − 1344.1 = −440.58T<sub>f</sub> + 6784.9
+  </div>
+<div class="step">
+    469.93T<sub>f</sub> = 8129.0
+  </div>
+</div>
+<div class="math-line" style="margin-top:.55rem">
+  T<sub>f</sub> = <span class="survive">17.3 °C</span>
+</div>
+<div class="reason-box" style="margin-top:.55rem">
+<strong>Reasonableness:</strong>
+  17.3 °C lies between 15.4 °C and 45.8 °C and is much closer to the water's initial temperature because the water has the larger total heat capacity.
+</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="26" data-local-slide="10" id="slide-10">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 26 · Local Slide 10</span>
+<h1 class="slide-title">ACS-Style Practice 1 — System, Surroundings, and Thermal Equilibrium</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use system definition, heat-flow direction, and thermal-equilibrium constraints to eliminate common calorimetry distractors.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Exam route:</strong> before calculating, decide who the system is, which way heat flows, and what thermal equilibrium requires.</div>
+<div class="acs-route">
+<div class="acs-route-card"><strong>1</strong>Define system</div>
+<div class="acs-route-card"><strong>2</strong>Predict heat direction</div>
+<div class="acs-route-card"><strong>3</strong>Use q<sub>system</sub> = −q<sub>surroundings</sub></div>
+<div class="acs-route-card"><strong>4</strong>Check the possible final T</div>
+</div>
+<div class="practice-card" style="margin-top:.65rem">
+<span class="practice-badge medium">ACS-style</span>
+<h4>Question A — Same heat, opposite signs</h4>
+<p>A hot metal sample is defined as the <strong>system</strong> and is placed in cooler water in an insulated calorimeter. The water absorbs 1.80 kJ. Which statement is correct?</p>
+<div class="mc-grid">
+<div class="mc-choice">A. q<sub>system</sub> = +1.80 kJ</div>
+<div class="mc-choice">B. q<sub>system</sub> = −1.80 kJ</div>
+<div class="mc-choice">C. q<sub>system</sub> = 0 because thermal equilibrium is reached</div>
+<div class="mc-choice">D. The sign cannot be known</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="practice-card">
+<span class="practice-badge hard">ACS-style</span>
+<h4>Question B — Thermal-equilibrium range</h4>
+<p>A 40.0 g metal sample at 82.0 °C is placed into water at 21.0 °C in an insulated calorimeter. Which final temperature is physically possible?</p>
+<div class="mc-grid">
+<div class="mc-choice">A. 15.0 °C</div>
+<div class="mc-choice">B. 21.0 °C</div>
+<div class="mc-choice">C. 34.0 °C</div>
+<div class="mc-choice">D. 90.0 °C</div>
+</div>
+</div>
+<div class="reason-box" style="margin-top:.55rem"><strong>Fast check:</strong> without phase change or external heat exchange, T<sub>final</sub> must lie between the two initial temperatures.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="answer-box"><strong>A:</strong> B. The surroundings gain +1.80 kJ, so the system loses the same magnitude: q<sub>system</sub> = −1.80 kJ.</div>
+<div class="answer-box"><strong>B:</strong> C. 34.0 °C lies between 21.0 °C and 82.0 °C.</div>
+<div class="warn" style="margin-top:.55rem"><strong>Distractor warning:</strong> reaching thermal equilibrium means the two objects have the same final temperature. It does <em>not</em> mean q = 0 for the entire transfer process.</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="27" data-local-slide="11" id="slide-11">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 27 · Local Slide 11</span>
+<h1 class="slide-title">ACS-Style Practice 2 — Calorimetry Calculation and Condition Checks</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Diagnose ΔT, sign, and calorimeter-condition distractors while solving a heat-transfer problem.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="practice-card">
+<span class="practice-badge medium">ACS-style</span>
+<h4>Question A — ΔT and q</h4>
+<p>75.0 g of water warms from 20.0 °C to 28.0 °C. Using c = 4.184 J/(g·°C), which value is closest to q<sub>water</sub>?</p>
+<div class="mc-grid">
+<div class="mc-choice">A. +2.51 kJ</div>
+<div class="mc-choice">B. −2.51 kJ</div>
+<div class="mc-choice">C. +8.79 kJ</div>
+<div class="mc-choice">D. −8.79 kJ</div>
+</div>
+</div>
+<div class="acs-route">
+<div class="acs-route-card"><strong>1</strong>Water warms</div>
+<div class="acs-route-card"><strong>2</strong>ΔT = 28.0 − 20.0 = +8.0 °C</div>
+<div class="acs-route-card"><strong>3</strong>q = mcΔT</div>
+<div class="acs-route-card"><strong>4</strong>Sign must be positive</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="practice-card">
+<span class="practice-badge hard">ACS-style</span>
+<h4>Question B — Which calorimeter relationship?</h4>
+<p>Which pairing is correct under the stated condition?</p>
+<div class="mc-grid">
+<div class="mc-choice">A. Coffee cup, constant pressure: q<sub>p</sub> = ΔE</div>
+<div class="mc-choice">B. Coffee cup, constant pressure: q<sub>p</sub> = ΔH</div>
+<div class="mc-choice">C. Bomb calorimeter, constant volume: q<sub>v</sub> = ΔH</div>
+<div class="mc-choice">D. Bomb calorimeter, constant volume: q<sub>v</sub> = −ΔE</div>
+</div>
+</div>
+<div class="trap-grid">
+<div class="trap-card"><h4>Trap 1</h4><p>Using T<sub>final</sub> instead of ΔT.</p></div>
+<div class="trap-card"><h4>Trap 2</h4><p>Giving system and surroundings the same sign.</p></div>
+<div class="trap-card"><h4>Trap 3</h4><p>Mixing constant-pressure and constant-volume relationships.</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="answer-box"><strong>A:</strong> A. q = (75.0 g)(4.184 J/(g·°C))(+8.0 °C) = +2.51 × 10³ J = +2.51 kJ.</div>
+<div class="answer-box"><strong>B:</strong> B. At constant pressure, q<sub>p</sub> = ΔH. In a rigid constant-volume calorimeter, when pressure–volume work is the only work mode, q<sub>v</sub> = ΔE.</div>
+<div class="callout" style="margin-top:.55rem"><strong>ACS fast check:</strong> system → direction/sign → ΔT → equation → calorimeter condition → units → reasonableness.</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="28" data-local-slide="12" id="slide-12">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 28 · Local Slide 12</span>
+<h1 class="slide-title">From Calorimetry to Dissolution — Apply the Same Energy Balance to Solutions</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Extend calorimetry to dissolving processes by connecting particle interactions, temperature change, and the sign of ΔHsoln.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="solution-path">
+<div class="solution-step absorb">
+<h4>Step 1 — Separate solute particles</h4>
+<p>Existing solute–solute attractions must be overcome.</p>
+<p style="margin-top:.35rem"><strong>Energy required</strong></p>
+<p>ΔH₁ &gt; 0</p>
+</div>
+<div class="solution-step absorb">
+<h4>Step 2 — Separate solvent particles</h4>
+<p>Some solvent–solvent attractions must be overcome.</p>
+<p style="margin-top:.35rem"><strong>Energy required</strong></p>
+<p>ΔH₂ &gt; 0</p>
+</div>
+<div class="solution-step release">
+<h4>Step 3 — Form new attractions</h4>
+<p>New solute–solvent attractions form.</p>
+<p style="margin-top:.35rem"><strong>Energy released</strong></p>
+<p>ΔH₃ &lt; 0</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="math-line">
+  ΔH<sub>soln</sub> = (+ energy required) + (+ energy required) + (− energy released)
+</div>
+<div class="callout" style="margin-top:.55rem">
+  What matters is the <strong>balance</strong> between the energy required to separate particles and the energy released when new attractions form.
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="sign-grid">
+<div class="sign-card warm">
+<h3>Release wins</h3>
+<p>more energy released than required</p>
+<div class="math-line">ΔH<sub>soln</sub> &lt; 0</div>
+<p style="text-align:center"><strong>exothermic dissolution</strong></p>
+</div>
+<div class="sign-card cool">
+<h3>Required energy wins</h3>
+<p>more energy required than released</p>
+<div class="math-line">ΔH<sub>soln</sub> &gt; 0</div>
+<p style="text-align:center"><strong>endothermic dissolution</strong></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="29" data-local-slide="13" id="slide-13">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 29 · Local Slide 13</span>
+<h1 class="slide-title">Worked Problem 1 — Endothermic Dissolution</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Calculate the heat absorbed by a dissolution process from a measured temperature decrease.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout">
+<strong>Problem:</strong> 3.21 g NH₄NO₃ dissolves in 50.0 g water at 24.9 °C.
+  The final temperature is 20.3 °C.
+  Find q<sub>dissolution</sub>.
+</div>
+<div class="callout" style="margin-top:.5rem">
+  Assume c<sub>soln</sub> = 4.184 J/(g·°C) and no heat is absorbed by the calorimeter.
+</div>
+<div class="equal-banner" style="margin-top:.5rem">
+  Predict first: solution cools → q<sub>dissolution</sub> should be positive.
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="work-stack">
+<div class="work-step"><strong>1. Mass of solution</strong><br/>
+    m<sub>soln</sub> = 50.0 g + 3.21 g = <strong>53.21 g</strong>
+</div>
+<div class="work-step"><strong>2. Temperature change</strong><br/>
+    ΔT<sub>soln</sub> = 20.3 °C − 24.9 °C = <strong>−4.6 °C</strong>
+</div>
+<div class="work-step"><strong>3. Heat change of solution</strong><br/>
+    q<sub>soln</sub> = (53.21 g)(4.184 J/(g·°C))(−4.6 °C)
+    = <strong>−1.02 × 10³ J</strong>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="math-line">
+  q<sub>dissolution</sub> = −q<sub>soln</sub>
+  = <span class="survive">+1.02 × 10³ J</span>
+</div>
+<div class="reason-box" style="margin-top:.55rem">
+<strong>Reasonableness check:</strong> the solution became colder, so it lost thermal energy.
+  The dissolving process must have absorbed that energy → positive q.
+</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="30" data-local-slide="14" id="slide-14">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 30 · Local Slide 14</span>
+<h1 class="slide-title">Worked Problem 2 — Exothermic Dissolution</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Calculate the heat released by dissolving CaCl₂ and convert the result to molar heat of solution.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout">
+<strong>Problem:</strong> 3.0 g CaCl₂ dissolves in 150.0 g water at 22.4 °C.
+  The final temperature is 25.8 °C.
+  Assume the resulting solution has c = 4.18 J/(g·°C).
+  Find q<sub>dissolution</sub> and ΔH<sub>soln</sub> in kJ/mol CaCl₂.
+</div>
+<div class="equal-banner" style="margin-top:.5rem">
+  Predict first: solution warms → q<sub>dissolution</sub> should be negative.
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="work-stack">
+<div class="work-step"><strong>1. Mass of solution</strong><br/>
+    m<sub>soln</sub> = 150.0 g + 3.0 g = <strong>153.0 g</strong>
+</div>
+<div class="work-step"><strong>2. Temperature change</strong><br/>
+    ΔT<sub>soln</sub> = 25.8 °C − 22.4 °C = <strong>+3.4 °C</strong>
+</div>
+<div class="work-step"><strong>3. Heat gained by solution</strong><br/>
+    q<sub>soln</sub> = (153.0 g)(4.18 J/(g·°C))(+3.4 °C)
+    = <strong>+2.17 × 10³ J</strong>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="work-stack">
+<div class="work-step"><strong>4. Heat of dissolution for this sample</strong><br/>
+    q<sub>dissolution</sub> = −2.17 × 10³ J = <strong>−2.2 kJ</strong>
+</div>
+<div class="work-step"><strong>5. Convert CaCl₂ to moles</strong><br/>
+    3.0 g CaCl₂ ×
+    <span class="fraction"><span class="num">1 mol CaCl₂</span><span class="den">110.98 g CaCl₂</span></span>
+    = <strong>0.027 mol CaCl₂</strong>
+</div>
+<div class="work-step"><strong>6. Molar heat of solution</strong><br/>
+    −2.2 kJ ×
+    <span class="fraction"><span class="num">1</span><span class="den">0.027 mol CaCl₂</span></span>
+    = <span class="survive">−80 kJ/mol CaCl₂</span>
+</div>
+</div>
+<div class="reason-box" style="margin-top:.5rem"><strong>Check:</strong> negative ΔH matches the observed temperature increase.</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="31" data-local-slide="15" id="slide-15">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 31 · Local Slide 15</span>
+<h1 class="slide-title">Heat of Dilution — Why Can Adding More Solvent Change Enthalpy?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Explain why an already-existing solution can absorb or release heat when its concentration changes.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="dilution-scene">
+<div class="conc-box">
+<h3>More concentrated solution</h3>
+<div class="beaker">
+<div class="water-fill low"></div>
+<div class="water-surface low"></div>
+<span class="solute-dot in-water" style="left:18%; bottom:18%"></span>
+<span class="solute-dot in-water" style="left:34%; bottom:12%"></span>
+<span class="solute-dot in-water" style="left:47%; bottom:22%"></span>
+<span class="solute-dot in-water" style="left:62%; bottom:15%"></span>
+<span class="solute-dot in-water" style="left:78%; bottom:20%"></span>
+<span class="solute-dot in-water" style="left:28%; bottom:30%"></span>
+<span class="solute-dot in-water" style="left:56%; bottom:28%"></span>
+</div>
+<div class="beaker-label">lower water level</div>
+</div>
+<div class="arrow">+ solvent →</div>
+<div class="conc-box dilute">
+<h3>More dilute solution</h3>
+<div class="beaker">
+<div class="water-fill high"></div>
+<div class="water-surface high"></div>
+<span class="solute-dot in-water" style="left:12%; bottom:18%"></span>
+<span class="solute-dot in-water" style="left:26%; bottom:44%"></span>
+<span class="solute-dot in-water" style="left:39%; bottom:26%"></span>
+<span class="solute-dot in-water" style="left:52%; bottom:58%"></span>
+<span class="solute-dot in-water" style="left:65%; bottom:16%"></span>
+<span class="solute-dot in-water" style="left:78%; bottom:40%"></span>
+<span class="solute-dot in-water" style="left:88%; bottom:24%"></span>
+</div>
+<div class="beaker-label">higher water level</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout">
+  In a concentrated solution, each solute particle experiences a different local solvent environment than it does in a much more dilute solution.
+  Adding solvent changes these interactions and therefore can change the enthalpy.
+</div>
+<div class="target-box" style="margin-top:.55rem">
+  concentrated solution + solvent → more dilute solution    ΔH<sub>dil</sub>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">
+  Heat of dilution is an energy change caused by changing concentration—not by adding new solute.
+</div>
+<div class="callout" style="margin-top:.55rem">
+  As dilution continues, the heat effect can become smaller.
+  At sufficiently great dilution, adding still more solvent produces essentially no additional heat effect.
+</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="32" data-local-slide="16" id="slide-16">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 32 · Local Slide 16</span>
+<h1 class="slide-title">Heat of Solution vs. Heat of Dilution — Same Thermochemistry, Different Initial State</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Distinguish the two processes and predict heat flow from qualitative temperature observations.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="compare-grid">
+<div class="compare-card">
+<h3>Heat of Solution</h3>
+<p><strong>Initial state:</strong> solute + solvent</p>
+<p><strong>Process:</strong> solute dissolves</p>
+<p><strong>Final state:</strong> solution</p>
+</div>
+<div class="compare-card">
+<h3>Heat of Dilution</h3>
+<p><strong>Initial state:</strong> existing solution + more solvent</p>
+<p><strong>Process:</strong> concentration decreases</p>
+<p><strong>Final state:</strong> more dilute solution</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="practice-wide">
+<h4 style="color:var(--accent-blue)">Practice — Identify the Process</h4>
+<p><strong>A.</strong> Solid CaCl₂ is added to water and dissolves.</p>
+<p><strong>B.</strong> Water is added to a concentrated CaCl₂(aq) solution.</p>
+<p style="margin-top:.45rem">Which is heat of solution? Which is heat of dilution?</p>
+</div>
+<div class="answer-reveal" style="margin-top:.5rem">
+<strong>A:</strong> heat of solution    |   
+  <strong>B:</strong> heat of dilution
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="practice-wide">
+<h4 style="color:var(--accent-blue)">Reasoning — Temperature Observation</h4>
+<p>Water is added to a concentrated solution in an insulated cup and the temperature rises.</p>
+<p style="margin-top:.35rem"><strong>What can you conclude about ΔH<sub>dil</sub>?</strong></p>
+</div>
+<div class="answer-reveal" style="margin-top:.5rem">
+  The solution gained heat, so the dilution process released heat.
+  Therefore <strong>ΔH<sub>dil</sub> &lt; 0</strong> for that dilution step.
+</div>
+<div class="warn" style="margin-top:.5rem">
+  M₁V₁ = M₂V₂ tracks concentration. ΔH<sub>dil</sub> tracks energy. Do not substitute one idea for the other.
+</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="33" data-local-slide="17" id="slide-17">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 33 · Local Slide 17</span>
+<h1 class="slide-title">ACS-Style Practice — Heat, Enthalpy, and Solution Processes</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use multiple-choice reasoning to integrate sign conventions, calorimetry, dilution, and experimental error.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="practice-grid">
+<div class="practice-card">
+<span class="practice-badge easy">ACS-style</span>
+<h4>1. Sign</h4>
+<p>A salt dissolves and the solution temperature decreases. Which must be true?</p>
+<div class="choice-grid">
+<div class="choice">A. q<sub>soln</sub> &gt; 0</div>
+<div class="choice">B. q<sub>dissolution</sub> &lt; 0</div>
+<div class="choice">C. ΔH<sub>soln</sub> &gt; 0</div>
+<div class="choice">D. ΔT<sub>soln</sub> &gt; 0</div>
+</div>
+</div>
+<div class="practice-card">
+<span class="practice-badge medium">ACS-style</span>
+<h4>2. Dilution</h4>
+<p>Water is added to an existing solution and the temperature rises. Which statement best describes the process?</p>
+<div class="choice-grid">
+<div class="choice">A. ΔH<sub>dil</sub> &lt; 0</div>
+<div class="choice">B. ΔH<sub>dil</sub> &gt; 0</div>
+<div class="choice">C. ΔH<sub>soln</sub> = 0</div>
+<div class="choice">D. No energy change occurs</div>
+</div>
+</div>
+<div class="practice-card">
+<span class="practice-badge hard">ACS-style</span>
+<h4>3. Experimental Error</h4>
+<p>An exothermic dissolution warms both the solution and the calorimeter.
+    The student assumes q<sub>cal</sub> = 0. What happens to the calculated magnitude of ΔH<sub>soln</sub>?</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="practice-grid">
+<div class="practice-card">
+<h4>1. Answer</h4>
+<div class="answer-box"><strong>C.</strong> Solution cools → q<sub>soln</sub> &lt; 0 → q<sub>dissolution</sub> &gt; 0 → ΔH<sub>soln</sub> &gt; 0.</div>
+</div>
+<div class="practice-card">
+<h4>2. Answer</h4>
+<div class="answer-box"><strong>A.</strong> The measured solution warms, so the dilution process released heat.</div>
+</div>
+<div class="practice-card">
+<h4>3. Energy ledger</h4>
+<p>True balance:</p>
+<div class="math-line">q<sub>dissolution</sub> + q<sub>soln</sub> + q<sub>cal</sub> = 0</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="practice-card">
+<span class="practice-badge hard">ACS-style</span>
+<h4>3. Answer</h4>
+<div class="answer-box">
+    The calculated |ΔH<sub>soln</sub>| is <strong>too small</strong>.
+    Ignoring q<sub>cal</sub> ignores part of the heat released by the dissolution.
+  </div>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">
+  ACS-style habit: identify the measured object → determine sign → write the energy balance → calculate only after the physical model is clear.
+</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="34" data-local-slide="18" id="slide-18">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 34 · Local Slide 18</span>
+<h1 class="slide-title">Independent Check — Calorimetry, Heat of Solution &amp; Heat of Dilution</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Check conceptual, calculation, and error-analysis understanding without answer support.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="question-grid">
+<div class="question-card">
+<div><span class="question-num">1</span> <span class="question-text">Name the three energy changes used to model ΔH<sub>soln</sub>. Which two require energy and which one releases energy?</span></div>
+<div class="response-area">Use the microscopic interaction model.</div>
+</div>
+<div class="question-card">
+<div><span class="question-num">2</span> <span class="question-text">Why is ΔT written as ΔT<sub>soln</sub> in a coffee-cup dissolution experiment?</span></div>
+<div class="response-area">Identify what the thermometer measures.</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="question-grid">
+<div class="question-card">
+<div><span class="question-num">3</span> <span class="question-text">A solution warms when a salt dissolves. State the signs of q<sub>soln</sub>, q<sub>dissolution</sub>, and ΔH<sub>soln</sub>.</span></div>
+<div class="response-area">Keep each quantity attached to its owner.</div>
+</div>
+<div class="question-card">
+<div><span class="question-num">4</span> <span class="question-text">Explain why adding solvent to an already-existing solution can still cause an enthalpy change.</span></div>
+<div class="response-area">Think about concentration and solute–solvent environment.</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="question-grid">
+<div class="question-card">
+<div><span class="question-num">5</span> <span class="question-text">A 75.0 g solution cools by 5.0 °C. With c = 4.18 J/(g·°C), set up q<sub>soln</sub> and infer the sign of q<sub>dissolution</sub>.</span></div>
+<div class="response-area">Path first, arithmetic second.</div>
+</div>
+<div class="question-card">
+<div><span class="question-num">6</span> <span class="question-text">During an exothermic dissolution, some heat escapes to the room. How does this affect the measured ΔT and the calculated |ΔH<sub>soln</sub>|?</span></div>
+<div class="response-area">Trace the missing energy.</div>
+</div>
+</div>
+<div class="callout" style="margin-top:.65rem"><strong>Topic synthesis:</strong> calorimetry measures energy transfer through the surroundings; solution and dilution processes use the same energy-balance logic with careful system labels and signs.</div>
+</div>
+</div>
+</div>
+</div></main>
+<div class="footer-copyright">© 2026 Nara Chon. All rights reserved.</div><script>
+let currentSlide=1;
+const totalSlides=18;
+let currentBuild=1;
+const buildsPerSlide={1:3,2:3,3:3,4:3,5:3,6:3,7:3,8:3,9:3,10:3,11:3,12:3,13:3,14:3,15:3,16:3,17:3,18:3};
+let currentMode='student';
+
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+
+function setMode(mode,button){
+  currentMode=mode;
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${mode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+
+
+
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>{
+    slide.classList.toggle('active',(index+1)===currentSlide);
+  });
+
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10);
+    step.classList.toggle('visible',n<=currentBuild);
+  });
+
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const visible=!parentBuild||parentBuild.classList.contains('visible');
+    if(currentMode==='answer'&&visible){
+      blank.textContent=blank.dataset.answer;
+      blank.classList.add('revealed');
+    }else{
+      blank.textContent='[ _______ ]';
+      blank.classList.remove('revealed');
+    }
+  });
+
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+
+function nextBuild(){
+  const max=buildsPerSlide[currentSlide];
+  if(currentBuild<max)currentBuild++;
+  else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}
+  updateDisplay();
+}
+
+function prevBuild(){
+  if(currentBuild>1)currentBuild--;
+  else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}
+  updateDisplay();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}
+});
+
+updateDisplay();
+</script>
+</body>
+</html>

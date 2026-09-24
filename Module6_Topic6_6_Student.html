@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>General Chemistry I — Module 6 — T6.6</title>
+<style>
+:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+  --accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+  --accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border-color:#475569;--blank-bg:#334155;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}
+.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}
+.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.75rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}
+.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}
+.slide-container.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide-header{margin-bottom:1.15rem}
+.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}
+.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}
+.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}
+.lo-box strong{color:var(--accent-blue)}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}
+.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}
+body.mode-answer .blank.revealed{color:var(--accent-amber);background:rgba(251,191,36,.15)}
+.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}
+.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}
+.equal-banner{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.65rem;text-align:center;color:var(--accent-teal);font-weight:900;font-size:1.05rem}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.8rem}
+.panel-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.85rem;text-align:center}
+.panel-card h4{color:var(--accent-blue);font-size:1rem;margin-bottom:.5rem}
+.particle-box{height:130px;border:2px solid #64748b;border-radius:10px;position:relative;background:#111827;overflow:hidden;margin:.4rem auto .55rem}
+.dot{position:absolute;width:15px;height:15px;border-radius:50%;background:var(--accent-blue);box-shadow:0 0 6px rgba(56,189,248,.45)}
+.gas-scene{height:150px;border:2px solid #64748b;border-radius:12px;position:relative;background:linear-gradient(to bottom, rgba(148,163,184,.06), rgba(15,23,42,.25));overflow:hidden;margin:.45rem auto .6rem}
+.gas-particle{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--accent-blue);box-shadow:0 0 8px rgba(56,189,248,.5)}
+.space-note,.fill-note{position:absolute;left:50%;transform:translateX(-50%);padding:.22rem .55rem;border-radius:999px;font-size:.78rem;font-weight:900;white-space:nowrap}
+.space-note{top:8px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.45);color:#fde68a}
+.fill-note{bottom:8px;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.45);color:#ccfbf1}
+.distance-arrow{position:absolute;height:0;border-top:2px dashed rgba(251,191,36,.8)}
+.distance-arrow::before,.distance-arrow::after{content:"";position:absolute;top:-5px;border-top:4px solid transparent;border-bottom:4px solid transparent}
+.distance-arrow::before{left:-1px;border-right:7px solid rgba(251,191,36,.9)}
+.distance-arrow::after{right:-1px;border-left:7px solid rgba(251,191,36,.9)}
+.distance-label{position:absolute;color:#fde68a;font-size:.76rem;font-weight:800}
+.volume-guide{position:absolute;inset:12px;border:2px dashed rgba(45,212,191,.28);border-radius:10px}
+.volume-arrow{position:absolute;color:#2dd4bf;font-size:1.05rem;font-weight:900}
+.gas-tags{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center}
+.gas-tag{padding:.25rem .55rem;border-radius:999px;background:#111827;border:1px solid #475569;font-weight:800;color:#e2e8f0}
+.formula-large{font-size:2rem;font-weight:900;color:var(--accent-teal)}
+.fraction{display:inline-grid;grid-template-rows:auto auto;align-items:center;justify-items:center;line-height:1.08;vertical-align:middle;margin:0 .18rem;min-width:120px}
+.fraction .num{width:100%;padding:.18rem .4rem .28rem;border-bottom:2px solid var(--text-main);text-align:center}
+.fraction .den{width:100%;padding:.28rem .4rem .18rem;text-align:center}
+.factor-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem 1rem;display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap}
+.cancel-pair{position:relative;display:inline-block;color:var(--text-main);padding:0 .08rem}
+.cancel-pair::after{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:2px;background:var(--accent-rose);transform:rotate(-10deg)}
+.survive{color:var(--accent-teal);font-weight:900;border:1px solid var(--accent-teal);border-radius:5px;padding:.08rem .28rem}
+.arrow{color:var(--accent-amber);font-size:1.35rem;font-weight:900;text-align:center}
+.pressure-equivalence{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;align-items:stretch}
+.unit-card{background:#0f172a;border:1px solid var(--border-color);border-radius:9px;padding:.7rem;text-align:center}
+.unit-card .big{font-size:1.2rem;font-weight:900;color:var(--accent-teal)}
+.barometer-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center}
+.barometer{width:260px;height:320px;margin:auto;position:relative}
+.reservoir{position:absolute;bottom:15px;left:35px;width:190px;height:58px;border:3px solid #cbd5e1;border-radius:0 0 28px 28px;background:#64748b}
+.tube{position:absolute;bottom:65px;left:105px;width:50px;height:235px;border:3px solid #cbd5e1;border-bottom:none;border-radius:22px 22px 0 0;overflow:hidden;background:#111827}
+.hg-column{position:absolute;left:0;right:0;bottom:0;height:190px;background:#94a3b8}
+.vacuum{position:absolute;top:8px;left:0;right:0;text-align:center;font-size:.74rem;color:#cbd5e1}
+.height-line{position:absolute;right:58px;bottom:68px;height:190px;border-right:2px dashed var(--accent-amber)}
+.height-label{position:absolute;right:3px;bottom:145px;color:#fde68a;font-weight:900}
+.atm-arrow{position:absolute;left:4px;bottom:56px;color:var(--accent-blue);font-weight:900;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.02em}
+.altitude-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.mountain-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:1rem;text-align:center}
+.air-column{height:190px;border-left:3px solid #64748b;border-right:3px solid #64748b;border-bottom:3px solid #64748b;position:relative;margin:.5rem auto;width:190px;background:linear-gradient(to top,rgba(56,189,248,.08),transparent)}
+.air-dot{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--accent-blue)}
+
+.pressure-link-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:stretch}
+.pressure-visual-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.9rem;text-align:center}
+.pressure-visual-card h4{margin:0 0 .5rem 0;color:var(--accent-blue)}
+.container-scene{width:100%;height:285px;border:3px solid #64748b;border-radius:12px;position:relative;background:#111827;overflow:hidden}
+.wall-label{position:absolute;right:8px;top:8px;font-size:.75rem;color:#cbd5e1;background:rgba(15,23,42,.7);padding:.15rem .4rem;border-radius:999px}
+.hit-arrow{position:absolute;color:#fde68a;font-size:1.05rem;font-weight:900}
+.impact-burst{position:absolute;color:#fbbf24;font-size:1rem;font-weight:900}
+.earth-scene{width:100%;height:210px;border:1px solid var(--border-color);border-radius:12px;position:relative;overflow:hidden;background:linear-gradient(to bottom,#082f49 0%,#0f172a 68%,#1f2937 69%,#1f2937 100%)}
+.air-column-label{position:absolute;top:10px;left:50%;transform:translateX(-50%);padding:.18rem .55rem;border-radius:999px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.42);color:#bae6fd;font-size:.76rem;font-weight:900;white-space:nowrap}
+.ground-strip{position:absolute;left:0;right:0;bottom:0;height:56px;background:#334155}
+.surface-label{position:absolute;padding:.18rem .48rem;border-radius:999px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.42);color:#fde68a;font-size:.76rem;font-weight:900;white-space:nowrap}
+.down-arrow{position:absolute;color:#2dd4bf;font-size:1rem;font-weight:900}
+.atm-note{display:inline-block;margin-top:.45rem;padding:.3rem .65rem;border-radius:999px;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.4);color:#ccfbf1;font-weight:900}
+.reference-figure{width:100%;max-width:430px;height:auto;display:block;margin:.2rem auto .55rem auto;border:1px solid var(--border-color);border-radius:12px;background:#ffffff}
+.mountain-shape{position:absolute;left:34px;bottom:48px;width:150px;height:96px;background:#475569;clip-path:polygon(0% 100%,35% 58%,55% 20%,75% 58%,100% 100%)}
+.mountain-cap{position:absolute;left:91px;bottom:119px;width:42px;height:20px;background:#cbd5e1;clip-path:polygon(0% 100%,30% 15%,70% 15%,100% 100%)}
+.sea-shape{position:absolute;right:0;bottom:48px;width:145px;height:44px;background:rgba(56,189,248,.35);border-top:3px solid #38bdf8}
+.arrow-group{position:absolute}
+.arrow-shaft{border-radius:20px;background:linear-gradient(to bottom,#2dd4bf,#0ea5e9);position:relative;margin:auto}
+.arrow-shaft::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-14px;border-left:12px solid transparent;border-right:12px solid transparent;border-top:16px solid #0ea5e9}
+.arrow-shaft.small{width:18px;height:58px}
+.arrow-shaft.large{width:26px;height:104px}
+.arrow-text-vertical{position:absolute;left:30px;top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:center;font-size:.78rem;font-weight:900;color:#ccfbf1;white-space:nowrap}
+.pressure-value{position:absolute;padding:.18rem .48rem;border-radius:999px;font-size:.76rem;font-weight:900;white-space:nowrap;background:rgba(15,23,42,.75);border:1px solid rgba(45,212,191,.45);color:#ccfbf1}
+.practice-badge{display:inline-block;padding:.22rem .55rem;border-radius:999px;font-size:.78rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
+.practice-badge.easy{background:rgba(45,212,191,.15);color:var(--accent-teal);border:1px solid var(--accent-teal)}
+.practice-badge.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}
+.practice-badge.hard{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.practice-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem}
+.practice-card h4{color:var(--accent-blue);margin-bottom:.45rem}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.45rem}
+.choice{background:#111827;border:1px solid #334155;border-radius:8px;padding:.55rem}
+.answer-box{margin-top:.55rem;background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.55rem;color:#ccfbf1;font-weight:800}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.85rem;display:flex;flex-direction:column;gap:.55rem}
+.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}
+.question-text{font-size:1rem;font-weight:600;line-height:1.4}
+.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:60px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.65rem;margin-top:.5rem}
+.meta-item{background:#1e293b;padding:.5rem .75rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.8rem;text-transform:uppercase}
+@media(max-width:900px){
+  .barometer-wrap,.altitude-grid,.practice-grid,.question-grid,.pressure-equivalence{grid-template-columns:1fr}
+  .slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}
+}
+
+.energy-flow{display:grid;grid-template-columns:1fr auto 1fr;gap:.8rem;align-items:center}
+.energy-object{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.9rem;text-align:center;min-height:150px;display:flex;flex-direction:column;justify-content:center}
+.energy-object h4{color:var(--accent-blue);margin-bottom:.45rem}
+.flow-arrow{font-size:2rem;color:var(--accent-amber);font-weight:900;text-align:center}
+.ball-track{height:120px;position:relative;border-bottom:4px solid #64748b;margin:.3rem 0 .6rem}
+.ball{position:absolute;width:40px;height:40px;border-radius:50%;top:48px;box-shadow:0 0 12px rgba(56,189,248,.35)}
+.ball.white{left:16%;background:#f8fafc;border:2px solid #cbd5e1}
+.ball.purple{right:16%;background:#a78bfa;border:2px solid #8b5cf6}
+.motion-line{position:absolute;top:67px;height:0;border-top:3px dashed var(--accent-amber)}
+.motion-line.left{left:2%;width:15%}
+.motion-line.right{right:2%;width:15%}
+.temp-pair{display:grid;grid-template-columns:1fr auto 1fr;gap:.7rem;align-items:center}
+.thermo{height:155px;width:62px;margin:.25rem auto;position:relative}
+.thermo .tube{position:absolute;left:26px;top:5px;width:12px;height:115px;border-radius:8px;background:#334155;border:2px solid #94a3b8}
+.thermo .mercury{position:absolute;left:29px;bottom:35px;width:6px;border-radius:4px;background:var(--accent-rose)}
+.thermo.hot .mercury{height:83px}.thermo.cold .mercury{height:40px}
+.thermo .bulb{position:absolute;left:16px;bottom:10px;width:32px;height:32px;border-radius:50%;background:var(--accent-rose);border:2px solid #fecdd3}
+.energy-type-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
+.energy-type{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem;text-align:center}
+.energy-type h4{color:var(--accent-blue);margin-bottom:.4rem}
+.icon-big{font-size:2rem;margin:.2rem 0 .45rem}
+.unit-map{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+.unit-chip{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.75rem;text-align:center}
+.unit-chip strong{display:block;color:var(--accent-teal);font-size:1.05rem}
+.boundary-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:1rem;align-items:center}
+.system-box{height:250px;border:3px solid var(--accent-blue);border-radius:16px;position:relative;background:#0f172a;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem}
+.system-label{font-size:1.3rem;font-weight:900;color:var(--accent-blue)}
+.surr-label{position:absolute;right:10px;top:10px;color:#cbd5e1;font-weight:800}
+.energy-arrow{position:absolute;font-size:1.55rem;font-weight:900;color:var(--accent-amber)}
+.energy-arrow.q{left:-70px;top:55px}.energy-arrow.w{right:-76px;bottom:52px}
+.universe-ring{border:2px dashed #64748b;border-radius:20px;padding:1rem;background:rgba(148,163,184,.04)}
+.system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.system-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.85rem;text-align:center}
+.system-card h4{color:var(--accent-blue);margin-bottom:.5rem}
+.container-icon{height:120px;border:3px solid #64748b;border-radius:8px 8px 16px 16px;position:relative;margin:.4rem auto .6rem;width:110px}
+.container-icon.open{border-top:none}
+.container-icon.closed::before,.container-icon.isolated::before{content:"";position:absolute;left:-5px;right:-5px;top:-10px;height:12px;background:#94a3b8;border-radius:5px}
+.container-icon.isolated{border:7px double #94a3b8}
+.exchange-tags{display:flex;gap:.35rem;justify-content:center;flex-wrap:wrap}
+.exchange-tag{font-size:.78rem;font-weight:900;padding:.2rem .45rem;border-radius:999px;border:1px solid #475569}
+.exchange-tag.yes{color:#ccfbf1;border-color:var(--accent-teal);background:rgba(45,212,191,.08)}
+.exchange-tag.no{color:#fecdd3;border-color:var(--accent-rose);background:rgba(244,63,94,.08)}
+@media(max-width:900px){
+  .energy-flow,.temp-pair,.boundary-wrap,.system-grid,.energy-type-grid,.unit-map{grid-template-columns:1fr}
+}
+
+.collision-scene{height:150px;position:relative;border-bottom:4px solid #64748b;margin:.35rem 0 .6rem;background:linear-gradient(180deg, rgba(30,41,59,.22), rgba(15,23,42,.02));border-radius:10px}
+.collision-ball{position:absolute;width:44px;height:44px;border-radius:50%;top:54px;box-shadow:0 0 12px rgba(56,189,248,.35)}
+.collision-ball.left{left:35%;background:#f8fafc;border:2px solid #cbd5e1}
+.collision-ball.right{left:52%;background:#a78bfa;border:2px solid #8b5cf6}
+.collision-line{position:absolute;top:75px;height:0;border-top:3px dashed var(--accent-amber)}
+.collision-line.left{left:18%;width:15%}
+.collision-line.right{left:67%;width:12%}
+.collision-burst{position:absolute;left:48.5%;top:62px;font-size:1.2rem;color:var(--accent-amber);font-weight:900}
+.universe-diagram{position:relative;min-height:270px;border:2px dashed #64748b;border-radius:20px;background:rgba(148,163,184,.04);padding:1rem}
+.universe-title{position:absolute;top:10px;left:16px;color:#cbd5e1;font-weight:900}
+.surroundings-zone{position:absolute;inset:42px 18px 18px 18px;border:2px solid #475569;border-radius:18px;background:rgba(15,23,42,.20)}
+.surroundings-label{position:absolute;top:14px;right:16px;color:#e2e8f0;font-weight:800}
+.system-core{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:220px;height:140px;border:3px solid var(--accent-blue);border-radius:16px;background:#0f172a;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem}
+.system-core .system-label{font-size:1.25rem;font-weight:900;color:var(--accent-blue)}
+.energy-arrow-in,.energy-arrow-out{position:absolute;font-size:1.15rem;font-weight:900;color:var(--accent-amber)}
+.energy-arrow-in{left:70px;top:112px}
+.energy-arrow-out{right:66px;bottom:94px}
+.boundary-note{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);color:#cbd5e1;font-size:.86rem}
+.logic-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.logic-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.7rem;text-align:center}
+
+
+.energy-arrow-in,.energy-arrow-out{
+  position:absolute;
+  font-size:1rem;
+  font-weight:900;
+  color:var(--accent-amber);
+  background:rgba(15,23,42,.9);
+  padding:.2rem .4rem;
+  border-radius:8px;
+  border:1px solid rgba(245,158,11,.35);
+  z-index:3;
+  white-space:nowrap;
+}
+.energy-arrow-in{
+  left:calc(50% - 178px);
+  top:110px;
+}
+.energy-arrow-out{
+  left:calc(50% + 78px);
+  top:150px;
+}
+.boundary-note{display:none}
+
+.energy-arrow-in,.energy-arrow-out{
+  position:absolute;
+  z-index:4;
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  font-size:1rem;
+  font-weight:900;
+  color:var(--accent-amber);
+  background:transparent;
+  border:none;
+  padding:0;
+  white-space:nowrap;
+}
+.energy-arrow-in{
+  left:calc(50% - 300px);
+  top:118px;
+}
+.energy-arrow-out{
+  left:calc(50% + 122px);
+  top:118px;
+}
+.energy-arrow-in .flow-line,
+.energy-arrow-out .flow-line{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:68px;
+  height:0;
+  border-top:4px solid var(--accent-amber);
+  position:relative;
+}
+.energy-arrow-in .flow-line::after,
+.energy-arrow-out .flow-line::after{
+  content:"";
+  position:absolute;
+  right:-2px;
+  top:-7px;
+  width:0;
+  height:0;
+  border-top:7px solid transparent;
+  border-bottom:7px solid transparent;
+  border-left:13px solid var(--accent-amber);
+}
+.energy-arrow-in .label,
+.energy-arrow-out .label{
+  text-shadow:0 1px 0 rgba(0,0,0,.25);
+}
+
+/* Slide 4 solid-shape arrow update */
+.energy-arrow-in,.energy-arrow-out{
+  position:absolute;
+  z-index:4;
+  display:flex;
+  align-items:center;
+  gap:.55rem;
+  font-size:1rem;
+  font-weight:900;
+  color:var(--accent-amber);
+  background:transparent;
+  border:none;
+  padding:0;
+  white-space:nowrap;
+}
+.energy-arrow-in{ left:calc(50% - 250px); top:114px; }
+.energy-arrow-out{ left:calc(50% + 118px); top:114px; }
+
+.shape-arrow{
+  position:relative;
+  display:inline-block;
+  width:82px;
+  height:14px;
+  background:var(--accent-amber);
+  border-radius:999px;
+  box-shadow:0 0 0 1px rgba(245,158,11,.18);
+}
+.shape-arrow::after{
+  content:"";
+  position:absolute;
+  right:-12px;
+  top:50%;
+  transform:translateY(-50%);
+  width:0;height:0;
+  border-top:11px solid transparent;
+  border-bottom:11px solid transparent;
+  border-left:16px solid var(--accent-amber);
+}
+.energy-arrow-in .shape-arrow,
+.energy-arrow-out .shape-arrow{
+  flex:0 0 auto;
+}
+
+
+/* --- Slide 1 collision spacing refinement --- */
+.collision-ball.left{left:36.5% !important;}
+.collision-ball.right{left:58.5% !important;}
+.collision-line.left{left:21% !important;width:14.5% !important;}
+.collision-line.right{left:63.8% !important;width:12.2% !important;}
+.collision-burst{left:48.2% !important;top:61px !important;}
+
+/* --- Slide 4 arrow spacing refinement --- */
+.energy-arrow-in,
+.energy-arrow-out{
+  position:absolute;
+  z-index:4;
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  font-size:1rem;
+  font-weight:900;
+  color:var(--accent-amber);
+  white-space:nowrap;
+}
+
+.energy-arrow-in{
+  left:calc(50% - 275px);
+  top:114px;
+  gap:.9rem;
+}
+.energy-arrow-out{
+  left:calc(50% + 105px);
+  top:114px;
+  gap:.9rem;
+}
+
+.shape-arrow{
+  position:relative;
+  display:inline-block;
+  width:92px;
+  height:14px;
+  background:var(--accent-amber);
+  border-radius:999px;
+  box-shadow:0 0 0 1px rgba(245,158,11,.18);
+}
+
+
+/* incoming arrow reaches the system boundary */
+.energy-arrow-in .shape-arrow{
+  margin-right:-18px;
+}
+
+/* outgoing arrow starts inside / across the system boundary */
+.energy-arrow-out .shape-arrow{
+  margin-right:0;
+  margin-left:-22px;
+}
+
+
+
+/* =========================================================
+   FINAL RESPONSIVE ILLUSTRATION POSITIONING
+   Horizontal geometry uses percentages of the illustration
+   container rather than monitor-dependent pixel offsets.
+   ========================================================= */
+
+/* ---------- Slide 1: collision illustration ---------- */
+.collision-scene{
+  position:relative;
+}
+
+/* Keep the approved left ball position. */
+.collision-ball.left{
+  left:36.5% !important;
+}
+
+/* Right ball stays visually attached to the outgoing dotted path. */
+.collision-ball.right{
+  left:58.5% !important;
+}
+
+/* Motion paths now scale with the collision scene width. */
+.collision-line.left{
+  left:21% !important;
+  width:14.5% !important;
+}
+.collision-line.right{
+  left:63.8% !important;
+  width:12.2% !important;
+}
+
+/* Collision/transfer marker remains positioned proportionally. */
+.collision-burst{
+  left:48.2% !important;
+  top:61px !important;
+}
+
+
+/* ---------- Slide 4: universe / system / surroundings ---------- */
+
+/* System size and position are relative to the surroundings box. */
+.system-core{
+  left:50% !important;
+  top:52% !important;
+  width:24% !important;
+  height:58% !important;
+  transform:translate(-50%,-50%) !important;
+}
+
+/*
+  System horizontal boundaries:
+  left  = 50% - 12% = 38%
+  right = 50% + 12% = 62%
+
+  Incoming arrow ends just INSIDE the 38% boundary.
+  Outgoing arrow begins just INSIDE the 62% boundary.
+*/
+.energy-arrow-in,
+.energy-arrow-out{
+  position:absolute !important;
+  top:46% !important;
+  z-index:4 !important;
+  display:flex !important;
+  align-items:center !important;
+  font-size:1rem !important;
+  font-weight:900 !important;
+  color:var(--accent-amber) !important;
+  background:transparent !important;
+  border:none !important;
+  padding:0 !important;
+  white-space:nowrap !important;
+}
+
+/* Incoming: label then arrow, ending slightly across system boundary. */
+.energy-arrow-in{
+  left:13% !important;
+  width:25.8% !important;
+  right:auto !important;
+  justify-content:flex-end !important;
+  gap:5% !important;
+}
+
+/* Outgoing: arrow begins slightly inside system boundary, then label. */
+.energy-arrow-out{
+  left:61.2% !important;
+  width:25.8% !important;
+  right:auto !important;
+  bottom:auto !important;
+  justify-content:flex-start !important;
+  gap:5% !important;
+}
+
+/* Arrow body scales with its own arrow group. */
+.energy-arrow-in .shape-arrow,
+.energy-arrow-out .shape-arrow{
+  width:47% !important;
+  height:14px !important;
+  margin:0 !important;
+  flex:0 0 47% !important;
+}
+
+/* Keep label and arrow clearly separated. */
+.energy-arrow-in .label,
+.energy-arrow-out .label{
+  flex:0 0 auto !important;
+  margin:0 !important;
+}
+
+/* Small-screen refinement while preserving the same relative geometry. */
+@media(max-width:900px){
+  .system-core{
+    width:28% !important;
+  }
+  .energy-arrow-in{
+    left:7% !important;
+    width:29% !important;
+  }
+  .energy-arrow-out{
+    left:64% !important;
+    width:29% !important;
+  }
+  .energy-arrow-in .shape-arrow,
+  .energy-arrow-out .shape-arrow{
+    width:42% !important;
+    flex-basis:42% !important;
+  }
+}
+
+/* =========================================================
+   SHARED ILLUSTRATION SYSTEM
+   Relative geometry is used whenever multiple shapes must
+   preserve spatial relationships across different screens.
+   ========================================================= */
+
+.energy-balance{
+  position:relative;
+  height:230px;
+  border:2px dashed #64748b;
+  border-radius:18px;
+  background:rgba(148,163,184,.04);
+  overflow:hidden;
+}
+.balance-system{
+  position:absolute;
+  left:39%;
+  top:22%;
+  width:22%;
+  height:56%;
+  border:3px solid var(--accent-blue);
+  border-radius:16px;
+  background:#0f172a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-weight:900;
+  color:var(--accent-blue);
+}
+.balance-side{
+  position:absolute;
+  top:13%;
+  width:25%;
+  height:74%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+  color:#cbd5e1;
+}
+.balance-side.left{left:4%}
+.balance-side.right{right:4%}
+.energy-transfer-arrow{
+  position:absolute;
+  top:46%;
+  width:18%;
+  height:16px;
+  background:var(--accent-amber);
+  border-radius:999px;
+}
+.energy-transfer-arrow::after{
+  content:"";
+  position:absolute;
+  right:-1.8%;
+  top:50%;
+  transform:translate(100%,-50%);
+  border-top:12px solid transparent;
+  border-bottom:12px solid transparent;
+  border-left:18px solid var(--accent-amber);
+}
+.energy-transfer-arrow.to-system{left:22%}
+.energy-transfer-arrow.from-system{left:60%}
+.balance-equation{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.55rem;
+  flex-wrap:wrap;
+  font-size:1.45rem;
+  font-weight:900;
+  color:var(--accent-teal);
+}
+
+.route-diagram{
+  position:relative;
+  height:220px;
+  border:1px solid var(--border-color);
+  border-radius:14px;
+  background:#0f172a;
+  overflow:hidden;
+}
+.state-node{
+  position:absolute;
+  width:17%;
+  min-width:120px;
+  padding:.7rem .5rem;
+  border:2px solid var(--accent-blue);
+  border-radius:12px;
+  text-align:center;
+  background:#111827;
+}
+.state-node.initial{left:8%;top:38%}
+.state-node.final{right:8%;top:38%}
+.route-path{
+  position:absolute;
+  left:25%;
+  width:50%;
+  border-top:4px solid var(--accent-amber);
+}
+.route-path.top{top:30%;transform:rotate(-5deg)}
+.route-path.bottom{top:68%;transform:rotate(5deg)}
+.route-label{
+  position:absolute;
+  left:48%;
+  transform:translateX(-50%);
+  padding:.25rem .55rem;
+  border-radius:999px;
+  background:#1e293b;
+  border:1px solid #475569;
+  color:#e2e8f0;
+  font-weight:800;
+}
+.route-label.top{top:15%}
+.route-label.bottom{bottom:12%}
+
+.sign-map{
+  position:relative;
+  height:265px;
+  border:2px dashed #64748b;
+  border-radius:18px;
+  background:rgba(148,163,184,.04);
+}
+.sign-system{
+  position:absolute;
+  left:40%;
+  top:29%;
+  width:20%;
+  height:42%;
+  border:3px solid var(--accent-blue);
+  border-radius:16px;
+  background:#0f172a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--accent-blue);
+  font-weight:900;
+}
+.sign-label{
+  position:absolute;
+  font-weight:900;
+  color:var(--accent-amber);
+  white-space:nowrap;
+}
+.sign-label.qin{left:8%;top:23%}
+.sign-label.win{left:8%;bottom:23%}
+.sign-label.qout{right:7%;top:23%}
+.sign-label.wout{right:7%;bottom:23%}
+.sign-shape{
+  position:absolute;
+  width:23%;
+  height:14px;
+  background:var(--accent-amber);
+  border-radius:999px;
+}
+.sign-shape::after{
+  content:"";
+  position:absolute;
+  right:-1.5%;
+  top:50%;
+  transform:translate(100%,-50%);
+  border-top:11px solid transparent;
+  border-bottom:11px solid transparent;
+  border-left:16px solid var(--accent-amber);
+}
+.sign-shape.qin{left:18%;top:36%}
+.sign-shape.win{left:18%;bottom:36%}
+.sign-shape.qout{left:59%;top:36%}
+.sign-shape.wout{left:59%;bottom:36%}
+
+.calc-path{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.65rem;
+  align-items:stretch;
+}
+.calc-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+}
+.calc-step strong{color:var(--accent-blue);display:block;margin-bottom:.35rem}
+.math-line{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem 1rem;
+  text-align:center;
+  font-size:1.25rem;
+  font-weight:850;
+}
+.math-line .positive{color:var(--accent-teal)}
+.math-line .negative{color:#fda4af}
+
+.piston-stage{
+  position:relative;
+  height:245px;
+  border:1px solid var(--border-color);
+  border-radius:14px;
+  background:#0f172a;
+  overflow:hidden;
+}
+.piston-cylinder{
+  position:absolute;
+  left:38%;
+  bottom:13%;
+  width:24%;
+  height:60%;
+  border:4px solid #94a3b8;
+  border-top:none;
+  border-radius:0 0 12px 12px;
+  background:#111827;
+}
+.piston-head{
+  position:absolute;
+  left:36%;
+  width:28%;
+  height:9%;
+  background:#94a3b8;
+  border-radius:6px;
+}
+.piston-head.expanded{top:19%}
+.piston-head.compressed{top:43%}
+.piston-rod{
+  position:absolute;
+  left:49%;
+  width:2%;
+  background:#64748b;
+}
+.piston-rod.expanded{top:5%;height:15%}
+.piston-rod.compressed{top:20%;height:24%}
+.piston-gas{
+  position:absolute;
+  left:41%;
+  width:18%;
+  bottom:17%;
+  border-radius:8px;
+  background:rgba(56,189,248,.13);
+  border:1px dashed rgba(56,189,248,.5);
+}
+.piston-gas.expanded{height:50%}
+.piston-gas.compressed{height:26%}
+.piston-force{
+  position:absolute;
+  left:67%;
+  top:17%;
+  width:21%;
+  text-align:center;
+  color:#fde68a;
+  font-weight:900;
+}
+.piston-note{
+  position:absolute;
+  left:6%;
+  width:25%;
+  top:34%;
+  text-align:center;
+  color:#cbd5e1;
+  font-weight:800;
+}
+.piston-arrow{
+  position:absolute;
+  left:68%;
+  top:42%;
+  width:13%;
+  height:14px;
+  background:var(--accent-amber);
+  border-radius:999px;
+}
+.piston-arrow.up{
+  width:14px;height:29%;
+  left:73%;top:20%;
+}
+.piston-arrow.up::after{
+  content:"";
+  position:absolute;
+  top:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  border-left:11px solid transparent;
+  border-right:11px solid transparent;
+  border-bottom:16px solid var(--accent-amber);
+}
+.piston-arrow.down{
+  width:14px;height:29%;
+  left:73%;top:31%;
+}
+.piston-arrow.down::after{
+  content:"";
+  position:absolute;
+  bottom:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  border-left:11px solid transparent;
+  border-right:11px solid transparent;
+  border-top:16px solid var(--accent-amber);
+}
+
+.pv-compare{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.8rem;
+}
+.pv-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.8rem;
+}
+.pv-card h4{color:var(--accent-blue);text-align:center;margin-bottom:.45rem}
+.pv-mini{
+  position:relative;
+  height:155px;
+  border:1px solid #334155;
+  border-radius:10px;
+  overflow:hidden;
+}
+.pv-mini .cyl{
+  position:absolute;
+  left:34%;
+  bottom:10%;
+  width:32%;
+  height:67%;
+  border:3px solid #94a3b8;
+  border-top:none;
+  background:#111827;
+}
+.pv-mini .head{
+  position:absolute;
+  left:31%;
+  width:38%;
+  height:10%;
+  background:#94a3b8;
+  border-radius:5px;
+}
+.pv-mini.expansion .head{top:17%}
+.pv-mini.compression .head{top:42%}
+.pv-mini .dir{
+  position:absolute;
+  right:13%;
+  top:27%;
+  font-size:2rem;
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.pv-mini .caption{
+  position:absolute;
+  left:6%;
+  bottom:8%;
+  font-size:.85rem;
+  color:#cbd5e1;
+  font-weight:800;
+}
+
+.reason-box{
+  background:rgba(45,212,191,.08);
+  border:1px solid var(--accent-teal);
+  border-radius:10px;
+  padding:.7rem 1rem;
+  color:#ccfbf1;
+}
+
+@media(max-width:900px){
+  .calc-path,.pv-compare{grid-template-columns:1fr 1fr}
+  .balance-system{width:28%;left:36%}
+  .energy-transfer-arrow.to-system{left:17%;width:20%}
+  .energy-transfer-arrow.from-system{left:63%;width:20%}
+  .sign-system{left:36%;width:28%}
+  .sign-shape.qin,.sign-shape.win{left:15%;width:22%}
+  .sign-shape.qout,.sign-shape.wout{left:63%;width:22%}
+}
+
+.fixed-illustration{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:340px;
+  object-fit:contain;
+  margin:.55rem auto;
+  border-radius:14px;
+}
+
+.fixed-illustration{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:330px;
+  object-fit:contain;
+  margin:.55rem auto;
+  border-radius:14px;
+}
+.heat-focus{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.75rem;
+}
+.quantity-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.85rem;
+}
+.quantity-card h4{
+  color:var(--accent-blue);
+  margin-bottom:.45rem;
+  text-align:center;
+}
+.quantity-card .eq{
+  text-align:center;
+  color:var(--accent-teal);
+  font-size:1.45rem;
+  font-weight:900;
+  margin:.35rem 0;
+}
+.equation-map{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+}
+.eq-part{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+}
+.eq-part strong{display:block;color:var(--accent-blue);font-size:1.25rem}
+.temp-sign-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.7rem;
+}
+.temp-sign-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+}
+.path-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+}
+.path-box{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.7rem;
+  text-align:center;
+}
+.path-box strong{display:block;color:var(--accent-blue);margin-bottom:.3rem}
+.energy-ledger{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:.65rem;
+}
+.ledger-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.8rem;
+  text-align:center;
+}
+.ledger-arrow{
+  font-size:1.6rem;
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.error-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.65rem;
+}
+.error-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+}
+.error-card h4{color:var(--accent-rose);margin-bottom:.35rem}
+@media(max-width:900px){
+  .heat-focus,.equation-map,.temp-sign-grid,.path-row,.error-grid{grid-template-columns:1fr 1fr}
+}
+
+.two-col-worked{
+  display:grid;
+  grid-template-columns:1.04fr .96fr;
+  gap:.8rem;
+}
+.worked-col{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.8rem;
+}
+.worked-col h4{
+  color:var(--accent-blue);
+  margin-bottom:.45rem;
+}
+.eq-sequence{
+  display:grid;
+  gap:.45rem;
+}
+.eq-sequence .step{
+  background:#111827;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.55rem .7rem;
+}
+.system-tag{
+  display:inline-block;
+  background:rgba(244,63,94,.12);
+  color:#fecdd3;
+  border:1px solid rgba(244,63,94,.35);
+  border-radius:999px;
+  padding:.16rem .5rem;
+  font-size:.82rem;
+  font-weight:800;
+}
+.surr-tag{
+  display:inline-block;
+  background:rgba(56,189,248,.12);
+  color:#bae6fd;
+  border:1px solid rgba(56,189,248,.35);
+  border-radius:999px;
+  padding:.16rem .5rem;
+  font-size:.82rem;
+  font-weight:800;
+}
+@media(max-width:900px){
+  .two-col-worked{grid-template-columns:1fr}
+}
+
+.acs-route{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.55rem;
+  margin-top:.55rem;
+}
+.acs-route-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.6rem;
+  text-align:center;
+}
+.acs-route-card strong{
+  display:block;
+  color:var(--accent-blue);
+  margin-bottom:.25rem;
+}
+.mc-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.5rem;
+  margin-top:.5rem;
+}
+.mc-choice{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:8px;
+  padding:.52rem .65rem;
+}
+.trap-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.6rem;
+  margin-top:.55rem;
+}
+.trap-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.65rem;
+}
+.trap-card h4{
+  color:var(--accent-amber);
+  margin-bottom:.3rem;
+}
+@media(max-width:900px){
+  .acs-route,.trap-grid{grid-template-columns:1fr 1fr}
+}
+
+.enthalpy-key{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:.8rem;align-items:center;
+}
+.big-symbol{
+  background:#0f172a;border:2px solid var(--accent-blue);border-radius:14px;
+  padding:1rem;text-align:center;font-size:2rem;font-weight:900;color:var(--accent-blue);
+}
+.cheat-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:stretch;
+}
+.cheat-side{
+  background:#0f172a;border:2px solid var(--border-color);border-radius:14px;padding:.9rem;
+}
+.cheat-side h3{text-align:center;margin-bottom:.55rem;font-size:1.25rem}
+.cheat-side.exo{border-color:#f59e0b}
+.cheat-side.endo{border-color:#38bdf8}
+.cheat-row{
+  display:grid;grid-template-columns:150px 1fr;gap:.5rem;padding:.34rem 0;
+  border-bottom:1px solid #334155;align-items:start;
+}
+.cheat-row:last-child{border-bottom:none}
+.cheat-label{font-weight:900;color:#cbd5e1}
+.energy-level{
+  position:relative;height:150px;background:#111827;border:1px solid #334155;
+  border-radius:10px;margin-top:.5rem;overflow:hidden;
+}
+.level-line{
+  position:absolute;left:15%;right:15%;height:4px;background:#94a3b8;border-radius:99px;
+}
+.level-line.react{top:35%}.level-line.prod{top:70%}
+.level-line.react.low{top:70%}.level-line.prod.high{top:35%}
+.level-text{position:absolute;font-size:.8rem;font-weight:800;color:#e2e8f0}
+.level-text.react{left:16%;top:22%}.level-text.prod{left:16%;top:73%}
+.level-text.react.low{top:73%}.level-text.prod.high{top:22%}
+.energy-arrow-down,.energy-arrow-up{
+  position:absolute;right:20%;width:12px;background:var(--accent-amber);border-radius:99px;
+}
+.energy-arrow-down{top:38%;height:42%}
+.energy-arrow-down::after{
+  content:"";position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);
+  border-left:10px solid transparent;border-right:10px solid transparent;border-top:14px solid var(--accent-amber);
+}
+.energy-arrow-up{top:32%;height:42%}
+.energy-arrow-up::after{
+  content:"";position:absolute;left:50%;top:-10px;transform:translateX(-50%);
+  border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:14px solid var(--accent-amber);
+}
+.beaker-icon{
+  width:110px;height:110px;margin:.35rem auto;position:relative;border:4px solid #94a3b8;
+  border-top:none;border-radius:0 0 18px 18px;background:linear-gradient(to top,rgba(56,189,248,.26) 0 60%,transparent 60%);
+}
+.beaker-icon::before{
+  content:"";position:absolute;left:-4px;right:-4px;top:-7px;border-top:4px solid #94a3b8;
+}
+.hand-note{text-align:center;font-weight:900;margin-top:.25rem}
+.word-bank{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;margin-top:.55rem;
+}
+.word-chip{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.6rem;text-align:center;
+}
+.word-chip strong{display:block;color:var(--accent-blue);margin-bottom:.2rem}
+.bridge-chain{
+  display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap;
+  font-size:1.08rem;font-weight:850;
+}
+.bridge-node{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:9px;padding:.55rem .75rem;
+}
+.state-route{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:.75rem;align-items:center;
+}
+.state-box{
+  background:#0f172a;border:2px solid var(--accent-blue);border-radius:12px;padding:.8rem;text-align:center;
+}
+@media(max-width:900px){
+  .cheat-grid,.enthalpy-key,.state-route{grid-template-columns:1fr}
+  .word-bank{grid-template-columns:1fr 1fr}
+  .cheat-row{grid-template-columns:120px 1fr}
+}
+
+.intuition-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.8rem;
+  align-items:stretch;
+}
+.intuition-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.85rem;
+}
+.intuition-card h4{
+  color:var(--accent-blue);
+  margin-bottom:.45rem;
+}
+.energy-budget{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:.7rem;
+  align-items:center;
+  margin-top:.55rem;
+}
+.budget-box{
+  background:#0f172a;
+  border:2px solid var(--accent-blue);
+  border-radius:12px;
+  padding:.8rem;
+  text-align:center;
+  min-height:105px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.budget-box strong{
+  color:var(--accent-blue);
+  font-size:1.2rem;
+}
+.open-beaker{
+  width:150px;
+  height:125px;
+  margin:.35rem auto;
+  position:relative;
+  border:4px solid #94a3b8;
+  border-top:none;
+  border-radius:0 0 22px 22px;
+  background:linear-gradient(to top,rgba(56,189,248,.24) 0 58%,transparent 58%);
+}
+.open-beaker::before{
+  content:"";
+  position:absolute;
+  left:-4px;right:-4px;top:-7px;
+  border-top:4px solid #94a3b8;
+}
+.air-arrows{
+  text-align:center;
+  color:var(--accent-amber);
+  font-weight:900;
+  font-size:1.1rem;
+}
+.chem-definition{
+  background:rgba(45,212,191,.08);
+  border:2px solid var(--accent-teal);
+  border-radius:12px;
+  padding:.8rem 1rem;
+}
+@media(max-width:900px){
+  .intuition-grid,.energy-budget{grid-template-columns:1fr}
+}
+
+.reactant-text{color:var(--accent-blue)!important;font-weight:900}
+.product-text{color:var(--accent-rose)!important;font-weight:900}
+.system-negative{color:var(--accent-rose);font-weight:900}
+.system-positive{color:var(--accent-blue);font-weight:900}
+
+.thermo-eq{
+  background:#0f172a;border:2px solid var(--border-color);border-radius:12px;
+  padding:.9rem;text-align:center;font-size:1.35rem;font-weight:850;
+}
+.eq-react{color:var(--accent-blue);font-weight:900}
+.eq-prod{color:var(--accent-rose);font-weight:900}
+.heat-ratio{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-top:.6rem;
+}
+.ratio-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:10px;
+  padding:.75rem;text-align:center;
+}
+.ratio-card strong{color:var(--accent-teal);display:block;margin-bottom:.3rem}
+.rule-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;
+}
+.rule-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem;
+}
+.rule-card h4{color:var(--accent-blue);margin-bottom:.4rem}
+.path-strip{
+  display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap;
+}
+.path-node{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:9px;
+  padding:.55rem .75rem;font-weight:850;
+}
+@media(max-width:900px){
+  .heat-ratio,.rule-grid{grid-template-columns:1fr}
+}
+
+.heat-product{
+  color:var(--accent-rose)!important;
+  font-weight:900;
+}
+.heat-reactant{
+  color:var(--accent-blue)!important;
+  font-weight:900;
+}
+.practice-stack{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.55rem;
+}
+.practice-line{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.65rem .8rem;
+}
+.practice-line strong{color:var(--accent-blue)}
+
+.standard-badge-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;
+}
+.standard-badge{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;
+  padding:.85rem;text-align:center;
+}
+.standard-badge strong{display:block;color:var(--accent-teal);font-size:1.15rem;margin-bottom:.3rem}
+.form-route{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;
+  font-size:1.05rem;font-weight:850;
+}
+.form-node{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:10px;
+  padding:.6rem .8rem;
+}
+.sort-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:.8rem;
+}
+.sort-col{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;
+}
+.sort-col h3{text-align:center;margin-bottom:.55rem}
+.zero{border-color:var(--accent-teal)}
+.notzero{border-color:var(--accent-rose)}
+.species-chip{
+  display:inline-block;background:#111827;border:1px solid #475569;border-radius:999px;
+  padding:.3rem .55rem;margin:.18rem;font-weight:800;
+}
+.formation-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:.75rem;
+}
+.formation-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.75rem;
+}
+.formation-card h4{color:var(--accent-blue);margin-bottom:.35rem}
+.ledger{
+  display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.55rem;
+}
+.ledger-col{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;
+}
+.ledger-col h3{text-align:center;color:var(--accent-blue);margin-bottom:.5rem}
+.ledger-row{
+  display:flex;justify-content:space-between;gap:.7rem;padding:.34rem 0;border-bottom:1px solid #334155;
+}
+.ledger-row:last-child{border-bottom:none}
+.ledger-total{
+  margin-top:.5rem;padding:.45rem;border-radius:8px;background:rgba(45,212,191,.08);
+  border:1px solid var(--accent-teal);font-weight:900;text-align:center;
+}
+@media(max-width:900px){
+  .standard-badge-grid,.sort-grid,.formation-grid,.ledger{grid-template-columns:1fr}
+}
+
+.product-highlight{color:var(--accent-rose)!important;font-weight:900}
+.read-aloud{
+  display:inline-block;margin-left:.45rem;padding:.18rem .5rem;border-radius:999px;
+  background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.45);
+  color:#fde68a;font-size:.82rem;font-weight:900;
+}
+.step-ladder{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:.6rem;
+}
+.step-box{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;
+}
+.step-box strong{display:block;color:var(--accent-blue);margin-bottom:.35rem}
+.baseline-wrap{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:.7rem;align-items:center;
+}
+.baseline-card{
+  background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem;text-align:center;
+}
+@media(max-width:900px){.step-ladder,.baseline-wrap{grid-template-columns:1fr}}
+
+.reference-line{
+  position:relative;
+  height:150px;
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  margin-top:.6rem;
+  overflow:hidden;
+}
+.reference-zero{
+  position:absolute;
+  left:10%;right:10%;top:65%;
+  border-top:3px solid var(--accent-teal);
+}
+.reference-label{
+  position:absolute;
+  left:12%;top:68%;
+  color:var(--accent-teal);
+  font-weight:900;
+}
+.reference-point{
+  position:absolute;
+  width:16px;height:16px;
+  border-radius:50%;
+  background:var(--accent-teal);
+  left:48%;top:60%;
+}
+.reference-name{
+  position:absolute;
+  left:52%;top:48%;
+  font-weight:900;
+}
+.reference-up{
+  position:absolute;
+  right:18%;top:18%;
+  padding:.35rem .55rem;
+  border:1px solid var(--border-color);
+  border-radius:8px;
+  background:#111827;
+}
+
+.footer-copyright{position:fixed;right:.75rem;bottom:.3rem;z-index:250;color:#64748b;font-size:.72rem;letter-spacing:.01em;pointer-events:none}
+</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧪</span><span>Topic T6.6 | Standard Enthalpy of Formation &amp; Reaction Enthalpy</span></div>
+<div class="mode-selector">
+<button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button>
+<button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button>
+</div>
+<div class="nav-controls">
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 7</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main><div class="slide-container active" data-integrated-slide="59" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 59 · Local Slide 1</span>
+<h1 class="slide-title">From Hess Law to Standard Enthalpy — Build a Common Reference System</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Connect Hess Law and state-function reasoning to standard-state enthalpies, then interpret the degree symbol in ΔH° and ΔH°f.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Transition from T6.5: Hess Law showed that enthalpy depends only on the initial and final states. Standard enthalpies of formation now give us a common reference system for applying that idea systematically.</strong> We already know that ΔH belongs to a reaction as written. But tabulated enthalpy values must be measured relative to a consistent reference condition.</div>
+<div class="math-line" style="margin-top:.55rem">ΔH   vs.   <span class="survive">ΔH°</span></div>
+<div class="equal-banner" style="margin-top:.55rem">The superscript ° means the quantity refers to <strong>standard-state conditions</strong>.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="standard-badge-grid">
+<div class="standard-badge">
+<strong>Pressure</strong>
+<span class="survive">1 atm</span>
+</div>
+<div class="standard-badge">
+<strong>Temperature</strong>
+    25.0 °C
+  </div>
+<div class="standard-badge">
+<strong>Solutions</strong>
+    1 M
+  </div>
+</div>
+<div class="callout" style="margin-top:.55rem">
+<strong>Course convention:</strong> these are the standard conditions used in our General Chemistry I thermochemistry materials.
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Do not confuse standard state with Standard Temperature and Pressure (STP).</strong> The ° symbol here is a thermodynamic reference-state notation, not the gas-law STP shortcut.</div>
+<p style="margin-top:.55rem">The ° in ΔH° means <span class="blank" data-answer="standard-state conditions">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="60" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 60 · Local Slide 2</span>
+<h1 class="slide-title">Standard Enthalpy of Formation, ΔH°f — Build Exactly 1 mol</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Define standard enthalpy of formation and identify the two requirements of a valid formation reaction.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="chem-definition">
+<strong>Standard enthalpy of formation, ΔH°<sub>f</sub>:</strong>
+the enthalpy change when <span class="product-highlight">exactly 1 mol of a substance is formed</span>
+from its constituent <strong>elements in their standard states</strong>.
+</div>
+<div class="form-route" style="margin-top:.65rem">
+<span class="form-node">elements in standard states</span><span>→</span>
+<span class="form-node product-highlight"><strong>1 mol compound</strong></span>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="thermo-eq">
+C(s, graphite) + O₂(g) → CO₂(g)
+   ΔH°<sub>f</sub> = −393.5 kJ/mol
+</div>
+<div class="callout" style="margin-top:.55rem"><strong>Why this qualifies:</strong> carbon and oxygen are elements in their standard states, and the equation forms exactly 1 mol CO₂(g).</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Formation equation checklist:</strong> 1) product coefficient must be 1; 2) reactants must be elements, not compounds; 3) use the correct standard state of each element; 4) fractions are allowed if needed to make exactly 1 mol product.</div>
+<p style="margin-top:.55rem">A formation equation must produce exactly <span class="blank" data-answer="1 mol">[ _______ ]</span> of product.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="61" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 61 · Local Slide 3</span>
+<h1 class="slide-title">Which ΔH°<sub>f</sub> Values Equal Zero? — Element + Standard State</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Identify species whose standard enthalpy of formation is zero and reject common look-alike choices.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="equal-banner"><strong>Rule:</strong> ΔH°<sub>f</sub> = 0 for an <strong>element in its standard state</strong>.</div>
+<div class="sort-grid" style="margin-top:.6rem">
+<div class="sort-col zero"><h3>ΔH°<sub>f</sub> = 0</h3>
+<span class="species-chip">H₂(g)</span>
+<span class="species-chip">N₂(g)</span>
+<span class="species-chip">O₂(g)</span>
+<span class="species-chip">Br₂(l)</span>
+<span class="species-chip">C(s, graphite)</span>
+</div>
+<div class="sort-col notzero"><h3>Not zero by this rule</h3>
+<span class="species-chip">H(g)</span>
+<span class="species-chip">O₃(g)</span>
+<span class="species-chip">C(s, diamond)</span>
+<span class="species-chip">H₂O(l)</span>
+<span class="species-chip">CO₂(g)</span>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout">
+<strong>Think of ΔH°<sub>f</sub> as a height measured from a chosen zero level.</strong>
+  We need one common starting point so that the formation enthalpies of different substances can be compared.
+</div>
+<div class="reference-line">
+<div class="reference-zero"></div>
+<div class="reference-label">reference level: ΔH°<sub>f</sub> = 0</div>
+<div class="reference-point"></div>
+<div class="reference-name">O₂(g), elemental oxygen in its standard state</div>
+<div class="reference-up">compounds can lie above or below this reference</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout">
+<strong>Why is O₂(g) assigned ΔH°<sub>f</sub> = 0?</strong><br/><br/>
+  The definition of ΔH°<sub>f</sub> asks:
+  <em>How much enthalpy change is required to form a substance from its elements in their standard states?</em>
+</div>
+<div class="math-line" style="margin-top:.55rem">
+  O₂(g, standard state) → O₂(g, standard state)
+</div>
+<div class="equal-banner" style="margin-top:.55rem">
+  The starting reference and the final substance are the <strong>same state</strong>.<br/>
+  There is no formation change to measure → <strong>ΔH°<sub>f</sub> = 0</strong>.
+</div>
+<div class="warn" style="margin-top:.55rem">
+<strong>Important:</strong> this does NOT mean O₂ has zero energy or zero enthalpy.
+  It means we <strong>choose its standard-state formation enthalpy as the zero reference</strong>,
+  just as sea level can be chosen as zero elevation.
+</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="62" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 62 · Local Slide 4</span>
+<h1 class="slide-title">Writing a Formation Equation — Do It in Three Steps</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Write a standard formation equation step by step by fixing 1 mol product, selecting elemental standard states, and then balancing.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Example:</strong> Write the standard formation equation for Na₂CO₃(s).</div>
+<div class="step-box" style="margin-top:.6rem">
+<strong>Step 1 — Write exactly 1 mol of product</strong>
+<div class="thermo-eq product-highlight">→ Na₂CO₃(s)</div>
+<p style="margin-top:.4rem">Do not change this product coefficient from 1.</p>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="step-box">
+<strong>Step 2 — Choose each element in its standard state</strong>
+<div class="thermo-eq">
+    Na(s) + C(s, graphite) + O₂(g) → <span class="product-highlight">Na₂CO₃(s)</span>
+</div>
+</div>
+<div class="callout" style="margin-top:.55rem">
+  We use <strong>Na(s)</strong>, <strong>C(s, graphite)</strong>, and <strong>O₂(g)</strong> because the reactants of a formation equation must be the constituent elements in their standard states.
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="step-box">
+<strong>Step 3 — Balance while keeping the product coefficient = 1</strong>
+<div class="thermo-eq">
+    2 Na(s) + C(s, graphite) + 3/2 O₂(g) → <span class="product-highlight">Na₂CO₃(s)</span>
+</div>
+</div>
+<div class="formation-grid" style="margin-top:.6rem">
+<div class="formation-card"><h4>Another example: AgCl(s)</h4><p>Ag(s) + 1/2 Cl₂(g) → <span class="product-highlight">AgCl(s)</span></p></div>
+<div class="formation-card"><h4>Another example: NH₃(g)</h4><p>1/2 N₂(g) + 3/2 H₂(g) → <span class="product-highlight">NH₃(g)</span></p></div>
+</div>
+<div class="warn" style="margin-top:.55rem"><strong>Fractions are allowed.</strong> The priority is exactly 1 mol of product.</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="63" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 63 · Local Slide 5</span>
+<h1 class="slide-title">From ΔH°f to ΔH°rxn — Compare the Two Sides of the Reaction</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Explain why formation enthalpies can be combined to obtain the standard enthalpy change of an entire reaction.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout">
+<strong>What do we already know?</strong>
+  Each ΔH°<sub>f</sub> tells us the enthalpy change required to place <strong>1 mol of a substance</strong>
+  at its enthalpy level starting from the same elemental standard-state reference.
+</div>
+<div class="baseline-wrap" style="margin-top:.6rem">
+<div class="baseline-card">
+<strong>Reactant side</strong><br/>
+    Add the formation enthalpies needed to represent all reactants.
+  </div>
+<div class="arrow">compare</div>
+<div class="baseline-card">
+<strong>Product side</strong><br/>
+    Add the formation enthalpies needed to represent all products.
+  </div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout">
+<strong>What do we want?</strong>
+  ΔH°<sub>rxn</sub> is the <strong>standard enthalpy change for the whole balanced reaction</strong>.
+  Since both sides are measured from the same elemental reference baseline, the reaction change is simply the difference between the two totals.
+</div>
+<div class="equal-banner" style="margin-top:.55rem">
+  overall reaction change = total enthalpy of products − total enthalpy of reactants
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="math-line">
+  ΔH°<sub>rxn</sub> =
+  Σ νΔH°<sub>f</sub>(products)
+  −
+  Σ νΔH°<sub>f</sub>(reactants)
+</div>
+<div class="ledger" style="margin-top:.55rem">
+<div class="ledger-col">
+<h3>Products</h3>
+<div class="ledger-row"><span>coefficient</span><span>× ΔH°f</span></div>
+<div class="ledger-total">add all product contributions</div>
+</div>
+<div class="ledger-col">
+<h3>Reactants</h3>
+<div class="ledger-row"><span>coefficient</span><span>× ΔH°f</span></div>
+<div class="ledger-total">add all reactant contributions</div>
+</div>
+</div>
+<div class="warn" style="margin-top:.55rem"><strong>Why coefficients matter:</strong> ΔH°f is per 1 mol, so the balanced-equation coefficient tells how many formation-enthalpy units to count.</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="64" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 64 · Local Slide 6</span>
+<h1 class="slide-title">Worked Problem — Calculate ΔH°rxn from ΔH°f Values</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Calculate a standard reaction enthalpy using a products-minus-reactants ledger and interpret its sign.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Problem:</strong> Calculate ΔH°<sub>rxn</sub> for the combustion of methane:</div>
+<div class="thermo-eq" style="margin-top:.45rem">
+CH₄(g) + 2 O₂(g) → CO₂(g) + 2 H₂O(l)
+</div>
+<div class="panel-grid" style="margin-top:.55rem">
+<div class="panel-card"><h4>CH₄(g)</h4><p>ΔH°f = −74.8 kJ/mol</p></div>
+<div class="panel-card"><h4>O₂(g)</h4><p>ΔH°f = 0</p></div>
+<div class="panel-card"><h4>CO₂(g)</h4><p>ΔH°f = −393.5 kJ/mol</p></div>
+<div class="panel-card"><h4>H₂O(l)</h4><p>ΔH°f = −285.8 kJ/mol</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="ledger">
+<div class="ledger-col">
+<h3>Products</h3>
+<div class="ledger-row"><span>1 CO₂</span><span>1(−393.5)</span></div>
+<div class="ledger-row"><span>2 H₂O(l)</span><span>2(−285.8)</span></div>
+<div class="ledger-total">Σ products = −965.1 kJ</div>
+</div>
+<div class="ledger-col">
+<h3>Reactants</h3>
+<div class="ledger-row"><span>1 CH₄</span><span>1(−74.8)</span></div>
+<div class="ledger-row"><span>2 O₂</span><span>2(0)</span></div>
+<div class="ledger-total">Σ reactants = −74.8 kJ</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="math-line">
+  ΔH°<sub>rxn</sub> = (−965.1 kJ) − (−74.8 kJ)
+  = <span class="survive">−890.3 kJ</span>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">
+<strong>Yes — the negative sign tells us the reaction is exothermic.</strong>
+</div>
+<div class="callout" style="margin-top:.55rem">
+  ΔH°<sub>rxn</sub> &lt; 0 means the products are at a lower enthalpy than the reactants.
+  The enthalpy difference is released to the surroundings as heat under constant-pressure conditions.
+</div>
+<div class="reason-box" style="margin-top:.55rem">
+<strong>Interpretation:</strong>
+  for the methane combustion reaction as written, about <strong>890.3 kJ of heat is released</strong>.
+</div>
+<div class="warn" style="margin-top:.55rem">
+<strong>Quick check:</strong> O₂(g) contributes 0 because it is elemental oxygen in its standard state.
+</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="65" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 65 · Local Slide 7</span>
+<h1 class="slide-title">Independent Check — Standard Enthalpy &amp; Formation Enthalpy</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Check standard-state notation, ΔH°f zero values, formation equations, and products-minus-reactants calculations.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="question-grid">
+<div class="question-card"><div><span class="question-num">1</span> <span class="question-text">What does the ° symbol in ΔH° indicate?</span></div><div class="response-area">State the meaning without using STP as a synonym.</div></div>
+<div class="question-card"><div><span class="question-num">2</span> <span class="question-text">Which has ΔH°f = 0: Br₂(l), Br₂(g), or Br(g)? Explain.</span></div><div class="response-area">Use element + standard state.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="question-grid">
+<div class="question-card"><div><span class="question-num">3</span> <span class="question-text">Write the standard formation equation for MgO(s).</span></div><div class="response-area">Form exactly 1 mol MgO from elemental standard states.</div></div>
+<div class="question-card"><div><span class="question-num">4</span> <span class="question-text">Is 2 H₂(g) + O₂(g) → 2 H₂O(l) a standard formation equation for H₂O(l)? Explain.</span></div><div class="response-area">Focus on the product coefficient.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="question-grid">
+<div class="question-card"><div><span class="question-num">5</span> <span class="question-text">For N₂(g) + 3 H₂(g) → 2 NH₃(g), write the products-minus-reactants setup for ΔH°rxn using ΔH°f values.</span></div><div class="response-area">Include coefficients and zero-value elemental terms.</div></div>
+<div class="question-card"><div><span class="question-num">6</span> <span class="question-text">A student calculates ΔH°rxn as reactants − products. Identify the error and state the correct order.</span></div><div class="response-area">Write the governing relationship.</div></div>
+</div>
+<div class="callout" style="margin-top:.7rem"><strong>Topic synthesis:</strong> standard enthalpies of formation provide a common reference scale. Once ΔH°f values are known, ΔH°rxn is found by coefficient-weighted <strong>products minus reactants</strong>.</div>
+</div>
+</div>
+</div>
+</div></main>
+<div class="footer-copyright">© 2026 Nara Chon. All rights reserved.</div><script>
+let currentSlide=1;
+const totalSlides=7;
+let currentBuild=1;
+const buildsPerSlide={1:3,2:3,3:3,4:3,5:3,6:3,7:3};
+let currentMode='student';
+
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+
+function setMode(mode,button){
+  currentMode=mode;
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${mode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+
+
+
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>{
+    slide.classList.toggle('active',(index+1)===currentSlide);
+  });
+
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10);
+    step.classList.toggle('visible',n<=currentBuild);
+  });
+
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const visible=!parentBuild||parentBuild.classList.contains('visible');
+    if(currentMode==='answer'&&visible){
+      blank.textContent=blank.dataset.answer;
+      blank.classList.add('revealed');
+    }else{
+      blank.textContent='[ _______ ]';
+      blank.classList.remove('revealed');
+    }
+  });
+
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+
+function nextBuild(){
+  const max=buildsPerSlide[currentSlide];
+  if(currentBuild<max)currentBuild++;
+  else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}
+  updateDisplay();
+}
+
+function prevBuild(){
+  if(currentBuild>1)currentBuild--;
+  else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}
+  updateDisplay();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}
+});
+
+updateDisplay();
+</script>
+</body>
+</html>

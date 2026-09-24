@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>General Chemistry I — Module 6 — T6.1</title>
+<style>
+:root{
+  --bg-dark:#0f172a;--bg-card:#1e293b;--bg-card-hover:#334155;
+  --accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;
+  --accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;
+  --border-color:#475569;--blank-bg:#334155;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}
+.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}
+.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.75rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}
+.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}
+.slide-container.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide-header{margin-bottom:1.15rem}
+.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}
+.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}
+.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}
+.lo-box strong{color:var(--accent-blue)}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}
+.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}
+body.mode-answer .blank.revealed{color:var(--accent-amber);background:rgba(251,191,36,.15)}
+.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}
+.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}
+.equal-banner{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.65rem;text-align:center;color:var(--accent-teal);font-weight:900;font-size:1.05rem}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.8rem}
+.panel-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.85rem;text-align:center}
+.panel-card h4{color:var(--accent-blue);font-size:1rem;margin-bottom:.5rem}
+.particle-box{height:130px;border:2px solid #64748b;border-radius:10px;position:relative;background:#111827;overflow:hidden;margin:.4rem auto .55rem}
+.dot{position:absolute;width:15px;height:15px;border-radius:50%;background:var(--accent-blue);box-shadow:0 0 6px rgba(56,189,248,.45)}
+.gas-scene{height:150px;border:2px solid #64748b;border-radius:12px;position:relative;background:linear-gradient(to bottom, rgba(148,163,184,.06), rgba(15,23,42,.25));overflow:hidden;margin:.45rem auto .6rem}
+.gas-particle{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--accent-blue);box-shadow:0 0 8px rgba(56,189,248,.5)}
+.space-note,.fill-note{position:absolute;left:50%;transform:translateX(-50%);padding:.22rem .55rem;border-radius:999px;font-size:.78rem;font-weight:900;white-space:nowrap}
+.space-note{top:8px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.45);color:#fde68a}
+.fill-note{bottom:8px;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.45);color:#ccfbf1}
+.distance-arrow{position:absolute;height:0;border-top:2px dashed rgba(251,191,36,.8)}
+.distance-arrow::before,.distance-arrow::after{content:"";position:absolute;top:-5px;border-top:4px solid transparent;border-bottom:4px solid transparent}
+.distance-arrow::before{left:-1px;border-right:7px solid rgba(251,191,36,.9)}
+.distance-arrow::after{right:-1px;border-left:7px solid rgba(251,191,36,.9)}
+.distance-label{position:absolute;color:#fde68a;font-size:.76rem;font-weight:800}
+.volume-guide{position:absolute;inset:12px;border:2px dashed rgba(45,212,191,.28);border-radius:10px}
+.volume-arrow{position:absolute;color:#2dd4bf;font-size:1.05rem;font-weight:900}
+.gas-tags{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center}
+.gas-tag{padding:.25rem .55rem;border-radius:999px;background:#111827;border:1px solid #475569;font-weight:800;color:#e2e8f0}
+.formula-large{font-size:2rem;font-weight:900;color:var(--accent-teal)}
+.fraction{display:inline-grid;grid-template-rows:auto auto;align-items:center;justify-items:center;line-height:1.08;vertical-align:middle;margin:0 .18rem;min-width:120px}
+.fraction .num{width:100%;padding:.18rem .4rem .28rem;border-bottom:2px solid var(--text-main);text-align:center}
+.fraction .den{width:100%;padding:.28rem .4rem .18rem;text-align:center}
+.factor-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem 1rem;display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap}
+.cancel-pair{position:relative;display:inline-block;color:var(--text-main);padding:0 .08rem}
+.cancel-pair::after{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:2px;background:var(--accent-rose);transform:rotate(-10deg)}
+.survive{color:var(--accent-teal);font-weight:900;border:1px solid var(--accent-teal);border-radius:5px;padding:.08rem .28rem}
+.arrow{color:var(--accent-amber);font-size:1.35rem;font-weight:900;text-align:center}
+.pressure-equivalence{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;align-items:stretch}
+.unit-card{background:#0f172a;border:1px solid var(--border-color);border-radius:9px;padding:.7rem;text-align:center}
+.unit-card .big{font-size:1.2rem;font-weight:900;color:var(--accent-teal)}
+.barometer-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center}
+.barometer{width:260px;height:320px;margin:auto;position:relative}
+.reservoir{position:absolute;bottom:15px;left:35px;width:190px;height:58px;border:3px solid #cbd5e1;border-radius:0 0 28px 28px;background:#64748b}
+.tube{position:absolute;bottom:65px;left:105px;width:50px;height:235px;border:3px solid #cbd5e1;border-bottom:none;border-radius:22px 22px 0 0;overflow:hidden;background:#111827}
+.hg-column{position:absolute;left:0;right:0;bottom:0;height:190px;background:#94a3b8}
+.vacuum{position:absolute;top:8px;left:0;right:0;text-align:center;font-size:.74rem;color:#cbd5e1}
+.height-line{position:absolute;right:58px;bottom:68px;height:190px;border-right:2px dashed var(--accent-amber)}
+.height-label{position:absolute;right:3px;bottom:145px;color:#fde68a;font-weight:900}
+.atm-arrow{position:absolute;left:4px;bottom:56px;color:var(--accent-blue);font-weight:900;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.02em}
+.altitude-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.mountain-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:1rem;text-align:center}
+.air-column{height:190px;border-left:3px solid #64748b;border-right:3px solid #64748b;border-bottom:3px solid #64748b;position:relative;margin:.5rem auto;width:190px;background:linear-gradient(to top,rgba(56,189,248,.08),transparent)}
+.air-dot{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--accent-blue)}
+
+.pressure-link-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:stretch}
+.pressure-visual-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.9rem;text-align:center}
+.pressure-visual-card h4{margin:0 0 .5rem 0;color:var(--accent-blue)}
+.container-scene{width:100%;height:285px;border:3px solid #64748b;border-radius:12px;position:relative;background:#111827;overflow:hidden}
+.wall-label{position:absolute;right:8px;top:8px;font-size:.75rem;color:#cbd5e1;background:rgba(15,23,42,.7);padding:.15rem .4rem;border-radius:999px}
+.hit-arrow{position:absolute;color:#fde68a;font-size:1.05rem;font-weight:900}
+.impact-burst{position:absolute;color:#fbbf24;font-size:1rem;font-weight:900}
+.earth-scene{width:100%;height:210px;border:1px solid var(--border-color);border-radius:12px;position:relative;overflow:hidden;background:linear-gradient(to bottom,#082f49 0%,#0f172a 68%,#1f2937 69%,#1f2937 100%)}
+.air-column-label{position:absolute;top:10px;left:50%;transform:translateX(-50%);padding:.18rem .55rem;border-radius:999px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.42);color:#bae6fd;font-size:.76rem;font-weight:900;white-space:nowrap}
+.ground-strip{position:absolute;left:0;right:0;bottom:0;height:56px;background:#334155}
+.surface-label{position:absolute;padding:.18rem .48rem;border-radius:999px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.42);color:#fde68a;font-size:.76rem;font-weight:900;white-space:nowrap}
+.down-arrow{position:absolute;color:#2dd4bf;font-size:1rem;font-weight:900}
+.atm-note{display:inline-block;margin-top:.45rem;padding:.3rem .65rem;border-radius:999px;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.4);color:#ccfbf1;font-weight:900}
+.reference-figure{width:100%;max-width:430px;height:auto;display:block;margin:.2rem auto .55rem auto;border:1px solid var(--border-color);border-radius:12px;background:#ffffff}
+.mountain-shape{position:absolute;left:34px;bottom:48px;width:150px;height:96px;background:#475569;clip-path:polygon(0% 100%,35% 58%,55% 20%,75% 58%,100% 100%)}
+.mountain-cap{position:absolute;left:91px;bottom:119px;width:42px;height:20px;background:#cbd5e1;clip-path:polygon(0% 100%,30% 15%,70% 15%,100% 100%)}
+.sea-shape{position:absolute;right:0;bottom:48px;width:145px;height:44px;background:rgba(56,189,248,.35);border-top:3px solid #38bdf8}
+.arrow-group{position:absolute}
+.arrow-shaft{border-radius:20px;background:linear-gradient(to bottom,#2dd4bf,#0ea5e9);position:relative;margin:auto}
+.arrow-shaft::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-14px;border-left:12px solid transparent;border-right:12px solid transparent;border-top:16px solid #0ea5e9}
+.arrow-shaft.small{width:18px;height:58px}
+.arrow-shaft.large{width:26px;height:104px}
+.arrow-text-vertical{position:absolute;left:30px;top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:center;font-size:.78rem;font-weight:900;color:#ccfbf1;white-space:nowrap}
+.pressure-value{position:absolute;padding:.18rem .48rem;border-radius:999px;font-size:.76rem;font-weight:900;white-space:nowrap;background:rgba(15,23,42,.75);border:1px solid rgba(45,212,191,.45);color:#ccfbf1}
+.practice-badge{display:inline-block;padding:.22rem .55rem;border-radius:999px;font-size:.78rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
+.practice-badge.easy{background:rgba(45,212,191,.15);color:var(--accent-teal);border:1px solid var(--accent-teal)}
+.practice-badge.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}
+.practice-badge.hard{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.practice-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem}
+.practice-card h4{color:var(--accent-blue);margin-bottom:.45rem}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.45rem}
+.choice{background:#111827;border:1px solid #334155;border-radius:8px;padding:.55rem}
+.answer-box{margin-top:.55rem;background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.55rem;color:#ccfbf1;font-weight:800}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.85rem;display:flex;flex-direction:column;gap:.55rem}
+.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}
+.question-text{font-size:1rem;font-weight:600;line-height:1.4}
+.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:60px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}
+.meta-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.65rem;margin-top:.5rem}
+.meta-item{background:#1e293b;padding:.5rem .75rem;border-radius:4px}
+.meta-item strong{color:var(--accent-blue);display:block;font-size:.8rem;text-transform:uppercase}
+@media(max-width:900px){
+  .barometer-wrap,.altitude-grid,.practice-grid,.question-grid,.pressure-equivalence{grid-template-columns:1fr}
+  .slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}
+}
+
+.energy-flow{display:grid;grid-template-columns:1fr auto 1fr;gap:.8rem;align-items:center}
+.energy-object{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.9rem;text-align:center;min-height:150px;display:flex;flex-direction:column;justify-content:center}
+.energy-object h4{color:var(--accent-blue);margin-bottom:.45rem}
+.flow-arrow{font-size:2rem;color:var(--accent-amber);font-weight:900;text-align:center}
+.ball-track{height:120px;position:relative;border-bottom:4px solid #64748b;margin:.3rem 0 .6rem}
+.ball{position:absolute;width:40px;height:40px;border-radius:50%;top:48px;box-shadow:0 0 12px rgba(56,189,248,.35)}
+.ball.white{left:16%;background:#f8fafc;border:2px solid #cbd5e1}
+.ball.purple{right:16%;background:#a78bfa;border:2px solid #8b5cf6}
+.motion-line{position:absolute;top:67px;height:0;border-top:3px dashed var(--accent-amber)}
+.motion-line.left{left:2%;width:15%}
+.motion-line.right{right:2%;width:15%}
+.temp-pair{display:grid;grid-template-columns:1fr auto 1fr;gap:.7rem;align-items:center}
+.thermo{height:155px;width:62px;margin:.25rem auto;position:relative}
+.thermo .tube{position:absolute;left:26px;top:5px;width:12px;height:115px;border-radius:8px;background:#334155;border:2px solid #94a3b8}
+.thermo .mercury{position:absolute;left:29px;bottom:35px;width:6px;border-radius:4px;background:var(--accent-rose)}
+.thermo.hot .mercury{height:83px}.thermo.cold .mercury{height:40px}
+.thermo .bulb{position:absolute;left:16px;bottom:10px;width:32px;height:32px;border-radius:50%;background:var(--accent-rose);border:2px solid #fecdd3}
+.energy-type-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
+.energy-type{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem;text-align:center}
+.energy-type h4{color:var(--accent-blue);margin-bottom:.4rem}
+.icon-big{font-size:2rem;margin:.2rem 0 .45rem}
+.unit-map{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+.unit-chip{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.75rem;text-align:center}
+.unit-chip strong{display:block;color:var(--accent-teal);font-size:1.05rem}
+.boundary-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:1rem;align-items:center}
+.system-box{height:250px;border:3px solid var(--accent-blue);border-radius:16px;position:relative;background:#0f172a;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem}
+.system-label{font-size:1.3rem;font-weight:900;color:var(--accent-blue)}
+.surr-label{position:absolute;right:10px;top:10px;color:#cbd5e1;font-weight:800}
+.energy-arrow{position:absolute;font-size:1.55rem;font-weight:900;color:var(--accent-amber)}
+.energy-arrow.q{left:-70px;top:55px}.energy-arrow.w{right:-76px;bottom:52px}
+.universe-ring{border:2px dashed #64748b;border-radius:20px;padding:1rem;background:rgba(148,163,184,.04)}
+.system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.system-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.85rem;text-align:center}
+.system-card h4{color:var(--accent-blue);margin-bottom:.5rem}
+.container-icon{height:120px;border:3px solid #64748b;border-radius:8px 8px 16px 16px;position:relative;margin:.4rem auto .6rem;width:110px}
+.container-icon.open{border-top:none}
+.container-icon.closed::before,.container-icon.isolated::before{content:"";position:absolute;left:-5px;right:-5px;top:-10px;height:12px;background:#94a3b8;border-radius:5px}
+.container-icon.isolated{border:7px double #94a3b8}
+.exchange-tags{display:flex;gap:.35rem;justify-content:center;flex-wrap:wrap}
+.exchange-tag{font-size:.78rem;font-weight:900;padding:.2rem .45rem;border-radius:999px;border:1px solid #475569}
+.exchange-tag.yes{color:#ccfbf1;border-color:var(--accent-teal);background:rgba(45,212,191,.08)}
+.exchange-tag.no{color:#fecdd3;border-color:var(--accent-rose);background:rgba(244,63,94,.08)}
+@media(max-width:900px){
+  .energy-flow,.temp-pair,.boundary-wrap,.system-grid,.energy-type-grid,.unit-map{grid-template-columns:1fr}
+}
+
+.collision-scene{height:150px;position:relative;border-bottom:4px solid #64748b;margin:.35rem 0 .6rem;background:linear-gradient(180deg, rgba(30,41,59,.22), rgba(15,23,42,.02));border-radius:10px}
+.collision-ball{position:absolute;width:44px;height:44px;border-radius:50%;top:54px;box-shadow:0 0 12px rgba(56,189,248,.35)}
+.collision-ball.left{left:35%;background:#f8fafc;border:2px solid #cbd5e1}
+.collision-ball.right{left:52%;background:#a78bfa;border:2px solid #8b5cf6}
+.collision-line{position:absolute;top:75px;height:0;border-top:3px dashed var(--accent-amber)}
+.collision-line.left{left:18%;width:15%}
+.collision-line.right{left:67%;width:12%}
+.collision-burst{position:absolute;left:48.5%;top:62px;font-size:1.2rem;color:var(--accent-amber);font-weight:900}
+.universe-diagram{position:relative;min-height:270px;border:2px dashed #64748b;border-radius:20px;background:rgba(148,163,184,.04);padding:1rem}
+.universe-title{position:absolute;top:10px;left:16px;color:#cbd5e1;font-weight:900}
+.surroundings-zone{position:absolute;inset:42px 18px 18px 18px;border:2px solid #475569;border-radius:18px;background:rgba(15,23,42,.20)}
+.surroundings-label{position:absolute;top:14px;right:16px;color:#e2e8f0;font-weight:800}
+.system-core{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:220px;height:140px;border:3px solid var(--accent-blue);border-radius:16px;background:#0f172a;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem}
+.system-core .system-label{font-size:1.25rem;font-weight:900;color:var(--accent-blue)}
+.energy-arrow-in,.energy-arrow-out{position:absolute;font-size:1.15rem;font-weight:900;color:var(--accent-amber)}
+.energy-arrow-in{left:70px;top:112px}
+.energy-arrow-out{right:66px;bottom:94px}
+.boundary-note{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);color:#cbd5e1;font-size:.86rem}
+.logic-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.logic-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.7rem;text-align:center}
+
+
+.energy-arrow-in,.energy-arrow-out{
+  position:absolute;
+  font-size:1rem;
+  font-weight:900;
+  color:var(--accent-amber);
+  background:rgba(15,23,42,.9);
+  padding:.2rem .4rem;
+  border-radius:8px;
+  border:1px solid rgba(245,158,11,.35);
+  z-index:3;
+  white-space:nowrap;
+}
+.energy-arrow-in{
+  left:calc(50% - 178px);
+  top:110px;
+}
+.energy-arrow-out{
+  left:calc(50% + 78px);
+  top:150px;
+}
+.boundary-note{display:none}
+
+.energy-arrow-in,.energy-arrow-out{
+  position:absolute;
+  z-index:4;
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  font-size:1rem;
+  font-weight:900;
+  color:var(--accent-amber);
+  background:transparent;
+  border:none;
+  padding:0;
+  white-space:nowrap;
+}
+.energy-arrow-in{
+  left:calc(50% - 300px);
+  top:118px;
+}
+.energy-arrow-out{
+  left:calc(50% + 122px);
+  top:118px;
+}
+.energy-arrow-in .flow-line,
+.energy-arrow-out .flow-line{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:68px;
+  height:0;
+  border-top:4px solid var(--accent-amber);
+  position:relative;
+}
+.energy-arrow-in .flow-line::after,
+.energy-arrow-out .flow-line::after{
+  content:"";
+  position:absolute;
+  right:-2px;
+  top:-7px;
+  width:0;
+  height:0;
+  border-top:7px solid transparent;
+  border-bottom:7px solid transparent;
+  border-left:13px solid var(--accent-amber);
+}
+.energy-arrow-in .label,
+.energy-arrow-out .label{
+  text-shadow:0 1px 0 rgba(0,0,0,.25);
+}
+
+/* Slide 4 solid-shape arrow update */
+.energy-arrow-in,.energy-arrow-out{
+  position:absolute;
+  z-index:4;
+  display:flex;
+  align-items:center;
+  gap:.55rem;
+  font-size:1rem;
+  font-weight:900;
+  color:var(--accent-amber);
+  background:transparent;
+  border:none;
+  padding:0;
+  white-space:nowrap;
+}
+.energy-arrow-in{ left:calc(50% - 250px); top:114px; }
+.energy-arrow-out{ left:calc(50% + 118px); top:114px; }
+
+.shape-arrow{
+  position:relative;
+  display:inline-block;
+  width:82px;
+  height:14px;
+  background:var(--accent-amber);
+  border-radius:999px;
+  box-shadow:0 0 0 1px rgba(245,158,11,.18);
+}
+.shape-arrow::after{
+  content:"";
+  position:absolute;
+  right:-12px;
+  top:50%;
+  transform:translateY(-50%);
+  width:0;height:0;
+  border-top:11px solid transparent;
+  border-bottom:11px solid transparent;
+  border-left:16px solid var(--accent-amber);
+}
+.energy-arrow-in .shape-arrow,
+.energy-arrow-out .shape-arrow{
+  flex:0 0 auto;
+}
+
+
+/* --- Slide 1 collision spacing refinement --- */
+.collision-ball.left{left:36.5% !important;}
+.collision-ball.right{left:58.5% !important;}
+.collision-line.left{left:21% !important;width:14.5% !important;}
+.collision-line.right{left:63.8% !important;width:12.2% !important;}
+.collision-burst{left:48.2% !important;top:61px !important;}
+
+/* --- Slide 4 arrow spacing refinement --- */
+.energy-arrow-in,
+.energy-arrow-out{
+  position:absolute;
+  z-index:4;
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  font-size:1rem;
+  font-weight:900;
+  color:var(--accent-amber);
+  white-space:nowrap;
+}
+
+.energy-arrow-in{
+  left:calc(50% - 275px);
+  top:114px;
+  gap:.9rem;
+}
+.energy-arrow-out{
+  left:calc(50% + 105px);
+  top:114px;
+  gap:.9rem;
+}
+
+.shape-arrow{
+  position:relative;
+  display:inline-block;
+  width:92px;
+  height:14px;
+  background:var(--accent-amber);
+  border-radius:999px;
+  box-shadow:0 0 0 1px rgba(245,158,11,.18);
+}
+
+
+/* incoming arrow reaches the system boundary */
+.energy-arrow-in .shape-arrow{
+  margin-right:-18px;
+}
+
+/* outgoing arrow starts inside / across the system boundary */
+.energy-arrow-out .shape-arrow{
+  margin-right:0;
+  margin-left:-22px;
+}
+
+
+
+/* =========================================================
+   FINAL RESPONSIVE ILLUSTRATION POSITIONING
+   Horizontal geometry uses percentages of the illustration
+   container rather than monitor-dependent pixel offsets.
+   ========================================================= */
+
+/* ---------- Slide 1: collision illustration ---------- */
+.collision-scene{
+  position:relative;
+}
+
+/* Keep the approved left ball position. */
+.collision-ball.left{
+  left:36.5% !important;
+}
+
+/* Right ball stays visually attached to the outgoing dotted path. */
+.collision-ball.right{
+  left:58.5% !important;
+}
+
+/* Motion paths now scale with the collision scene width. */
+.collision-line.left{
+  left:21% !important;
+  width:14.5% !important;
+}
+.collision-line.right{
+  left:63.8% !important;
+  width:12.2% !important;
+}
+
+/* Collision/transfer marker remains positioned proportionally. */
+.collision-burst{
+  left:48.2% !important;
+  top:61px !important;
+}
+
+
+/* ---------- Slide 4: universe / system / surroundings ---------- */
+
+/* System size and position are relative to the surroundings box. */
+.system-core{
+  left:50% !important;
+  top:52% !important;
+  width:24% !important;
+  height:58% !important;
+  transform:translate(-50%,-50%) !important;
+}
+
+/*
+  System horizontal boundaries:
+  left  = 50% - 12% = 38%
+  right = 50% + 12% = 62%
+
+  Incoming arrow ends just INSIDE the 38% boundary.
+  Outgoing arrow begins just INSIDE the 62% boundary.
+*/
+.energy-arrow-in,
+.energy-arrow-out{
+  position:absolute !important;
+  top:46% !important;
+  z-index:4 !important;
+  display:flex !important;
+  align-items:center !important;
+  font-size:1rem !important;
+  font-weight:900 !important;
+  color:var(--accent-amber) !important;
+  background:transparent !important;
+  border:none !important;
+  padding:0 !important;
+  white-space:nowrap !important;
+}
+
+/* Incoming: label then arrow, ending slightly across system boundary. */
+.energy-arrow-in{
+  left:13% !important;
+  width:25.8% !important;
+  right:auto !important;
+  justify-content:flex-end !important;
+  gap:5% !important;
+}
+
+/* Outgoing: arrow begins slightly inside system boundary, then label. */
+.energy-arrow-out{
+  left:61.2% !important;
+  width:25.8% !important;
+  right:auto !important;
+  bottom:auto !important;
+  justify-content:flex-start !important;
+  gap:5% !important;
+}
+
+/* Arrow body scales with its own arrow group. */
+.energy-arrow-in .shape-arrow,
+.energy-arrow-out .shape-arrow{
+  width:47% !important;
+  height:14px !important;
+  margin:0 !important;
+  flex:0 0 47% !important;
+}
+
+/* Keep label and arrow clearly separated. */
+.energy-arrow-in .label,
+.energy-arrow-out .label{
+  flex:0 0 auto !important;
+  margin:0 !important;
+}
+
+/* Small-screen refinement while preserving the same relative geometry. */
+@media(max-width:900px){
+  .system-core{
+    width:28% !important;
+  }
+  .energy-arrow-in{
+    left:7% !important;
+    width:29% !important;
+  }
+  .energy-arrow-out{
+    left:64% !important;
+    width:29% !important;
+  }
+  .energy-arrow-in .shape-arrow,
+  .energy-arrow-out .shape-arrow{
+    width:42% !important;
+    flex-basis:42% !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:900px){
+  .barometer-wrap,.altitude-grid,.practice-grid,.question-grid,.pressure-equivalence{grid-template-columns:1fr}
+  .slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:900px){
+  .energy-flow,.temp-pair,.boundary-wrap,.system-grid,.energy-type-grid,.unit-map{grid-template-columns:1fr}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Slide 4 solid-shape arrow update */
+
+
+
+
+
+
+
+
+
+/* --- Slide 1 collision spacing refinement --- */
+
+
+
+
+
+
+/* --- Slide 4 arrow spacing refinement --- */
+
+
+
+
+
+
+
+
+/* incoming arrow reaches the system boundary */
+
+
+/* outgoing arrow starts inside / across the system boundary */
+
+
+
+
+/* =========================================================
+   FINAL RESPONSIVE ILLUSTRATION POSITIONING
+   Horizontal geometry uses percentages of the illustration
+   container rather than monitor-dependent pixel offsets.
+   ========================================================= */
+
+/* ---------- Slide 1: collision illustration ---------- */
+
+
+/* Keep the approved left ball position. */
+
+
+/* Right ball stays visually attached to the outgoing dotted path. */
+
+
+/* Motion paths now scale with the collision scene width. */
+
+
+
+/* Collision/transfer marker remains positioned proportionally. */
+
+
+
+/* ---------- Slide 4: universe / system / surroundings ---------- */
+
+/* System size and position are relative to the surroundings box. */
+
+
+/*
+  System horizontal boundaries:
+  left  = 50% - 12% = 38%
+  right = 50% + 12% = 62%
+
+  Incoming arrow ends just INSIDE the 38% boundary.
+  Outgoing arrow begins just INSIDE the 62% boundary.
+*/
+
+
+/* Incoming: label then arrow, ending slightly across system boundary. */
+
+
+/* Outgoing: arrow begins slightly inside system boundary, then label. */
+
+
+/* Arrow body scales with its own arrow group. */
+
+
+/* Keep label and arrow clearly separated. */
+
+
+/* Small-screen refinement while preserving the same relative geometry. */
+@media(max-width:900px){
+  .system-core{
+    width:28% !important;
+  }
+  .energy-arrow-in{
+    left:7% !important;
+    width:29% !important;
+  }
+  .energy-arrow-out{
+    left:64% !important;
+    width:29% !important;
+  }
+  .energy-arrow-in .shape-arrow,
+  .energy-arrow-out .shape-arrow{
+    width:42% !important;
+    flex-basis:42% !important;
+  }
+}
+
+/* =========================================================
+   SHARED ILLUSTRATION SYSTEM
+   Relative geometry is used whenever multiple shapes must
+   preserve spatial relationships across different screens.
+   ========================================================= */
+
+.energy-balance{
+  position:relative;
+  height:230px;
+  border:2px dashed #64748b;
+  border-radius:18px;
+  background:rgba(148,163,184,.04);
+  overflow:hidden;
+}
+.balance-system{
+  position:absolute;
+  left:39%;
+  top:22%;
+  width:22%;
+  height:56%;
+  border:3px solid var(--accent-blue);
+  border-radius:16px;
+  background:#0f172a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-weight:900;
+  color:var(--accent-blue);
+}
+.balance-side{
+  position:absolute;
+  top:13%;
+  width:25%;
+  height:74%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+  color:#cbd5e1;
+}
+.balance-side.left{left:4%}
+.balance-side.right{right:4%}
+.energy-transfer-arrow{
+  position:absolute;
+  top:46%;
+  width:18%;
+  height:16px;
+  background:var(--accent-amber);
+  border-radius:999px;
+}
+.energy-transfer-arrow::after{
+  content:"";
+  position:absolute;
+  right:-1.8%;
+  top:50%;
+  transform:translate(100%,-50%);
+  border-top:12px solid transparent;
+  border-bottom:12px solid transparent;
+  border-left:18px solid var(--accent-amber);
+}
+.energy-transfer-arrow.to-system{left:22%}
+.energy-transfer-arrow.from-system{left:60%}
+.balance-equation{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.55rem;
+  flex-wrap:wrap;
+  font-size:1.45rem;
+  font-weight:900;
+  color:var(--accent-teal);
+}
+
+.route-diagram{
+  position:relative;
+  height:220px;
+  border:1px solid var(--border-color);
+  border-radius:14px;
+  background:#0f172a;
+  overflow:hidden;
+}
+.state-node{
+  position:absolute;
+  width:17%;
+  min-width:120px;
+  padding:.7rem .5rem;
+  border:2px solid var(--accent-blue);
+  border-radius:12px;
+  text-align:center;
+  background:#111827;
+}
+.state-node.initial{left:8%;top:38%}
+.state-node.final{right:8%;top:38%}
+.route-path{
+  position:absolute;
+  left:25%;
+  width:50%;
+  border-top:4px solid var(--accent-amber);
+}
+.route-path.top{top:30%;transform:rotate(-5deg)}
+.route-path.bottom{top:68%;transform:rotate(5deg)}
+.route-label{
+  position:absolute;
+  left:48%;
+  transform:translateX(-50%);
+  padding:.25rem .55rem;
+  border-radius:999px;
+  background:#1e293b;
+  border:1px solid #475569;
+  color:#e2e8f0;
+  font-weight:800;
+}
+.route-label.top{top:15%}
+.route-label.bottom{bottom:12%}
+
+.sign-map{
+  position:relative;
+  height:265px;
+  border:2px dashed #64748b;
+  border-radius:18px;
+  background:rgba(148,163,184,.04);
+}
+.sign-system{
+  position:absolute;
+  left:40%;
+  top:29%;
+  width:20%;
+  height:42%;
+  border:3px solid var(--accent-blue);
+  border-radius:16px;
+  background:#0f172a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--accent-blue);
+  font-weight:900;
+}
+.sign-label{
+  position:absolute;
+  font-weight:900;
+  color:var(--accent-amber);
+  white-space:nowrap;
+}
+.sign-label.qin{left:8%;top:23%}
+.sign-label.win{left:8%;bottom:23%}
+.sign-label.qout{right:7%;top:23%}
+.sign-label.wout{right:7%;bottom:23%}
+.sign-shape{
+  position:absolute;
+  width:23%;
+  height:14px;
+  background:var(--accent-amber);
+  border-radius:999px;
+}
+.sign-shape::after{
+  content:"";
+  position:absolute;
+  right:-1.5%;
+  top:50%;
+  transform:translate(100%,-50%);
+  border-top:11px solid transparent;
+  border-bottom:11px solid transparent;
+  border-left:16px solid var(--accent-amber);
+}
+.sign-shape.qin{left:18%;top:36%}
+.sign-shape.win{left:18%;bottom:36%}
+.sign-shape.qout{left:59%;top:36%}
+.sign-shape.wout{left:59%;bottom:36%}
+
+.calc-path{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.65rem;
+  align-items:stretch;
+}
+.calc-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem;
+  text-align:center;
+}
+.calc-step strong{color:var(--accent-blue);display:block;margin-bottom:.35rem}
+.math-line{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem 1rem;
+  text-align:center;
+  font-size:1.25rem;
+  font-weight:850;
+}
+.math-line .positive{color:var(--accent-teal)}
+.math-line .negative{color:#fda4af}
+
+.piston-stage{
+  position:relative;
+  height:245px;
+  border:1px solid var(--border-color);
+  border-radius:14px;
+  background:#0f172a;
+  overflow:hidden;
+}
+.piston-cylinder{
+  position:absolute;
+  left:38%;
+  bottom:13%;
+  width:24%;
+  height:60%;
+  border:4px solid #94a3b8;
+  border-top:none;
+  border-radius:0 0 12px 12px;
+  background:#111827;
+}
+.piston-head{
+  position:absolute;
+  left:36%;
+  width:28%;
+  height:9%;
+  background:#94a3b8;
+  border-radius:6px;
+}
+.piston-head.expanded{top:19%}
+.piston-head.compressed{top:43%}
+.piston-rod{
+  position:absolute;
+  left:49%;
+  width:2%;
+  background:#64748b;
+}
+.piston-rod.expanded{top:5%;height:15%}
+.piston-rod.compressed{top:20%;height:24%}
+.piston-gas{
+  position:absolute;
+  left:41%;
+  width:18%;
+  bottom:17%;
+  border-radius:8px;
+  background:rgba(56,189,248,.13);
+  border:1px dashed rgba(56,189,248,.5);
+}
+.piston-gas.expanded{height:50%}
+.piston-gas.compressed{height:26%}
+.piston-force{
+  position:absolute;
+  left:67%;
+  top:17%;
+  width:21%;
+  text-align:center;
+  color:#fde68a;
+  font-weight:900;
+}
+.piston-note{
+  position:absolute;
+  left:6%;
+  width:25%;
+  top:34%;
+  text-align:center;
+  color:#cbd5e1;
+  font-weight:800;
+}
+.piston-arrow{
+  position:absolute;
+  left:68%;
+  top:42%;
+  width:13%;
+  height:14px;
+  background:var(--accent-amber);
+  border-radius:999px;
+}
+.piston-arrow.up{
+  width:14px;height:29%;
+  left:73%;top:20%;
+}
+.piston-arrow.up::after{
+  content:"";
+  position:absolute;
+  top:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  border-left:11px solid transparent;
+  border-right:11px solid transparent;
+  border-bottom:16px solid var(--accent-amber);
+}
+.piston-arrow.down{
+  width:14px;height:29%;
+  left:73%;top:31%;
+}
+.piston-arrow.down::after{
+  content:"";
+  position:absolute;
+  bottom:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  border-left:11px solid transparent;
+  border-right:11px solid transparent;
+  border-top:16px solid var(--accent-amber);
+}
+
+.pv-compare{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.8rem;
+}
+.pv-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.8rem;
+}
+.pv-card h4{color:var(--accent-blue);text-align:center;margin-bottom:.45rem}
+.pv-mini{
+  position:relative;
+  height:155px;
+  border:1px solid #334155;
+  border-radius:10px;
+  overflow:hidden;
+}
+.pv-mini .cyl{
+  position:absolute;
+  left:34%;
+  bottom:10%;
+  width:32%;
+  height:67%;
+  border:3px solid #94a3b8;
+  border-top:none;
+  background:#111827;
+}
+.pv-mini .head{
+  position:absolute;
+  left:31%;
+  width:38%;
+  height:10%;
+  background:#94a3b8;
+  border-radius:5px;
+}
+.pv-mini.expansion .head{top:17%}
+.pv-mini.compression .head{top:42%}
+.pv-mini .dir{
+  position:absolute;
+  right:13%;
+  top:27%;
+  font-size:2rem;
+  color:var(--accent-amber);
+  font-weight:900;
+}
+.pv-mini .caption{
+  position:absolute;
+  left:6%;
+  bottom:8%;
+  font-size:.85rem;
+  color:#cbd5e1;
+  font-weight:800;
+}
+
+.reason-box{
+  background:rgba(45,212,191,.08);
+  border:1px solid var(--accent-teal);
+  border-radius:10px;
+  padding:.7rem 1rem;
+  color:#ccfbf1;
+}
+
+@media(max-width:900px){
+  .calc-path,.pv-compare{grid-template-columns:1fr 1fr}
+  .balance-system{width:28%;left:36%}
+  .energy-transfer-arrow.to-system{left:17%;width:20%}
+  .energy-transfer-arrow.from-system{left:63%;width:20%}
+  .sign-system{left:36%;width:28%}
+  .sign-shape.qin,.sign-shape.win{left:15%;width:22%}
+  .sign-shape.qout,.sign-shape.wout{left:63%;width:22%}
+}
+
+.fixed-illustration{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:340px;
+  object-fit:contain;
+  margin:.55rem auto;
+  border-radius:14px;
+}
+
+.acs-strip{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.5rem;
+  margin-top:.55rem;
+}
+.acs-step{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:9px;
+  padding:.55rem;
+  text-align:center;
+  font-size:.92rem;
+}
+.acs-step strong{
+  display:block;
+  color:var(--accent-blue);
+  margin-bottom:.25rem;
+}
+.mc-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.5rem;
+  margin-top:.5rem;
+}
+.mc-choice{
+  background:#111827;
+  border:1px solid #334155;
+  border-radius:8px;
+  padding:.5rem .65rem;
+}
+.distractor-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.6rem;
+  margin-top:.55rem;
+}
+.distractor-card{
+  background:#0f172a;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.65rem;
+}
+.distractor-card h4{
+  color:var(--accent-amber);
+  margin-bottom:.3rem;
+}
+@media(max-width:900px){
+  .acs-strip,.distractor-grid{grid-template-columns:1fr 1fr}
+}
+
+.footer-copyright{position:fixed;right:.75rem;bottom:.3rem;z-index:250;color:#64748b;font-size:.72rem;letter-spacing:.01em;pointer-events:none}
+</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧪</span><span>Topic T6.1 | Energy, Systems &amp; the First Law</span></div>
+<div class="mode-selector">
+<button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button>
+<button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button>
+</div>
+<div class="nav-controls">
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 16</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main><div class="slide-container active" data-integrated-slide="1" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 1 · Local Slide 1</span>
+<h1 class="slide-title">Energy, Heat, and Work — Conservation of Energy in Thermochemistry</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Distinguish energy, work, heat, and temperature, and connect these ideas to conservation of energy and the First Law of Thermodynamics.</div>
+</div>
+<div class="slide-body"><div class="build-step visible" data-build="1">
+<div class="callout"><strong>Law of conservation of energy:</strong> energy cannot be created or destroyed. It can only be transferred or transformed.</div>
+<div class="collision-scene">
+<div class="collision-line left"></div>
+<div class="collision-ball left"></div>
+<div class="collision-burst">✦</div>
+<div class="collision-ball right"></div>
+<div class="collision-line right"></div>
+</div>
+<div class="equal-banner">moving ball → collision → energy transferred → second ball moves</div>
+</div><div class="build-step" data-build="2">
+<div class="callout"><strong>First Law of Thermodynamics:</strong> this conservation idea applied to thermochemistry. Energy can move between a system and its surroundings as <strong>heat</strong> or <strong>work</strong>.</div>
+<div class="panel-grid" style="margin-top:.55rem">
+<div class="panel-card"><h4>Work</h4><p>energy transfer when a force causes motion</p></div>
+<div class="panel-card"><h4>Heat</h4><p>energy transfer because of a temperature difference</p></div>
+</div>
+</div><div class="build-step" data-build="3">
+<div class="temp-pair">
+<div class="panel-card"><h4>Warmer object</h4><div class="thermo hot"><div class="tube"></div><div class="mercury"></div><div class="bulb"></div></div></div>
+<div class="flow-arrow">heat →</div>
+<div class="panel-card"><h4>Cooler object</h4><div class="thermo cold"><div class="tube"></div><div class="mercury"></div><div class="bulb"></div></div></div>
+</div>
+<div class="warn" style="margin-top:.55rem"><strong>Do not use heat and temperature as synonyms.</strong> Temperature describes the thermal state of a sample; heat describes energy <em>in transfer</em> because of a temperature difference.</div>
+<p style="margin-top:.55rem">Heat is energy <span class="blank" data-answer="transferred">[ _______ ]</span> because of a temperature difference.</p>
+</div></div>
+</div>
+</div><div class="slide-container" data-integrated-slide="2" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 2 · Local Slide 2</span>
+<h1 class="slide-title">Types and Forms of Energy — What Kind of Energy Are We Talking About?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Classify kinetic, potential, thermal, and chemical energy and connect each type to a physical description.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="energy-type-grid">
+<div class="energy-type"><div class="icon-big">🏃</div><h4>Kinetic Energy</h4><p>energy associated with motion</p></div>
+<div class="energy-type"><div class="icon-big">⬆️</div><h4>Potential Energy</h4><p>energy associated with position or arrangement</p></div>
+<div class="energy-type"><div class="icon-big">🌡️</div><h4>Thermal Energy</h4><p>microscopic energy associated with particle motion in a sample</p></div>
+<div class="energy-type"><div class="icon-big">⚛️</div><h4>Chemical Energy</h4><p>energy associated with the arrangement and interactions of atoms and electrons</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="panel-card"><h4>A rolling ball</h4><p>mainly <strong>kinetic</strong></p></div>
+<div class="panel-card"><h4>A book on a high shelf</h4><p>gravitational <strong>potential</strong></p></div>
+<div class="panel-card"><h4>Hot water</h4><p>greater <strong>thermal</strong> energy than cooler water of the same amount</p></div>
+<div class="panel-card"><h4>Reactants → products</h4><p>chemical reactions change the arrangement of atoms/electrons and therefore the system’s energy</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Precision:</strong> avoid saying “breaking a bond releases the energy stored inside it.” Bond breaking requires energy; the overall energy change depends on both bonds/interactions broken and those formed.</div>
+<p style="margin-top:.55rem">Energy associated with motion is <span class="blank" data-answer="kinetic energy">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="3" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 3 · Local Slide 3</span>
+<h1 class="slide-title">Energy Units — Joules, Calories, and Food Calories</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Relate common energy units and perform a simple energy conversion using dimensional analysis.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="unit-map">
+<div class="unit-chip"><strong>joule (J)</strong><span>SI energy unit</span></div>
+<div class="unit-chip"><strong>kilojoule (kJ)</strong><span>1 kJ = 1000 J</span></div>
+<div class="unit-chip"><strong>calorie (cal)</strong><span>1 cal = 4.184 J</span></div>
+<div class="unit-chip"><strong>Food Calorie (Cal)</strong><span>1 Cal = 1 kcal = 1000 cal</span></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout"><strong>Example:</strong> Convert 325 cal to kJ. <strong>Path first:</strong> cal → J → kJ.</div>
+<div class="factor-card" style="margin-top:.55rem">
+<span>325 <span class="cancel-pair">cal</span></span>
+<span>×</span>
+<span class="fraction"><span class="num">4.184 <span class="cancel-pair">J</span></span><span class="den">1 <span class="cancel-pair">cal</span></span></span>
+<span>×</span>
+<span class="fraction"><span class="num">1 <span class="survive">kJ</span></span><span class="den">1000 <span class="cancel-pair">J</span></span></span>
+<span>= 1.36 <span class="survive">kJ</span></span>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Reasonableness:</strong> 325 cal is only about one-third of a kilocalorie, so a result near 1 kJ is reasonable.</div>
+<div class="warn" style="margin-top:.55rem"><strong>Capitalization matters:</strong> 1 food <strong>Calorie</strong> = 1000 small <strong>calories</strong>.</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="4" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 4 · Local Slide 4</span>
+<h1 class="slide-title">Thermochemistry — Define the System Before You Track Energy</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Define thermochemistry, system, surroundings, and universe, and identify energy entering or leaving the system across a chosen boundary.</div>
+</div>
+<div class="slide-body"><div class="build-step visible" data-build="1">
+<div class="callout"><strong>Thermochemistry</strong> is the study of heat changes associated with chemical reactions.</div>
+<div class="universe-diagram" style="margin-top:.65rem">
+<div class="universe-title">UNIVERSE = SYSTEM + SURROUNDINGS</div>
+<div class="surroundings-zone">
+<div class="surroundings-label">SURROUNDINGS</div>
+<div class="system-core">
+<div class="system-label">SYSTEM<br/><span style="font-size:.9rem;color:#cbd5e1">the part we choose to study</span></div>
+</div>
+<div class="energy-arrow-in">
+<span class="label">heat/work</span>
+<span aria-hidden="true" class="shape-arrow"></span>
+</div>
+<div class="energy-arrow-out">
+<span aria-hidden="true" class="shape-arrow"></span>
+<span class="label">heat/work</span>
+</div>
+</div>
+</div>
+</div><div class="build-step" data-build="2">
+<div class="logic-strip">
+<div class="logic-card"><h4>System</h4><p>the reaction, sample, or process of interest</p></div>
+<div class="logic-card"><h4>Surroundings</h4><p>everything outside the boundary that can interact with the system</p></div>
+<div class="logic-card"><h4>Universe</h4><p>system + surroundings together</p></div>
+</div>
+</div><div class="build-step" data-build="3">
+<div class="warn"><strong>Why the boundary matters:</strong> later, heat and work will be assigned positive or negative signs depending on whether energy enters or leaves the <em>system</em>.</div>
+<p style="margin-top:.55rem">Universe = <span class="blank" data-answer="system">[ _______ ]</span> + surroundings.</p>
+</div></div>
+</div>
+</div><div class="slide-container" data-integrated-slide="5" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 5 · Local Slide 5</span>
+<h1 class="slide-title">Open, Closed, and Isolated Systems — What Can Cross the Boundary?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> After defining the system boundary, classify systems by whether matter and/or energy can cross that boundary.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1"><div class="callout" style="margin-bottom:.6rem"><strong>Connection:</strong> Now that we have defined a <strong>system</strong>, we can classify systems by what is allowed to cross the boundary.</div>
+<div class="system-grid">
+<div class="system-card"><h4>Open System</h4><div class="container-icon open"></div><div class="exchange-tags"><span class="exchange-tag yes">matter ✓</span><span class="exchange-tag yes">energy ✓</span></div><p style="margin-top:.45rem">Example: an open cup of hot coffee</p></div>
+<div class="system-card"><h4>Closed System</h4><div class="container-icon closed"></div><div class="exchange-tags"><span class="exchange-tag no">matter ✕</span><span class="exchange-tag yes">energy ✓</span></div><p style="margin-top:.45rem">Example: a sealed bottle that can warm or cool</p></div>
+<div class="system-card"><h4>Isolated System</h4><div class="container-icon isolated"></div><div class="exchange-tags"><span class="exchange-tag no">matter ✕</span><span class="exchange-tag no">energy ✕</span></div><p style="margin-top:.45rem">Idealized perfectly insulated, sealed container</p></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout"><strong>Decision strategy:</strong> first ask, “Can matter cross?” Then ask, “Can energy cross?”</div>
+<div class="panel-grid" style="margin-top:.55rem">
+<div class="panel-card"><h4>Matter + energy cross</h4><p>open</p></div>
+<div class="panel-card"><h4>Only energy crosses</h4><p>closed</p></div>
+<div class="panel-card"><h4>Neither crosses</h4><p>isolated</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Real-world caution:</strong> a household thermos is not perfectly isolated. “Isolated” is an ideal model in which neither matter nor energy crosses the boundary.</div>
+<p style="margin-top:.55rem">A sealed container that can still exchange heat is a <span class="blank" data-answer="closed">[ _______ ]</span> system.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="6" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 6 · Local Slide 6</span>
+<h1 class="slide-title">First Law of Thermodynamics — Tracking Energy for the System</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use the First Law of Thermodynamics to track how the energy of a defined system changes relative to its surroundings.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>System first:</strong> thermochemistry tracks the energy of a chosen <strong>system</strong>. The First Law of Thermodynamics says energy is conserved as it is transferred between the system and surroundings.</div>
+<img alt="First Law overview showing energy entering and leaving a system" class="fixed-illustration" src="data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTAwMCAzMDAiPgogIDxyZWN0IHg9IjE2IiB5PSIxNiIgd2lkdGg9Ijk2OCIgaGVpZ2h0PSIyNjgiIHJ4PSIyNCIgZmlsbD0iIzExMTgyNyIgc3Ryb2tlPSIjNjQ3NDhiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTQiIGZpbGw9IiMzOGJkZjgiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyOCIgZm9udC13ZWlnaHQ9IjkwMCI+Rmlyc3QgTGF3IG92ZXJ2aWV3PC90ZXh0PgoKICA8cmVjdCB4PSIzOTAiIHk9IjkwIiB3aWR0aD0iMjIwIiBoZWlnaHQ9IjEyMCIgcng9IjE4IiBmaWxsPSIjMGYxNzJhIiBzdHJva2U9IiMzOGJkZjgiIHN0cm9rZS13aWR0aD0iNCIvPgogIDx0ZXh0IHg9IjUwMCIgeT0iMTYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzhiZGY4IiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI5MDAiPlNZU1RFTTwvdGV4dD4KCiAgPHRleHQgeD0iOTAiIHk9Ijk2IiBmaWxsPSIjZTJlOGYwIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI4MDAiPlNVUlJPVU5ESU5HUzwvdGV4dD4KICA8dGV4dCB4PSI3MDAiIHk9Ijk2IiBmaWxsPSIjZTJlOGYwIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI4MDAiPlNVUlJPVU5ESU5HUzwvdGV4dD4KCiAgPCEtLSBJbmNvbWluZyBhcnJvdywgd2hvbGUtc2hhcGUgLS0+CiAgPHBhdGggZD0iTTE3MCAxNDUgSDM1MCBWMTMyIEwzODggMTUwIEwzNTAgMTY4IFYxNTUgSDE3MCBaIiBmaWxsPSIjZmJiZjI0Ii8+CiAgPHRleHQgeD0iMTcwIiB5PSIxOTgiIGZpbGw9IiNmYmJmMjQiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjgwMCI+ZW5lcmd5IGVudGVycyBzeXN0ZW08L3RleHQ+CgogIDwhLS0gT3V0Z29pbmcgYXJyb3csIHdob2xlLXNoYXBlIC0tPgogIDxwYXRoIGQ9Ik02MTIgMTUwIEg3OTIgVjEzNyBMODMwIDE1NSBMNzkyIDE3MyBWMTYwIEg2MTIgWiIgZmlsbD0iI2ZiYmYyNCIvPgogIDx0ZXh0IHg9IjY1MCIgeT0iMjA1IiBmaWxsPSIjZmJiZjI0IiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI4MDAiPmVuZXJneSBsZWF2ZXMgc3lzdGVtPC90ZXh0PgoKICA8dGV4dCB4PSI1MDAiIHk9IjI1OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzJkZDRiZiIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjI1IiBmb250LXdlaWdodD0iOTAwIj7OlEUoc3lzdGVtKSA9IOKIks6URShzdXJyb3VuZGluZ3MpPC90ZXh0Pgo8L3N2Zz4K"/>
+</div>
+<div class="build-step" data-build="2">
+<div class="math-line">ΔE<sub>system</sub> = −ΔE<sub>surroundings</sub></div>
+<div class="equal-banner" style="margin-top:.55rem">Energy gained by one part of the universe must be lost by another part.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Universe accounting:</strong> ΔE<sub>universe</sub> = ΔE<sub>system</sub> + ΔE<sub>surroundings</sub> = 0.</div>
+<p style="margin-top:.55rem">For the universe, total energy change is <span class="blank" data-answer="zero">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="7" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 7 · Local Slide 7</span>
+<h1 class="slide-title">Internal Energy of the System — A State Function</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Define the internal energy of a system and explain why ΔE depends only on the initial and final states.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Internal energy, E:</strong> the total microscopic kinetic and potential energy of all particles in the <strong>system</strong>.</div>
+<div class="math-line" style="margin-top:.55rem">ΔE = E<sub>final</sub> − E<sub>initial</sub></div>
+</div>
+<div class="build-step" data-build="2">
+<img alt="State function illustration showing two different paths between the same initial and final states" class="fixed-illustration" src="data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTAwMCAzMjAiPgogIDxyZWN0IHg9IjE2IiB5PSIxNiIgd2lkdGg9Ijk2OCIgaGVpZ2h0PSIyODgiIHJ4PSIyNCIgZmlsbD0iIzBmMTcyYSIgc3Ryb2tlPSIjNDc1NTY5IiBzdHJva2Utd2lkdGg9IjMiLz4KCiAgPHJlY3QgeD0iNzAiIHk9IjExOCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI5MiIgcng9IjE2IiBmaWxsPSIjMTExODI3IiBzdHJva2U9IiMzOGJkZjgiIHN0cm9rZS13aWR0aD0iNCIvPgogIDx0ZXh0IHg9IjE2MCIgeT0iMTU3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzhiZGY4IiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI5MDAiPklOSVRJQUwgU1RBVEU8L3RleHQ+CiAgPHRleHQgeD0iMTYwIiB5PSIxODgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNjYmQ1ZTEiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCI+RShpbml0aWFsKTwvdGV4dD4KCiAgPHJlY3QgeD0iNzUwIiB5PSIxMTgiIHdpZHRoPSIxODAiIGhlaWdodD0iOTIiIHJ4PSIxNiIgZmlsbD0iIzExMTgyNyIgc3Ryb2tlPSIjMzhiZGY4IiBzdHJva2Utd2lkdGg9IjQiLz4KICA8dGV4dCB4PSI4NDAiIHk9IjE1NyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzM4YmRmOCIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iOTAwIj5GSU5BTCBTVEFURTwvdGV4dD4KICA8dGV4dCB4PSI4NDAiIHk9IjE4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2NiZDVlMSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIj5FKGZpbmFsKTwvdGV4dD4KCiAgPCEtLSBQYXRoIEEgLS0+CiAgPHBhdGggZD0iTTI1MCAxNDIgQzQxMCA0OCwgNTkwIDQ4LCA3NTAgMTQyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmYmJmMjQiIHN0cm9rZS13aWR0aD0iNiIvPgogIDxwb2x5Z29uIHBvaW50cz0iNzQyLDEyOSA3NzAsMTQyIDc0NCwxNTUiIGZpbGw9IiNmYmJmMjQiLz4KICA8dGV4dCB4PSI1MDAiIHk9IjU1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmRlNjhhIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI4MDAiPlBhdGggQTwvdGV4dD4KCiAgPCEtLSBQYXRoIEIgc3F1aWdnbHkgLS0+CiAgPHBhdGggZD0iTTI1MCAxOTIgQzMwMCAyNTUsIDM1MCAxNTUsIDQwNSAyMjUgUzUyMCAyNTUsIDU3NSAxOTAgUzY5MCAxNDUsIDc1MCAxOTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZiYmYyNCIgc3Ryb2tlLXdpZHRoPSI2Ii8+CiAgPHBvbHlnb24gcG9pbnRzPSI3NDIsMTc5IDc3MCwxOTIgNzQ0LDIwNSIgZmlsbD0iI2ZiYmYyNCIvPgogIDx0ZXh0IHg9IjUwMCIgeT0iMjg1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmRlNjhhIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI4MDAiPlBhdGggQjwvdGV4dD4KCiAgPHRleHQgeD0iNTAwIiB5PSIxNTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMyZGQ0YmYiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNSIgZm9udC13ZWlnaHQ9IjkwMCI+c2FtZSDOlEU8L3RleHQ+CiAgPHRleHQgeD0iNTAwIiB5PSIxODgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNjYmQ1ZTEiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCI+ZGVwZW5kcyBvbmx5IG9uIGluaXRpYWwgYW5kIGZpbmFsIHN0YXRlczwvdGV4dD4KPC9zdmc+Cg=="/>
+<div class="equal-banner" style="margin-top:.55rem">Different paths can connect the same two states, but ΔE is the same.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>State function:</strong> a property determined by the state of the system, not by the path used to reach that state.</div>
+<p style="margin-top:.55rem">Internal energy is a <span class="blank" data-answer="state function">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="8" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 8 · Local Slide 8</span>
+<h1 class="slide-title">How Can the System's Internal Energy Change? — Heat and Work</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Identify heat, q, and work, w, as the two energy-transfer modes that can change the internal energy of the system, and assign their signs from the system perspective.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Central relationship:</strong> ΔE = q + w. The internal energy of the <strong>system</strong> changes when energy crosses the boundary as <strong>heat</strong> or <strong>work</strong>.</div>
+<img alt="Heat and work sign convention diagram with centered right-side labels" class="fixed-illustration" src="data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTAwMCAzMzAiPgogIDxyZWN0IHg9IjE4IiB5PSIxOCIgd2lkdGg9Ijk2NCIgaGVpZ2h0PSIyOTQiIHJ4PSIyMiIgZmlsbD0iIzExMTgyNyIgc3Ryb2tlPSIjNjQ3NDhiIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1kYXNoYXJyYXk9IjEwIDEwIi8+CgogIDxyZWN0IHg9IjM2NSIgeT0iOTQiIHdpZHRoPSIyNzAiIGhlaWdodD0iMTQyIiByeD0iMTgiIGZpbGw9IiMwZjE3MmEiIHN0cm9rZT0iIzM4YmRmOCIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgPHRleHQgeD0iNTAwIiB5PSIxNzciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzOGJkZjgiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzNCIgZm9udC13ZWlnaHQ9IjkwMCI+U1lTVEVNPC90ZXh0PgoKICA8IS0tIGxlZnQgbGFiZWxzIC0tPgogIDx0ZXh0IHg9Ijk1IiB5PSI4MiIgZmlsbD0iI2ZiYmYyNCIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIzIiBmb250LXdlaWdodD0iOTAwIj5xICZndDsgMDwvdGV4dD4KICA8dGV4dCB4PSI5NSIgeT0iMTEwIiBmaWxsPSIjY2JkNWUxIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiPmhlYXQgZW50ZXJzPC90ZXh0PgogIDxwYXRoIGQ9Ik0xODUgMTIyIEgzMzAgVjEwOSBMMzY0IDEyOSBMMzMwIDE0OSBWMTM2IEgxODUgWiIgZmlsbD0iI2ZiYmYyNCIvPgoKICA8dGV4dCB4PSI5NSIgeT0iMjI4IiBmaWxsPSIjZmJiZjI0IiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjMiIGZvbnQtd2VpZ2h0PSI5MDAiPncgJmd0OyAwPC90ZXh0PgogIDx0ZXh0IHg9Ijk1IiB5PSIyNTYiIGZpbGw9IiNjYmQ1ZTEiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCI+d29yayBkb25lIG9uIHN5c3RlbTwvdGV4dD4KICA8cGF0aCBkPSJNMTg1IDIxOCBIMzMwIFYyMDUgTDM2NCAyMjUgTDMzMCAyNDUgVjIzMiBIMTg1IFoiIGZpbGw9IiNmYmJmMjQiLz4KCiAgPCEtLSByaWdodCBhcnJvd3MgLS0+CiAgPHBhdGggZD0iTTYzNiAxMjkgSDc4MCBWMTE2IEw4MTQgMTM2IEw3ODAgMTU2IFYxNDMgSDYzNiBaIiBmaWxsPSIjZmJiZjI0Ii8+CiAgPHBhdGggZD0iTTYzNiAyMjUgSDc4MCBWMjEyIEw4MTQgMjMyIEw3ODAgMjUyIFYyMzkgSDYzNiBaIiBmaWxsPSIjZmJiZjI0Ii8+CgogIDwhLS0gcmlnaHQgbGFiZWxzIGNlbnRlcmVkIG9uIHNhbWUgeCBwb3NpdGlvbiAtLT4KICA8dGV4dCB4PSI4OTUiIHk9IjgyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmJiZjI0IiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjMiIGZvbnQtd2VpZ2h0PSI5MDAiPnEgJmx0OyAwPC90ZXh0PgogIDx0ZXh0IHg9Ijg5NSIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjY2JkNWUxIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiPmhlYXQgbGVhdmVzPC90ZXh0PgoKICA8dGV4dCB4PSI4OTUiIHk9IjIyOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZiYmYyNCIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIzIiBmb250LXdlaWdodD0iOTAwIj53ICZsdDsgMDwvdGV4dD4KICA8dGV4dCB4PSI4OTUiIHk9IjI1NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2NiZDVlMSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3Ij53b3JrIGRvbmUgYnkgc3lzdGVtPC90ZXh0Pgo8L3N2Zz4K"/>
+</div>
+<div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="panel-card"><h4>Heat into system</h4><p><strong>q &gt; 0</strong></p></div>
+<div class="panel-card"><h4>Heat out of system</h4><p><strong>q &lt; 0</strong></p></div>
+<div class="panel-card"><h4>Work on system</h4><p><strong>w &gt; 0</strong></p></div>
+<div class="panel-card"><h4>Work by system</h4><p><strong>w &lt; 0</strong></p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Common mistake:</strong> do not decide the sign from whether the surroundings gain or lose energy. The sign convention is written from the <em>system</em> perspective.</div>
+<p style="margin-top:.55rem">Work done <strong>by</strong> the system has <span class="blank" data-answer="negative">[ _______ ]</span> w.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="9" data-local-slide="9" id="slide-9">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 9 · Local Slide 9</span>
+<h1 class="slide-title">Heat or Work? — What Is Changing the System's Internal Energy?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Decide whether a change in the system's internal energy occurs through heat or work, determine the direction of transfer, and assign the correct sign.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Decision sequence:</strong> 1) What is the system? → 2) Is the transfer heat or work? → 3) Does energy enter or leave the system? → 4) Assign + or −.</div>
+<div class="panel-grid" style="margin-top:.6rem">
+<div class="panel-card">
+<h4>A. Melting ice cube</h4>
+<p>An ice cube melts and cools the surrounding beverage.</p>
+<p style="margin-top:.35rem"><strong>System:</strong> the ice cube</p>
+</div>
+<div class="panel-card">
+<h4>B. Cylinder rolled uphill</h4>
+<p>A metal cylinder is rolled up a ramp. Assume no friction.</p>
+<p style="margin-top:.35rem"><strong>System:</strong> the metal cylinder</p>
+</div>
+<div class="panel-card">
+<h4>C. Steam condenses</h4>
+<p>Steam condenses on skin, causing a burn.</p>
+<p style="margin-top:.35rem"><strong>System:</strong> the condensing steam</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="callout"><strong>Your task for each case:</strong> write <em>heat or work</em> → draw the energy-transfer direction → assign the sign of q or w.</div>
+<div class="question-grid" style="margin-top:.55rem">
+<div class="question-card"><div><span class="question-num">A</span> <span class="question-text">Transfer type: ______    Direction: ______    Sign: ______</span></div></div>
+<div class="question-card"><div><span class="question-num">B</span> <span class="question-text">Transfer type: ______    Direction: ______    Sign: ______</span></div></div>
+<div class="question-card"><div><span class="question-num">C</span> <span class="question-text">Transfer type: ______    Direction: ______    Sign: ______</span></div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="panel-grid">
+<div class="panel-card"><h4>A. Ice cube</h4><p><strong>heat</strong> enters system → <strong>q &gt; 0</strong></p></div>
+<div class="panel-card"><h4>B. Cylinder</h4><p><strong>work</strong> done on system → <strong>w &gt; 0</strong></p></div>
+<div class="panel-card"><h4>C. Steam</h4><p><strong>heat</strong> leaves system → <strong>q &lt; 0</strong></p></div>
+</div>
+<div class="warn" style="margin-top:.6rem"><strong>Fast exam check:</strong> never assign + or − before defining the system and deciding the direction of energy transfer.</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="10" data-local-slide="10" id="slide-10">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 10 · Local Slide 10</span>
+<h1 class="slide-title">Internal Energy Change — ΔE = q + w</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Calculate the change in the system's internal energy by combining signed heat and work transfers.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1"><div class="equal-banner" style="margin-bottom:.55rem"><strong>Internal energy is the target:</strong> q and w are the two transfer terms that determine ΔE.</div>
+<div class="callout"><strong>Example:</strong> A cylinder and piston assembly is the system. It absorbs 559 J of heat and expands, doing 488 J of work on the surroundings.</div>
+<div class="calc-path" style="margin-top:.55rem">
+<div class="calc-step"><strong>1. Define system</strong>cylinder + contents</div>
+<div class="calc-step"><strong>2. Heat direction</strong>into system → q = +559 J</div>
+<div class="calc-step"><strong>3. Work direction</strong>by system → w = −488 J</div>
+<div class="calc-step"><strong>4. Predict</strong>ΔE should be small and positive</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="math-line">ΔE = q + w</div>
+<div class="math-line" style="margin-top:.5rem">ΔE = <span class="positive">(+559 J)</span> + <span class="negative">(−488 J)</span></div>
+</div>
+<div class="build-step" data-build="3">
+<div class="math-line">ΔE = <span class="survive">+71 J</span></div>
+<div class="reason-box" style="margin-top:.55rem"><strong>Reasonableness:</strong> the system absorbs slightly more energy as heat than it transfers out as work, so its internal energy increases slightly.</div>
+<p style="margin-top:.55rem">ΔE = q + <span class="blank" data-answer="w">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="11" data-local-slide="11" id="slide-11">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 11 · Local Slide 11</span>
+<h1 class="slide-title">Work as Energy Transfer — Magnitude and Path Dependence</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Relate mechanical work to force and displacement, and distinguish work from state functions such as internal energy.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>General work idea:</strong> work is energy transferred when a force acts through a distance.</div>
+<div class="equal-banner" style="margin-top:.55rem">mechanical work magnitude = force × displacement</div>
+<p style="margin-top:.55rem">This gives the physical meaning behind the thermodynamic work term, <strong>w</strong>.</p>
+</div>
+<div class="build-step" data-build="2">
+<div class="compare-grid">
+<div class="compare-card"><h4>State function</h4><p><strong>ΔE</strong> depends only on the initial and final states.</p></div>
+<div class="compare-card"><h4>Path-dependent transfer</h4><p><strong>q</strong> and <strong>w</strong> depend on how the process occurs.</p></div>
+</div>
+<div class="warn" style="margin-top:.55rem"><strong>Important:</strong> work is not a state function. Two different paths between the same initial and final states can involve different amounts of work.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Next layer:</strong> for gases in General Chemistry I, the most useful work model is pressure–volume work.</div>
+<div class="equal-banner" style="margin-top:.55rem">general work idea → pressure–volume work: w = −P<sub>ext</sub>ΔV</div>
+<p style="margin-top:.55rem">Unlike ΔE, work is <span class="blank" data-answer="path dependent">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="12" data-local-slide="12" id="slide-12">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 12 · Local Slide 12</span>
+<h1 class="slide-title">Focus on the Work Term, w — Pressure–Volume Work</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Focus on the work term in ΔE = q + w and connect expansion and compression to the sign of pressure–volume work.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1"><div class="callout" style="margin-bottom:.55rem"><strong>Now isolate one term:</strong> internal energy can change through heat or work. In this topic, we now focus on <strong>work, w</strong>. The heat term, q, will be developed next through calorimetry.</div>
+<img alt="Pressure-volume work illustration comparing gas expansion and compression" class="fixed-illustration" src="data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTAwMCAzNDAiPgogIDxyZWN0IHg9IjE4IiB5PSIxOCIgd2lkdGg9IjQ2NCIgaGVpZ2h0PSIzMDQiIHJ4PSIyMiIgZmlsbD0iIzBmMTcyYSIgc3Ryb2tlPSIjNDc1NTY5IiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cmVjdCB4PSI1MTgiIHk9IjE4IiB3aWR0aD0iNDY0IiBoZWlnaHQ9IjMwNCIgcng9IjIyIiBmaWxsPSIjMGYxNzJhIiBzdHJva2U9IiM0NzU1NjkiIHN0cm9rZS13aWR0aD0iMyIvPgoKICA8dGV4dCB4PSIyNTAiIHk9IjU4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzhiZGY4IiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjYiIGZvbnQtd2VpZ2h0PSI5MDAiPkVYUEFOU0lPTjwvdGV4dD4KICA8dGV4dCB4PSI3NTAiIHk9IjU4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzhiZGY4IiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjYiIGZvbnQtd2VpZ2h0PSI5MDAiPkNPTVBSRVNTSU9OPC90ZXh0PgoKICA8IS0tIGV4cGFuc2lvbiBjeWxpbmRlciAtLT4KICA8cmVjdCB4PSIxNjUiIHk9IjEzMCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIxMzUiIHJ4PSIwIDAgMTQgMTQiIGZpbGw9IiMxMTE4MjciIHN0cm9rZT0iIzk0YTNiOCIgc3Ryb2tlLXdpZHRoPSI1Ii8+CiAgPHJlY3QgeD0iMTQ1IiB5PSIxMDUiIHdpZHRoPSIyMTAiIGhlaWdodD0iMjQiIHJ4PSI3IiBmaWxsPSIjOTRhM2I4Ii8+CiAgPHJlY3QgeD0iMjQxIiB5PSI3MiIgd2lkdGg9IjE4IiBoZWlnaHQ9IjM0IiBmaWxsPSIjNjQ3NDhiIi8+CiAgPGxpbmUgeDE9IjI1MCIgeTE9IjEwNSIgeDI9IjI1MCIgeTI9Ijc4IiBzdHJva2U9IiNmYmJmMjQiIHN0cm9rZS13aWR0aD0iOSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBvbHlnb24gcG9pbnRzPSIyNTAsNjAgMjM2LDgyIDI2NCw4MiIgZmlsbD0iI2ZiYmYyNCIvPgogIDx0ZXh0IHg9IjI1MCIgeT0iMjkyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjY2JkNWUxIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTkiPnN5c3RlbSBwdXNoZXMgc3Vycm91bmRpbmdzPC90ZXh0PgogIDx0ZXh0IHg9IjI1MCIgeT0iMzE4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMmRkNGJmIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLFNlZ29lIFVJLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI5MDAiPs6UViAmZ3Q7IDAgIOKGkiAgdyAmbHQ7IDA8L3RleHQ+CgogIDwhLS0gY29tcHJlc3Npb24gY3lsaW5kZXIgLS0+CiAgPHJlY3QgeD0iNjY1IiB5PSIxMzAiIHdpZHRoPSIxNzAiIGhlaWdodD0iMTM1IiByeD0iMCAwIDE0IDE0IiBmaWxsPSIjMTExODI3IiBzdHJva2U9IiM5NGEzYjgiIHN0cm9rZS13aWR0aD0iNSIvPgogIDxyZWN0IHg9IjY0NSIgeT0iMTcwIiB3aWR0aD0iMjEwIiBoZWlnaHQ9IjI0IiByeD0iNyIgZmlsbD0iIzk0YTNiOCIvPgogIDxyZWN0IHg9Ijc0MSIgeT0iODAiIHdpZHRoPSIxOCIgaGVpZ2h0PSI5MCIgZmlsbD0iIzY0NzQ4YiIvPgogIDxsaW5lIHgxPSI3NTAiIHkxPSI5MiIgeDI9Ijc1MCIgeTI9IjE2MCIgc3Ryb2tlPSIjZmJiZjI0IiBzdHJva2Utd2lkdGg9IjkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwb2x5Z29uIHBvaW50cz0iNzUwLDE3OCA3MzYsMTU2IDc2NCwxNTYiIGZpbGw9IiNmYmJmMjQiLz4KICA8dGV4dCB4PSI3NTAiIHk9IjI5MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2NiZDVlMSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxTZWdvZSBVSSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE5Ij5zdXJyb3VuZGluZ3MgcHVzaCBzeXN0ZW08L3RleHQ+CiAgPHRleHQgeD0iNzUwIiB5PSIzMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMyZGQ0YmYiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksU2Vnb2UgVUksc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMSIgZm9udC13ZWlnaHQ9IjkwMCI+zpRWICZsdDsgMCAg4oaSICB3ICZndDsgMDwvdGV4dD4KPC9zdmc+Cg=="/>
+</div>
+<div class="build-step" data-build="2">
+<div class="math-line">w = −P<sub>ext</sub>ΔV</div>
+<div class="panel-grid" style="margin-top:.55rem">
+<div class="panel-card"><h4>Expansion</h4><p>ΔV &gt; 0 → w &lt; 0</p><p>work done <strong>by</strong> system</p></div>
+<div class="panel-card"><h4>Compression</h4><p>ΔV &lt; 0 → w &gt; 0</p><p>work done <strong>on</strong> system</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Why the minus sign?</strong> During expansion, the system transfers energy to the surroundings by pushing against the external pressure. That energy leaves the system, so w is negative.</div>
+<p style="margin-top:.55rem">For expansion, ΔV is <span class="blank" data-answer="positive">[ _______ ]</span> and w is negative.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="13" data-local-slide="13" id="slide-13">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 13 · Local Slide 13</span>
+<h1 class="slide-title">Work Term in Action — Calculating Pressure–Volume Work</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Calculate the work contribution to the system's internal-energy change and convert L·atm to joules.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Example:</strong> A gas expands from 2.00 L to 5.00 L against a constant external pressure of 1.20 atm.</div>
+<div class="calc-path" style="margin-top:.55rem">
+<div class="calc-step"><strong>1. Direction</strong>expansion</div>
+<div class="calc-step"><strong>2. ΔV</strong>5.00 − 2.00 = +3.00 L</div>
+<div class="calc-step"><strong>3. Predict sign</strong>w must be negative</div>
+<div class="calc-step"><strong>4. Path</strong>L·atm → J</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="math-line">w = −P<sub>ext</sub>ΔV = −(1.20 atm)(+3.00 L) = −3.60 L·atm</div>
+<div class="factor-card" style="margin-top:.55rem">
+<span>−3.60 <span class="cancel-pair">L·atm</span></span>
+<span>×</span>
+<span class="fraction"><span class="num">101.325 <span class="survive">J</span></span><span class="den">1 <span class="cancel-pair">L·atm</span></span></span>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="math-line">w = <span class="survive">−365 J</span></div>
+<div class="reason-box" style="margin-top:.55rem"><strong>Reasonableness:</strong> expansion means the system does work on the surroundings, so the negative sign is required. A few L·atm corresponds to a few hundred joules.</div>
+<p style="margin-top:.55rem">1 L·atm = <span class="blank" data-answer="101.325 J">[ _______ ]</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="14" data-local-slide="14" id="slide-14">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 14 · Local Slide 14</span>
+<h1 class="slide-title">ACS-Style Practice 1 — System Signs and Internal Energy</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use the system perspective to eliminate sign-convention distractors before calculating ΔE.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Exam strategy:</strong> do not start with arithmetic. First identify the system, then the direction of heat and work, then assign signs.</div>
+<div class="acs-strip">
+<div class="acs-step"><strong>1</strong>Define system</div>
+<div class="acs-step"><strong>2</strong>Heat direction</div>
+<div class="acs-step"><strong>3</strong>Work direction</div>
+<div class="acs-step"><strong>4</strong>Apply ΔE = q + w</div>
+</div>
+<div class="practice-card" style="margin-top:.65rem">
+<span class="practice-badge medium">ACS-style</span>
+<h4>Question A — Sign logic</h4>
+<p>A gas is the system. It releases 325 J of heat while 140 J of work is done <strong>on</strong> the gas. Which pair of values is correct?</p>
+<div class="mc-grid">
+<div class="mc-choice">A. q = +325 J, w = +140 J</div>
+<div class="mc-choice">B. q = −325 J, w = +140 J</div>
+<div class="mc-choice">C. q = +325 J, w = −140 J</div>
+<div class="mc-choice">D. q = −325 J, w = −140 J</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="practice-card">
+<span class="practice-badge hard">ACS-style</span>
+<h4>Question B — Predict before calculating</h4>
+<p>For the same system, which statement about ΔE is correct?</p>
+<div class="mc-grid">
+<div class="mc-choice">A. ΔE must be positive because work is done on the system.</div>
+<div class="mc-choice">B. ΔE must be negative because more energy leaves as heat than enters as work.</div>
+<div class="mc-choice">C. ΔE = 0 because heat and work always cancel.</div>
+<div class="mc-choice">D. The sign cannot be known from the information given.</div>
+</div>
+</div>
+<div class="reason-box" style="margin-top:.55rem"><strong>Fast check:</strong> compare magnitudes after signs are assigned: 325 J leaves, 140 J enters → net energy leaves the system.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="answer-box"><strong>A:</strong> B. Heat leaves the system → q = −325 J. Work done on the system → w = +140 J.</div>
+<div class="math-line" style="margin-top:.5rem">ΔE = (−325 J) + (+140 J) = <span class="survive">−185 J</span></div>
+<div class="answer-box"><strong>B:</strong> B. The system loses more energy as heat than it gains as work, so internal energy decreases.</div>
+<div class="warn" style="margin-top:.55rem"><strong>Distractor warning:</strong> words such as “releases,” “on,” and “by” are sign information. Read them before touching the calculator.</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="15" data-local-slide="15" id="slide-15">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 15 · Local Slide 15</span>
+<h1 class="slide-title">ACS-Style Practice 2 — Pressure–Volume Work and Distractor Checks</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use expansion/compression, ΔV, units, and sign reasoning to solve pressure–volume work problems efficiently.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="practice-card">
+<span class="practice-badge medium">ACS-style</span>
+<h4>Question A — Expansion work</h4>
+<p>A gas expands from 3.00 L to 7.00 L against a constant external pressure of 1.50 atm. Which setup is correct?</p>
+<div class="mc-grid">
+<div class="mc-choice">A. w = +(1.50 atm)(4.00 L)</div>
+<div class="mc-choice">B. w = −(1.50 atm)(4.00 L)</div>
+<div class="mc-choice">C. w = −(1.50 atm)(10.00 L)</div>
+<div class="mc-choice">D. w = +(1.50 atm)(10.00 L)</div>
+</div>
+</div>
+<div class="equal-banner" style="margin-top:.55rem">Expansion → ΔV &gt; 0 → work done by system → w &lt; 0</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="practice-card">
+<span class="practice-badge hard">ACS-style</span>
+<h4>Question B — Compression + unit reasoning</h4>
+<p>A gas is compressed from 5.20 L to 2.20 L against 0.800 atm. Which statement must be true?</p>
+<div class="mc-grid">
+<div class="mc-choice">A. ΔV = +3.00 L and w &lt; 0</div>
+<div class="mc-choice">B. ΔV = −3.00 L and w &lt; 0</div>
+<div class="mc-choice">C. ΔV = −3.00 L and w &gt; 0</div>
+<div class="mc-choice">D. ΔV = +3.00 L and w &gt; 0</div>
+</div>
+</div>
+<div class="distractor-grid">
+<div class="distractor-card"><h4>Trap 1</h4><p>Using V<sub>initial</sub> − V<sub>final</sub> instead of ΔV = V<sub>final</sub> − V<sub>initial</sub>.</p></div>
+<div class="distractor-card"><h4>Trap 2</h4><p>Forgetting the minus sign in w = −P<sub>ext</sub>ΔV.</p></div>
+<div class="distractor-card"><h4>Trap 3</h4><p>Reporting L·atm when the requested answer is in joules.</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="answer-box"><strong>A:</strong> B. ΔV = 7.00 − 3.00 = +4.00 L, so w = −(1.50)(4.00) = −6.00 L·atm ≈ −608 J.</div>
+<div class="answer-box"><strong>B:</strong> C. ΔV = 2.20 − 5.20 = −3.00 L, so compression gives w &gt; 0.</div>
+<div class="callout" style="margin-top:.55rem"><strong>ACS fast check:</strong> direction → sign of ΔV → sign of w → unit conversion → magnitude. These checks can eliminate plausible distractors before full arithmetic.</div>
+</div>
+</div>
+</div>
+</div><div class="slide-container" data-integrated-slide="16" data-local-slide="16" id="slide-16">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 16 · Local Slide 16</span>
+<h1 class="slide-title">Independent Check — Energy, Systems &amp; the First Law</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Check internal-energy reasoning, heat/work identification, q and w signs, ΔE calculations, and pressure–volume work.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="question-grid">
+<div class="question-card"><div><span class="question-num">1</span> <span class="question-text">Two different processes take a system from the same initial state to the same final state. Must ΔE be the same for both?</span></div><div class="response-area">Explain using the meaning of a state function.</div></div>
+<div class="question-card"><div><span class="question-num">2</span> <span class="question-text">The system absorbs heat from the surroundings. What is the sign of q?</span></div><div class="response-area">Use the system perspective.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="question-grid">
+<div class="question-card"><div><span class="question-num">3</span> <span class="question-text">A system releases 240 J as heat and has 90 J of work done on it. Write q and w with signs, then calculate ΔE.</span></div><div class="response-area">Show sign assignment before arithmetic.</div></div>
+<div class="question-card"><div><span class="question-num">4</span> <span class="question-text">A gas changes from 4.0 L to 6.5 L. Is ΔV positive or negative? Is PV work positive or negative?</span></div><div class="response-area">Identify expansion/compression first.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="question-grid">
+<div class="question-card"><div><span class="question-num">5</span> <span class="question-text">During compression, the surroundings push a piston inward. Is work done on the system or by the system? What sign should w have?</span></div><div class="response-area">State both the direction and sign.</div></div>
+<div class="question-card"><div><span class="question-num">6</span> <span class="question-text">A gas expands against 0.950 atm from 1.50 L to 3.50 L. Set up the calculation for w in joules.</span></div><div class="response-area">Show ΔV, w = −P<sub>ext</sub>ΔV, and the L·atm → J conversion.</div></div>
+</div>
+<div class="callout" style="margin-top:.7rem"><strong>Topic synthesis:</strong> ΔE tracks the change in the <strong>system's internal energy</strong>. Heat, q, and work, w, are the two ways energy crosses the system boundary. This topic focused on the <strong>work term</strong>; next, calorimetry will focus on the <strong>heat term</strong>.</div>
+</div>
+</div>
+</div>
+</div></main>
+<div class="footer-copyright">© 2026 Nara Chon. All rights reserved.</div><script>
+let currentSlide=1;
+const totalSlides=16;
+let currentBuild=1;
+const buildsPerSlide={1:3,2:3,3:3,4:3,5:3,6:3,7:3,8:3,9:3,10:3,11:3,12:3,13:3,14:3,15:3,16:3};
+let currentMode='student';
+
+const slideCounter=document.getElementById('slideCounter');
+const buildCounter=document.getElementById('buildCounter');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+
+function setMode(mode,button){
+  currentMode=mode;
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${mode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+
+
+
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>{
+    slide.classList.toggle('active',(index+1)===currentSlide);
+  });
+
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10);
+    step.classList.toggle('visible',n<=currentBuild);
+  });
+
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const visible=!parentBuild||parentBuild.classList.contains('visible');
+    if(currentMode==='answer'&&visible){
+      blank.textContent=blank.dataset.answer;
+      blank.classList.add('revealed');
+    }else{
+      blank.textContent='[ _______ ]';
+      blank.classList.remove('revealed');
+    }
+  });
+
+  slideCounter.textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  buildCounter.textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  prevBtn.disabled=currentSlide===1&&currentBuild===1;
+  nextBtn.disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+
+function nextBuild(){
+  const max=buildsPerSlide[currentSlide];
+  if(currentBuild<max)currentBuild++;
+  else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}
+  updateDisplay();
+}
+
+function prevBuild(){
+  if(currentBuild>1)currentBuild--;
+  else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}
+  updateDisplay();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}
+});
+
+updateDisplay();
+</script>
+</body>
+</html>
