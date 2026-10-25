@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>T8.1 — Electron Configuration and Periodic Classification | Student</title>
+<style>
+:root{--bg-dark:#0f172a;--bg-card:#1e293b;--accent-blue:#38bdf8;--accent-teal:#2dd4bf;--accent-amber:#fbbf24;--accent-rose:#f43f5e;--text-main:#f8fafc;--text-muted:#94a3b8;--border-color:#475569;--blank-bg:#334155;--s-block:#e7a3bb;--p-block:#b7d57a;--d-block:#5f9fdd;--f-block:#b24bb8;--anomaly-a:#22d3ee;--anomaly-b:#f97316;--anomaly-c:#e879f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-dark);color:var(--text-main);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+header{background:#0b1120;border-bottom:1px solid var(--border-color);padding:.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;z-index:100}
+.deck-title{font-size:1.25rem;font-weight:700;color:var(--accent-blue);display:flex;align-items:center;gap:.5rem}
+.mode-selector{display:flex;background:#1e293b;border-radius:8px;padding:3px;border:1px solid var(--border-color)}
+.mode-btn{background:none;border:none;color:var(--text-muted);padding:.4rem .8rem;font-size:.95rem;font-weight:600;cursor:pointer;border-radius:6px}
+.mode-btn.active{background:var(--accent-blue);color:#0f172a}
+.nav-controls{display:flex;align-items:center;gap:.75rem}
+.btn{background:#334155;color:var(--text-main);border:1px solid var(--border-color);padding:.45rem .9rem;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}
+.btn:hover:not(:disabled){background:#475569;border-color:var(--accent-blue)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--accent-blue);color:#0f172a;border:none}
+.counter-badge{font-size:.95rem;color:var(--text-muted);font-weight:600;background:#1e293b;padding:.3rem .6rem;border-radius:4px;border:1px solid var(--border-color)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;max-width:1400px;width:100%;margin:0 auto}
+.slide-container{width:100%;background:var(--bg-card);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 20px 25px -5px rgba(0,0,0,.5);padding:2rem;min-height:620px;display:none;flex-direction:column;justify-content:space-between;position:relative;animation:fadeIn .3s ease-in-out}
+.slide-container.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide-header{margin-bottom:1.15rem}
+.meta-pill{display:inline-block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent-teal);background:rgba(45,212,191,.1);padding:.25rem .6rem;border-radius:4px;margin-bottom:.5rem;border:1px solid rgba(45,212,191,.2)}
+.slide-title{font-size:2.05rem;font-weight:800;line-height:1.25}
+.lo-box{background:rgba(56,189,248,.08);border-left:4px solid var(--accent-blue);padding:.7rem 1.1rem;border-radius:0 6px 6px 0;margin-top:.75rem;font-size:1rem;color:#e2e8f0}
+.lo-box strong{color:var(--accent-blue)}
+.slide-body{flex:1;display:flex;flex-direction:column;gap:1rem;margin-top:.35rem}
+.build-step{opacity:.15;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateY(8px);filter:blur(1px)}
+.build-step.visible{opacity:1;pointer-events:auto;transform:none;filter:none}
+.blank{display:inline-block;min-width:90px;padding:.15rem .55rem;background:var(--blank-bg);border-bottom:2px solid var(--accent-amber);border-radius:4px;color:transparent;text-align:center;font-weight:700;user-select:none;vertical-align:middle}
+.callout{background:rgba(56,189,248,.08);border:1px solid var(--accent-blue);border-radius:8px;padding:.7rem 1rem}
+.warn{background:rgba(244,63,94,.1);border:1px solid var(--accent-rose);border-radius:8px;padding:.7rem 1rem;color:#fecdd3}
+.equal-banner{background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.65rem;text-align:center;color:var(--accent-teal);font-weight:900;font-size:1.05rem}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.8rem}
+.panel-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.85rem;text-align:center}
+.panel-card h4{color:var(--accent-blue);font-size:1rem;margin-bottom:.5rem}
+.arrow{color:var(--accent-amber);font-size:1.35rem;font-weight:900;text-align:center}
+.practice-badge{display:inline-block;padding:.22rem .55rem;border-radius:999px;font-size:.78rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
+.practice-badge.easy{background:rgba(45,212,191,.15);color:var(--accent-teal);border:1px solid var(--accent-teal)}
+.practice-badge.medium{background:rgba(251,191,36,.15);color:var(--accent-amber);border:1px solid var(--accent-amber)}
+.practice-badge.hard{background:rgba(244,63,94,.15);color:var(--accent-rose);border:1px solid var(--accent-rose)}
+.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.practice-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem}
+.practice-card h4{color:var(--accent-blue);margin-bottom:.45rem}
+.answer-box{margin-top:.55rem;background:rgba(45,212,191,.1);border:1px solid var(--accent-teal);border-radius:8px;padding:.55rem;color:#ccfbf1;font-weight:800}
+.question-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.question-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.85rem;display:flex;flex-direction:column;gap:.55rem}
+.question-num{display:inline-block;background:var(--accent-blue);color:#0f172a;font-weight:800;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.9rem}
+.question-text{font-size:1rem;font-weight:600;line-height:1.4}
+.response-area{background:#1e293b;border:1px dashed var(--border-color);border-radius:6px;min-height:60px;padding:.5rem;font-size:.9rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-style:italic}
+@media (max-width:900px){.practice-grid,.question-grid{grid-template-columns:1fr}.slide-title{font-size:1.6rem}.slide-container{padding:1.25rem;min-height:auto}}
+.acs-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.75rem}
+.acs-card h4{margin-bottom:.4rem;color:var(--accent-blue)}
+.acs-card.easy h4{color:#4ade80}
+.acs-card.medium h4{color:#38bdf8}
+.acs-card.hard h4{color:#f59e0b}
+.mini-note{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.7rem;margin-top:.55rem;color:#cbd5e1;font-size:.84rem;line-height:1.35}
+.orbital-compare{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;align-items:stretch;margin:.55rem 0 .45rem}
+@media (max-width:900px){.orbital-compare{grid-template-columns:1fr}}
+.module-path{display:grid;grid-template-columns:1fr auto 1fr;gap:.8rem;align-items:stretch}
+.path-card{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:1rem}
+.path-card h4{color:var(--accent-blue);margin-bottom:.45rem;text-align:center}
+.path-arrow{display:grid;place-items:center;color:var(--accent-amber);font-size:2rem;font-weight:900}
+.logic-chain{display:flex;gap:.45rem;align-items:center;justify-content:center;flex-wrap:wrap}
+.logic-chip{background:#0f172a;border:1px solid var(--border-color);border-radius:999px;padding:.4rem .75rem;font-weight:900;color:#e2e8f0}
+.logic-arrow{color:var(--accent-amber);font-weight:900}
+.periodic-block-map{display:grid;grid-template-columns:42px repeat(18,minmax(31px,1fr));grid-template-rows:repeat(7,42px);gap:4px;background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.7rem;overflow-x:auto}
+.period-marker{display:grid;place-items:center;color:#94a3b8;font-weight:900}
+.period-marker.r1{grid-column:1;grid-row:1}
+.period-marker.r2{grid-column:1;grid-row:2}
+.period-marker.r3{grid-column:1;grid-row:3}
+.period-marker.r4{grid-column:1;grid-row:4}
+.period-marker.r5{grid-column:1;grid-row:5}
+.period-marker.r6{grid-column:1;grid-row:6}
+.period-marker.r7{grid-column:1;grid-row:7}
+.pb-s,.pb-p,.pb-d,.pb-he{border:2px solid rgba(255,255,255,.28);border-radius:8px;display:grid;place-items:center;text-align:center;color:#0f172a;font-weight:900}
+.pb-s{grid-column:2/4;grid-row:2/8;background:var(--s-block)}
+.pb-p{grid-column:14/20;grid-row:2/8;background:var(--p-block)}
+.pb-d{grid-column:4/14;grid-row:4/8;background:var(--d-block)}
+.pb-h{grid-column:2;grid-row:1;background:var(--s-block)}
+.pb-he{grid-column:19;grid-row:1;background:var(--s-block)}
+.pb-h,.pb-he{border:2px solid rgba(255,255,255,.28);border-radius:8px;display:grid;place-items:center;text-align:center;color:#0f172a;font-weight:900}
+.pb-s small,.pb-p small,.pb-d small,.pb-h small,.pb-he small{font-size:.72rem}
+.f-block-wrap{display:grid;grid-template-columns:120px 1fr;gap:.55rem;align-items:stretch;margin:.5rem 0 0 46px}
+.f-side-label{display:grid;place-items:center;color:#94a3b8;font-weight:900;text-align:center}
+.pb-f{min-height:88px;background:var(--f-block);color:white;border:2px solid rgba(255,255,255,.28);border-radius:8px;display:grid;place-items:center;text-align:center;font-weight:900}
+.pb-f small{font-size:.75rem}
+.block-meaning-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.block-meaning{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.85rem}
+.block-meaning h4{color:var(--accent-blue);margin-bottom:.4rem}
+.anomaly-ptable{display:grid;grid-template-columns:88px repeat(10,minmax(47px,1fr));gap:4px;background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.7rem}
+.ap-row{display:grid;place-items:center;color:#94a3b8;font-weight:900}
+.ap-cell{background:#111827;border:1px solid #475569;border-radius:7px;display:flex;place-items:center;min-height:52px;font-weight:850;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.ap-a{border:3px solid var(--anomaly-a)}
+.ap-b{border:3px solid var(--anomaly-b)}
+.ap-c{border:3px dashed var(--anomaly-c)}
+.anomaly-legend{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:.55rem;color:#cbd5e1;font-size:.85rem}
+.legend-key{display:inline-block;width:18px;height:12px;border:3px solid;border-radius:3px;margin-right:.25rem;vertical-align:middle}
+.legend-key.a{border-color:var(--anomaly-a)}
+.legend-key.b{border-color:var(--anomaly-b)}
+.legend-key.c{border-color:var(--anomaly-c);border-style:dashed}
+.interaction-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.interaction-card{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.8rem;text-align:center}
+.interaction-card h4{color:var(--accent-blue);margin-bottom:.35rem}
+.interaction-symbol{font-size:1.7rem;font-weight:900;color:var(--accent-amber);margin:.35rem 0}
+@media (max-width:900px){.module-path,.block-meaning-grid,.interaction-grid{grid-template-columns:1fr}.periodic-block-map{grid-template-columns:36px repeat(18,34px)}.f-block-wrap{margin-left:0;grid-template-columns:90px 650px;overflow-x:auto}.anomaly-ptable{grid-template-columns:78px repeat(10,48px);overflow-x:auto}}
+.block-term{display:inline-block;padding:.06rem .34rem;border-radius:5px;font-weight:900;color:#0f172a;line-height:1.15;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)}
+.block-term-s{background:var(--s-block)}
+.block-term-p{background:var(--p-block)}
+.block-term-d{background:var(--d-block)}
+.block-term-f{background:var(--f-block);color:#fff}
+.ap-la-gap{border-right:7px double var(--accent-amber) !important;position:relative}
+.ap-la-gap::after{content:"58–71 f";position:absolute;right:-39px;top:50%;transform:translate(50%,-50%) rotate(-90deg);padding:.12rem .32rem;border-radius:999px;background:#0f172a;color:#fde68a;border:1px solid rgba(251,191,36,.55);font-size:.62rem;font-weight:900;white-space:nowrap;z-index:5;display:none !important}
+.ap-z{font-size:.60rem;line-height:1;color:#94a3b8;font-weight:800}
+.ap-symbol{font-size:1rem;line-height:1.1;font-weight:900}
+.period6-gap-note{grid-column:2/12;margin-top:.2rem;display:flex;align-items:center;justify-content:center;gap:.45rem;color:#fde68a;font-size:.72rem;font-weight:900}
+.period6-gap-note .gap-line{flex:1;border-top:3px double var(--accent-amber)}
+.period6-gap-note .gap-label{padding:.12rem .48rem;border:1px solid rgba(251,191,36,.55);border-radius:999px;background:#0f172a;white-space:nowrap}
+.anomaly-explain-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.anomaly-family{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.8rem}
+.anomaly-family.crmo{border-top:4px solid var(--anomaly-a)}
+.anomaly-family.cuaga{border-top:4px solid var(--anomaly-b)}
+.anomaly-family h4{margin:0 0 .4rem;text-align:center}
+@media (max-width:900px){.anomaly-explain-grid{grid-template-columns:1fr}}
+.family-header{text-align:center;font-weight:900;margin-bottom:.45rem}
+.generic-note{text-align:center;color:#cbd5e1;font-size:.84rem;margin:.15rem 0 .55rem}
+.orbital-panel{background:#111827;border:1px solid #334155;border-radius:10px;padding:.65rem}
+.orbital-panel h5{margin:0 0 .45rem;text-align:center;color:#e2e8f0;font-size:.92rem}
+.sublevel-line{display:grid;grid-template-columns:48px 1fr;gap:.45rem;align-items:center;margin:.35rem 0}
+.sublevel-tag{font-weight:900;text-align:right;color:#cbd5e1}
+.orbital-row-wide{display:flex;gap:.28rem;justify-content:flex-start;flex-wrap:nowrap}
+.orbital-row-wide span{min-width:36px;height:34px;border:2px solid #64748b;display:grid;place-items:center;font-weight:900;background:#0f172a}
+.config-table-3{display:grid;grid-template-columns:90px 1fr 1fr;border:1px solid var(--border-color);border-radius:10px;overflow:hidden;margin:.45rem 0 .6rem}
+.config-table-3 > div{padding:.42rem .5rem;border-right:1px solid #334155;border-bottom:1px solid #334155}
+.config-table-3 > div:nth-child(3n){border-right:none}
+.config-table-3 .head{background:#0b1120;color:var(--accent-blue);font-weight:900;text-align:center}
+.config-table-3 .el{font-weight:900;text-align:center}
+.config-table-3 .cfg{text-align:center;font-weight:800;background:#111827}
+.electron-category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.electron-category{background:#0f172a;border:1px solid var(--border-color);border-radius:12px;padding:.85rem}
+.electron-category h4{margin:0 0 .45rem;text-align:center;color:var(--accent-blue)}
+.category-key{display:inline-block;padding:.12rem .42rem;border-radius:999px;font-weight:900;margin:.15rem 0 .35rem}
+.outer-key{background:rgba(56,189,248,.14);border:1px solid var(--accent-blue);color:#bae6fd}
+.valence-key{background:rgba(45,212,191,.14);border:1px solid var(--accent-teal);color:#ccfbf1}
+.inner-key{background:rgba(251,191,36,.14);border:1px solid var(--accent-amber);color:#fde68a}
+.example-table{display:grid;grid-template-columns:90px 1.45fr 1.05fr .7fr .7fr .7fr;border:1px solid var(--border-color);border-radius:10px;overflow:hidden}
+.example-table > div{padding:.38rem .45rem;border-right:1px solid #334155;border-bottom:1px solid #334155;font-size:.84rem}
+.example-table > div:nth-child(6n){border-right:none}
+.example-table .head{background:#0b1120;color:var(--accent-blue);font-weight:900;text-align:center}
+.example-table .name{font-weight:900;text-align:center}
+.example-table .cfg{background:#111827}
+.example-table .num{text-align:center;font-weight:900}
+@media (max-width:900px){.electron-category-grid{grid-template-columns:1fr}.example-table{grid-template-columns:80px 1.2fr 1fr .55fr .55fr .55fr;overflow-x:auto}}
+.compact-bullets{margin:.35rem 0 0 1.1rem;display:grid;gap:.28rem}
+.compact-bullets li{line-height:1.3}
+.category-formula{margin-top:.5rem;padding:.48rem .62rem;border-radius:8px;background:#111827;border:1px solid #334155;text-align:center;font-weight:900}
+.removal-rule{display:grid;grid-template-columns:1fr auto 1fr;gap:.6rem;align-items:center}
+.rule-box{background:#0f172a;border:1px solid var(--border-color);border-radius:10px;padding:.7rem;text-align:center}
+.rule-box strong{color:var(--accent-blue)}
+.removal-path{display:grid;gap:.4rem;margin-top:.5rem}
+.removal-step{display:grid;grid-template-columns:1fr auto 1fr;gap:.5rem;align-items:center;background:#111827;border:1px solid #334155;border-radius:8px;padding:.5rem .65rem}
+.remove-highlight{color:#fda4af;font-weight:950;text-decoration:line-through;text-decoration-thickness:2px}
+.keep-highlight{color:#ccfbf1;font-weight:900}
+.orbital-five{display:flex;justify-content:center;gap:.35rem;margin:.55rem 0}
+.orbital-five .obox{width:44px;height:40px;border:2px solid #64748b;background:#111827;display:grid;place-items:center;font-weight:950;font-size:1.05rem}
+.orbital-five .obox.empty{color:transparent}
+.unpaired-count{display:inline-block;padding:.2rem .5rem;border-radius:999px;border:1px solid var(--accent-amber);color:#fde68a;background:rgba(251,191,36,.1);font-weight:900}
+.acs-level-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.acs-choices{display:grid;gap:.3rem;margin-top:.4rem}
+.acs-choice{background:#111827;border:1px solid #334155;border-radius:7px;padding:.38rem .5rem}
+@media (max-width:900px){.removal-rule,.removal-step,.acs-level-grid{grid-template-columns:1fr}}
+.copyright-notice{width:100%;max-width:1400px;margin:0 auto;padding:.75rem 1.5rem 1rem;color:var(--text-muted);font-size:.78rem;line-height:1.45;text-align:center}
+body.mode-answer .blank.revealed{color:var(--accent-amber);background:rgba(251,191,36,.15)}
+
+body.mode-student .answer-box{display:none !important}
+body.mode-answer .answer-box{display:block}
+</style>
+</head>
+<body class="mode-student">
+<header>
+<div class="deck-title"><span>🧪</span><span>Topic T8.1 | Electron Configuration and Periodic Classification</span></div>
+<div class="mode-selector"><button class="mode-btn active" onclick="setMode('student',this)">Student Mode</button><button class="mode-btn" onclick="setMode('answer',this)">Answer Mode</button></div>
+<div class="nav-controls">
+
+<button class="btn" id="prevBtn" onclick="prevBuild()">◀ Prev</button>
+<span class="counter-badge" id="slideCounter">Slide 1 / 10</span>
+<span class="counter-badge" id="buildCounter" style="color:var(--accent-teal)">Build 1 / 3</span>
+<button class="btn btn-primary" id="nextBtn" onclick="nextBuild()">Next ▶</button>
+</div>
+</header>
+<main>
+<div class="slide-container active" data-integrated-slide="1" data-local-slide="1" id="slide-1">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 1 · Local Slide 1</span>
+<h1 class="slide-title">Why Are We Revisiting Electron Configuration?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Explain why transition-metal electron configurations and anomalous configurations are introduced after the basic electron-configuration pattern was established in Module 7.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="equal-banner">Module 7 established the basic ground-state electron-configuration pattern.</div>
+<div class="module-path" style="margin-top:.75rem">
+<div class="path-card">
+<h4>Module 7</h4>
+<p>We used the periodic table with the <strong>Aufbau Principle</strong>, <strong>Pauli Exclusion Principle</strong>, and <strong>Hund’s Rule</strong> to construct ground-state electron configurations.</p>
+</div>
+<div class="path-arrow">→</div>
+<div class="path-card">
+<h4>Module 8</h4>
+<p>Now we test how well the same electron-configuration pattern works when we move into the <strong><span class="block-term block-term-d">d block</span></strong>.</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="logic-chain">
+<span class="logic-chip">learn the pattern</span><span class="logic-arrow">→</span>
+<span class="logic-chip">test the pattern</span><span class="logic-arrow">→</span>
+<span class="logic-chip">find exceptions</span><span class="logic-arrow">→</span>
+<span class="logic-chip">explain why</span>
+</div>
+<div class="callout" style="margin-top:.7rem"><strong>Why put the exceptions here?</strong> First we needed a clear ground-state electron-configuration pattern. Now the exceptions give us a reason to ask what controls orbital energies in multi-electron atoms.</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Module 8 question:</strong> When does the Aufbau prediction differ from the experimentally observed ground-state configuration, and what ideas help us understand that difference?</div>
+<p style="margin-top:.6rem">That question leads directly into <span class="blank" data-answer="shielding">[ _______ ]</span>, effective nuclear charge, penetration, and periodic trends.</p>
+</div>
+</div>
+
+</div>
+</div>
+<div class="slide-container" data-integrated-slide="2" data-local-slide="2" id="slide-2">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 2 · Local Slide 2</span>
+<h1 class="slide-title">Periodic Classification — Blocks and Electron Configuration</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Connect the s, p, d, and f blocks to the type of orbital being filled and distinguish block classification from the definition of valence electrons.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="periodic-block-map">
+<div class="period-marker r1">1</div><div class="period-marker r2">2</div><div class="period-marker r3">3</div>
+<div class="period-marker r4">4</div><div class="period-marker r5">5</div><div class="period-marker r6">6</div><div class="period-marker r7">7</div>
+<div class="pb-h"><div>H<br/><small>1s¹</small></div></div>
+<div class="pb-s"><div><span class="block-term block-term-s">s block</span><br/><small>ns</small></div></div>
+<div class="pb-d"><div><span class="block-term block-term-d">d block</span><br/><small>(n−1)d</small></div></div>
+<div class="pb-p"><div><span class="block-term block-term-p">p block</span><br/><small>np</small></div></div>
+<div class="pb-he"><div>He<br/><small>1s²</small></div></div>
+</div>
+<div class="f-block-wrap">
+<div class="f-side-label">Periods<br/>6–7</div>
+<div class="pb-f"><div><span class="block-term block-term-f">f block</span> — 2 rows × 14 positions<br/><small>(n−2)f</small></div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="equal-banner">The block shows which type of orbital is being filled as electrons are added across that region of the periodic table.</div>
+<div class="block-meaning-grid" style="margin-top:.7rem">
+<div class="block-meaning">
+<h4>Main-group elements</h4>
+<p>The last electron added enters an outermost <strong>s</strong> or <strong>p</strong> orbital.</p>
+<p style="margin-top:.35rem">For main-group elements, the valence electrons are the electrons in the highest <strong>n</strong> level.</p>
+</div>
+<div class="block-meaning">
+<h4>Transition elements</h4>
+<p>The <span class="block-term block-term-d">d block</span> corresponds to filling an <strong>(n−1)d</strong> subshell.</p>
+<p style="margin-top:.35rem">Transition-element valence electrons can include both <strong>ns</strong> and <strong>(n−1)d</strong> electrons.</p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Helium:</strong> He is placed in Group 18 because of its chemical behavior, but its electron configuration is 1s². In an electron-configuration block map, He belongs to the <strong><span class="block-term block-term-s">s block</span></strong>.</div>
+<p style="margin-top:.55rem">So block position tells us the orbital type being filled; it does <strong>not</strong> mean that every valence electron of every element is located in that one block.</p>
+</div>
+</div>
+
+</div>
+</div>
+<div class="slide-container" data-integrated-slide="3" data-local-slide="3" id="slide-3">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 3 · Local Slide 3</span>
+<h1 class="slide-title">Transition-Metal Electron Configurations — Test the Aufbau Prediction</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Apply the Aufbau Principle to separated transition-metal examples before examining anomalous ground-state configurations.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="callout"><strong>Aufbau Principle:</strong> electrons are placed in the lowest-energy sublevel available.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="practice-grid">
+<div class="practice-card"><span class="practice-badge easy">Try 1</span><h4>Sc, Z = 21</h4><p>After [Ar], place the next three electrons.</p><div class="answer-box">[Ar] 4s² 3d¹</div></div>
+<div class="practice-card"><span class="practice-badge medium">Try 2</span><h4>Fe, Z = 26</h4><p>Use the same filling order after [Ar].</p><div class="answer-box">[Ar] 4s² 3d⁶</div></div>
+<div class="practice-card"><span class="practice-badge medium">Try 3</span><h4>Tc, Z = 43</h4><p>Continue the pattern in the next transition series.</p><div class="answer-box">[Kr] 5s² 4d⁵</div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">These separated examples match the Aufbau prediction.</div>
+<div class="warn" style="margin-top:.65rem"><strong>Next test:</strong> What happens when we reach an element whose predicted configuration does <em>not</em> match the experimentally observed ground state?</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class="slide-container" data-integrated-slide="4" data-local-slide="4" id="slide-4">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 4 · Local Slide 4</span>
+<h1 class="slide-title">Anomalous Electron Configurations — Predicted vs Observed</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Compare Aufbau predictions with experimentally observed ground-state configurations for the anomalous configurations emphasized in the course materials.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="anomaly-legend">
+<span><i class="legend-key a"></i> Cr / Mo</span>
+<span><i class="legend-key b"></i> Cu / Ag / Au</span>
+<span><i class="legend-key c"></i> additional anomalous configurations</span>
+</div>
+<div class="anomaly-ptable"><div class="ap-row">Period 4</div><div class="ap-cell"><div class="ap-z">21</div><div class="ap-symbol">Sc</div></div><div class="ap-cell"><div class="ap-z">22</div><div class="ap-symbol">Ti</div></div><div class="ap-cell"><div class="ap-z">23</div><div class="ap-symbol">V</div></div><div class="ap-cell ap-a"><div class="ap-z">24</div><div class="ap-symbol">Cr</div></div><div class="ap-cell"><div class="ap-z">25</div><div class="ap-symbol">Mn</div></div><div class="ap-cell"><div class="ap-z">26</div><div class="ap-symbol">Fe</div></div><div class="ap-cell"><div class="ap-z">27</div><div class="ap-symbol">Co</div></div><div class="ap-cell"><div class="ap-z">28</div><div class="ap-symbol">Ni</div></div><div class="ap-cell ap-b"><div class="ap-z">29</div><div class="ap-symbol">Cu</div></div><div class="ap-cell"><div class="ap-z">30</div><div class="ap-symbol">Zn</div></div><div class="ap-row">Period 5</div><div class="ap-cell"><div class="ap-z">39</div><div class="ap-symbol">Y</div></div><div class="ap-cell"><div class="ap-z">40</div><div class="ap-symbol">Zr</div></div><div class="ap-cell"><div class="ap-z">41</div><div class="ap-symbol">Nb</div></div><div class="ap-cell ap-a"><div class="ap-z">42</div><div class="ap-symbol">Mo</div></div><div class="ap-cell"><div class="ap-z">43</div><div class="ap-symbol">Tc</div></div><div class="ap-cell ap-c"><div class="ap-z">44</div><div class="ap-symbol">Ru</div></div><div class="ap-cell"><div class="ap-z">45</div><div class="ap-symbol">Rh</div></div><div class="ap-cell ap-c"><div class="ap-z">46</div><div class="ap-symbol">Pd</div></div><div class="ap-cell ap-b"><div class="ap-z">47</div><div class="ap-symbol">Ag</div></div><div class="ap-cell"><div class="ap-z">48</div><div class="ap-symbol">Cd</div></div><div class="ap-row">Period 6</div><div class="ap-cell ap-la-gap"><div class="ap-z">57</div><div class="ap-symbol">La</div></div><div class="ap-cell"><div class="ap-z">72</div><div class="ap-symbol">Hf</div></div><div class="ap-cell"><div class="ap-z">73</div><div class="ap-symbol">Ta</div></div><div class="ap-cell"><div class="ap-z">74</div><div class="ap-symbol">W</div></div><div class="ap-cell"><div class="ap-z">75</div><div class="ap-symbol">Re</div></div><div class="ap-cell"><div class="ap-z">76</div><div class="ap-symbol">Os</div></div><div class="ap-cell"><div class="ap-z">77</div><div class="ap-symbol">Ir</div></div><div class="ap-cell"><div class="ap-z">78</div><div class="ap-symbol">Pt</div></div><div class="ap-cell ap-b"><div class="ap-z">79</div><div class="ap-symbol">Au</div></div><div class="ap-cell"><div class="ap-z">80</div><div class="ap-symbol">Hg</div></div></div><div class="period6-gap-note"><span class="gap-line"></span><span class="gap-label">58–71 = f block (Ce–Lu) inserted between La and Hf in the long-form table</span><span class="gap-line"></span></div>
+</div>
+<div class="build-step" data-build="2">
+<div class="anomaly-explain-grid">
+<div class="anomaly-family crmo">
+<div class="family-header">Cr / Mo pattern — predicted d⁴ → observed d⁵s¹</div>
+<div class="config-table-3">
+<div class="head">Element</div><div class="head">Predicted</div><div class="head">Observed</div>
+<div class="el">Cr</div><div class="cfg">[Ar] 4s² 3d⁴</div><div class="cfg">[Ar] 4s¹ 3d⁵</div>
+<div class="el">Mo</div><div class="cfg">[Kr] 5s² 4d⁴</div><div class="cfg">[Kr] 5s¹ 4d⁵</div>
+</div>
+<div class="generic-note">Orbital-box pattern shown below with the 5s / 4d case. The same occupancy change idea also applies to 4s / 3d for Cr.</div>
+<div class="orbital-compare">
+<div class="orbital-panel">
+<h5>Predicted</h5>
+<div class="sublevel-line">
+<div class="sublevel-tag">5s</div>
+<div class="orbital-row-wide"><span>↑↓</span></div>
+</div>
+<div class="sublevel-line">
+<div class="sublevel-tag">4d</div>
+<div class="orbital-row-wide"><span>↑</span><span>↑</span><span>↑</span><span>↑</span><span>□</span></div>
+</div>
+</div>
+<div class="orbital-panel">
+<h5>Observed</h5>
+<div class="sublevel-line">
+<div class="sublevel-tag">5s</div>
+<div class="orbital-row-wide"><span>↑</span></div>
+</div>
+<div class="sublevel-line">
+<div class="sublevel-tag">4d</div>
+<div class="orbital-row-wide"><span>↑</span><span>↑</span><span>↑</span><span>↑</span><span>↑</span></div>
+</div>
+</div>
+</div>
+<p class="mini-note"><strong>Pattern to notice:</strong> one ns electron is in the d subshell in the observed arrangement, so the d subshell changes from four singly occupied orbitals to five singly occupied orbitals.</p>
+</div>
+<div class="anomaly-family cuaga">
+<div class="family-header">Cu / Ag / Au pattern — predicted d⁹ → observed d¹⁰s¹</div>
+<div class="config-table-3">
+<div class="head">Element</div><div class="head">Predicted</div><div class="head">Observed</div>
+<div class="el">Cu</div><div class="cfg">[Ar] 4s² 3d⁹</div><div class="cfg">[Ar] 4s¹ 3d¹⁰</div>
+<div class="el">Ag</div><div class="cfg">[Kr] 5s² 4d⁹</div><div class="cfg">[Kr] 5s¹ 4d¹⁰</div>
+<div class="el">Au</div><div class="cfg">[Xe] 6s² 4f¹⁴ 5d⁹</div><div class="cfg">[Xe] 6s¹ 4f¹⁴ 5d¹⁰</div>
+</div>
+<div class="generic-note">Orbital-box pattern shown below with the 5s / 4d case. The same occupancy change idea also applies to 4s / 3d for Cu and 6s / 5d for Au.</div>
+<div class="orbital-compare">
+<div class="orbital-panel">
+<h5>Predicted</h5>
+<div class="sublevel-line">
+<div class="sublevel-tag">5s</div>
+<div class="orbital-row-wide"><span>↑↓</span></div>
+</div>
+<div class="sublevel-line">
+<div class="sublevel-tag">4d</div>
+<div class="orbital-row-wide"><span>↑↓</span><span>↑↓</span><span>↑↓</span><span>↑↓</span><span>↑</span></div>
+</div>
+</div>
+<div class="orbital-panel">
+<h5>Observed</h5>
+<div class="sublevel-line">
+<div class="sublevel-tag">5s</div>
+<div class="orbital-row-wide"><span>↑</span></div>
+</div>
+<div class="sublevel-line">
+<div class="sublevel-tag">4d</div>
+<div class="orbital-row-wide"><span>↑↓</span><span>↑↓</span><span>↑↓</span><span>↑↓</span><span>↑↓</span></div>
+</div>
+</div>
+</div>
+<p class="mini-note"><strong>Pattern to notice:</strong> one ns electron is in the d subshell in the observed arrangement, so the d subshell changes from d⁹ to a completely filled d¹⁰ subshell.</p>
+</div>
+</div>
+<div class="callout" style="margin-top:.7rem">
+  These orbital-box diagrams are a <strong>pattern-recognition aid</strong>. The observed ground state is the lower-energy arrangement when the <strong>ns</strong> and <strong>(n−1)d</strong> sublevels are very close in energy.
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Selected course examples:</strong> Cr, Mo, Cu, Ag, Au, Ru, and Pd are anomalous electron configurations emphasized in the course materials. <strong>Additional anomalous electron configurations are also known.</strong></div>
+<div class="config-table-3" style="margin-top:.65rem">
+<div class="head">Element</div><div class="head">Predicted</div><div class="head">Observed</div>
+<div class="el">Ru</div><div class="cfg">[Kr] 5s² 4d⁶</div><div class="cfg">[Kr] 5s¹ 4d⁷</div>
+<div class="el">Pd</div><div class="cfg">[Kr] 5s² 4d⁸</div><div class="cfg">[Kr] 4d¹⁰</div>
+</div>
+<div class="callout" style="margin-top:.65rem"><strong>Notice:</strong> Ru and Pd do not fit the same simple d⁴→d⁵ or d⁹→d¹⁰ pattern. They are included because the course materials identify them as additional anomalous configurations.</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class="slide-container" data-integrated-slide="5" data-local-slide="5" id="slide-5">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 5 · Local Slide 5</span>
+<h1 class="slide-title">Why Can the Aufbau Prediction Differ?</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Connect anomalous ground-state configurations to the fact that sublevel energies in multi-electron atoms depend on several competing electron–nucleus and electron–electron effects.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="equal-banner">In multi-electron atoms, orbital energies depend on more than the principal quantum number.</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="interaction-grid">
+<div class="interaction-card"><div class="interaction-symbol">+ ↔ −</div><h4>Nucleus–electron attraction</h4><p>Electrons are attracted to the positively charged nucleus.</p></div>
+<div class="interaction-card"><div class="interaction-symbol">− ↔ −</div><h4>Electron–electron repulsion</h4><p>Electrons repel one another, so electron arrangement affects energy.</p></div>
+<div class="interaction-card"><div class="interaction-symbol">s &gt; p &gt; d &gt; f</div><h4>Shielding and penetration</h4><p>Different orbitals experience nuclear attraction differently.</p></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="callout"><strong>Key idea:</strong> the ns and (n−1)d sublevels can be close in energy. Small differences in attraction, shielding, penetration, and electron–electron repulsion can change which arrangement has the lowest energy.</div>
+<div class="equal-banner" style="margin-top:.65rem">Next: shielding → effective nuclear charge → penetration → periodic trends</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class="slide-container" data-integrated-slide="6" data-local-slide="6" id="slide-6">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 6 · Local Slide 6</span>
+<h1 class="slide-title">Inner, Outer, and Valence Electrons</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Distinguish outer, valence, and inner/core electrons by location and function, then identify each category from main-group and transition-element configurations.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="electron-category-grid">
+<div class="electron-category">
+<h4>Outer electrons</h4>
+<div class="category-key outer-key">WHERE? → highest n</div>
+<ul class="compact-bullets">
+<li>Find the <strong>largest n</strong> in the electron configuration.</li>
+<li>Count all electrons with that n: <strong>ns</strong> and, if present, <strong>np</strong>.</li>
+</ul>
+<div class="category-formula">[Ar] <span class="nmark">4s²</span> 3d⁶ → highest n = 4 → <strong>2 outer e⁻</strong></div>
+</div>
+<div class="electron-category">
+<h4>Valence electrons</h4>
+<div class="category-key valence-key">FUNCTION? → bonding</div>
+<ul class="compact-bullets">
+<li>Electrons involved in <strong>forming compounds / chemical bonds</strong>.</li>
+<li><strong>Main group:</strong> valence e⁻ = outer e⁻.</li>
+<li><strong>Transition:</strong> valence e⁻ can include <strong>ns + (n−1)d</strong>.</li>
+</ul>
+<div class="category-formula">Important later → <strong>Lewis dot structures</strong></div>
+</div>
+<div class="electron-category">
+<h4>Inner (core) electrons</h4>
+<div class="category-key inner-key">WHAT IS LEFT? → not valence</div>
+<ul class="compact-bullets">
+<li>Electrons <strong>not counted as valence electrons</strong>.</li>
+<li>For a neutral atom, total e⁻ = <strong>Z</strong>.</li>
+</ul>
+<div class="category-formula">inner e⁻ = Z − valence e⁻</div>
+<div class="warn" style="margin-top:.45rem"><strong>Transition elements:</strong> do not substitute outer e⁻ for valence e⁻.</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="example-table">
+<div class="head">Example</div>
+<div class="head">Full configuration</div>
+<div class="head">Condensed</div>
+<div class="head">Outer e⁻</div>
+<div class="head">Valence e⁻</div>
+<div class="head"><span>Inner e⁻</span><br/><span style="font-size:.82em">= Z − Valence e⁻</span></div>
+<div class="name"><strong>K (Z = 19)</strong><br/><small>main group</small></div>
+<div class="cfg">1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹</div>
+<div class="cfg">[Ar] 4s¹</div>
+<div class="num">1</div><div class="num">1</div><div class="num">19 − 1 = 18</div>
+<div class="name"><strong>Tc (Z = 43)</strong><br/><small>transition, regular</small></div>
+<div class="cfg">1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁵</div>
+<div class="cfg">[Kr] 5s² 4d⁵</div>
+<div class="num">2</div><div class="num">7</div><div class="num">43 − 7 = 36</div>
+<div class="name"><strong>Mo (Z = 42)</strong><br/><small>transition, anomalous</small></div>
+<div class="cfg">1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d⁵</div>
+<div class="cfg">[Kr] 5s¹ 4d⁵</div>
+<div class="num">1</div><div class="num">6</div><div class="num">42 − 6 = 36</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">Outer = location • Valence = bonding role • Inner/core = not valence</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class="slide-container" data-integrated-slide="7" data-local-slide="7" id="slide-7">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 7 · Local Slide 7</span>
+<h1 class="slide-title">Electron Configurations of Ions</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use the highest-n rule to identify which electrons are removed first when main-group and transition-metal cations form.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="equal-banner">Rule of thumb for forming cations</div>
+<div class="removal-rule" style="margin-top:.65rem">
+<div class="rule-box"><strong>1. Find the highest occupied n</strong><br/>Those are the outer electrons.</div>
+<div class="arrow">→</div>
+<div class="rule-box"><strong>2. Remove electrons from that outer level first</strong><br/>Main group: np before ns when both are occupied.<br/>Transition metals: ns before (n−1)d.</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="panel-card">
+<h4>Main-group example — Al → Al³⁺</h4>
+<p><strong>Al: [Ne] 3s² 3p¹</strong></p>
+<p>highest n = <strong>3</strong> → outer valence electrons are 3s² 3p¹</p>
+<div class="removal-path">
+<div class="removal-step"><span>[Ne] 3s² <span class="remove-highlight">3p¹</span></span><span>→</span><span>[Ne] 3s²</span></div>
+<div class="removal-step"><span>[Ne] <span class="remove-highlight">3s²</span></span><span>→</span><span class="keep-highlight">[Ne]</span></div>
+</div>
+<div class="answer-box">Al³⁺ = [Ne]</div>
+</div>
+<div class="panel-card">
+<h4>Transition example — Fe → Fe³⁺</h4>
+<p><strong>Fe: [Ar] 4s² 3d⁶</strong></p>
+<p>highest n = <strong>4</strong> → remove 4s before 3d</p>
+<div class="removal-path">
+<div class="removal-step"><span>[Ar] <span class="remove-highlight">4s²</span> 3d⁶</span><span>→</span><span>[Ar] 3d⁶</span></div>
+<div class="removal-step"><span>[Ar] 3d<span class="remove-highlight">⁶</span></span><span>− 1 e⁻</span><span class="keep-highlight">[Ar] 3d⁵</span></div>
+</div>
+<div class="answer-box">Fe³⁺ = [Ar] 3d⁵</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="panel-grid">
+<div class="panel-card">
+<h4>Anomalous neutral configuration — Cu → Cu⁺</h4>
+<p><strong>Cu: [Ar] 4s¹ 3d¹⁰</strong></p>
+<p>highest n = <strong>4</strong> → remove the 4s electron first</p>
+<div class="removal-step">
+<span>[Ar] <span class="remove-highlight">4s¹</span> 3d¹⁰</span>
+<span>→</span>
+<span class="keep-highlight">[Ar] 3d¹⁰</span>
+</div>
+<div class="answer-box">Cu⁺ = [Ar] 3d¹⁰</div>
+</div>
+<div class="panel-card">
+<h4>Filled 4f subshell remains core — Au → Au³⁺</h4>
+<p><strong>Au: [Xe] 6s¹ 4f¹⁴ 5d¹⁰</strong></p>
+<p>highest n = <strong>6</strong> → remove 6s first, then remove from 5d. <strong>4f¹⁴ remains filled.</strong></p>
+<div class="removal-path">
+<div class="removal-step">
+<span>[Xe] <span class="remove-highlight">6s¹</span> 4f¹⁴ 5d¹⁰</span>
+<span>→</span>
+<span>[Xe] 4f¹⁴ 5d¹⁰</span>
+</div>
+<div class="removal-step">
+<span>[Xe] 4f¹⁴ 5d¹⁰</span>
+<span>− 2 e⁻ from 5d</span>
+<span class="keep-highlight">[Xe] 4f¹⁴ 5d⁸</span>
+</div>
+</div>
+<div class="answer-box">Au³⁺ = [Xe] 4f¹⁴ 5d⁸</div>
+</div>
+</div>
+<div class="callout" style="margin-top:.7rem">
+<strong>Keep the two ideas separate:</strong>
+  Electron filling order and electron-removal order are not the same statement.
+  For transition-metal cations, the course rule is <strong>remove ns before (n−1)d</strong>.
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class="slide-container" data-integrated-slide="8" data-local-slide="8" id="slide-8">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 8 · Local Slide 8</span>
+<h1 class="slide-title">Unpaired Electrons and Magnetism — Worked Practice</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Use orbital occupancy to determine whether an atom or ion is paramagnetic or diamagnetic.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="panel-grid">
+<div class="panel-card">
+<h4>Paramagnetic</h4>
+<p>Contains one or more <strong>unpaired electrons</strong>.</p>
+<div class="orbital-five"><span class="obox">↑</span><span class="obox">↑</span><span class="obox">↑</span><span class="obox empty"> </span><span class="obox empty"> </span></div>
+<span class="unpaired-count">3 unpaired e⁻</span>
+</div>
+<div class="panel-card">
+<h4>Diamagnetic</h4>
+<p>All electrons are paired.</p>
+<div class="orbital-five"><span class="obox">↑↓</span><span class="obox">↑↓</span><span class="obox">↑↓</span><span class="obox">↑↓</span><span class="obox">↑↓</span></div>
+<span class="unpaired-count">0 unpaired e⁻</span>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="panel-grid">
+<div class="panel-card">
+<h4>Example — d⁸</h4>
+<p>Fill five d orbitals using Hund’s Rule.</p>
+<div class="orbital-five"><span class="obox">↑↓</span><span class="obox">↑↓</span><span class="obox">↑↓</span><span class="obox">↑</span><span class="obox">↑</span></div>
+<p><strong>2 unpaired electrons → paramagnetic</strong></p>
+</div>
+<div class="panel-card">
+<h4>Example — Cu⁺: [Ar] 3d¹⁰</h4>
+<div class="orbital-five"><span class="obox">↑↓</span><span class="obox">↑↓</span><span class="obox">↑↓</span><span class="obox">↑↓</span><span class="obox">↑↓</span></div>
+<p><strong>0 unpaired electrons → diamagnetic</strong></p>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="warn"><strong>Fast check:</strong> write or inspect the orbital diagram → count unpaired electrons → classify the species.</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class="slide-container" data-integrated-slide="9" data-local-slide="9" id="slide-9">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 9 · Local Slide 9</span>
+<h1 class="slide-title">Practice — Electron Configuration &amp; Magnetism</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Apply electron-configuration and unpaired-electron reasoning across easy, medium, and challenging multiple-choice practice.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="acs-level-grid">
+<div class="acs-card">
+<span class="practice-badge easy">Easy</span>
+<h4>How many unpaired electrons?</h4>
+<p>A ground-state atom has a 2p³ configuration. How many unpaired electrons are in the 2p subshell?</p>
+<div class="acs-choices"><div class="acs-choice">A. 0</div><div class="acs-choice">B. 1</div><div class="acs-choice">C. 2</div><div class="acs-choice">D. 3</div></div>
+<div class="answer-box">Answer: D — Hund’s Rule gives ↑ ↑ ↑.</div>
+</div>
+<div class="acs-card">
+<span class="practice-badge medium">Medium</span>
+<h4>Which orbital diagram gives two unpaired electrons?</h4>
+<p>Which d-subshell occupancy has exactly two unpaired electrons?</p>
+<div class="acs-choices"><div class="acs-choice">A. d⁵</div><div class="acs-choice">B. d⁶</div><div class="acs-choice">C. d⁸</div><div class="acs-choice">D. d¹⁰</div></div>
+<div class="answer-box">Answer: C — d⁸ has two unpaired electrons.</div>
+</div>
+<div class="acs-card">
+<span class="practice-badge hard">Challenging</span>
+<h4>Ion + magnetism</h4>
+<p>Which species is diamagnetic in its ground state?</p>
+<div class="acs-choices"><div class="acs-choice">A. Fe³⁺, [Ar] 3d⁵</div><div class="acs-choice">B. Cu⁺, [Ar] 3d¹⁰</div><div class="acs-choice">C. Ni²⁺, [Ar] 3d⁸</div><div class="acs-choice">D. Co²⁺, [Ar] 3d⁷</div></div>
+<div class="answer-box">Answer: B — d¹⁰ has no unpaired electrons.</div>
+</div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+</div>
+<div class="build-step" data-build="3">
+<div class="equal-banner">Exam path: configuration → orbital occupancy → count unpaired e⁻ → magnetic classification</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class="slide-container" data-integrated-slide="10" data-local-slide="10" id="slide-10">
+<div>
+<div class="slide-header">
+<span class="meta-pill">Integrated Slide 10 · Local Slide 10</span>
+<h1 class="slide-title">Independent Check — Configuration and Periodic Classification</h1>
+<div class="lo-box"><strong>Learning Objective:</strong> Check your ability to connect periodic-table position, electron configuration, anomalous configurations, ions, and unpaired electrons.</div>
+</div>
+<div class="slide-body">
+<div class="build-step visible" data-build="1">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">1</span><div class="question-text">Classify Cr as main group, transition, or inner transition. Which block is it in?</div><div class="response-area">Write your reasoning.</div></div>
+<div class="question-card"><span class="question-num">2</span><div class="question-text">Predict the Cr configuration using the Aufbau Principle, then state the experimentally observed ground-state configuration.</div><div class="response-area">Predicted → observed</div></div>
+</div>
+</div>
+<div class="build-step" data-build="2">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">3</span><div class="question-text">Which five anomalous elements were grouped by periodic-table position in this Topic?</div><div class="response-area">Identify both position patterns.</div></div>
+<div class="question-card"><span class="question-num">4</span><div class="question-text">Write the electron configuration of Fe³⁺ from neutral Fe.</div><div class="response-area">Show which electrons are removed first.</div></div>
+</div>
+</div>
+<div class="build-step" data-build="3">
+<div class="question-grid">
+<div class="question-card"><span class="question-num">5</span><div class="question-text">Why can a simple Aufbau prediction differ from an experimentally observed ground-state configuration?</div><div class="response-area">Use orbital energy and electron interactions.</div></div>
+<div class="question-card"><span class="question-num">6</span><div class="question-text">Is [Ar] 3d⁵ paramagnetic or diamagnetic? Explain using unpaired electrons.</div><div class="response-area">Show your reasoning.</div></div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</main>
+<footer aria-label="Copyright notice" class="copyright-notice">
+<div>© 2026 Nara Chon. All rights reserved.</div>
+<div>This lecture material is the intellectual property of Nara Chon and may not be reproduced, distributed, or modified without permission.</div>
+</footer>
+<script>let currentSlide=1;
+let currentBuild=1;
+let currentMode='student';
+const totalSlides=10;
+const buildsPerSlide={"1":3,"2":3,"3":3,"4":3,"5":3,"6":3,"7":3,"8":3,"9":3,"10":3};
+function setMode(mode,button){
+  currentMode=mode;
+  document.body.classList.remove('mode-student','mode-answer');
+  document.body.classList.add(`mode-${mode}`);
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  if(button)button.classList.add('active');
+  updateDisplay();
+}
+function updateDisplay(){
+  document.querySelectorAll('.slide-container').forEach((slide,index)=>slide.classList.toggle('active',(index+1)===currentSlide));
+  const activeSlide=document.getElementById(`slide-${currentSlide}`);
+  if(activeSlide)activeSlide.querySelectorAll('.build-step').forEach(step=>{
+    const n=parseInt(step.dataset.build,10); step.classList.toggle('visible',n<=currentBuild);
+  });
+  document.querySelectorAll('.blank').forEach(blank=>{
+    const parentBuild=blank.closest('.build-step');
+    const visible=!parentBuild||parentBuild.classList.contains('visible');
+    if(currentMode==='answer'&&visible&&blank.dataset.answer){blank.textContent=blank.dataset.answer;blank.classList.add('revealed');}
+    else{blank.textContent='[ _______ ]';blank.classList.remove('revealed');}
+  });
+  document.getElementById('slideCounter').textContent=`Slide ${currentSlide} / ${totalSlides}`;
+  document.getElementById('buildCounter').textContent=`Build ${currentBuild} / ${buildsPerSlide[currentSlide]}`;
+  document.getElementById('prevBtn').disabled=currentSlide===1&&currentBuild===1;
+  document.getElementById('nextBtn').disabled=currentSlide===totalSlides&&currentBuild===buildsPerSlide[totalSlides];
+}
+function nextBuild(){const max=buildsPerSlide[currentSlide];if(currentBuild<max)currentBuild++;else if(currentSlide<totalSlides){currentSlide++;currentBuild=1;}updateDisplay();}
+function prevBuild(){if(currentBuild>1)currentBuild--;else if(currentSlide>1){currentSlide--;currentBuild=buildsPerSlide[currentSlide];}updateDisplay();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextBuild();}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevBuild();}});
+updateDisplay();</script>
+</body>
+</html>
